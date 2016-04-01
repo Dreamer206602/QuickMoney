@@ -282,7 +282,7 @@ public class FragmentPage3 extends BaseFragment implements
 		elv.setAdapter(viewAdapter);
 	}
 
-	static String gofordate(String s) {
+	public  static String gofordate(String s) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = null;
 		try {

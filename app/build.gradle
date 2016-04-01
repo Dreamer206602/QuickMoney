@@ -4,6 +4,8 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
 
+    useLibrary 'org.apache.http.legacy'
+
     defaultConfig {
         applicationId "com.cwp.cmoneycharge"
         minSdkVersion 15
