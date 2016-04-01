@@ -141,4 +141,7 @@
     <string name="cancel">取消</string>
     <string name="multi_choice">弹出多选框</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

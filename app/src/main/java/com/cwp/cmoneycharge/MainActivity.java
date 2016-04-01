@@ -3,41 +3,27 @@ package com.cwp.cmoneycharge;
 import java.util.Calendar;
 
 import com.cwp.chart.SystemBarTintManager;
-import com.cwp.cmoneycharge.AddPay;
-import com.cwp.cmoneycharge.R;
+import com.cwp.fragment.FragmentPage2;
+import com.cwp.fragment.FragmentPage3;
 import com.cwp.pattern.UnlockGesturePasswordActivity;
 import com.cwp.pattern.UpdateManager;
 
 import android.annotation.TargetApi;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.PopupWindow.OnDismissListener;
 
 public class MainActivity extends FragmentActivity implements OnClickListener {
-	// ¶¨ÒåFragmentÒ³Ãæ
+	// ï¿½ï¿½ï¿½ï¿½FragmentÒ³ï¿½ï¿½
 	private FragmentPage2 fragmentPage2;
 	SharedPreferences sp;
 	int userid;
@@ -45,7 +31,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	DialogShowUtil dialogShowUtil = new DialogShowUtil(this, this, null, null,
 			null);
 
-	private Effectstype effect; // ×Ô¶¨ÒåDialog
+	private Effectstype effect; // ï¿½Ô¶ï¿½ï¿½ï¿½Dialog
 	private FragmentPage3 fragmentPage3;
 	private String updatedate;
 	private Editor edit;
@@ -59,7 +45,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 
 		sp = this.getSharedPreferences("preferences", MODE_WORLD_READABLE);
 		edit = sp.edit();
-		// initdefault();// ³õÊ¼»¯Êý¾Ý
+		// initdefault();// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 		SystemBarTintManager mTintManager;
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -70,23 +56,23 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		mTintManager.setStatusBarTintResource(R.color.statusbar_bg);
 
 		fragmentPage2 = new FragmentPage2(this);
-		// µÃµ½FragmentÊÂÎñ¹ÜÀíÆ÷
+		// ï¿½Ãµï¿½Fragmentï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		FragmentTransaction fragmentTransaction = this
 				.getSupportFragmentManager().beginTransaction();
-		// Ìæ»»µ±Ç°µÄÒ³Ãæ
+		// ï¿½æ»»ï¿½ï¿½Ç°ï¿½ï¿½Ò³ï¿½ï¿½
 		fragmentTransaction.replace(R.id.frame_foot, fragmentPage2);
 		fragmentTransaction.commit();
 
-		SysApplication.getInstance().addActivity(this); // ÔÚÏú»Ù¶ÓÁÐÖÐÌí¼Óthis
+		SysApplication.getInstance().addActivity(this); // ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½this
 		Intent intentr = getIntent();
 		userid = intentr.getIntExtra("cwp.id", 100000001);
-		if (intentr.getStringExtra("cwp.Fragment") != null) { // È¡»ØÌø×ªµÄÄ¿µÄÒ³Ãæ
+		if (intentr.getStringExtra("cwp.Fragment") != null) { // È¡ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Ä¿ï¿½ï¿½Ò³ï¿½ï¿½
 			value = Integer.parseInt(intentr.getStringExtra("cwp.Fragment"));
 		}
-		Calendar c = Calendar.getInstance();// »ñÈ¡µ±Ç°ÏµÍ³ÈÕÆÚ
-		int mYear = c.get(Calendar.YEAR);// »ñÈ¡Äê·Ý
-		int mMonth = c.get(Calendar.MONTH);// »ñÈ¡ÔÂ·Ý
-		int mDay = c.get(Calendar.DAY_OF_MONTH);// »ñÈ¡ÌìÊý
+		Calendar c = Calendar.getInstance();// ï¿½ï¿½È¡ï¿½ï¿½Ç°ÏµÍ³ï¿½ï¿½ï¿½ï¿½
+		int mYear = c.get(Calendar.YEAR);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½
+		int mMonth = c.get(Calendar.MONTH);// ï¿½ï¿½È¡ï¿½Â·ï¿½
+		int mDay = c.get(Calendar.DAY_OF_MONTH);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 		updatedate = mYear + "-" + mMonth + 1 + "-" + mDay;
 
 		// StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
@@ -97,9 +83,9 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		// .penaltyLog().penaltyDeath().build());
 	}
 
-	private void initdefault() { // ³õÊ¼»¯Êý¾Ý
-		edit.putString("sendlog", "¿ª"); // ±¨log
-		edit.putString("gesturepw", "¿ª"); // ÊÖÊÆ¿ª
+	private void initdefault() { // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		edit.putString("sendlog", "ï¿½ï¿½"); // ï¿½ï¿½log
+		edit.putString("gesturepw", "ï¿½ï¿½"); // ï¿½ï¿½ï¿½Æ¿ï¿½
 		edit.commit();
 	}
 
@@ -109,7 +95,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) { // ¼à¿Ø/À¹½Ø/ÆÁ±Î·µ»Ø¼ü
+		if (keyCode == KeyEvent.KEYCODE_BACK) { // ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½Î·ï¿½ï¿½Ø¼ï¿½
 			dialogShowUtil.dialogShow("shake", "quit", "", "");
 		}
 		return super.onKeyDown(keyCode, event);
@@ -136,16 +122,16 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		super.onResume();
 		CrashApplication myApplaction = (CrashApplication) getApplication();
 		if ((myApplaction.isLocked)
-				&& (sp.getString("gesturepw", "").equals("¿ª"))) {// ÅÐ¶ÏÊÇ·ñÐèÒªÌø×ªµ½ÃÜÂë½çÃæ
+				&& (sp.getString("gesturepw", "").equals("ï¿½ï¿½"))) {// ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Òªï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			Intent intent = new Intent(this,
 					UnlockGesturePasswordActivity.class);
 			startActivity(intent);
 		}
 
-		if (!updatedate.equals(sp.getString("updatedate", ""))) { // ½ñÌìÒÑ¾­¼ì²é¹ý¾Í²»×Ô¶¯¼ì²éÁË
+		if (!updatedate.equals(sp.getString("updatedate", ""))) { // ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í²ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			UpdateManager manager = new UpdateManager(MainActivity.this);
 			manager.checkUpdate("noshow");
-			edit.putString("updatedate", updatedate); // Ò»ÌìÖ»¼ì²éÒ»´Î
+			edit.putString("updatedate", updatedate); // Ò»ï¿½ï¿½Ö»ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 			edit.commit();
 		}
 	};

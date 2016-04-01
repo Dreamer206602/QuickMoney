@@ -1,5 +1,8 @@
-package com.cwp.cmoneycharge;
+package com.cwp.fragment;
 
+import com.cwp.cmoneycharge.AddPay;
+import com.cwp.cmoneycharge.MainActivity;
+import com.cwp.cmoneycharge.PayChart;
 import com.cwp.cmoneycharge.R;
 
 import android.content.Context;
@@ -16,40 +19,38 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
-import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
 
-public class FragmentPage2 extends Fragment implements OnClickListener {
+public class FragmentPage2 extends BaseFragment implements OnClickListener {
 	static int userid;
 	private static FragmentPage1 fragmentPage1;
 	private FragmentPage2 fragmentPage2;
 	private static FragmentPage3 fragmentPage3;
 	private static FragmentPage4 fragmentPage4;
-	// ¶¨Òå²¼¾Ö¶ÔÏó
+	// ï¿½ï¿½ï¿½å²¼ï¿½Ö¶ï¿½ï¿½ï¿½
 	private static FrameLayout friendfeedFl;
 	private static FrameLayout myfeedFl;
 	private static FrameLayout homeFl;
 	private static FrameLayout moreFl;
 
-	// ¶¨ÒåÍ¼Æ¬×é¼þ¶ÔÏó
+	// ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private static ImageView friendfeedIv;
 	private static ImageView myfeedIv;
 	private static ImageView homeIv;
 	private static ImageView moreIv;
 
-	// ¶¨Òå°´Å¥Í¼Æ¬×é¼þ
+	// ï¿½ï¿½ï¿½å°´Å¥Í¼Æ¬ï¿½ï¿½ï¿½
 	private ImageView toggleImageView, plusImageView;
 
-	// ¶¨ÒåPopupWindow
+	// ï¿½ï¿½ï¿½ï¿½PopupWindow
 	private PopupWindow popWindow;
 	private LinearLayout popWinLayout;
 
-	// ¶¨Òåpop×é¼þ
+	// ï¿½ï¿½ï¿½ï¿½popï¿½ï¿½ï¿½
 	private LinearLayout pop_voiceView;
 	private LinearLayout pop_quickView;
 
@@ -59,10 +60,20 @@ public class FragmentPage2 extends Fragment implements OnClickListener {
 	static FragmentActivity act;
 
 	public FragmentPage2(FragmentActivity activity) {
-		act = activity;
+		this.act = activity;
 	}
 
 	public FragmentPage2() {
+	}
+
+	@Override
+	public void filngtonext() {
+
+	}
+
+	@Override
+	public void filngtonpre() {
+
 	}
 
 	@Override
@@ -101,66 +112,66 @@ public class FragmentPage2 extends Fragment implements OnClickListener {
 	}
 
 	/**
-	 * ³õÊ¼»¯×é¼þ
+	 * ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public void initView() {
 		value = MainActivity.getValueFM();
-		// ÊµÀý»¯²¼¾Ö¶ÔÏó
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¶ï¿½ï¿½ï¿½
 		friendfeedFl = (FrameLayout) getActivity().findViewById(
 				R.id.layout_friendfeed);
 		myfeedFl = (FrameLayout) getActivity().findViewById(R.id.layout_myfeed);
 		homeFl = (FrameLayout) getActivity().findViewById(R.id.layout_home);
 		moreFl = (FrameLayout) getActivity().findViewById(R.id.layout_more);
 
-		// ÊµÀý»¯Í¼Æ¬×é¼þ¶ÔÏó
+		// Êµï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		friendfeedIv = (ImageView) getActivity().findViewById(
 				R.id.image_friendfeed);
 		myfeedIv = (ImageView) getActivity().findViewById(R.id.image_myfeed);
 		homeIv = (ImageView) getActivity().findViewById(R.id.image_home);
 		moreIv = (ImageView) getActivity().findViewById(R.id.image_more);
 
-		// ÊµÀý»¯°´Å¥Í¼Æ¬×é¼þ
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥Í¼Æ¬ï¿½ï¿½ï¿½
 		toggleImageView = (ImageView) getActivity().findViewById(
 				R.id.toggle_btn);
 		plusImageView = (ImageView) getActivity().findViewById(R.id.plus_btn);
 	}
 
 	private void initData() {
-		// ¸ø²¼¾Ö¶ÔÏóÉèÖÃ¼àÌý
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ö¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½
 		friendfeedFl.setOnClickListener(this);
 		myfeedFl.setOnClickListener(this);
 		homeFl.setOnClickListener(this);
 		moreFl.setOnClickListener(this);
 
-		// ¸ø°´Å¥Í¼Æ¬ÉèÖÃ¼àÌý
+		// ï¿½ï¿½ï¿½ï¿½Å¥Í¼Æ¬ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½
 		toggleImageView.setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View v) {
-		// System.out.println("ÎÒ°´ÁË" + v.getId());
+		// System.out.println("ï¿½Ò°ï¿½ï¿½ï¿½" + v.getId());
 		switch (v.getId()) {
-		// µã»÷¶¯Ì¬°´Å¥
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ì¬ï¿½ï¿½Å¥
 		case R.id.layout_friendfeed:
 			clickFriendfeedBtn();
 			break;
-		// µã»÷ÓëÎÒÏà¹Ø°´Å¥
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø°ï¿½Å¥
 		case R.id.layout_myfeed:
 			clickMyfeedBtn();
 			break;
-		// µã»÷ÎÒµÄ¿Õ¼ä°´Å¥
+		// ï¿½ï¿½ï¿½ï¿½ÒµÄ¿Õ¼ä°´Å¥
 		case R.id.layout_home:
 			clickHomeBtn();
 			break;
-		// µã»÷¸ü¶à°´Å¥
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à°´Å¥
 		case R.id.layout_more:
 			clickMoreBtn();
 			break;
-		// µã»÷ÖÐ¼ä°´Å¥
+		// ï¿½ï¿½ï¿½ï¿½Ð¼ä°´Å¥
 		case R.id.toggle_btn:
 			clickToggleBtn();
 			break;
-		// µã»÷ÖÐ¼ä°´Å¥
+		// ï¿½ï¿½ï¿½ï¿½Ð¼ä°´Å¥
 		case R.id.pop_voice:
 			clickPop_voiceBtn();
 			break;
@@ -174,20 +185,20 @@ public class FragmentPage2 extends Fragment implements OnClickListener {
 	}
 
 	private void clickPop_photoViewBtn() {
-		Intent intent = new Intent(getActivity(), AddPay.class);// ´´½¨Intent¶ÔÏó
+		Intent intent = new Intent(getActivity(), AddPay.class);// ï¿½ï¿½ï¿½ï¿½Intentï¿½ï¿½ï¿½ï¿½
 		intent.putExtra("cwp.id", userid);
-		intent.putExtra("cwp.photo", "");// ÉèÖÃ´«µÝÊý¾Ý
+		intent.putExtra("cwp.photo", "");// ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		startActivity(intent);
 	}
 
 	/**
-	 * ÏÔÊ¾PopupWindowµ¯³ö²Ëµ¥
+	 * ï¿½ï¿½Ê¾PopupWindowï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½
 	 */
 	private void showPopupWindow(View parent) {
 		DisplayMetrics dm = parent.getResources().getDisplayMetrics();
 		int w_screen = dm.widthPixels;
 		int h_screen = dm.heightPixels;
-		// System.out.println("ÄãµÄÉè±¸w_screen£º" + w_screen + " h_screen£º" +
+		// System.out.println("ï¿½ï¿½ï¿½ï¿½è±¸w_screenï¿½ï¿½" + w_screen + " h_screenï¿½ï¿½" +
 		// h_screen);
 		if (popWindow == null) {
 			LayoutInflater layoutInflater = (LayoutInflater) getActivity()
@@ -195,13 +206,13 @@ public class FragmentPage2 extends Fragment implements OnClickListener {
 
 			View view = layoutInflater.inflate(R.layout.popwindow_layout, null);
 			popWinLayout = (LinearLayout) view.findViewById(R.id.popwindow);
-			// ´´½¨Ò»¸öPopuWidow¶ÔÏó
+			// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½PopuWidowï¿½ï¿½ï¿½ï¿½
 			float radiowith = w_screen / 480.0f;
 			float radioheight = h_screen / 800.0f;
 			popWindow = new PopupWindow(view,
 					(int) (popWinLayout.getLayoutParams().width), h_screen / 4);
 		}
-		// Ê¹Æä¾Û¼¯ £¬ÒªÏë¼àÌý²Ëµ¥Àï¿Ø¼þµÄÊÂ¼þ¾Í±ØÐëÒªµ÷ÓÃ´Ë·½·¨
+		// Ê¹ï¿½ï¿½Û¼ï¿½ ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½Í±ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Ã´Ë·ï¿½ï¿½ï¿½
 		popWindow.setFocusable(true);
 
 		pop_voiceView = (LinearLayout) popWinLayout
@@ -214,30 +225,30 @@ public class FragmentPage2 extends Fragment implements OnClickListener {
 		pop_quickView.setOnClickListener(this);
 		pop_photoView.setOnClickListener(this);
 
-		// ÉèÖÃÔÊÐíÔÚÍâµã»÷ÏûÊ§
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§
 		popWindow.setOutsideTouchable(true);
-		// ÉèÖÃ±³¾°£¬Õâ¸öÊÇÎªÁËµã»÷¡°·µ»ØBack¡±Ò²ÄÜÊ¹ÆäÏûÊ§£¬²¢ÇÒ²¢²»»áÓ°ÏìÄãµÄ±³¾°
+		// ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Backï¿½ï¿½Ò²ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
 		popWindow.setBackgroundDrawable(new BitmapDrawable());
-		// ÉèÖÃ²Ëµ¥ÏÔÊ¾µÄÎ»ÖÃ
+		// ï¿½ï¿½ï¿½Ã²Ëµï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Î»ï¿½ï¿½
 
 		int xPos = (w_screen - popWinLayout.getLayoutParams().width) / 2;
 		popWindow.showAsDropDown(parent, xPos, 12);
 		// popWindow.showAsDropDown(parent, Gravity.CENTER, 0);
 
-		// ¼àÌý²Ëµ¥µÄ¹Ø±ÕÊÂ¼þ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½Ä¹Ø±ï¿½ï¿½Â¼ï¿½
 		popWindow.setOnDismissListener(new OnDismissListener() {
 			@Override
 			public void onDismiss() {
-				// ¸Ä±äÏÔÊ¾µÄ°´Å¥Í¼Æ¬ÎªÕý³£×´Ì¬
+				// ï¿½Ä±ï¿½ï¿½ï¿½Ê¾ï¿½Ä°ï¿½Å¥Í¼Æ¬Îªï¿½ï¿½ï¿½ï¿½×´Ì¬
 				changeButtonImage();
 			}
 		});
 
-		// ¼àÌý´¥ÆÁÊÂ¼þ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 		popWindow.setTouchInterceptor(new OnTouchListener() {
 			public boolean onTouch(View view, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-					// ¸Ä±äÏÔÊ¾µÄ°´Å¥Í¼Æ¬ÎªÕý³£×´Ì¬
+					// ï¿½Ä±ï¿½ï¿½ï¿½Ê¾ï¿½Ä°ï¿½Å¥Í¼Æ¬Îªï¿½ï¿½ï¿½ï¿½×´Ì¬
 					changeButtonImage();
 				}
 
@@ -247,19 +258,19 @@ public class FragmentPage2 extends Fragment implements OnClickListener {
 	}
 
 	/**
-	 * µã»÷ÁË¡°¶¯Ì¬¡±°´Å¥
+	 * ï¿½ï¿½ï¿½ï¿½Ë¡ï¿½ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½Å¥
 	 */
 	public static void clickFriendfeedBtn() {
-		// ÊµÀý»¯FragmentÒ³Ãæ
+		// Êµï¿½ï¿½ï¿½ï¿½FragmentÒ³ï¿½ï¿½
 		fragmentPage1 = new FragmentPage1();
-		// µÃµ½FragmentÊÂÎñ¹ÜÀíÆ÷
+		// ï¿½Ãµï¿½Fragmentï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		FragmentTransaction fragmentTransaction;
 		fragmentTransaction = act.getSupportFragmentManager()
 				.beginTransaction();
 
-		// Ìæ»»µ±Ç°µÄÒ³Ãæ
+		// ï¿½æ»»ï¿½ï¿½Ç°ï¿½ï¿½Ò³ï¿½ï¿½
 		fragmentTransaction.replace(R.id.frame_content, fragmentPage1);
-		// ÊÂÎñ¹ÜÀíÌá½»
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á½»
 		fragmentTransaction.commit();
 
 		friendfeedFl.setSelected(true);
@@ -276,7 +287,7 @@ public class FragmentPage2 extends Fragment implements OnClickListener {
 	}
 
 	/**
-	 * µã»÷ÁË¡°ÓëÎÒÏà¹Ø¡±°´Å¥
+	 * ï¿½ï¿½ï¿½ï¿½Ë¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¡ï¿½ï¿½ï¿½Å¥
 	 */
 	public static void clickMyfeedBtn() {
 
@@ -291,17 +302,17 @@ public class FragmentPage2 extends Fragment implements OnClickListener {
 	}
 
 	/**
-	 * µã»÷ÁË¡°ÎÒµÄ¿Õ¼ä¡±°´Å¥
+	 * ï¿½ï¿½ï¿½ï¿½Ë¡ï¿½ï¿½ÒµÄ¿Õ¼ä¡±ï¿½ï¿½Å¥
 	 */
 	public static void clickHomeBtn() {
-		// ÊµÀý»¯FragmentÒ³Ãæ
+		// Êµï¿½ï¿½ï¿½ï¿½FragmentÒ³ï¿½ï¿½
 		fragmentPage3 = new FragmentPage3();
-		// µÃµ½FragmentÊÂÎñ¹ÜÀíÆ÷
+		// ï¿½Ãµï¿½Fragmentï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		FragmentTransaction fragmentTransaction = act
 				.getSupportFragmentManager().beginTransaction();
-		// Ìæ»»µ±Ç°µÄÒ³Ãæ
+		// ï¿½æ»»ï¿½ï¿½Ç°ï¿½ï¿½Ò³ï¿½ï¿½
 		fragmentTransaction.replace(R.id.frame_content, fragmentPage3);
-		// ÊÂÎñ¹ÜÀíÌá½»
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á½»
 		fragmentTransaction.commit();
 
 		friendfeedFl.setSelected(false);
@@ -318,17 +329,17 @@ public class FragmentPage2 extends Fragment implements OnClickListener {
 	}
 
 	/**
-	 * µã»÷ÁË¡°¸ü¶à¡±°´Å¥
+	 * ï¿½ï¿½ï¿½ï¿½Ë¡ï¿½ï¿½ï¿½ï¿½à¡±ï¿½ï¿½Å¥
 	 */
 	public static void clickMoreBtn() {
-		// ÊµÀý»¯FragmentÒ³Ãæ
+		// Êµï¿½ï¿½ï¿½ï¿½FragmentÒ³ï¿½ï¿½
 		fragmentPage4 = new FragmentPage4();
-		// µÃµ½FragmentÊÂÎñ¹ÜÀíÆ÷
+		// ï¿½Ãµï¿½Fragmentï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		FragmentTransaction fragmentTransaction = act
 				.getSupportFragmentManager().beginTransaction();
-		// Ìæ»»µ±Ç°µÄÒ³Ãæ
+		// ï¿½æ»»ï¿½ï¿½Ç°ï¿½ï¿½Ò³ï¿½ï¿½
 		fragmentTransaction.replace(R.id.frame_content, fragmentPage4);
-		// ÊÂÎñ¹ÜÀíÌá½»
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á½»
 		fragmentTransaction.commit();
 
 		friendfeedFl.setSelected(false);
@@ -346,32 +357,32 @@ public class FragmentPage2 extends Fragment implements OnClickListener {
 
 	private void clickPop_voiceBtn() {
 
-		Intent intent = new Intent(getActivity(), AddPay.class);// ´´½¨Intent¶ÔÏó
+		Intent intent = new Intent(getActivity(), AddPay.class);// ï¿½ï¿½ï¿½ï¿½Intentï¿½ï¿½ï¿½ï¿½
 		intent.putExtra("cwp.id", userid);
-		intent.putExtra("cwp.voice", "");// ÉèÖÃ´«µÝÊý¾Ý
+		intent.putExtra("cwp.voice", "");// ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		startActivity(intent);
 	}
 
 	private void clickPop_quickBtn() {
 
-		Intent intent = new Intent(getActivity(), AddPay.class);// ´´½¨Intent¶ÔÏó
+		Intent intent = new Intent(getActivity(), AddPay.class);// ï¿½ï¿½ï¿½ï¿½Intentï¿½ï¿½ï¿½ï¿½
 		intent.putExtra("cwp.id", userid);
 		intent.putExtra("keyboard", "true");
 		startActivity(intent);
 	}
 
 	/**
-	 * µã»÷ÁËÖÐ¼ä°´Å¥
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¼ä°´Å¥
 	 */
 	private void clickToggleBtn() {
 		showPopupWindow(plusImageView);
-		// ¸Ä±ä°´Å¥ÏÔÊ¾µÄÍ¼Æ¬Îª°´ÏÂÊ±µÄ×´Ì¬
+		// ï¿½Ä±ä°´Å¥ï¿½ï¿½Ê¾ï¿½ï¿½Í¼Æ¬Îªï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½×´Ì¬
 		plusImageView.setImageResource(R.drawable.toolbar_plusback);
 		toggleImageView.setImageResource(R.drawable.toolbar_btn_pressed);
 	}
 
 	/**
-	 * ¸Ä±äÏÔÊ¾µÄ°´Å¥Í¼Æ¬ÎªÕý³£×´Ì¬
+	 * ï¿½Ä±ï¿½ï¿½ï¿½Ê¾ï¿½Ä°ï¿½Å¥Í¼Æ¬Îªï¿½ï¿½ï¿½ï¿½×´Ì¬
 	 */
 	private void changeButtonImage() {
 		plusImageView.setImageResource(R.drawable.toolbar_plus);

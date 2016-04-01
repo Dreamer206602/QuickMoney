@@ -12,6 +12,7 @@ import java.util.Map;
 import com.cwp.chart.CustomMultiChoiceDialog;
 import com.cwp.chart.MyAdspter;
 import com.cwp.chart.SystemBarTintManager;
+import com.cwp.fragment.FragmentPage3;
 
 import cwp.moneycharge.dao.IncomeDAO;
 import cwp.moneycharge.dao.ItypeDAO;
@@ -50,8 +51,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class SearchActivity extends Activity {
-	private String arrs[] = { "×Ô¶¨ÒåÊ±¼ä¶Î", "½ñÌì", "×òÌì", "±¾ÖÜ", "ÉÏÖÜ", "±¾ÔÂ", "ÉÏÔÂ",
-			"±¾¼¾", "ÉÏ¼¾", "±¾Äê" };
+	private String arrs[] = { "ï¿½Ô¶ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½",
+			"ï¿½ï¿½ï¿½ï¿½", "ï¿½Ï¼ï¿½", "ï¿½ï¿½ï¿½ï¿½" };
 	private boolean boos[] = { false, false, false, false, false, false, false,
 			false, false, false };
 	private CustomMultiChoiceDialog.Builder multiChoiceDialogBuilder;
@@ -59,7 +60,7 @@ public class SearchActivity extends Activity {
 	public String contact_name;
 
 	private CustomMultiChoiceDialog multiChoiceDialog;
-	protected static final int DATE_DIALOG_ID = 0;// ´´½¨ÈÕÆÚ¶Ô»°¿ò³£Á¿
+	protected static final int DATE_DIALOG_ID = 0;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶Ô»ï¿½ï¿½ï¿½ï¿½ï¿½
 	EditText query_dialog;
 	ListView mListView;
 	LinearLayout mlayout;
@@ -68,7 +69,7 @@ public class SearchActivity extends Activity {
 	IncomeDAO incomeDAO = new IncomeDAO(this);
 	PtypeDAO ptypeDAO = new PtypeDAO(this);
 	ItypeDAO itypeDAO = new ItypeDAO(this);
-	PayDAO payDAO = new PayDAO(this);// ´´½¨PayDAO¶ÔÏó
+	PayDAO payDAO = new PayDAO(this);// ï¿½ï¿½ï¿½ï¿½PayDAOï¿½ï¿½ï¿½ï¿½
 	private String[] strInfos;
 	private TextView searchincome;
 	private TextView searchpay;
@@ -134,51 +135,51 @@ public class SearchActivity extends Activity {
 		Intent intentr = getIntent();
 		userid = intentr.getIntExtra("cwp.id", 100000001);
 
-		mlayout = (LinearLayout) findViewById(R.id.mlayout);// »ñÈ¡½ð¶îÎÄ±¾¿ò
-		search_list_timeall = (LinearLayout) findViewById(R.id.search_list_timeall);// »ñÈ¡½ð¶îÎÄ±¾¿ò
-		search_more_list = (LinearLayout) findViewById(R.id.search_more_list);// »ñÈ¡½ð¶îÎÄ±¾¿ò
-		search_more = (RelativeLayout) findViewById(R.id.search_more);// »ñÈ¡½ð¶îÎÄ±¾¿ò
-		search_more_close = (RelativeLayout) findViewById(R.id.search_more_close);// »ñÈ¡½ð¶îÎÄ±¾¿ò
+		mlayout = (LinearLayout) findViewById(R.id.mlayout);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+		search_list_timeall = (LinearLayout) findViewById(R.id.search_list_timeall);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+		search_more_list = (LinearLayout) findViewById(R.id.search_more_list);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+		search_more = (RelativeLayout) findViewById(R.id.search_more);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+		search_more_close = (RelativeLayout) findViewById(R.id.search_more_close);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
 
-		search_list_time = (RelativeLayout) findViewById(R.id.search_list_time);// »ñÈ¡½ð¶îÎÄ±¾¿ò
-		search_list_starttime = (RelativeLayout) findViewById(R.id.search_list_starttime);// »ñÈ¡½ð¶îÎÄ±¾¿ò
-		search_list_endtime = (RelativeLayout) findViewById(R.id.search_list_endtime);// »ñÈ¡½ð¶îÎÄ±¾¿ò
-		search_list_paytype = (RelativeLayout) findViewById(R.id.search_list_paytype);// »ñÈ¡½ð¶îÎÄ±¾¿ò
-		search_list_incometype = (RelativeLayout) findViewById(R.id.search_list_incometype);// »ñÈ¡½ð¶îÎÄ±¾¿ò
+		search_list_time = (RelativeLayout) findViewById(R.id.search_list_time);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+		search_list_starttime = (RelativeLayout) findViewById(R.id.search_list_starttime);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+		search_list_endtime = (RelativeLayout) findViewById(R.id.search_list_endtime);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+		search_list_paytype = (RelativeLayout) findViewById(R.id.search_list_paytype);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+		search_list_incometype = (RelativeLayout) findViewById(R.id.search_list_incometype);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
 
-		mListView = (ListView) findViewById(R.id.mListView);// »ñÈ¡½ð¶îÎÄ±¾¿ò
-		query_dialog = (EditText) findViewById(R.id.query_dialog);// »ñÈ¡½ð¶îÎÄ±¾¿ò
-		searchincome = (TextView) findViewById(R.id.searchincome);// »ñÈ¡½ð¶îÎÄ±¾¿ò
-		seachbalance = (TextView) findViewById(R.id.seachbalance);// »ñÈ¡½ð¶îÎÄ±¾¿ò
-		searchpay = (TextView) findViewById(R.id.searchpay);// »ñÈ¡½ð¶îÎÄ±¾¿ò
-		search_quit = (TextView) findViewById(R.id.search_quit);// »ñÈ¡½ð¶îÎÄ±¾¿ò
+		mListView = (ListView) findViewById(R.id.mListView);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+		query_dialog = (EditText) findViewById(R.id.query_dialog);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+		searchincome = (TextView) findViewById(R.id.searchincome);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+		seachbalance = (TextView) findViewById(R.id.seachbalance);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+		searchpay = (TextView) findViewById(R.id.searchpay);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+		search_quit = (TextView) findViewById(R.id.search_quit);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
 
-		search_list_time_text = (TextView) findViewById(R.id.search_list_time_text);// »ñÈ¡½ð¶îÎÄ±¾¿ò
-		search_starttime = (TextView) findViewById(R.id.search_starttime);// »ñÈ¡½ð¶îÎÄ±¾¿ò
-		search_endtime = (TextView) findViewById(R.id.search_endtime);// »ñÈ¡½ð¶îÎÄ±¾¿ò
-		search_paytype = (TextView) findViewById(R.id.search_paytype);// »ñÈ¡½ð¶îÎÄ±¾¿ò
-		search_incometype = (TextView) findViewById(R.id.search_incometype);// »ñÈ¡½ð¶îÎÄ±¾¿ò
+		search_list_time_text = (TextView) findViewById(R.id.search_list_time_text);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+		search_starttime = (TextView) findViewById(R.id.search_starttime);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+		search_endtime = (TextView) findViewById(R.id.search_endtime);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+		search_paytype = (TextView) findViewById(R.id.search_paytype);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+		search_incometype = (TextView) findViewById(R.id.search_incometype);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
 
-		c = Calendar.getInstance();// »ñÈ¡µ±Ç°ÏµÍ³ÈÕÆÚ
-		mYear = c.get(Calendar.YEAR);// »ñÈ¡Äê·Ý
-		mMonth = c.get(Calendar.MONTH) + 1;// »ñÈ¡ÔÂ·Ý
-		mDay = c.get(Calendar.DAY_OF_MONTH);// »ñÈ¡ÌìÊý
+		c = Calendar.getInstance();// ï¿½ï¿½È¡ï¿½ï¿½Ç°ÏµÍ³ï¿½ï¿½ï¿½ï¿½
+		mYear = c.get(Calendar.YEAR);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½
+		mMonth = c.get(Calendar.MONTH) + 1;// ï¿½ï¿½È¡ï¿½Â·ï¿½
+		mDay = c.get(Calendar.DAY_OF_MONTH);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 
-		search_list_endtime.setOnTouchListener(new OnTouchListener() { // ÎªÊ±¼äÎÄ±¾¿òÉèÖÃµ¥»÷¼àÌýÊÂ¼þ
+		search_list_endtime.setOnTouchListener(new OnTouchListener() { // ÎªÊ±ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 					@Override
 					public boolean onTouch(View v, MotionEvent event) {
 
-						showDialog(DATE_DIALOG_ID);// ÏÔÊ¾ÈÕÆÚÑ¡Ôñ¶Ô»°¿ò
+						showDialog(DATE_DIALOG_ID);// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ô»ï¿½ï¿½ï¿½
 						timetype = "end";
 						return false;
 					}
 				});
 
-		search_list_starttime.setOnTouchListener(new OnTouchListener() { // ÎªÊ±¼äÎÄ±¾¿òÉèÖÃµ¥»÷¼àÌýÊÂ¼þ
+		search_list_starttime.setOnTouchListener(new OnTouchListener() { // ÎªÊ±ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 					@Override
 					public boolean onTouch(View v, MotionEvent event) {
 
-						showDialog(DATE_DIALOG_ID);// ÏÔÊ¾ÈÕÆÚÑ¡Ôñ¶Ô»°¿ò
+						showDialog(DATE_DIALOG_ID);// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ô»ï¿½ï¿½ï¿½
 						timetype = "start";
 						return false;
 					}
@@ -186,11 +187,11 @@ public class SearchActivity extends Activity {
 
 		spdatalistpay = ptypeDAO.getPtypeName(userid);
 		spdatalistincome = itypeDAO.getItypeName(userid);
-		spdatapay = spdatalistpay.toArray(new String[spdatalistpay.size()]);// ÔÚtb_itypeÖÐ°´ÓÃ»§id¶ÁÈ¡
+		spdatapay = spdatalistpay.toArray(new String[spdatalistpay.size()]);// ï¿½ï¿½tb_itypeï¿½Ð°ï¿½ï¿½Ã»ï¿½idï¿½ï¿½È¡
 		spdataincome = spdatalistincome.toArray(new String[spdatalistincome
-				.size()]);// ÔÚtb_itypeÖÐ°´ÓÃ»§id¶ÁÈ¡
+				.size()]);// ï¿½ï¿½tb_itypeï¿½Ð°ï¿½ï¿½Ã»ï¿½idï¿½ï¿½È¡
 
-		search_list_time.setOnClickListener(new OnClickListener() { // ¸ß¼¶ËÑË÷Ê±¼äÁÐ±í
+		search_list_time.setOnClickListener(new OnClickListener() { // ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ð±ï¿½
 
 					@Override
 					public void onClick(View v) {
@@ -198,7 +199,7 @@ public class SearchActivity extends Activity {
 					}
 				});
 
-		search_list_paytype.setOnClickListener(new OnClickListener() {// ¸ß¼¶ËÑË÷Ö§³öÁÐ±í
+		search_list_paytype.setOnClickListener(new OnClickListener() {// ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½Ð±ï¿½
 
 					@Override
 					public void onClick(View v) {
@@ -207,7 +208,7 @@ public class SearchActivity extends Activity {
 					}
 				});
 
-		search_list_incometype.setOnClickListener(new OnClickListener() {// ¸ß¼¶ËÑË÷ÊÕÈëÁÐ±í
+		search_list_incometype.setOnClickListener(new OnClickListener() {// ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
 
 					@Override
 					public void onClick(View v) {
@@ -216,23 +217,23 @@ public class SearchActivity extends Activity {
 					}
 				});
 
-		search_more_close.setOnClickListener(new OnClickListener() { // °´ÁË¸ü¶àÑ¡Ïî
+		search_more_close.setOnClickListener(new OnClickListener() { // ï¿½ï¿½ï¿½Ë¸ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½
 					@Override
 					public void onClick(View v) {
 						closemore();
 					}
 				});
 
-		search_more.setOnClickListener(new OnClickListener() { // °´ÁË¸ü¶àÑ¡Ïî
+		search_more.setOnClickListener(new OnClickListener() { // ï¿½ï¿½ï¿½Ë¸ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½
 					@Override
 					public void onClick(View v) {
 						InputMethodManager imm = (InputMethodManager) getApplicationContext()
 								.getSystemService(Context.INPUT_METHOD_SERVICE);
-						imm.hideSoftInputFromWindow(v.getWindowToken(), 0); // Ç¿ÖÆ¹Ø±ÕÈí¼üÅÌ
+						imm.hideSoftInputFromWindow(v.getWindowToken(), 0); // Ç¿ï¿½Æ¹Ø±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 						search_more.setVisibility(View.GONE);
 						mlayout.setVisibility(View.GONE);
 						search_more_list.setVisibility(View.VISIBLE);
-						search_quit.setText("¿ªÊ¼²éÑ¯");
+						search_quit.setText("ï¿½ï¿½Ê¼ï¿½ï¿½Ñ¯");
 						searchstate = "search";
 						search_starttime.setText(mYear + "-01-01");
 						search_endtime.setText(mYear + "-12-31");
@@ -246,7 +247,7 @@ public class SearchActivity extends Activity {
 					}
 				});
 
-		class OnClickListenernormal implements OnClickListener { // Ö´ÐÐ²éÑ¯
+		class OnClickListenernormal implements OnClickListener { // Ö´ï¿½Ð²ï¿½Ñ¯
 			private String String;
 
 			@Override
@@ -279,10 +280,10 @@ public class SearchActivity extends Activity {
 						resultpay[0] = (String) search_paytype.getText();
 					}
 					// for (int i = 0; i < resultincome.length; i++) {
-					// System.out.println("ÊÕÈë " + resultincome[i]);
+					// System.out.println("ï¿½ï¿½ï¿½ï¿½ " + resultincome[i]);
 					// }
 					// for (int i = 0; i < resultpay.length; i++) {
-					// System.out.println("Ö§³ö " + resultpay[i]);
+					// System.out.println("Ö§ï¿½ï¿½ " + resultpay[i]);
 					// }
 					if (text == null) {
 						String = "";
@@ -301,7 +302,7 @@ public class SearchActivity extends Activity {
 
 		search_quit.setOnClickListener(new OnClickListenernormal());
 
-		mListView.setOnItemClickListener(new OnItemClickListener()// ÎªListViewÌí¼ÓÏîµ¥»÷ÊÂ¼þ
+		mListView.setOnItemClickListener(new OnItemClickListener()// ÎªListViewï¿½ï¿½ï¿½ï¿½îµ¥ï¿½ï¿½ï¿½Â¼ï¿½
 				{
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
@@ -311,21 +312,21 @@ public class SearchActivity extends Activity {
 								.findViewById(R.id.kind);
 						String strtype = ((String) txkind.getText()).substring(
 								1, ((String) txkind.getText()).indexOf(']'))
-								.trim();// ´ÓÊÕÈëÐÅÏ¢ÖÐ½ØÈ¡ÊÕÖ§ÀàÐÍ
-						String strno = (String) txno.getText(); // ´ÓÐÅÏ¢ÖÐ½ØÈ¡ÊÕÖ§±àºÅ
+								.trim();// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Ð½ï¿½È¡ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½
+						String strno = (String) txno.getText(); // ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Ð½ï¿½È¡ï¿½ï¿½Ö§ï¿½ï¿½ï¿½
 						Intent intent = new Intent(SearchActivity.this,
-								AddPay.class);// ´´½¨Intent¶ÔÏó
-						if (strtype.equals("ÊÕÈë")) {
+								AddPay.class);// ï¿½ï¿½ï¿½ï¿½Intentï¿½ï¿½ï¿½ï¿½
+						if (strtype.equals("ï¿½ï¿½ï¿½ï¿½")) {
 							intent.putExtra("cwp.message", new String[] {
-									strno, "btnininfo" });// ÉèÖÃ´«µÝÊý¾Ý
+									strno, "btnininfo" });// ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 						}
-						if (strtype.equals("Ö§³ö")) {
+						if (strtype.equals("Ö§ï¿½ï¿½")) {
 							intent.putExtra("cwp.message", new String[] {
-									strno, "btnoutinfo" });// ÉèÖÃ´«µÝÊý¾Ý
+									strno, "btnoutinfo" });// ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 						}
 						intent.putExtra("cwp.id", userid);
 						intent.putExtra("cwp.search", "search");
-						startActivityForResult(intent, 101);// Ö´ÐÐIntent²Ù×÷
+						startActivityForResult(intent, 101);// Ö´ï¿½ï¿½Intentï¿½ï¿½ï¿½ï¿½
 					}
 				});
 		query_dialog.addTextChangedListener(new TextWatcher() {
@@ -333,25 +334,25 @@ public class SearchActivity extends Activity {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// text ÊäÈë¿òÖÐ¸Ä±äÇ°µÄ×Ö·û´®ÐÅÏ¢
-				// start ÊäÈë¿òÖÐ¸Ä±äÇ°µÄ×Ö·û´®µÄÆðÊ¼Î»ÖÃ
-				// count ÊäÈë¿òÖÐ¸Ä±äÇ°ºóµÄ×Ö·û´®¸Ä±äÊýÁ¿Ò»°ãÎª0
-				// after ÊäÈë¿òÖÐ¸Ä±äºóµÄ×Ö·û´®ÓëÆðÊ¼Î»ÖÃµÄÆ«ÒÆÁ¿
+				// text ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¸Ä±ï¿½Ç°ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+				// start ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¸Ä±ï¿½Ç°ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼Î»ï¿½ï¿½
+				// count ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¸Ä±ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Îª0
+				// after ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¸Ä±ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼Î»ï¿½Ãµï¿½Æ«ï¿½ï¿½ï¿½ï¿½
 
 			}
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
-				// text ÊäÈë¿òÖÐ¸Ä±äºóµÄ×Ö·û´®ÐÅÏ¢
-				// start ÊäÈë¿òÖÐ¸Ä±äºóµÄ×Ö·û´®µÄÆðÊ¼Î»ÖÃ
-				// before ÊäÈë¿òÖÐ¸Ä±äÇ°µÄ×Ö·û´®µÄÎ»ÖÃ Ä¬ÈÏÎª0
-				// count ÊäÈë¿òÖÐ¸Ä±äºóµÄÒ»¹²ÊäÈë×Ö·û´®µÄÊýÁ¿
+				// text ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¸Ä±ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+				// start ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¸Ä±ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼Î»ï¿½ï¿½
+				// before ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¸Ä±ï¿½Ç°ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ Ä¬ï¿½ï¿½Îª0
+				// count ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¸Ä±ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// edit ÊäÈë½áÊø³ÊÏÖÔÚÊäÈë¿òÖÐµÄÐÅÏ¢
+				// edit ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½Ï¢
 				text = s;
 				update(text.toString());
 			}
@@ -364,7 +365,7 @@ public class SearchActivity extends Activity {
 		imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
 		search_more.setVisibility(View.VISIBLE);
 		search_more_list.setVisibility(View.GONE);
-		search_quit.setText("È¡Ïû");
+		search_quit.setText("È¡ï¿½ï¿½");
 		searchstate = "quit";
 		search_more.setBackgroundColor(Color.parseColor("#00000000"));
 	}
@@ -384,7 +385,7 @@ public class SearchActivity extends Activity {
 			return months[3];
 	}
 
-	public void showMultiChoiceDialog(View view, String type) { // ÀàÐÍÑ¡Ôñ
+	public void showMultiChoiceDialog(View view, String type) { // ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½
 		paychoice = new boolean[spdatalistpay.size()];
 		incomechoice = new boolean[spdatalistincome.size()];
 		for (int i = 0; i < paychoice.length; i++) {
@@ -396,19 +397,19 @@ public class SearchActivity extends Activity {
 		multiChoiceDialogBuilder = new CustomMultiChoiceDialog.Builder(this);
 		if (type == "pay") {
 			multiChoiceDialog = multiChoiceDialogBuilder
-					.setTitle("ÊÕÈëÀà±ð")
+					.setTitle("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")
 					.setMultiChoiceItems(true, spdatapay, paychoice, null, true)
-					.setPositiveButton("È·¶¨", new PositiveClickListener())
-					.setNegativeButton("È¡Ïû", null).create();
+					.setPositiveButton("È·ï¿½ï¿½", new PositiveClickListener())
+					.setNegativeButton("È¡ï¿½ï¿½", null).create();
 		} else if (type == "income") {
 			multiChoiceDialog = multiChoiceDialogBuilder
-					.setTitle("Ö§³öÀà±ð")
+					.setTitle("Ö§ï¿½ï¿½ï¿½ï¿½ï¿½")
 					.setMultiChoiceItems(true, spdataincome, incomechoice,
 							null, true)
-					.setPositiveButton("È·¶¨", new PositiveClickListener())
-					.setNegativeButton("È¡Ïû", null).create();
+					.setPositiveButton("È·ï¿½ï¿½", new PositiveClickListener())
+					.setNegativeButton("È¡ï¿½ï¿½", null).create();
 		} else {
-			multiChoiceDialog = multiChoiceDialogBuilder.setTitle("Ê±¼ä·¶Î§")
+			multiChoiceDialog = multiChoiceDialogBuilder.setTitle("Ê±ï¿½ä·¶Î§")
 					.setMultiChoiceItems(false, arrs, boos, new onitem(), true)
 					.setPositiveButton(null, null)
 					.setNegativeButton(null, null).create();
@@ -418,7 +419,7 @@ public class SearchActivity extends Activity {
 		multiChoiceDialog.show();
 	}
 
-	class PositiveClickListener implements DialogInterface.OnClickListener { // µãÈ·¶¨°´Å¥
+	class PositiveClickListener implements DialogInterface.OnClickListener { // ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½Å¥
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
 			if (CustomMultiChoiceDialog.Builder.getisMultiChoice()) {
@@ -444,7 +445,7 @@ public class SearchActivity extends Activity {
 						if (resultpay.length != 0) {
 							search_paytype.setText(resultpay[0]);
 						} else {
-							search_paytype.setText("Ôç²Í");
+							search_paytype.setText("ï¿½ï¿½ï¿½");
 						}
 					}
 				} else if (searchtype == "income") {
@@ -469,7 +470,7 @@ public class SearchActivity extends Activity {
 						if (resultincome.length != 0) {
 							search_incometype.setText(resultincome[0]);
 						} else {
-							search_incometype.setText("Ôç²Í");
+							search_incometype.setText("ï¿½ï¿½ï¿½");
 						}
 					}
 				}
@@ -482,7 +483,7 @@ public class SearchActivity extends Activity {
 		}
 	}
 
-	class onitem implements OnItemClickListener { // Ê±¼ä·¶Î§ÏìÓ¦ÊÂ¼þ
+	class onitem implements OnItemClickListener { // Ê±ï¿½ä·¶Î§ï¿½ï¿½Ó¦ï¿½Â¼ï¿½
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -490,13 +491,13 @@ public class SearchActivity extends Activity {
 			TextView cn = (TextView) view.findViewById(R.id.contact_name);
 			search_list_time_text.setText(cn.getText());
 			switch (position) {
-			case 0: // ×Ô¶¨ÒåÊ±¼ä
+			case 0: // ï¿½Ô¶ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 				search_starttime.setText(mYear + "-01-01");
 				search_endtime.setText(mYear + "-12-31");
 				search_list_timeall.setVisibility(view.VISIBLE);
 				timeselect = true;
 				break;
-			case 1:// ½ñÌì
+			case 1:// ï¿½ï¿½ï¿½ï¿½
 				search_list_timeall.setVisibility(view.GONE);
 				timeselect = false;
 				search_starttime.setText(incomeDAO.gettime(mYear, mMonth, mDay,
@@ -504,7 +505,7 @@ public class SearchActivity extends Activity {
 				search_endtime.setText(incomeDAO.gettime(mYear, mMonth, mDay,
 						false, false));
 				break;
-			case 2:// ×òÌì
+			case 2:// ï¿½ï¿½ï¿½ï¿½
 				search_list_timeall.setVisibility(view.GONE);
 				timeselect = false;
 				if (mDay == 1) {
@@ -521,13 +522,13 @@ public class SearchActivity extends Activity {
 				// System.out.println(search_starttime.getText() + "  "
 				// + search_endtime.getText());
 				break;
-			case 3:// ±¾ÖÜ
+			case 3:// ï¿½ï¿½ï¿½ï¿½
 				search_list_timeall.setVisibility(view.GONE);
 				timeselect = false;
 				int n = 0;
-				// nÎªÍÆ³ÙµÄÖÜÊý£¬0±¾ÖÜ£¬-1ÏòÇ°ÍÆ³ÙÒ»ÖÜ£¬1ÏÂÖÜ£¬ÒÀ´ÎÀàÍÆ
+				// nÎªï¿½Æ³Ùµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½Ü£ï¿½-1ï¿½ï¿½Ç°ï¿½Æ³ï¿½Ò»ï¿½Ü£ï¿½1ï¿½ï¿½ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				c.add(Calendar.DATE, n * 7);
-				// ÏëÖÜ¼¸£¬ÕâÀï¾Í´«¼¸Calendar.MONDAY£¨TUESDAY...£©
+				// ï¿½ï¿½ï¿½Ü¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í´ï¿½ï¿½ï¿½Calendar.MONDAYï¿½ï¿½TUESDAY...ï¿½ï¿½
 				c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 				search_starttime.setText(incomeDAO.gettime(
 						c.get(Calendar.YEAR), (c.get(Calendar.MONTH) + 1),
@@ -537,12 +538,12 @@ public class SearchActivity extends Activity {
 						(c.get(Calendar.MONTH) + 1),
 						c.get(Calendar.DAY_OF_MONTH), false, false));
 				break;
-			case 4:// ÉÏÖÜ
+			case 4:// ï¿½ï¿½ï¿½ï¿½
 				timeselect = false;
 				search_list_timeall.setVisibility(view.GONE);
-				// nÎªÍÆ³ÙµÄÖÜÊý£¬0±¾ÖÜ£¬-1ÏòÇ°ÍÆ³ÙÒ»ÖÜ£¬1ÏÂÖÜ£¬ÒÀ´ÎÀàÍÆ
+				// nÎªï¿½Æ³Ùµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½Ü£ï¿½-1ï¿½ï¿½Ç°ï¿½Æ³ï¿½Ò»ï¿½Ü£ï¿½1ï¿½ï¿½ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				c.add(Calendar.DATE, (-1) * 7);
-				// ÏëÖÜ¼¸£¬ÕâÀï¾Í´«¼¸Calendar.MONDAY£¨TUESDAY...£©
+				// ï¿½ï¿½ï¿½Ü¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í´ï¿½ï¿½ï¿½Calendar.MONDAYï¿½ï¿½TUESDAY...ï¿½ï¿½
 				c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 				search_starttime.setText(incomeDAO.gettime(
 						c.get(Calendar.YEAR), (c.get(Calendar.MONTH) + 1),
@@ -552,7 +553,7 @@ public class SearchActivity extends Activity {
 						(c.get(Calendar.MONTH) + 1),
 						c.get(Calendar.DAY_OF_MONTH), false, false));
 				break;
-			case 5:// ±¾ÔÂ
+			case 5:// ï¿½ï¿½ï¿½ï¿½
 				timeselect = false;
 				search_list_timeall.setVisibility(view.GONE);
 				search_starttime.setText(incomeDAO.gettime(mYear, mMonth, mDay,
@@ -560,7 +561,7 @@ public class SearchActivity extends Activity {
 				search_endtime.setText(incomeDAO.gettime(mYear, mMonth, mDay,
 						false, true));
 				break;
-			case 6:// ÉÏÔÂ
+			case 6:// ï¿½ï¿½ï¿½ï¿½
 				timeselect = false;
 				search_list_timeall.setVisibility(view.GONE);
 				search_starttime.setText(incomeDAO.gettime(mYear, mMonth - 1,
@@ -568,7 +569,7 @@ public class SearchActivity extends Activity {
 				search_endtime.setText(incomeDAO.gettime(mYear, mMonth - 1,
 						mDay, false, true));
 				break;
-			case 7:// ±¾¼¾
+			case 7:// ï¿½ï¿½ï¿½ï¿½
 				timeselect = false;
 				search_list_timeall.setVisibility(view.GONE);
 				Calendar calendar = new GregorianCalendar();
@@ -581,7 +582,7 @@ public class SearchActivity extends Activity {
 						calendar.get(Calendar.YEAR),
 						(calendar.get(Calendar.MONTH) + 1),
 						calendar.get(Calendar.DAY_OF_MONTH), false, false));
-				// ¼¾¶ÈÄ©
+				// ï¿½ï¿½ï¿½ï¿½Ä©
 				calendar.setTime(new Date());
 				month = getQuarterInMonth(calendar.get(Calendar.MONTH) + 1,
 						false);
@@ -592,7 +593,7 @@ public class SearchActivity extends Activity {
 						(calendar.get(Calendar.MONTH) + 1),
 						calendar.get(Calendar.DAY_OF_MONTH), false, false));
 				break;
-			case 8:// ÉÏ¼¾
+			case 8:// ï¿½Ï¼ï¿½
 				timeselect = false;
 				search_list_timeall.setVisibility(view.GONE);
 				Calendar calendar2 = new GregorianCalendar();
@@ -615,7 +616,7 @@ public class SearchActivity extends Activity {
 						(calendar2.get(calendar2.MONTH) + 1),
 						calendar2.get(calendar2.DAY_OF_MONTH), false, false));
 				break;
-			case 9:// ÉÏÄê
+			case 9:// ï¿½ï¿½ï¿½ï¿½
 				timeselect = false;
 				search_list_timeall.setVisibility(view.GONE);
 				search_starttime.setText(incomeDAO.gettime(mYear - 1, 1, 1,
@@ -637,25 +638,25 @@ public class SearchActivity extends Activity {
 		mlayout.setVisibility(View.VISIBLE);
 		search_more.setBackgroundColor(Color.parseColor("#e8e8e8"));
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-		int m = 0, income = 0, pay = 0;// ¶¨ÒåÒ»¸ö¿ªÊ¼±êÊ¶
+		int m = 0, income = 0, pay = 0;// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½Ê¶
 		strInfos = new String[listinfos2.size()];
-		if (listinfos2.size() == 0) { // ´¦Àílistview
-			seachbalance.setText("£¤ 0.0");
-			searchpay.setText("£¤ 0.0");
-			searchincome.setText("£¤ 0.0");
+		if (listinfos2.size() == 0) { // ï¿½ï¿½ï¿½ï¿½listview
+			seachbalance.setText("ï¿½ï¿½ 0.0");
+			searchpay.setText("ï¿½ï¿½ 0.0");
+			searchincome.setText("ï¿½ï¿½ 0.0");
 			mListView.setVisibility(View.GONE);
 		} else {
 			mListView.setVisibility(View.VISIBLE);
-			for (Tb_income tb_income : listinfos2) {// ±éÀúList·ºÐÍ¼¯ºÏ
-				// ½«ÊÕÈëÏà¹ØÐÅÏ¢×éºÏ³ÉÒ»¸ö×Ö·û´®£¬´æ´¢µ½×Ö·û´®Êý×éµÄÏàÓ¦Î»ÖÃ
-				if (tb_income.getKind().equals("ÊÕÈë")) { // ÊÕÈë
+			for (Tb_income tb_income : listinfos2) {// ï¿½ï¿½ï¿½ï¿½Listï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Ï³ï¿½Ò»ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ´¢ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦Î»ï¿½ï¿½
+				if (tb_income.getKind().equals("ï¿½ï¿½ï¿½ï¿½")) { // ï¿½ï¿½ï¿½ï¿½
 					Map<String, Object> map = new HashMap<String, Object>();
 					map.put("img",
 							itypeDAO.getOneImg(userid, tb_income.getType()));
 					map.put("no", tb_income.getNo() + "");
 					map.put("kind", "[" + tb_income.getKind() + "]");
 					map.put("address", tb_income.getHandler());
-					map.put("money", "£¤ " + tb_income.getMoney2() + "Ôª");
+					map.put("money", "ï¿½ï¿½ " + tb_income.getMoney2() + "Ôª");
 					map.put("title",
 							itypeDAO.getOneName(userid, tb_income.getType()));
 					map.put("info", tb_income.getTime());
@@ -663,15 +664,15 @@ public class SearchActivity extends Activity {
 							FragmentPage3.gofordate(tb_income.getTime()));
 					list.add(map);
 					income += tb_income.getMoney();
-					m++;// ±êÊ¶¼Ó1
-				} else { // Ö§³ö
+					m++;// ï¿½ï¿½Ê¶ï¿½ï¿½1
+				} else { // Ö§ï¿½ï¿½
 					Map<String, Object> map = new HashMap<String, Object>();
 					map.put("img",
 							ptypeDAO.getOneImg(userid, tb_income.getType()));
 					map.put("no", tb_income.getNo() + "");
 					map.put("kind", "[" + tb_income.getKind() + "]");
 					map.put("address", tb_income.getHandler());
-					map.put("money", "£¤ " + tb_income.getMoney2() + "Ôª");
+					map.put("money", "ï¿½ï¿½ " + tb_income.getMoney2() + "Ôª");
 					map.put("title",
 							ptypeDAO.getOneName(userid, tb_income.getType()));
 					map.put("info", tb_income.getTime());
@@ -679,12 +680,12 @@ public class SearchActivity extends Activity {
 							FragmentPage3.gofordate(tb_income.getTime()));
 					list.add(map);
 					pay += tb_income.getMoney();
-					m++;// ±êÊ¶¼Ó1
+					m++;// ï¿½ï¿½Ê¶ï¿½ï¿½1
 				}
 			}
-			seachbalance.setText("£¤ " + String.valueOf(income - pay));
-			searchpay.setText("£¤ " + String.valueOf(-pay));
-			searchincome.setText("£¤ " + String.valueOf(income));
+			seachbalance.setText("ï¿½ï¿½ " + String.valueOf(income - pay));
+			searchpay.setText("ï¿½ï¿½ " + String.valueOf(-pay));
+			searchincome.setText("ï¿½ï¿½ " + String.valueOf(income));
 			adapter = new MyAdspter(this, list, true);
 			mListView.setAdapter(adapter);
 		}
@@ -706,18 +707,18 @@ public class SearchActivity extends Activity {
 
 		public void onDateSet(DatePicker view, int year, int monthOfYear,
 				int dayOfMonth) {
-			mYear = year;// ÎªÄê·Ý¸³Öµ
-			mMonth = monthOfYear;// ÎªÔÂ·Ý¸³Öµ
-			mDay = dayOfMonth;// ÎªÌì¸³Öµ
-			updateDisplay();// ÏÔÊ¾ÉèÖÃµÄÈÕÆÚ
+			mYear = year;// Îªï¿½ï¿½Ý¸ï¿½Öµ
+			mMonth = monthOfYear;// Îªï¿½Â·Ý¸ï¿½Öµ
+			mDay = dayOfMonth;// Îªï¿½ì¸³Öµ
+			updateDisplay();// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½
 		}
 	};
 
 	@Override
-	protected Dialog onCreateDialog(int id)// ÖØÐ´onCreateDialog·½·¨
+	protected Dialog onCreateDialog(int id)// ï¿½ï¿½Ð´onCreateDialogï¿½ï¿½ï¿½ï¿½
 	{
 		switch (id) {
-		case DATE_DIALOG_ID:// µ¯³öÈÕÆÚÑ¡Ôñ¶Ô»°¿ò
+		case DATE_DIALOG_ID:// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ô»ï¿½ï¿½ï¿½
 			return new DatePickerDialog(this, AlertDialog.THEME_HOLO_LIGHT,
 					mDateSetListener, mYear, mMonth, mDay);
 		}
@@ -736,12 +737,12 @@ public class SearchActivity extends Activity {
 
 	public static void DateCompare(CharSequence s1, CharSequence s2)
 			throws Exception {
-		// Éè¶¨Ê±¼äµÄÄ£°å
+		// ï¿½è¶¨Ê±ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		// µÃµ½Ö¸¶¨Ä£·¶µÄÊ±¼ä
+		// ï¿½Ãµï¿½Ö¸ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 		Date d1 = sdf.parse(s1 + "");
 		Date d2 = sdf.parse(s2 + "");
-		// ±È½Ï
+		// ï¿½È½ï¿½
 		if (d1.getTime() - d2.getTime() > 0) {
 			CharSequence a = search_starttime.getText();
 			search_starttime.setText(search_endtime.getText());

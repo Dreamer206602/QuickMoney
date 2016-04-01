@@ -2,7 +2,7 @@ package com.cwp.chart;
 
 import java.util.Date;
 
-import com.cwp.cmoneycharge.FragmentPage3;
+import com.cwp.fragment.FragmentPage3;
 import com.cwp.cmoneycharge.R;
 
 import android.content.Context;
@@ -22,17 +22,17 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 /**
- * @description×Ô¶¨ÒåÈİÆ÷£¬Ê¢·Ålistview,gridview,scrollview
- * @author Ô¬¶«Çä
- * @date 2014-7-21 ÏÂÎç5:56:00
+ * @descriptionï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¢ï¿½ï¿½listview,gridview,scrollview
+ * @author Ô¬ï¿½ï¿½ï¿½ï¿½
+ * @date 2014-7-21 ï¿½ï¿½ï¿½ï¿½5:56:00
  */
 public class PullToRefreshView extends LinearLayout {
 	private static final String TAG = "PullToRefreshView";
-	// Ë¢ĞÂ×´ë
+	// Ë¢ï¿½ï¿½×´ï¿½ï¿½
 	private static final int PULL_TO_REFRESH = 2;
 	private static final int RELEASE_TO_REFRESH = 3;
 	private static final int REFRESHING = 4;
-	// À­¶¯×´ë
+	// ï¿½ï¿½ï¿½ï¿½×´ï¿½ï¿½
 	private static final int PULL_UP_STATE = 0;
 	private static final int PULL_DOWN_STATE = 1;
 	private boolean enablePullTorefresh = true;
@@ -40,53 +40,53 @@ public class PullToRefreshView extends LinearLayout {
 	private int mLastMotionY;
 	private boolean mLock;
 	/**
-	 * Í·²¿view
+	 * Í·ï¿½ï¿½view
 	 */
 	private View mHeaderView;
 	/**
-	 * µ×²¿view
+	 * ï¿½×²ï¿½view
 	 */
 	private View mFooterView;
 	private AdapterView<?> mAdapterView;
 	private ScrollView mScrollView;
 	/**
-	 * Í·²¿viewµÄ¸ß
+	 * Í·ï¿½ï¿½viewï¿½Ä¸ï¿½
 	 */
 	private int mHeaderViewHeight;
 	/**
-	 * µ×²¿viewµÄ¸ß
+	 * ï¿½×²ï¿½viewï¿½Ä¸ï¿½
 	 */
 	private int mFooterViewHeight;
 	/**
-	 * Í·²¿¼ıÍ·
+	 * Í·ï¿½ï¿½ï¿½ï¿½Í·
 	 */
 	private ImageView mHeaderImageView;
 	/**
-	 * µ×²¿¼ıÍ·
+	 * ï¿½×²ï¿½ï¿½ï¿½Í·
 	 */
 	private ImageView mFooterImageView;
 	/**
-	 * Í·²¿ÎÄ×Ö
+	 * Í·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private TextView mHeaderTextView;
 	/**
-	 * µ×²¿ÎÄ×Ö
+	 * ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private TextView mFooterTextView;
 	/**
-	 * Í·²¿Ë¢ĞÂÊ±¼ä
+	 * Í·ï¿½ï¿½Ë¢ï¿½ï¿½Ê±ï¿½ï¿½
 	 */
 	private TextView mHeaderUpdateTextView;
 	/**
-	 * µ×²¿Ë¢ĞÂÊ±¼ä
+	 * ï¿½×²ï¿½Ë¢ï¿½ï¿½Ê±ï¿½ï¿½
 	 */
 	private TextView mFooterUpdateTextView;
 	/**
-	 * Í·²¿½ø¶È°å
+	 * Í·ï¿½ï¿½ï¿½ï¿½ï¿½È°ï¿½
 	 */
 	private ProgressBar mHeaderProgressBar;
 	/**
-	 * µ×²¿½ø¶È°å
+	 * ï¿½×²ï¿½ï¿½ï¿½ï¿½È°ï¿½
 	 */
 	private ProgressBar mFooterProgressBar;
 	/**
@@ -94,36 +94,36 @@ public class PullToRefreshView extends LinearLayout {
 	 */
 	private LayoutInflater mInflater;
 	/**
-	 * Í·²¿viewµÄµ±Ç°×´âø
+	 * Í·ï¿½ï¿½viewï¿½Äµï¿½Ç°×´ï¿½ï¿½
 	 */
 	private int mHeaderState;
 	/**
-	 * µ×²¿viewµÄµ±Ç°×´âø
+	 * ï¿½×²ï¿½viewï¿½Äµï¿½Ç°×´ï¿½ï¿½
 	 */
 	private int mFooterState;
 	/**
-	 * À­¶¯×´ë
+	 * ï¿½ï¿½ï¿½ï¿½×´ï¿½ï¿½
 	 */
 	private int mPullState;
 	/**
-	 * ±äÎªÏòÏÂµÄ¼ıŠB¸Ä±ä¼ıÍ··½Ïò
+	 * ï¿½ï¿½Îªï¿½ï¿½ï¿½ÂµÄ¼ï¿½ï¿½Bï¿½Ä±ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½
 	 */
 	private RotateAnimation mFlipAnimation;
 	/**
-	 * ±äÎªÄæÏòµÄ¼ıŠBĞı×ª
+	 * ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Bï¿½ï¿½×ª
 	 */
 	private RotateAnimation mReverseFlipAnimation;
 	/**
-	 * µ×²¿viewµÄË¢ĞÂ¼à…Ì
+	 * ï¿½×²ï¿½viewï¿½ï¿½Ë¢ï¿½Â¼ï¿½ï¿½ï¿½
 	 */
 	private OnFooterRefreshListener mOnFooterRefreshListener;
 	/**
-	 * Í·²¿viewµÄË¢ĞÂ¼à…Ì
+	 * Í·ï¿½ï¿½viewï¿½ï¿½Ë¢ï¿½Â¼ï¿½ï¿½ï¿½
 	 */
 	private OnHeaderRefreshListener mOnHeaderRefreshListener;
 
 	/**
-	 * –c?¸üĞÂÊ±¼ä
+	 * ï¿½c?ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 	 */
 	private String mLastUpdateTime;
 
@@ -153,7 +153,7 @@ public class PullToRefreshView extends LinearLayout {
 		mReverseFlipAnimation.setFillAfter(true);
 
 		mInflater = LayoutInflater.from(getContext());
-		// header view ÔÚ´ËÌí¼Ó,±£Ö¤ÊÇµÚØ¯?Ìí¼Óµ½linearlayoutµÄ×îÉÏ¶Ë
+		// header view ï¿½Ú´ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Ö¤ï¿½Çµï¿½Ø¯?ï¿½ï¿½Óµï¿½linearlayoutï¿½ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½
 		addHeaderView();
 	}
 
@@ -174,7 +174,7 @@ public class PullToRefreshView extends LinearLayout {
 		mHeaderViewHeight = mHeaderView.getMeasuredHeight();
 		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,
 				mHeaderViewHeight);
-		// ÉèÖÃtopMarginµÄN?¸ºµÄheader View¸ß¶È,¼´½«ÆäÒş²ØÔÚ–c?”å
+		// ï¿½ï¿½ï¿½ï¿½topMarginï¿½ÄN?ï¿½ï¿½ï¿½ï¿½header Viewï¿½ß¶ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú–c?ï¿½ï¿½
 		params.topMargin = -(mHeaderViewHeight);
 		// mHeaderView.setLayoutParams(params1);
 		addView(mHeaderView, params);
@@ -197,16 +197,16 @@ public class PullToRefreshView extends LinearLayout {
 				mFooterViewHeight);
 		// int top = getHeight();
 		// params.topMargin
-		// =getHeight();//ÔÚÕâÀïgetHeight()==0,µ«ÔÚonInterceptTouchEvent()·½·¨ÀïgetHeight()ÒÑ¾­ÓĞN?²»ÔÙ•p;
-		// getHeight()·Â?Ê±N?¸³‚ÉÔ¼±?ÑĞ¾¿Ò»Ø¯
-		// ÓÉÓÚÊÇÏßĞÔ²¼Óì?ÒÔÖ±½ÓÌíÊÆÖ»ÒªAdapterViewµÄ¸ß¶ÈÊÇMATCH_PARENT,ÄÇÃ´footer view¾Í»á±»Ìí¼Óµ½–c?,²¢ÒşŞ½
+		// =getHeight();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½getHeight()==0,ï¿½ï¿½ï¿½ï¿½onInterceptTouchEvent()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½getHeight()ï¿½Ñ¾ï¿½ï¿½ĞN?ï¿½ï¿½ï¿½Ù•p;
+		// getHeight()ï¿½ï¿½?Ê±ï¿½N?ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½?ï¿½Ğ¾ï¿½Ò»Ø¯
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô²ï¿½ï¿½ï¿½?ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ÒªAdapterViewï¿½Ä¸ß¶ï¿½ï¿½ï¿½MATCH_PARENT,ï¿½ï¿½Ã´footer viewï¿½Í»á±»ï¿½ï¿½Óµï¿½ï¿½c?,ï¿½ï¿½ï¿½ï¿½Ş½
 		addView(mFooterView, params);
 	}
 
 	@Override
 	protected void onFinishInflate() {
 		super.onFinishInflate();
-		// footer view ÔÚ´ËÌí¼Ó±£Ö¤Ìí¼Óµ½linearlayoutÖĞµÄ–c?
+		// footer view ï¿½Ú´ï¿½ï¿½ï¿½Ó±ï¿½Ö¤ï¿½ï¿½Óµï¿½linearlayoutï¿½ĞµÄ–c?
 		addFooterView();
 		initContentAdapterView();
 	}
@@ -214,7 +214,7 @@ public class PullToRefreshView extends LinearLayout {
 	private void initContentAdapterView() {
 		int count = getChildCount();
 		if (count < 3) {
-			Log.e(TAG, "×ÓviewµÄ¸öÊıĞ¡ÒÚ----------------");
+			Log.e(TAG, "ï¿½ï¿½viewï¿½Ä¸ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½----------------");
 		}
 		View view = null;
 		for (int i = 0; i < count - 1; ++i) {
@@ -228,7 +228,7 @@ public class PullToRefreshView extends LinearLayout {
 			}
 		}
 		if (mAdapterView == null && mScrollView == null) {
-			Log.e(TAG, "viewÎª¿Õ-------------------");
+			Log.e(TAG, "viewÎªï¿½ï¿½-------------------");
 		}
 	}
 
@@ -257,11 +257,11 @@ public class PullToRefreshView extends LinearLayout {
 		int y = (int) e.getRawY();
 		switch (e.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			// Ê×ÏÈÀ¹½ØdownÊÂ¼ş,¼ÇÂ¼y×ø±ê
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½downï¿½Â¼ï¿½,ï¿½ï¿½Â¼yï¿½ï¿½ï¿½ï¿½
 			mLastMotionY = y;
 			break;
 		case MotionEvent.ACTION_MOVE:
-			// deltaY > 0 ÊÇÏòÏÂÔËÊÆ< 0ÊÇÏòÉÏÔËÊÆ
+			// deltaY > 0 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½< 0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			int deltaY = y - mLastMotionY;
 			if (isRefreshViewScroll(deltaY)) {
 				return true;
@@ -275,8 +275,8 @@ public class PullToRefreshView extends LinearLayout {
 	}
 
 	/*
-	 * Èç¹ûÔÚonInterceptTouchEvent()·½·¨ÖĞÃ»ÓĞÀ¹·¿¼´onInterceptTouchEvent()·½·¨Ø¯return
-	 * false)ÔòÓÉPullToRefreshView µÄ×ÓViewÀ´´¦¬q·ñÔòÓÉÏÂÃæµÄ·½·¨À´´¦¬q¼´ÓÉPullToRefreshView×Ô¼ºÀ´´¦¬q
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½onInterceptTouchEvent()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½onInterceptTouchEvent()ï¿½ï¿½ï¿½ï¿½Ø¯return
+	 * false)ï¿½ï¿½ï¿½ï¿½PullToRefreshView ï¿½ï¿½ï¿½ï¿½Viewï¿½ï¿½ï¿½ï¿½ï¿½qï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½qï¿½ï¿½ï¿½ï¿½PullToRefreshViewï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½q
 	 */
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
@@ -286,18 +286,18 @@ public class PullToRefreshView extends LinearLayout {
 		int y = (int) event.getRawY();
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			// onInterceptTouchEventÒÑ¾­¼ÇÂ¼
+			// onInterceptTouchEventï¿½Ñ¾ï¿½ï¿½ï¿½Â¼
 			// mLastMotionY = y;
 			break;
 		case MotionEvent.ACTION_MOVE:
 			int deltaY = y - mLastMotionY;
 			if (mPullState == PULL_DOWN_STATE) {
-				// PullToRefreshViewÖ´ĞĞÏÂÀ­
+				// PullToRefreshViewÖ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				// Log.i(TAG, " pull down!parent view move!");
 				headerPrepareToRefresh(deltaY);
 				// setHeaderPadding(-mHeaderViewHeight);
 			} else if (mPullState == PULL_UP_STATE) {
-				// PullToRefreshViewÖ´ĞĞÉÏÀ­
+				// PullToRefreshViewÖ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				// Log.i(TAG, "pull up!parent view move!");
 				footerPrepareToRefresh(deltaY);
 			}
@@ -308,19 +308,19 @@ public class PullToRefreshView extends LinearLayout {
 			int topMargin = getHeaderTopMargin();
 			if (mPullState == PULL_DOWN_STATE) {
 				if (topMargin >= 0) {
-					// ?Ë¢ĞÂ
+					// ï¿½ï¿½?Ë¢ï¿½ï¿½
 					headerRefreshing();
 				} else {
-					// »¹Ã»ÓĞÖ´ĞĞË¢ĞÂ£¬ÖØĞÂÒş²Ø
+					// ï¿½ï¿½Ã»ï¿½ï¿½Ö´ï¿½ï¿½Ë¢ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					setHeaderTopMargin(-mHeaderViewHeight);
 				}
 			} else if (mPullState == PULL_UP_STATE) {
 				if (Math.abs(topMargin) >= mHeaderViewHeight
 						+ mFooterViewHeight) {
-					// ?Ö´ĞĞfooter Ë¢ĞÂ
+					// ï¿½ï¿½?Ö´ï¿½ï¿½footer Ë¢ï¿½ï¿½
 					footerRefreshing();
 				} else {
-					// »¹Ã»ÓĞÖ´ĞĞË¢ĞÂ£¬ÖØĞÂÒş²Ø
+					// ï¿½ï¿½Ã»ï¿½ï¿½Ö´ï¿½ï¿½Ë¢ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					setHeaderTopMargin(-mHeaderViewHeight);
 				}
 			}
@@ -330,27 +330,27 @@ public class PullToRefreshView extends LinearLayout {
 	}
 
 	/**
-	 * ÊÇ·ñÓ¦¸Ãµ½ÁË¸¸View,¼´PullToRefreshView»¬¶¯
+	 * ï¿½Ç·ï¿½Ó¦ï¿½Ãµï¿½ï¿½Ë¸ï¿½View,ï¿½ï¿½PullToRefreshViewï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param deltaY
-	 *            , deltaY > 0 ÊÇÏòÏÂÔËÊÆ< 0ÊÇÏòÉÏÔËÊÆ
+	 *            , deltaY > 0 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½< 0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	private boolean isRefreshViewScroll(int deltaY) {
 		if (mHeaderState == REFRESHING || mFooterState == REFRESHING) {
 			return false;
 		}
-		// ¶ÔÓÚListViewºÍGridView
+		// ï¿½ï¿½ï¿½ï¿½ListViewï¿½ï¿½GridView
 		if (mAdapterView != null) {
-			// ×Óview(ListView or GridView)»¬¶¯µ½×î¶¥¶Ë
+			// ï¿½ï¿½view(ListView or GridView)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î¶¥ï¿½ï¿½
 			if (deltaY > 0) {
-				// ÅĞ¶ÏÊÇ·ñ½ûÓÃÏÂÀ­Ë¢ĞÂ²Ù×÷
+				// ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½Â²ï¿½ï¿½ï¿½
 				if (!enablePullTorefresh) {
 					return false;
 				}
 				View child = mAdapterView.getChildAt(0);
 				if (child == null) {
-					// Èç¹ûmAdapterViewÖĞÃ»ÓĞÊı’İ²»À¹·¿
+					// ï¿½ï¿½ï¿½mAdapterViewï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½İ²ï¿½ï¿½ï¿½ï¿½ï¿½
 					return false;
 				}
 				if (mAdapterView.getFirstVisiblePosition() == 0
@@ -361,24 +361,24 @@ public class PullToRefreshView extends LinearLayout {
 				int top = child.getTop();
 				int padding = mAdapterView.getPaddingTop();
 				if (mAdapterView.getFirstVisiblePosition() == 0
-						&& Math.abs(top - padding) <= 11) {// ÕâÀïÖ®Ç°®m¿ÉÒÔÅĞ¶Ï,µ«ÏÖÔÚ²»ñÆ»¹Ã»ÕÒµ½Ô­Òò
+						&& Math.abs(top - padding) <= 11) {// ï¿½ï¿½ï¿½ï¿½Ö®Ç°ï¿½mï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½Æ»ï¿½Ã»ï¿½Òµï¿½Ô­ï¿½ï¿½
 					mPullState = PULL_DOWN_STATE;
 					return true;
 				}
 
 			} else if (deltaY < 0) {
-				// ÅĞ¶ÏÊÇ·ñ½ûÓÃÉÏÀ­¼ÓÔØ¸ü¶à²Ù×÷
+				// ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				if (!enablePullLoadMoreDataStatus) {
 					return false;
 				}
 				View lastChild = mAdapterView.getChildAt(mAdapterView
 						.getChildCount() - 1);
 				if (lastChild == null) {
-					// Èç¹ûmAdapterViewÖĞÃ»ÓĞÊı’İ²»À¹·¿
+					// ï¿½ï¿½ï¿½mAdapterViewï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½İ²ï¿½ï¿½ï¿½ï¿½ï¿½
 					return false;
 				}
-				// –c?Ø¯?×ÓviewµÄBottomĞ¡ÓÚ¸¸ViewµÄ¸ß¶ÈËµÃ÷mAdapterViewµÄÊı¾İÃ»ÓĞÌîÂú¸¸view,
-				// µÈÓÚ¸¸ViewµÄ¸ß¶ÈËµÃ÷mAdapterViewÒÑ¾­»¬¶¯µ½×î…Ì
+				// ï¿½c?Ø¯?ï¿½ï¿½viewï¿½ï¿½BottomĞ¡ï¿½Ú¸ï¿½Viewï¿½Ä¸ß¶ï¿½Ëµï¿½ï¿½mAdapterViewï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½view,
+				// ï¿½ï¿½ï¿½Ú¸ï¿½Viewï¿½Ä¸ß¶ï¿½Ëµï¿½ï¿½mAdapterViewï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				if (lastChild.getBottom() <= getHeight()
 						&& mAdapterView.getLastVisiblePosition() == mAdapterView
 								.getCount() - 1) {
@@ -387,9 +387,9 @@ public class PullToRefreshView extends LinearLayout {
 				}
 			}
 		}
-		// ¶ÔÓÚScrollView
+		// ï¿½ï¿½ï¿½ï¿½ScrollView
 		if (mScrollView != null) {
-			// ×Óscroll view»¬¶¯µ½×î¶¥¶Ë
+			// ï¿½ï¿½scroll viewï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î¶¥ï¿½ï¿½
 			View child = mScrollView.getChildAt(0);
 			if (deltaY > 0 && mScrollView.getScrollY() == 0) {
 				mPullState = PULL_DOWN_STATE;
@@ -405,55 +405,55 @@ public class PullToRefreshView extends LinearLayout {
 	}
 
 	/**
-	 * header ×¼±¸Ë¢ĞÂ,ÊÖÖ¸ÒÆ¶¯¹ı³Ì,»¹Ã»ÓĞÊÍÕş
+	 * header ×¼ï¿½ï¿½Ë¢ï¿½ï¿½,ï¿½ï¿½Ö¸ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param deltaY
-	 *            ,ÊÖÖ¸»¬¶¯µÄ¾à¶d
+	 *            ,ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½d
 	 */
 	private void headerPrepareToRefresh(int deltaY) {
 		int newTopMargin = changingHeaderViewTopMargin(deltaY);
 
-		// µ±header viewµÄtopMargin>=0Ê±£¬ËµÃ÷ÒÑ¾­ÍêÈ«ÏÔÊ¾³öÀ´ÒÚĞŞ¸Äheader view µÄÌáÊ¾×´âø
+		// ï¿½ï¿½header viewï¿½ï¿½topMargin>=0Ê±ï¿½ï¿½Ëµï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½È«ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ş¸ï¿½header view ï¿½ï¿½ï¿½ï¿½Ê¾×´ï¿½ï¿½
 		if (newTopMargin >= 0 && mHeaderState != RELEASE_TO_REFRESH) {
-			mHeaderTextView.setText("·Å¿ªÇĞ»»µ½"
-					+ Integer.toString(FragmentPage3.getyear() + 1) + "ÄêÁ÷Ë®");
+			mHeaderTextView.setText("ï¿½Å¿ï¿½ï¿½Ğ»ï¿½ï¿½ï¿½"
+					+ Integer.toString(FragmentPage3.getyear() + 1) + "ï¿½ï¿½ï¿½ï¿½Ë®");
 			mHeaderUpdateTextView.setVisibility(View.VISIBLE);
 			mHeaderImageView.clearAnimation();
 			mHeaderImageView.startAnimation(mFlipAnimation);
 			mHeaderState = RELEASE_TO_REFRESH;
-		} else if (newTopMargin < 0 && newTopMargin > -mHeaderViewHeight) {// ÍÏ¶¯Ê±Ã»ÓĞÊÍÕş
+		} else if (newTopMargin < 0 && newTopMargin > -mHeaderViewHeight) {// ï¿½Ï¶ï¿½Ê±Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			mHeaderImageView.clearAnimation();
 			mHeaderImageView.startAnimation(mFlipAnimation);
 			// mHeaderImageView.
-			mHeaderTextView.setText("ÏÂÀ­ÇĞ»»µ½"
-					+ Integer.toString(FragmentPage3.getyear() + 1) + "ÄêÁ÷Ë®");
+			mHeaderTextView.setText("ï¿½ï¿½ï¿½ï¿½ï¿½Ğ»ï¿½ï¿½ï¿½"
+					+ Integer.toString(FragmentPage3.getyear() + 1) + "ï¿½ï¿½ï¿½ï¿½Ë®");
 			mHeaderState = PULL_TO_REFRESH;
 		}
 	}
 
 	/**
-	 * footer ×¼±¸Ë¢ĞÂ,ÊÖÖ¸ÒÆ¶¯¹ı³Ì,»¹Ã»ÓĞÊÍÕşÒÆ¶¯footer view¸ß¶ÈÍ¬ÑùºÍÒÆ¶¯header view
-	 * ¸ß¶ÈÊÇÒ»Ñù£¬¶¼ÊÇÍ¨¹ıĞŞ¸Äheader viewµÄtopmarginµÄâñ?´ïØÛ
+	 * footer ×¼ï¿½ï¿½Ë¢ï¿½ï¿½,ï¿½ï¿½Ö¸ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½footer viewï¿½ß¶ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½header view
+	 * ï¿½ß¶ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½Ş¸ï¿½header viewï¿½ï¿½topmarginï¿½ï¿½ï¿½ï¿½?ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param deltaY
-	 *            ,ÊÖÖ¸»¬¶¯µÄ¾à¶d
+	 *            ,ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½d
 	 */
 	private void footerPrepareToRefresh(int deltaY) {
 		int newTopMargin = changingHeaderViewTopMargin(deltaY);
-		// Èç¹ûheader view topMargin µÄ¾ø¶Ô¼±?ÓÚ»òµÈÓÚheader + footer µÄ¸ßø
-		// ËµÃ÷footer view ÍêÈ«ÏÔÊ¾³öÀ´ÁË£¬ĞŞ¸Äfooter view µÄÌáÊ¾×´âø
+		// ï¿½ï¿½ï¿½header view topMargin ï¿½Ä¾ï¿½ï¿½Ô¼ï¿½?ï¿½Ú»ï¿½ï¿½ï¿½ï¿½header + footer ï¿½Ä¸ßï¿½
+		// Ëµï¿½ï¿½footer view ï¿½ï¿½È«ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ï¿½Ş¸ï¿½footer view ï¿½ï¿½ï¿½ï¿½Ê¾×´ï¿½ï¿½
 		if (Math.abs(newTopMargin) >= (mHeaderViewHeight + mFooterViewHeight)
 				&& mFooterState != RELEASE_TO_REFRESH) {
-			mFooterTextView.setText("·Å¿ªÇĞ»»µ½"
-					+ Integer.toString(FragmentPage3.getyear() - 1) + "ÄêÁ÷Ë®");
+			mFooterTextView.setText("ï¿½Å¿ï¿½ï¿½Ğ»ï¿½ï¿½ï¿½"
+					+ Integer.toString(FragmentPage3.getyear() - 1) + "ï¿½ï¿½ï¿½ï¿½Ë®");
 			mFooterImageView.clearAnimation();
 			mFooterImageView.startAnimation(mFlipAnimation);
 			mFooterState = RELEASE_TO_REFRESH;
 		} else if (Math.abs(newTopMargin) < (mHeaderViewHeight + mFooterViewHeight)) {
 			mFooterImageView.clearAnimation();
 			mFooterImageView.startAnimation(mFlipAnimation);
-			mFooterTextView.setText("ÉÏÀ­ÇĞ»»µ½"
-					+ Integer.toString(FragmentPage3.getyear() - 1) + "ÄêÁ÷Ë®");
+			mFooterTextView.setText("ï¿½ï¿½ï¿½ï¿½ï¿½Ğ»ï¿½ï¿½ï¿½"
+					+ Integer.toString(FragmentPage3.getyear() - 1) + "ï¿½ï¿½ï¿½ï¿½Ë®");
 			mFooterState = PULL_TO_REFRESH;
 		}
 	}
@@ -461,13 +461,13 @@ public class PullToRefreshView extends LinearLayout {
 	private int changingHeaderViewTopMargin(int deltaY) {
 		LayoutParams params = (LayoutParams) mHeaderView.getLayoutParams();
 		float newTopMargin = params.topMargin + deltaY * 0.3f;
-		// ÕâÀï¶ÔÉÏÀ­×öØ¯?ÏŞÖÆ,ÒòÎªµ±Ç°ÉÏÀ­ºóÈ»ºó²»ÊÍ·ÅÊÖÖ¸Ö±½ÓÏÂÀ­,»á°ÑÏÂÀ­Ë¢ĞÂ¸ø´¥·¢ÁË,¸ĞĞ»ÍøÓÑyufengzungzheµÄÖ¸Ôä
-		// ±íÊ¾Èç¹ûÊÇÔÚÉÏÀ­ºóÒ»¶Î¾à¶dÈ»ºóÖ±½ÓÏÂÀ­
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¯?ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Îªï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È»ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½Ö¸Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½Â¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Ğ»ï¿½ï¿½ï¿½ï¿½yufengzungzheï¿½ï¿½Ö¸ï¿½ï¿½
+		// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Î¾ï¿½dÈ»ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (deltaY > 0 && mPullState == PULL_UP_STATE
 				&& Math.abs(params.topMargin) <= mHeaderViewHeight) {
 			return params.topMargin;
 		}
-		// Í¬Ñùˆ]¶ÔÏÂÀ­×öØ¯?ÏŞÖÆ,±ÜÃâ³öÏÖ¸úÉÏÀ­²Ù×÷Ê±Ø¯7µÄbug
+		// Í¬ï¿½ï¿½ï¿½]ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¯?ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±Ø¯7ï¿½ï¿½bug
 		if (deltaY < 0 && mPullState == PULL_DOWN_STATE
 				&& Math.abs(params.topMargin) >= mHeaderViewHeight) {
 			return params.topMargin;
@@ -507,7 +507,7 @@ public class PullToRefreshView extends LinearLayout {
 	}
 
 	/**
-	 * ÉèÖÃheader view µÄtopMarginµÄÈÌ
+	 * ï¿½ï¿½ï¿½ï¿½header view ï¿½ï¿½topMarginï¿½ï¿½ï¿½ï¿½
 	 */
 	private void setHeaderTopMargin(int topMargin) {
 		LayoutParams params = (LayoutParams) mHeaderView.getLayoutParams();
@@ -517,7 +517,7 @@ public class PullToRefreshView extends LinearLayout {
 	}
 
 	/**
-	 * header view Íê³É¸üĞÂºó»Ö¸´³õÊ¼×´âø
+	 * header view ï¿½ï¿½É¸ï¿½ï¿½Âºï¿½Ö¸ï¿½ï¿½ï¿½Ê¼×´ï¿½ï¿½
 	 * 
 	 */
 	public void onHeaderRefreshComplete() {
@@ -527,7 +527,7 @@ public class PullToRefreshView extends LinearLayout {
 		mHeaderTextView.setText(R.string.pull_to_refresh_pull_label);
 		// mHeaderProgressBar.setVisibility(View.GONE);
 		mHeaderState = PULL_TO_REFRESH;
-		setLastUpdated("–c?¸üĞÂ:" + new Date().toLocaleString());
+		setLastUpdated("ï¿½c?ï¿½ï¿½ï¿½ï¿½:" + new Date().toLocaleString());
 	}
 
 	public void onHeaderRefreshComplete(CharSequence lastUpdated) {
@@ -536,7 +536,7 @@ public class PullToRefreshView extends LinearLayout {
 	}
 
 	/**
-	 * footer view Íê³É¸üĞÂºó»Ö¸´³õÊ¼×´âø
+	 * footer view ï¿½ï¿½É¸ï¿½ï¿½Âºï¿½Ö¸ï¿½ï¿½ï¿½Ê¼×´ï¿½ï¿½
 	 */
 	public void onFooterRefreshComplete() {
 		setHeaderTopMargin(-mHeaderViewHeight);
@@ -549,7 +549,7 @@ public class PullToRefreshView extends LinearLayout {
 	}
 
 	/**
-	 * footer view Íê³É¸üĞÂºó»Ö¸´³õÊ¼×´âø
+	 * footer view ï¿½ï¿½É¸ï¿½ï¿½Âºï¿½Ö¸ï¿½ï¿½ï¿½Ê¼×´ï¿½ï¿½
 	 */
 	public void onFooterRefreshComplete(int size) {
 		if (size > 0) {

@@ -1,4 +1,4 @@
-package com.cwp.cmoneycharge;
+package com.cwp.fragment;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,11 +8,15 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.cwp.chart.FoldingLayout;
+
 import com.cwp.chart.PullToRefreshView;
 import com.cwp.chart.PullToRefreshView.OnFooterRefreshListener;
 import com.cwp.chart.PullToRefreshView.OnHeaderRefreshListener;
 import com.cwp.chart.RiseNumberTextView;
+import com.cwp.cmoneycharge.AddPay;
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.SearchActivity;
+import com.cwp.fragment.FragmentPage2;
 
 import cwp.moneycharge.dao.IncomeDAO;
 import cwp.moneycharge.dao.ItypeDAO;
@@ -26,11 +30,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.ParseException;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 
 import android.view.View;
@@ -40,7 +42,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.view.animation.Animation.AnimationListener;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -50,11 +51,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 @SuppressLint("InflateParams")
-public class FragmentPage3 extends BaseFrament implements
+public class FragmentPage3 extends BaseFragment implements
 		OnHeaderRefreshListener, OnFooterRefreshListener {
 
 	TextView sum_pay, sum_income, sum_title, February_date;

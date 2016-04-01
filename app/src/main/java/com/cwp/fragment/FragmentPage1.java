@@ -1,7 +1,6 @@
-package com.cwp.cmoneycharge;
+package com.cwp.fragment;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -9,35 +8,29 @@ import java.util.Map;
 
 import com.cwp.chart.MyAdspter;
 import com.cwp.cmoneycharge.AddPay;
-import com.cwp.cmoneycharge.ModifyInP;
 import com.cwp.cmoneycharge.R;
 
 import cwp.moneycharge.dao.IncomeDAO;
 import cwp.moneycharge.dao.ItypeDAO;
 import cwp.moneycharge.dao.PayDAO;
 import cwp.moneycharge.dao.PtypeDAO;
-import cwp.moneycharge.model.ActivityManager;
 import cwp.moneycharge.model.Tb_income;
 import cwp.moneycharge.model.Tb_pay;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Toast;
 
-public class FragmentPage1 extends BaseFrament {
+public class FragmentPage1 extends BaseFragment {
 	int userid;
 	Button baddpay;
 	TextView income_amount;

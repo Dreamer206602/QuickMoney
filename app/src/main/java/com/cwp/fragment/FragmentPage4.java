@@ -1,10 +1,13 @@
-package com.cwp.cmoneycharge;
+package com.cwp.fragment;
 
+import com.cwp.cmoneycharge.About;
+import com.cwp.cmoneycharge.InPtypeManager;
 import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.SettingActivity;
+import com.cwp.fragment.FragmentPage2;
 
 import cwp.moneycharge.dao.IncomeDAO;
 import cwp.moneycharge.dao.ItypeDAO;
-import cwp.moneycharge.dao.NoteDAO;
 import cwp.moneycharge.dao.PayDAO;
 import cwp.moneycharge.dao.PtypeDAO;
 import cwp.moneycharge.model.CustomDialog;
@@ -13,19 +16,16 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class FragmentPage4 extends BaseFrament {
+public class FragmentPage4 extends BaseFragment {
 
 	int userid;
 	Intent intentr;
@@ -59,22 +59,22 @@ public class FragmentPage4 extends BaseFrament {
 		super.onStart();
 		intentr = getActivity().getIntent();
 		userid = intentr.getIntExtra("cwp.id", 100000001);
-		listview.setOnItemClickListener(new OnItemClickListener() {// ÎªGridViewÉèÖÃÏîµ¥»÷ÊÂ¼þ
+		listview.setOnItemClickListener(new OnItemClickListener() {// ÎªGridViewï¿½ï¿½ï¿½ï¿½ï¿½îµ¥ï¿½ï¿½ï¿½Â¼ï¿½
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
 					long arg3) {
 				String result = arg0.getItemAtPosition(pos).toString();
-				Intent intent = getActivity().getIntent();// ´´½¨Intent¶ÔÏó
+				Intent intent = getActivity().getIntent();// ï¿½ï¿½ï¿½ï¿½Intentï¿½ï¿½ï¿½ï¿½
 				userid = intent.getIntExtra("cwp.id", 100000001);
 				switch (pos) {
 				case 0:
-					alarmDialog(pos);// Çå¿ÕÊÕÈëÊý¾Ý
+					alarmDialog(pos);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					break;
 				case 1:
-					alarmDialog(pos); // Çå¿ÕÖ§³öÊý¾Ý
+					alarmDialog(pos); // ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					break;
 				case 2:
-					intentr = new Intent(getActivity(), SettingActivity.class); // ÉèÖÃ°Ù¶ÈÓïÒô
+					intentr = new Intent(getActivity(), SettingActivity.class); // ï¿½ï¿½ï¿½Ã°Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½
 					startActivity(intentr);
 					break;
 				case 3:
@@ -90,10 +90,10 @@ public class FragmentPage4 extends BaseFrament {
 					startActivity(intentr);
 					break;
 				case 5:
-					alarmDialog(pos); // Êý¾Ý³õÊ¼»¯
+					alarmDialog(pos); // ï¿½ï¿½ï¿½Ý³ï¿½Ê¼ï¿½ï¿½
 					break;
 				case 6:
-					// ¹ØÓÚÏµÍ³
+					// ï¿½ï¿½ï¿½ï¿½ÏµÍ³
 					intentr = new Intent(getActivity(), About.class);
 					intentr.putExtra("cwp.id", userid);
 					startActivity(intentr);
@@ -104,18 +104,18 @@ public class FragmentPage4 extends BaseFrament {
 		});
 	}
 
-	private void alarmDialog(int type) { // ÍË³ö³ÌÐòµÄ·½·¨
+	private void alarmDialog(int type) { // ï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½
 		Dialog dialog = null;
-		String ps = "ÊÕÈëÊý¾Ý", is = "Ö§³öÊý¾Ý";
+		String ps = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", is = "Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 		CustomDialog.Builder customBuilder = new CustomDialog.Builder(getView()
 				.getContext());
 
-		customBuilder.setTitle("¾¯¸æ"); // ´´½¨±êÌâ
+		customBuilder.setTitle("ï¿½ï¿½ï¿½ï¿½"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		switch (type) {
 		case 0:
 			customBuilder
-					.setMessage("½«É¾³ýµ±Ç°µÄÓÃ»§ËùÓÐ" + ps)
-					.setPositiveButton("È·¶¨",
+					.setMessage("ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½" + ps)
+					.setPositiveButton("È·ï¿½ï¿½",
 							new DialogInterface.OnClickListener() {
 
 								public void onClick(DialogInterface dialog,
@@ -123,12 +123,12 @@ public class FragmentPage4 extends BaseFrament {
 									IncomeDAO incomeDAO = new IncomeDAO(
 											getActivity());
 									incomeDAO.deleteUserData(userid);
-									Toast.makeText(getActivity(), "ÒÑÇå¿Õ~£¡£¡",
+									Toast.makeText(getActivity(), "ï¿½ï¿½ï¿½ï¿½ï¿½~ï¿½ï¿½ï¿½ï¿½",
 											Toast.LENGTH_LONG).show();
 								}
 
 							})
-					.setNegativeButton("È¡Ïû",
+					.setNegativeButton("È¡ï¿½ï¿½",
 							new DialogInterface.OnClickListener() {
 
 								public void onClick(DialogInterface dialog,
@@ -141,21 +141,21 @@ public class FragmentPage4 extends BaseFrament {
 
 		case 1:
 			customBuilder
-					.setMessage("½«É¾³ýµ±Ç°µÄÓÃ»§ËùÓÐ" + is)
-					.setPositiveButton("È·¶¨",
+					.setMessage("ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½" + is)
+					.setPositiveButton("È·ï¿½ï¿½",
 							new DialogInterface.OnClickListener() {
 
 								public void onClick(DialogInterface dialog,
 										int which) {
 									PayDAO payDAO = new PayDAO(getActivity());
 									payDAO.deleteUserData(userid);
-									Toast.makeText(getActivity(), "ÒÑÇå¿Õ~£¡£¡",
+									Toast.makeText(getActivity(), "ï¿½ï¿½ï¿½ï¿½ï¿½~ï¿½ï¿½ï¿½ï¿½",
 											Toast.LENGTH_LONG).show();
 									dialog.dismiss();
 								}
 
 							})
-					.setNegativeButton("È¡Ïû",
+					.setNegativeButton("È¡ï¿½ï¿½",
 							new DialogInterface.OnClickListener() {
 
 								public void onClick(DialogInterface dialog,
@@ -167,8 +167,8 @@ public class FragmentPage4 extends BaseFrament {
 			break;
 		case 5:
 			customBuilder
-					.setMessage("´Ë²Ù×÷½«ÖØÖÃµ±Ç°ÓÃ»§µÄÊÕÈë¡¢Ö§³öÀàÐÍ£¬È·¶¨»¹Ô­Âð£¿")
-					.setPositiveButton("È·¶¨",
+					.setMessage("ï¿½Ë²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½Ç°ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¡¢Ö§ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½È·ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½")
+					.setPositiveButton("È·ï¿½ï¿½",
 							new DialogInterface.OnClickListener() {
 
 								public void onClick(DialogInterface dialog,
@@ -179,13 +179,13 @@ public class FragmentPage4 extends BaseFrament {
 											getActivity());
 									itypedao.initData(userid);
 									ptypedao.initData(userid);
-									Toast.makeText(getActivity(), "ÒÑ»¹Ô­~£¡£¡",
+									Toast.makeText(getActivity(), "ï¿½Ñ»ï¿½Ô­~ï¿½ï¿½ï¿½ï¿½",
 											Toast.LENGTH_LONG).show();
 									dialog.dismiss();
 								}
 
 							})
-					.setNegativeButton("È¡Ïû",
+					.setNegativeButton("È¡ï¿½ï¿½",
 							new DialogInterface.OnClickListener() {
 
 								public void onClick(DialogInterface dialog,
@@ -198,8 +198,8 @@ public class FragmentPage4 extends BaseFrament {
 
 		}
 
-		dialog = customBuilder.create();// ´´½¨¶Ô»°¿ò
-		dialog.show(); // ÏÔÊ¾¶Ô»°¿ò
+		dialog = customBuilder.create();// ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½
+		dialog.show(); // ï¿½ï¿½Ê¾ï¿½Ô»ï¿½ï¿½ï¿½
 
 	}
 
