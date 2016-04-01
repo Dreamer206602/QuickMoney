@@ -34,6 +34,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cwp.cmoneycharge.R;
+
 /**
  * The folding layout where the number of folds, the anchor point and the
  * orientation of the fold can be specified. Each of these parameters can be

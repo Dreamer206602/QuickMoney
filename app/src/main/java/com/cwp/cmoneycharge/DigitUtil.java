@@ -10,24 +10,24 @@ import java.util.Hashtable;
 public class DigitUtil {
 
 	/**
-	 * ºº×ÖÖĞµÄÊı×Ö×Ö·û
+	 * æ±‰å­—ä¸­çš„æ•°å­—å­—ç¬¦
 	 */
-	private static final Character[] SCDigits = { 'Áã', 'Ò»', '¶ş', 'Á½', 'Èı', 'ËÄ',
-			'Îå', 'Áù', 'Æß', '°Ë', '¾Å' };
+	private static final Character[] SCDigits = { 'é›¶', 'ä¸€', 'äºŒ', 'ä¸¤', 'ä¸‰', 'å››',
+			'äº”', 'å…­', 'ä¸ƒ', 'å…«', 'ä¹' };
 
 	/**
-	 * °¢À­²®Êı×Ö
+	 * é˜¿æ‹‰ä¼¯æ•°å­—
 	 */
 	private static final Character[] araDigits = { '0', '1', '2', '2', '3',
 			'4', '5', '6', '7', '8', '9' };
 
 	/**
-	 * °¢À­²®Êı×Ö
+	 * é˜¿æ‹‰ä¼¯æ•°å­—
 	 */
 	private static Hashtable<Character, Character> araHash = new Hashtable<Character, Character>();
 
 	/**
-	 * °¢À­²®Êı×Ö
+	 * é˜¿æ‹‰ä¼¯æ•°å­—
 	 */
 	private static Hashtable<Character, Integer> YWQBSHash = new Hashtable<Character, Integer>();
 
@@ -35,54 +35,54 @@ public class DigitUtil {
 		for (int i = 0; i < SCDigits.length; i++) {
 			araHash.put(SCDigits[i], araDigits[i]);
 		}
-		YWQBSHash.put('ÒÚ', 100000000);
-		YWQBSHash.put('Íò', 10000);
-		YWQBSHash.put('Ç§', 1000);
-		YWQBSHash.put('°Ù', 100);
-		YWQBSHash.put('Ê®', 10);
+		YWQBSHash.put('äº¿', 100000000);
+		YWQBSHash.put('ä¸‡', 10000);
+		YWQBSHash.put('åƒ', 1000);
+		YWQBSHash.put('ç™¾', 100);
+		YWQBSHash.put('å', 10);
 	}
 
 	/**
 	 * @param remain
-	 *            Ê£ÏÂ¶àÉÙ¸ö×Ö·û
+	 *            å‰©ä¸‹å¤šå°‘ä¸ªå­—ç¬¦
 	 * @param curchar
-	 *            µ±Ç°·ÖÎöµÄ×Ö·û
+	 *            å½“å‰åˆ†æçš„å­—ç¬¦
 	 */
 	private static int ywqbs(int num, Boolean bool, int no, int remain,
-			char curchar, char lastshow) {
+							 char curchar, char lastshow) {
 		if (num == 0) {
 			num += no;
 			return num;
 		} else {
-			String numString = String.valueOf(num); // ½«num×ª»»³ÉString
+			String numString = String.valueOf(num); // å°†numè½¬æ¢æˆString
 			String last = numString.substring(numString.length() - 1,
-					numString.length()); // »ñÈ¡×îºóÒ»¸ö×Ö·û
-			String exceptlast = numString.substring(0, numString.length() - 1); // »ñÈ¡³ıÁË×îºóÒ»¸ö×Ö·ûËùÓĞ×Ö·û´®
-			if (exceptlast.length() == 0) { // ËµÃ÷numÊÇ¸öÎ»Öµ
+					numString.length()); // è·å–æœ€åä¸€ä¸ªå­—ç¬¦
+			String exceptlast = numString.substring(0, numString.length() - 1); // è·å–é™¤äº†æœ€åä¸€ä¸ªå­—ç¬¦æ‰€æœ‰å­—ç¬¦ä¸²
+			if (exceptlast.length() == 0) { // è¯´æ˜numæ˜¯ä¸ªä½å€¼
 				num = Integer.parseInt(last) * no;
 				return num;
 			} else {
-				/***** Õë¶ÔÓĞÁ¬ĞøµÄÕâĞ©×Ö·û[Ê®°ÙÇ§ÍòÒÚ] start *****/
-				if (bool && YWQBSHash.get(curchar) > YWQBSHash.get(lastshow)) { // ËµÃ÷ÉÏ¸ö×Ö·ûÊôÓÚ[Ê®°ÙÇ§ÍòÒÚ]
+				/***** é’ˆå¯¹æœ‰è¿ç»­çš„è¿™äº›å­—ç¬¦[åç™¾åƒä¸‡äº¿] start *****/
+				if (bool && YWQBSHash.get(curchar) > YWQBSHash.get(lastshow)) { // è¯´æ˜ä¸Šä¸ªå­—ç¬¦å±äº[åç™¾åƒä¸‡äº¿]
 					num *= no;
 					return num;
 				}
-				/***** Õë¶ÔÓĞÁ¬ĞøµÄÕâĞ©×Ö·û[Ê®°ÙÇ§ÍòÒÚ] end *****/
-				/***** ·ÖÎöµ½×îºóÒ»¸ö×Ö·û start *****/
-				/**** Õë¶ÔÕâÖÖÇé¿ö(Ò»Ç§¶ş°Ù¶şÊ®Ò»Íò) ****/
+				/***** é’ˆå¯¹æœ‰è¿ç»­çš„è¿™äº›å­—ç¬¦[åç™¾åƒä¸‡äº¿] end *****/
+				/***** åˆ†æåˆ°æœ€åä¸€ä¸ªå­—ç¬¦ start *****/
+				/**** é’ˆå¯¹è¿™ç§æƒ…å†µ(ä¸€åƒäºŒç™¾äºŒåä¸€ä¸‡) ****/
 				if (remain == 1
 						&& YWQBSHash.get(curchar) > YWQBSHash.get(lastshow)) {
 					num *= YWQBSHash.get(curchar);
 					return num;
 				}
-				/**** Õë¶ÔÕâÖÖÇé¿ö(Ò»Ç§¶ş°Ù¶şÊ®Ò»Íò) ****/
-				/***** ·ÖÎöµ½×îºóÒ»¸ö×Ö·û end *****/
-				/***** lastÈç¹ûÎª0 start *****/
-				if (last.equals("0")) { // Ñ­»·µ½×îºóÒ»Î»×Ö·û,lastµÈÓÚ0
+				/**** é’ˆå¯¹è¿™ç§æƒ…å†µ(ä¸€åƒäºŒç™¾äºŒåä¸€ä¸‡) ****/
+				/***** åˆ†æåˆ°æœ€åä¸€ä¸ªå­—ç¬¦ end *****/
+				/***** lastå¦‚æœä¸º0 start *****/
+				if (last.equals("0")) { // å¾ªç¯åˆ°æœ€åä¸€ä½å­—ç¬¦,lastç­‰äº0
 					last = "1"; //
 				}
-				/***** lastÈç¹ûÎª0 end *****/
-				exceptlast = exceptlast + "0"; // È±ÉÙ×îºóÒ»Î»,ĞèÒª²¹ÉÏ
+				/***** lastå¦‚æœä¸º0 end *****/
+				exceptlast = exceptlast + "0"; // ç¼ºå°‘æœ€åä¸€ä½,éœ€è¦è¡¥ä¸Š
 				num = Integer.parseInt(exceptlast) + Integer.parseInt(last)
 						* no;
 				return num;
@@ -92,37 +92,37 @@ public class DigitUtil {
 
 	public static int parse(String word) {
 		int num = 0;
-		char lastchar = 'Ò»'; // ÉÏ´Î×Ö·û,×Ö·ûÌØÖ¸[Ê®°ÙÇ§ÍòÒÚ],Ä¬ÈÏËæ±ãÌîĞ´Ò»¸ö'Ò»'
-		char lastshow = 'Ò»'; // ÉÏ´Î³öÏÖµÄ×Ö·û,×Ö·ûÌØÖ¸[Ê®°ÙÇ§ÍòÒÚ],Ä¬ÈÏËæ±ãÌîĞ´Ò»¸ö'Ò»'
+		char lastchar = 'ä¸€'; // ä¸Šæ¬¡å­—ç¬¦,å­—ç¬¦ç‰¹æŒ‡[åç™¾åƒä¸‡äº¿],é»˜è®¤éšä¾¿å¡«å†™ä¸€ä¸ª'ä¸€'
+		char lastshow = 'ä¸€'; // ä¸Šæ¬¡å‡ºç°çš„å­—ç¬¦,å­—ç¬¦ç‰¹æŒ‡[åç™¾åƒä¸‡äº¿],é»˜è®¤éšä¾¿å¡«å†™ä¸€ä¸ª'ä¸€'
 		char[] ch = word.toCharArray();
-		Boolean bool = false; // ÊÇ·ñÁ¬Ğø³öÏÖ[Ê®°ÙÇ§ÍòÒÚ]
+		Boolean bool = false; // æ˜¯å¦è¿ç»­å‡ºç°[åç™¾åƒä¸‡äº¿]
 		for (int i = 0; i < ch.length; i++) {
-			Character find = araHash.get(ch[i]);// »ñÈ¡°¢À­²®Êı×ÖÊı×é[1,2,3...]
+			Character find = araHash.get(ch[i]);// è·å–é˜¿æ‹‰ä¼¯æ•°å­—æ•°ç»„[1,2,3...]
 			if (find != null) {
 				num += Integer.parseInt(String.valueOf(find.charValue()));
 				bool = false;
-				lastchar = 'Ò»'; // »Ö¸´µ½Ä¬ÈÏÖµ
+				lastchar = 'ä¸€'; // æ¢å¤åˆ°é»˜è®¤å€¼
 				continue;
-			} else if (ch[i] == 'Ê®') {
+			} else if (ch[i] == 'å') {
 				num = ywqbs(num, bool, 10, ch.length - i, ch[i], lastshow);
 				bool = true;
-				lastchar = 'Ê®';
-				lastshow = 'Ê®';
-			} else if (ch[i] == 'Ç§') {
+				lastchar = 'å';
+				lastshow = 'å';
+			} else if (ch[i] == 'åƒ') {
 				num = ywqbs(num, bool, 1000, ch.length - i, ch[i], lastshow);
 				bool = true;
-				lastchar = 'Ç§';
-				lastshow = 'Ç§';
-			} else if (ch[i] == '°Ù') {
+				lastchar = 'åƒ';
+				lastshow = 'åƒ';
+			} else if (ch[i] == 'ç™¾') {
 				num = ywqbs(num, bool, 100, ch.length - i, ch[i], lastshow);
 				bool = true;
-				lastchar = '°Ù';
-				lastshow = '°Ù';
-			} else if (ch[i] == 'Íò') {
+				lastchar = 'ç™¾';
+				lastshow = 'ç™¾';
+			} else if (ch[i] == 'ä¸‡') {
 				num = ywqbs(num, bool, 10000, ch.length - i, ch[i], lastshow);
 				bool = true;
-				lastchar = 'Íò';
-				lastshow = 'Íò';
+				lastchar = 'ä¸‡';
+				lastshow = 'ä¸‡';
 			}
 		}
 		ch = null;
@@ -131,15 +131,15 @@ public class DigitUtil {
 
 	// public static void main(String args[]) {
 	// String wordes[] = {
-	// "Ò»Ç§¶ş°Ù¶şÊ®Ò»Íò",
-	// "Ò»Ç§¶ş°Ù¶şÊ®Ò»",
-	// "Ò»Ç§ÁãÊ®",
-	// "Ò»ÍòÁãÒ»°Ù",
-	// "Ò»Ç§ÁãÊ®Ò»",
-	// "Ò»ÍòÁãÒ»°ÙÊ®Ò»",
-	// "Ò»Ç§¶ş°ÙÊ®¾Å",
-	// "Ò»Ç§Íò",
-	// "ÎåÊ®Îå"
+	// "ä¸€åƒäºŒç™¾äºŒåä¸€ä¸‡",
+	// "ä¸€åƒäºŒç™¾äºŒåä¸€",
+	// "ä¸€åƒé›¶å",
+	// "ä¸€ä¸‡é›¶ä¸€ç™¾",
+	// "ä¸€åƒé›¶åä¸€",
+	// "ä¸€ä¸‡é›¶ä¸€ç™¾åä¸€",
+	// "ä¸€åƒäºŒç™¾åä¹",
+	// "ä¸€åƒä¸‡",
+	// "äº”åäº”"
 	// };
 	// for(int i = 0; i < wordes.length; i++) {
 	// DigitUtil t = new DigitUtil();

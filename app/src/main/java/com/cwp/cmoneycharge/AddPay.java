@@ -78,56 +78,57 @@ import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+
 public class AddPay extends Activity implements AMapLocationListener,
 		OnClickListener {
-	protected static final int DATE_DIALOG_ID = 0;// ´´½¨ÈÕÆÚ¶Ô»°¿ò³£Á¿
+	protected static final int DATE_DIALOG_ID = 0;// åˆ›å»ºæ—¥æœŸå¯¹è¯æ¡†å¸¸é‡
 	static String type = "pay";
 	String VoiceDefault = "";
 	protected static String typemode = "add";
-	EditText txtMoney, txtTime, txtAddress, txtMark;// ´´½¨EditText¶ÔÏó
-	Spinner spType;// ´´½¨Spinner¶ÔÏó
-	Button btnSaveButton;// ´´½¨Button¶ÔÏó¡°±£´æ¡±
-	Button btnCancelButton;// ´´½¨Button¶ÔÏó¡°È¡Ïû¡±
-	Button btnVoice;// ´´½¨Button¶ÔÏó¡°ÓïÒôÊ¶±ğ¡±
+	EditText txtMoney, txtTime, txtAddress, txtMark;// åˆ›å»ºEditTextå¯¹è±¡
+	Spinner spType;// åˆ›å»ºSpinnerå¯¹è±¡
+	Button btnSaveButton;// åˆ›å»ºButtonå¯¹è±¡â€œä¿å­˜â€
+	Button btnCancelButton;// åˆ›å»ºButtonå¯¹è±¡â€œå–æ¶ˆâ€
+	Button btnVoice;// åˆ›å»ºButtonå¯¹è±¡â€œè¯­éŸ³è¯†åˆ«â€
 	int userid;
 	int Selection = 0;
 	Bundle bundle = null;
-	String[] strInfos = null;// ¶¨Òå×Ö·û´®Êı×é
-	String strno, strType;// ¶¨ÒåÁ½¸ö×Ö·û´®±äÁ¿£¬·Ö±ğÓÃÀ´¼ÇÂ¼ĞÅÏ¢±àºÅºÍ¹ÜÀíÀàĞÍ
+	String[] strInfos = null;// å®šä¹‰å­—ç¬¦ä¸²æ•°ç»„
+	String strno, strType;// å®šä¹‰ä¸¤ä¸ªå­—ç¬¦ä¸²å˜é‡ï¼Œåˆ†åˆ«ç”¨æ¥è®°å½•ä¿¡æ¯ç¼–å·å’Œç®¡ç†ç±»å‹
 	private FrameLayout corporation_fl, address_fl = null;
 	private RadioButton rb1 = null;
 	private RadioButton rb2 = null;
 	ImageView left_back;
 
-	private BaiduASRDigitalDialog mDialog = null; // °Ù¶ÈÓïÒô¶¨Òå
+	private BaiduASRDigitalDialog mDialog = null; // ç™¾åº¦è¯­éŸ³å®šä¹‰
 	private DialogRecognitionListener mRecognitionListener;
 	private int mCurrentTheme = Config.DIALOG_THEME;
-	private Effectstype effect; // ×Ô¶¨ÒåDialog
+	private Effectstype effect; // è‡ªå®šä¹‰Dialog
 	NiftyDialogBuilder dialogBuilder = null;
 	Boolean firstin = true;
 
-	private int mYear;// Äê
-	private int mMonth;// ÔÂ
-	private int mDay;// ÈÕ
+	private int mYear;// å¹´
+	private int mMonth;// æœˆ
+	private int mDay;// æ—¥
 
 	private ArrayAdapter<String> adapter;
 	private String[] spdata;
 
-	private LocationManagerProxy mLocationManagerProxy;// ¸ßµÂµØÍ¼api
+	private LocationManagerProxy mLocationManagerProxy;// é«˜å¾·åœ°å›¾api
 	private Random mRandom = new Random();
 
-	String[] number = { "Ò»", "¶ş", "Á½", "Èı", "ËÄ", "Îå", "Áù", "Æß", "°Ë", "¾Å", "Ê®" };
-	String[] money = { "Ôª", "¿é", "Ç®" };
-	String[] money2 = { "Ê®", "°Ù", "Ç§", "Íò", "ÒÚ" };
-	String[] voice_pay = { "Âò", "³Ô" };
-	String[] voice_income = { "Âô", "»ñ" };
+	String[] number = { "ä¸€", "äºŒ", "ä¸¤", "ä¸‰", "å››", "äº”", "å…­", "ä¸ƒ", "å…«", "ä¹", "å" };
+	String[] money = { "å…ƒ", "å—", "é’±" };
+	String[] money2 = { "å", "ç™¾", "åƒ", "ä¸‡", "äº¿" };
+	String[] voice_pay = { "ä¹°", "åƒ" };
+	String[] voice_income = { "å–", "è·" };
 
 	String[] VoiceSave = new String[6];
 	static DialogShowUtil dialogShowUtil;
 	PtypeDAO ptypeDAO = new PtypeDAO(AddPay.this);
 	ItypeDAO itypeDAO = new ItypeDAO(AddPay.this);
-	PayDAO payDAO = new PayDAO(AddPay.this);// ´´½¨PayDAO¶ÔÏó
-	IncomeDAO incomeDAO = new IncomeDAO(AddPay.this);// ´´½¨IncomeDAO¶ÔÏó
+	PayDAO payDAO = new PayDAO(AddPay.this);// åˆ›å»ºPayDAOå¯¹è±¡
+	IncomeDAO incomeDAO = new IncomeDAO(AddPay.this);// åˆ›å»ºIncomeDAOå¯¹è±¡
 	List<String> spdatalist, spdatalist2;
 	private SystemBarTintManager mTintManager;
 	private ImageView btn_loacte;
@@ -148,10 +149,10 @@ public class AddPay extends Activity implements AMapLocationListener,
 		super.onCreate(savedInstanceState);
 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.add);// ÉèÖÃ²¼¾ÖÎÄ¼ş
+		setContentView(R.layout.add);// è®¾ç½®å¸ƒå±€æ–‡ä»¶
 
-		SysApplication.getInstance().addActivity(this); // ÔÚÏú»Ù¶ÓÁĞÖĞÌí¼Óthis
-		super.onStart();// ÊµÏÖ»ùÀàÖĞµÄ·½·¨
+		SysApplication.getInstance().addActivity(this); // åœ¨é”€æ¯é˜Ÿåˆ—ä¸­æ·»åŠ this
+		super.onStart();// å®ç°åŸºç±»ä¸­çš„æ–¹æ³•
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 			setTranslucentStatus(true);
@@ -161,14 +162,14 @@ public class AddPay extends Activity implements AMapLocationListener,
 		mTintManager.setStatusBarTintEnabled(true);
 		mTintManager.setStatusBarTintResource(R.color.statusbar_bg);
 
-		txtMoney = (EditText) findViewById(R.id.txtMoney);// »ñÈ¡½ğ¶îÎÄ±¾¿ò
-		txtTime = (EditText) findViewById(R.id.txtTime);// »ñÈ¡Ê±¼äÎÄ±¾¿ò
-		txtAddress = (EditText) findViewById(R.id.txtAddress);// »ñÈ¡µØµãÎÄ±¾¿ò
-		txtMark = (EditText) findViewById(R.id.txtMark);// »ñÈ¡±¸×¢ÎÄ±¾¿ò
-		spType = (Spinner) findViewById(R.id.spType);// »ñÈ¡Àà±ğÏÂÀ­ÁĞ±í
-		btnSaveButton = (Button) findViewById(R.id.btnSave);// »ñÈ¡±£´æ°´Å¥
-		btnCancelButton = (Button) findViewById(R.id.btnCancel);// »ñÈ¡È¡Ïû°´Å¥
-		btnVoice = (Button) findViewById(R.id.btnVoice);// »ñÈ¡ÓïÒôÊ¶±ğ°´Å¥
+		txtMoney = (EditText) findViewById(R.id.txtMoney);// è·å–é‡‘é¢æ–‡æœ¬æ¡†
+		txtTime = (EditText) findViewById(R.id.txtTime);// è·å–æ—¶é—´æ–‡æœ¬æ¡†
+		txtAddress = (EditText) findViewById(R.id.txtAddress);// è·å–åœ°ç‚¹æ–‡æœ¬æ¡†
+		txtMark = (EditText) findViewById(R.id.txtMark);// è·å–å¤‡æ³¨æ–‡æœ¬æ¡†
+		spType = (Spinner) findViewById(R.id.spType);// è·å–ç±»åˆ«ä¸‹æ‹‰åˆ—è¡¨
+		btnSaveButton = (Button) findViewById(R.id.btnSave);// è·å–ä¿å­˜æŒ‰é’®
+		btnCancelButton = (Button) findViewById(R.id.btnCancel);// è·å–å–æ¶ˆæŒ‰é’®
+		btnVoice = (Button) findViewById(R.id.btnVoice);// è·å–è¯­éŸ³è¯†åˆ«æŒ‰é’®
 		rb1 = (RadioButton) findViewById(R.id.payout_tab_rb);
 		rb2 = (RadioButton) findViewById(R.id.income_tab_rb);
 		left_back = (ImageView) findViewById(R.id.example_left3);
@@ -177,11 +178,11 @@ public class AddPay extends Activity implements AMapLocationListener,
 		bottom_empty = (FrameLayout) findViewById(R.id.bottom_empty);
 		bottom_full = (LinearLayout) findViewById(R.id.bottom_full);
 
-		dialogShowUtil = new DialogShowUtil(this, this, VoiceSave, type, // ³õÊ¼»¯dialog
+		dialogShowUtil = new DialogShowUtil(this, this, VoiceSave, type, // åˆå§‹åŒ–dialog
 				VoiceDefault);
-		btn_loacte.setOnClickListener(this); // ¶¨Î»
+		btn_loacte.setOnClickListener(this); // å®šä½
 
-		// Òş²Ø²Ëµ¥
+		// éšè—èœå•
 		bottom_empty.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				keyBoard.hideKeyboard();
@@ -190,7 +191,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 			}
 		});
 
-		// Ìí¼ÓÍ¼Æ¬
+		// æ·»åŠ å›¾ç‰‡
 		addphoto.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent intent = new Intent(AddPay.this, PublishedActivity.class);
@@ -199,14 +200,14 @@ public class AddPay extends Activity implements AMapLocationListener,
 			}
 		});
 
-		// ³õÊ¼»¯¶¨Î»£¬Ö»²ÉÓÃÍøÂç¶¨Î»
+		// åˆå§‹åŒ–å®šä½ï¼Œåªé‡‡ç”¨ç½‘ç»œå®šä½
 		mLocationManagerProxy = LocationManagerProxy.getInstance(this);
 		mLocationManagerProxy.setGpsEnable(false);
-		// ´Ë·½·¨ÎªÃ¿¸ô¹Ì¶¨Ê±¼ä»á·¢ÆğÒ»´Î¶¨Î»ÇëÇó£¬ÎªÁË¼õÉÙµçÁ¿ÏûºÄ»òÍøÂçÁ÷Á¿ÏûºÄ£¬
-		// ×¢ÒâÉèÖÃºÏÊÊµÄ¶¨Î»Ê±¼äµÄ¼ä¸ô£¨×îĞ¡¼ä¸ôÖ§³ÖÎª2000ms£©£¬²¢ÇÒÔÚºÏÊÊÊ±¼äµ÷ÓÃremoveUpdates()·½·¨À´È¡Ïû¶¨Î»ÇëÇó
-		// ÔÚ¶¨Î»½áÊøºó£¬ÔÚºÏÊÊµÄÉúÃüÖÜÆÚµ÷ÓÃdestroy()·½·¨
-		// ÆäÖĞÈç¹û¼ä¸ôÊ±¼äÎª-1£¬Ôò¶¨Î»Ö»¶¨Ò»´Î,
-		// ÔÚµ¥´Î¶¨Î»Çé¿öÏÂ£¬¶¨Î»ÎŞÂÛ³É¹¦Óë·ñ£¬¶¼ÎŞĞèµ÷ÓÃremoveUpdates()·½·¨ÒÆ³ıÇëÇó£¬¶¨Î»sdkÄÚ²¿»áÒÆ³ı
+		// æ­¤æ–¹æ³•ä¸ºæ¯éš”å›ºå®šæ—¶é—´ä¼šå‘èµ·ä¸€æ¬¡å®šä½è¯·æ±‚ï¼Œä¸ºäº†å‡å°‘ç”µé‡æ¶ˆè€—æˆ–ç½‘ç»œæµé‡æ¶ˆè€—ï¼Œ
+		// æ³¨æ„è®¾ç½®åˆé€‚çš„å®šä½æ—¶é—´çš„é—´éš”ï¼ˆæœ€å°é—´éš”æ”¯æŒä¸º2000msï¼‰ï¼Œå¹¶ä¸”åœ¨åˆé€‚æ—¶é—´è°ƒç”¨removeUpdates()æ–¹æ³•æ¥å–æ¶ˆå®šä½è¯·æ±‚
+		// åœ¨å®šä½ç»“æŸåï¼Œåœ¨åˆé€‚çš„ç”Ÿå‘½å‘¨æœŸè°ƒç”¨destroy()æ–¹æ³•
+		// å…¶ä¸­å¦‚æœé—´éš”æ—¶é—´ä¸º-1ï¼Œåˆ™å®šä½åªå®šä¸€æ¬¡,
+		// åœ¨å•æ¬¡å®šä½æƒ…å†µä¸‹ï¼Œå®šä½æ— è®ºæˆåŠŸä¸å¦ï¼Œéƒ½æ— éœ€è°ƒç”¨removeUpdates()æ–¹æ³•ç§»é™¤è¯·æ±‚ï¼Œå®šä½sdkå†…éƒ¨ä¼šç§»é™¤
 
 		left_back.setOnClickListener(new OnClickListener() {
 
@@ -216,24 +217,24 @@ public class AddPay extends Activity implements AMapLocationListener,
 				typemode = "add";
 				if (bundle.containsKey("cwp.frament3")) {
 					intent = new Intent(AddPay.this, MainActivity.class);
-					intent.putExtra("cwp.Fragment", "3");// ÉèÖÃ´«µİÊı¾İ
+					intent.putExtra("cwp.Fragment", "3");// è®¾ç½®ä¼ é€’æ•°æ®
 				} else {
 					intent = new Intent(AddPay.this, MainActivity.class);
 				}
 				intent.putExtra("cwp.id", userid);
 				startActivity(intent);
-				finish();// Õâ¸öÊÇ¹Ø¼ü
+				finish();// è¿™ä¸ªæ˜¯å…³é”®
 			}
 		});
 
-		mRecognitionListener = new DialogRecognitionListener() { // °Ù¶ÈÊ¶±ğ·µ»ØÊı¾İ
+		mRecognitionListener = new DialogRecognitionListener() { // ç™¾åº¦è¯†åˆ«è¿”å›æ•°æ®
 
 			@Override
 			public void onResults(Bundle results) {
 				ArrayList<String> rs = results != null ? results
 						.getStringArrayList(RESULTS_RECOGNITION) : null;
 				if (rs != null && rs.size() > 0) {
-					Recognition(rs.get(0)); // °ÑÊ¶±ğÊı¾İ´«ÈëÊ¶±ğ·½·¨
+					Recognition(rs.get(0)); // æŠŠè¯†åˆ«æ•°æ®ä¼ å…¥è¯†åˆ«æ–¹æ³•
 					// Toast.makeText(AddPay.this, rs.get(0),
 					// Toast.LENGTH_SHORT).show();
 				}
@@ -246,11 +247,11 @@ public class AddPay extends Activity implements AMapLocationListener,
 		rb1.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
+										 boolean isChecked) {
 
-				if (rb1.isChecked()) { // Ö§³ö
+				if (rb1.isChecked()) { // æ”¯å‡º
 					type = "pay";
-				} else // ÊÕÈë
+				} else // æ”¶å…¥
 				{
 					type = "income";
 				}
@@ -258,10 +259,10 @@ public class AddPay extends Activity implements AMapLocationListener,
 			}
 		});
 
-		final Calendar c = Calendar.getInstance();// »ñÈ¡µ±Ç°ÏµÍ³ÈÕÆÚ
-		mYear = c.get(Calendar.YEAR);// »ñÈ¡Äê·İ
-		mMonth = c.get(Calendar.MONTH);// »ñÈ¡ÔÂ·İ
-		mDay = c.get(Calendar.DAY_OF_MONTH);// »ñÈ¡ÌìÊı
+		final Calendar c = Calendar.getInstance();// è·å–å½“å‰ç³»ç»Ÿæ—¥æœŸ
+		mYear = c.get(Calendar.YEAR);// è·å–å¹´ä»½
+		mMonth = c.get(Calendar.MONTH);// è·å–æœˆä»½
+		mDay = c.get(Calendar.DAY_OF_MONTH);// è·å–å¤©æ•°
 	}
 
 	@TargetApi(19)
@@ -277,65 +278,65 @@ public class AddPay extends Activity implements AMapLocationListener,
 		win.setAttributes(winParams);
 	}
 
-	private void initData(int userid) { // ³õÊ¼»¯Êı¾İ
-		if (typemode == "add") { // Ìí¼ÓÄ£Ê½
-			if (type == "pay") { // Ö§³ö
+	private void initData(int userid) { // åˆå§‹åŒ–æ•°æ®
+		if (typemode == "add") { // æ·»åŠ æ¨¡å¼
+			if (type == "pay") { // æ”¯å‡º
 				rb1.setChecked(true);
 				spdatalist = ptypeDAO.getPtypeName(userid);
 				txtMoney.setTextColor(Color.parseColor("#5ea98d"));
-			} else { // ÊÕÈë
+			} else { // æ”¶å…¥
 				rb2.setChecked(true);
 				spdatalist = itypeDAO.getItypeName(userid);
 				txtMoney.setTextColor(Color.parseColor("#ffff0000"));
 			}
-		} else { // ĞŞ¸ÄÄ£Ê½
+		} else { // ä¿®æ”¹æ¨¡å¼
 			bottom_empty.setVisibility(View.GONE);
 			bottom_full.setVisibility(View.VISIBLE);
 			rb1.setOnCheckedChangeListener(null);
-			btnSaveButton.setText("ĞŞ¸Ä"); // Ìæ»»ĞŞ¸Ä°´Å¥
-			btnCancelButton.setText("É¾³ı"); // Ìæ»»É¾³ı°´Å¥
+			btnSaveButton.setText("ä¿®æ”¹"); // æ›¿æ¢ä¿®æ”¹æŒ‰é’®
+			btnCancelButton.setText("åˆ é™¤"); // æ›¿æ¢åˆ é™¤æŒ‰é’®
 			CharSequence textreAddres;
 			String textreMark;
-			if (type == "pay") { // Ö§³ö
+			if (type == "pay") { // æ”¯å‡º
 				rb1.setChecked(true);
 				rb1.setClickable(false);
 				rb2.setClickable(false);
-				// Ñ¡ÔñÁĞ±í³õÊ¼»¯
+				// é€‰æ‹©åˆ—è¡¨åˆå§‹åŒ–
 				spdatalist = ptypeDAO.getPtypeName(userid);
-				// ¸ù¾İ±àºÅ²éÕÒÖ§³öĞÅÏ¢£¬²¢´æ´¢µ½Tb_pay¶ÔÏóÖĞ
+				// æ ¹æ®ç¼–å·æŸ¥æ‰¾æ”¯å‡ºä¿¡æ¯ï¼Œå¹¶å­˜å‚¨åˆ°Tb_payå¯¹è±¡ä¸­
 				Tb_pay tb_pay = payDAO.find(userid, Integer.parseInt(strno));
-				txtMoney.setText(tb_pay.getMoney2());// ÏÔÊ¾½ğ¶î
+				txtMoney.setText(tb_pay.getMoney2());// æ˜¾ç¤ºé‡‘é¢
 				txtMoney.setTextColor(Color.parseColor("#5ea98d"));
-				txtTime.setText(tb_pay.getTime());// ÏÔÊ¾Ê±¼ä
+				txtTime.setText(tb_pay.getTime());// æ˜¾ç¤ºæ—¶é—´
 				Selection = tb_pay.getType() - 1;
 				initphotodata(tb_pay.getPhoto());
 				textreAddres = tb_pay.getAddress();
 				textreMark = tb_pay.getMark();
-				txtAddress.setText(textreAddres);// ÏÔÊ¾µØµã
-				txtMark.setText(textreMark);// ÏÔÊ¾±¸×¢
-			} else { // ÊÕÈë
-				// Ñ¡ÔñÁĞ±í³õÊ¼»¯
+				txtAddress.setText(textreAddres);// æ˜¾ç¤ºåœ°ç‚¹
+				txtMark.setText(textreMark);// æ˜¾ç¤ºå¤‡æ³¨
+			} else { // æ”¶å…¥
+				// é€‰æ‹©åˆ—è¡¨åˆå§‹åŒ–
 				rb2.setChecked(true);
 				rb1.setClickable(false);
 				rb2.setClickable(false);
 				spdatalist = itypeDAO.getItypeName(userid);
-				// ¸ù¾İ±àºÅ²éÕÒÊÕÈëĞÅÏ¢£¬²¢´æ´¢µ½Tb_pay¶ÔÏóÖĞ
+				// æ ¹æ®ç¼–å·æŸ¥æ‰¾æ”¶å…¥ä¿¡æ¯ï¼Œå¹¶å­˜å‚¨åˆ°Tb_payå¯¹è±¡ä¸­
 				Tb_income tb_income = incomeDAO.find(userid,
 						Integer.parseInt(strno));
-				txtMoney.setText(tb_income.getMoney2());// ÏÔÊ¾½ğ¶î
+				txtMoney.setText(tb_income.getMoney2());// æ˜¾ç¤ºé‡‘é¢
 				txtMoney.setTextColor(Color.parseColor("#ffff0000"));
-				txtTime.setText(tb_income.getTime());// ÏÔÊ¾Ê±¼ä
-				Selection = tb_income.getType() - 1; // ÏÔÊ¾Àà±ğ
+				txtTime.setText(tb_income.getTime());// æ˜¾ç¤ºæ—¶é—´
+				Selection = tb_income.getType() - 1; // æ˜¾ç¤ºç±»åˆ«
 				initphotodata(tb_income.getPhoto());
 				textreAddres = tb_income.getHandler();
 				textreMark = tb_income.getMark();
-				txtAddress.setText(textreAddres);// ÏÔÊ¾µØµã
-				txtMark.setText(textreMark);// ÏÔÊ¾±¸×¢
+				txtAddress.setText(textreAddres);// æ˜¾ç¤ºåœ°ç‚¹
+				txtMark.setText(textreMark);// æ˜¾ç¤ºå¤‡æ³¨
 			}
 		}
 	}
 
-	private void initphotodata(String photo) { // ³õÊ¼»¯Í¼Æ¬Êı¾İ
+	private void initphotodata(String photo) { // åˆå§‹åŒ–å›¾ç‰‡æ•°æ®
 		if ((incount == 0) && (!photo.equals(""))) {
 			String[] photoall = photo.split(",");
 			for (int i = 0; i < photoall.length / 2; i++) {
@@ -355,12 +356,12 @@ public class AddPay extends Activity implements AMapLocationListener,
 	}
 
 	@SuppressWarnings("deprecation")
-	private void initphoto() {// ³õÊ¼»¯Í¼Æ¬
+	private void initphoto() {// åˆå§‹åŒ–å›¾ç‰‡
 		try {
 			if (textphoto.equals("")) {
 				addphoto.setImageResource(R.drawable.addphoto_btn);
 			} else if (Bimp.getbitmap(Bimp.smdrr.get(0)) == null) {
-				Toast.makeText(AddPay.this, "Í¼Æ¬²»´æÔÚ", Toast.LENGTH_SHORT).show();
+				Toast.makeText(AddPay.this, "å›¾ç‰‡ä¸å­˜åœ¨", Toast.LENGTH_SHORT).show();
 			} else {
 				addphoto.setImageBitmap(Bimp.getbitmap(Bimp.smdrr.get(0)));
 			}
@@ -369,38 +370,38 @@ public class AddPay extends Activity implements AMapLocationListener,
 		}
 	}
 
-	private void updatetype() { // ¸üĞÂÀà±ğ
+	private void updatetype() { // æ›´æ–°ç±»åˆ«
 		initData(userid);
-		spdata = spdatalist.toArray(new String[spdatalist.size()]);// ÔÚtb_itypeÖĞ°´ÓÃ»§id¶ÁÈ¡
+		spdata = spdatalist.toArray(new String[spdatalist.size()]);// åœ¨tb_itypeä¸­æŒ‰ç”¨æˆ·idè¯»å–
 		adapter = new ArrayAdapter<String>(AddPay.this, R.layout.spinner,
-				spdata); // ¶¯Ì¬Éú³ÉÊÕÈëÀàĞÍÁĞ±í
+				spdata); // åŠ¨æ€ç”Ÿæˆæ”¶å…¥ç±»å‹åˆ—è¡¨
 		spType.setAdapter(adapter);
 		if (Selection > 0) {
-			spType.setSelection(Selection);// ÏÔÊ¾Àà±ğ
+			spType.setSelection(Selection);// æ˜¾ç¤ºç±»åˆ«
 		}
 	}
 
 	@Override
-	protected void onStart() { // ¸´Ğ´onstart
-		super.onStart();// ÊµÏÖ»ùÀàÖĞµÄ·½·¨
-		updateDisplay();// ÏÔÊ¾µ±Ç°ÏµÍ³Ê±¼ä
+	protected void onStart() { // å¤å†™onstart
+		super.onStart();// å®ç°åŸºç±»ä¸­çš„æ–¹æ³•
+		updateDisplay();// æ˜¾ç¤ºå½“å‰ç³»ç»Ÿæ—¶é—´
 
 		Intent intentr = getIntent();
 		userid = intentr.getIntExtra("cwp.id", 100000001);
-		bundle = intentr.getExtras();// »ñÈ¡´«ÈëµÄÊı¾İ£¬²¢Ê¹ÓÃBundle¼ÇÂ¼
+		bundle = intentr.getExtras();// è·å–ä¼ å…¥çš„æ•°æ®ï¼Œå¹¶ä½¿ç”¨Bundleè®°å½•
 		if (bundle.containsKey("cwp.message")) {
-			strInfos = bundle.getStringArray("cwp.message");// »ñÈ¡BundleÖĞ¼ÇÂ¼µÄĞÅÏ¢
-			strno = strInfos[0];// ¼ÇÂ¼id
-			strType = strInfos[1];// ¼ÇÂ¼ÀàĞÍ
+			strInfos = bundle.getStringArray("cwp.message");// è·å–Bundleä¸­è®°å½•çš„ä¿¡æ¯
+			strno = strInfos[0];// è®°å½•id
+			strType = strInfos[1];// è®°å½•ç±»å‹
 			typemode = "ModifyInP";
-			if (strType.equals("btnininfo")) { // ÊÕÈë
+			if (strType.equals("btnininfo")) { // æ”¶å…¥
 				type = "income";
 			} else {
 				type = "pay";
 			}
 		}
-		keyBoard = new KeyboardUtil(this, this, txtMoney, typemode); // Êı×ÖÈí¼üÅÌ
-		if (bundle.containsKey("cwp.voice")) { // ½øÀ´µ÷ÓÃÓïÒô¼ÇÕË
+		keyBoard = new KeyboardUtil(this, this, txtMoney, typemode); // æ•°å­—è½¯é”®ç›˜
+		if (bundle.containsKey("cwp.voice")) { // è¿›æ¥è°ƒç”¨è¯­éŸ³è®°è´¦
 			if (firstin) {
 				bottom_empty.setVisibility(View.GONE);
 				bottom_full.setVisibility(View.VISIBLE);
@@ -408,7 +409,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 				firstin = false;
 			}
 		}
-		if (bundle.containsKey("cwp.photo")) {// ½øÀ´µ÷ÓÃÅÄÕÕ
+		if (bundle.containsKey("cwp.photo")) {// è¿›æ¥è°ƒç”¨æ‹ç…§
 			if (firstin) {
 				bottom_empty.setVisibility(View.GONE);
 				bottom_full.setVisibility(View.VISIBLE);
@@ -419,35 +420,35 @@ public class AddPay extends Activity implements AMapLocationListener,
 				firstin = false;
 			}
 		}
-		if (bundle.containsKey("keyboard")) { // ½øÀ´ÏÔÊ¾¼üÅÌ
+		if (bundle.containsKey("keyboard")) { // è¿›æ¥æ˜¾ç¤ºé”®ç›˜
 			if (keycount) {
-				InputMethodManager imm = (InputMethodManager) getSystemService(AddPay.this.INPUT_METHOD_SERVICE); // ÏÔÊ¾¼üÅÌ
-				imm.hideSoftInputFromWindow(txtMoney.getWindowToken(), 0); // Òş²Ø¼üÅÌ¡¡
+				InputMethodManager imm = (InputMethodManager) getSystemService(AddPay.this.INPUT_METHOD_SERVICE); // æ˜¾ç¤ºé”®ç›˜
+				imm.hideSoftInputFromWindow(txtMoney.getWindowToken(), 0); // éšè—é”®ç›˜ã€€
 				keyBoard.showKeyboard();
 				keycount = false;
 			}
 		}
 		updatetype();
-		txtTime.setOnTouchListener(new OnTouchListener() { // ÎªÊ±¼äÎÄ±¾¿òÉèÖÃµ¥»÷¼àÌıÊÂ¼ş
+		txtTime.setOnTouchListener(new OnTouchListener() { // ä¸ºæ—¶é—´æ–‡æœ¬æ¡†è®¾ç½®å•å‡»ç›‘å¬äº‹ä»¶
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 
-				showDialog(DATE_DIALOG_ID);// ÏÔÊ¾ÈÕÆÚÑ¡Ôñ¶Ô»°¿ò
+				showDialog(DATE_DIALOG_ID);// æ˜¾ç¤ºæ—¥æœŸé€‰æ‹©å¯¹è¯æ¡†
 				return false;
 			}
 		});
 
-		txtMoney.setOnTouchListener(new OnTouchListener() { // Êı×ÖÈí¼üÅÌ¼àÌı
+		txtMoney.setOnTouchListener(new OnTouchListener() { // æ•°å­—è½¯é”®ç›˜ç›‘å¬
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				InputMethodManager imm = (InputMethodManager) getSystemService(AddPay.this.INPUT_METHOD_SERVICE); // ÏÔÊ¾¼üÅÌ
-				imm.hideSoftInputFromWindow(txtMoney.getWindowToken(), 0); // Òş²Ø¼üÅÌ¡¡
+				InputMethodManager imm = (InputMethodManager) getSystemService(AddPay.this.INPUT_METHOD_SERVICE); // æ˜¾ç¤ºé”®ç›˜
+				imm.hideSoftInputFromWindow(txtMoney.getWindowToken(), 0); // éšè—é”®ç›˜ã€€
 				keyBoard.showKeyboard();
 				return false;
 			}
 		});
 
-		btnVoice.setOnClickListener(new OnClickListener() {// ÓïÒôÊ¶±ğ¼àÌı
+		btnVoice.setOnClickListener(new OnClickListener() {// è¯­éŸ³è¯†åˆ«ç›‘å¬
 
 			@Override
 			public void onClick(View v) {
@@ -455,182 +456,182 @@ public class AddPay extends Activity implements AMapLocationListener,
 			}
 		});
 
-		btnSaveButton.setOnClickListener(new OnClickListener() {// Îª±£´æ°´Å¥ÉèÖÃ¼àÌıÊÂ¼ş
-					private String textreAddres;
-					private String textreMark;
+		btnSaveButton.setOnClickListener(new OnClickListener() {// ä¸ºä¿å­˜æŒ‰é’®è®¾ç½®ç›‘å¬äº‹ä»¶
+			private String textreAddres;
+			private String textreMark;
 
-					@SuppressLint("NewApi")
-					@Override
-					public void onClick(View arg0) {
-						textreAddres = txtAddress.getText().toString();
-						textreMark = txtMark.getText().toString();
-						if (textphoto == null) {
-							textphoto = "";
-						}
-						if (typemode == "add") { // Ìí¼ÓÄ£Ê½
-							String strMoney = txtMoney.getText().toString();// »ñÈ¡½ğ¶îÎÄ±¾¿òµÄÖµ
-							if (type == "pay") { // Ö§³ö
-								if (!strMoney.isEmpty()) {// ÅĞ¶Ï½ğ¶î²»Îª¿Õ
-									// ´´½¨InaccountDAO¶ÔÏó
-									PayDAO payDAO = new PayDAO(AddPay.this);
-									// ´´½¨Tb_inaccount¶ÔÏó
-									Tb_pay tb_pay = new Tb_pay(
-											userid,
-											payDAO.getMaxNo(userid) + 1,
-											get2Double(strMoney),
-											setTimeFormat(null),
-											(spType.getSelectedItemPosition() + 1),
-											textreAddres, textreMark, textphoto);
-									payDAO.add(tb_pay);// Ìí¼ÓÊÕÈëĞÅÏ¢
-									Toast.makeText(AddPay.this,
-											"¡¼ĞÂÔöÊÕÈë¡½Êı¾İÌí¼Ó³É¹¦£¡", Toast.LENGTH_SHORT)
-											.show();
-									gotoback();
-								} else {
-									Toast.makeText(AddPay.this, "ÇëÊäÈëÊÕÈë½ğ¶î£¡",
-											Toast.LENGTH_SHORT).show();
-								}
-							} else { // ÊÕÈë
-								if (!strMoney.isEmpty()) {// ÅĞ¶Ï½ğ¶î²»Îª¿Õ
-									// ´´½¨InaccountDAO¶ÔÏó
-									IncomeDAO incomeDAO = new IncomeDAO(
-											AddPay.this);
-									// ´´½¨Tb_inaccount¶ÔÏó
-									Tb_income tb_income = new Tb_income(
-											userid,
-											payDAO.getMaxNo(userid) + 1,
-											get2Double(strMoney),
-											setTimeFormat(null),
-											(spType.getSelectedItemPosition() + 1),
-											// txtInhandler.getText().toString(),
-											textreAddres, textreMark,
-											textphoto, "Ö§³ö");
-									incomeDAO.add(tb_income);// Ìí¼ÓÊÕÈëĞÅÏ¢
-									// µ¯³öĞÅÏ¢ÌáÊ¾
-									Toast.makeText(AddPay.this,
-											"¡¼ĞÂÔöÊÕÈë¡½Êı¾İÌí¼Ó³É¹¦£¡", Toast.LENGTH_SHORT)
-											.show();
-									gotoback();
-								} else {
-									Toast.makeText(AddPay.this, "ÇëÊäÈëÊÕÈë½ğ¶î£¡",
-											Toast.LENGTH_SHORT).show();
-								}
-							}
-						} else { // ĞŞ¸ÄÄ£Ê½
-							if (type == "pay") { // Ö§³ö
-								if (!txtMoney.getText().toString().isEmpty()) {// ÅĞ¶Ï½ğ¶î²»Îª¿Õ
-									Tb_pay tb_pay = new Tb_pay(); // ´´½¨Tb_pay¶ÔÏó
-									tb_pay.set_id(userid); // ÉèÖÃuserid
-									tb_pay.setNo(Integer.parseInt(strno)); // ÉèÖÃ±àºÅ
-									tb_pay.setMoney(get2Double(txtMoney
-											.getText().toString()));// ÉèÖÃ½ğ¶î
-									tb_pay.setTime(setTimeFormat(txtTime
-											.getText().toString()));// ÉèÖÃÊ±¼ä
-									tb_pay.setType(spType
-											.getSelectedItemPosition() + 1);// ÉèÖÃÀà±ğ
-									tb_pay.setAddress(textreAddres);// ÉèÖÃµØµã
-									tb_pay.setMark(textreMark);// ÉèÖÃ±¸×¢
-									tb_pay.setPhoto(textphoto);// ÉèÖÃ±¸×¢
-									payDAO.update(tb_pay);// ¸üĞÂÖ§³öĞÅÏ¢
-									Toast.makeText(AddPay.this, "¡¼Êı¾İ¡½ĞŞ¸Ä³É¹¦£¡",
-											Toast.LENGTH_SHORT).show();
-									gotoback();
-								} else {
-									Toast.makeText(AddPay.this, "ÇëÊäÈëÊÕÈë½ğ¶î£¡",
-											Toast.LENGTH_SHORT).show();
-								}
-							} else { // ÊÕÈë
-								if (!txtMoney.getText().toString().isEmpty()) {// ÅĞ¶Ï½ğ¶î²»Îª¿Õ
-									Tb_income tb_income = new Tb_income();// ´´½¨Tb_income¶ÔÏó
-									tb_income.set_id(userid);// ÉèÖÃ±àºÅ
-									tb_income.setNo(Integer.parseInt(strno));// ÉèÖÃ±àºÅ
-									tb_income.setMoney(get2Double(txtMoney
-											.getText().toString()));// ÉèÖÃ½ğ¶î
-									tb_income.setTime(setTimeFormat(txtTime
-											.getText().toString()));// ÉèÖÃÊ±¼ä
-									tb_income.setType(spType
-											.getSelectedItemPosition() + 1);// ÉèÖÃÀà±ğ
-									tb_income.setHandler(textreAddres);// ÉèÖÃ¸¶¿î·½
-									tb_income.setMark(textreMark);// ÉèÖÃ±¸×¢
-									tb_income.setPhoto(textphoto);// ÉèÖÃ±¸×¢
-									incomeDAO.update(tb_income);// ¸üĞÂÊÕÈëĞÅÏ¢
-									Toast.makeText(AddPay.this, "¡¼Êı¾İ¡½ĞŞ¸Ä³É¹¦£¡",
-											Toast.LENGTH_SHORT).show();
-									gotoback();
-								} else {
-									Toast.makeText(AddPay.this, "ÇëÊäÈëÊÕÈë½ğ¶î£¡",
-											Toast.LENGTH_SHORT).show();
-								}
-							}
-						}
-					}
-				});
-		btnCancelButton.setOnClickListener(new OnClickListener() {// ÎªÈ¡Ïû°´Å¥ÉèÖÃµ¥»÷¼àÌıÊÂ¼ş
-					@Override
-					public void onClick(View arg0) {
-
-						if (typemode == "add") { // Ìí¼ÓÄ£Ê½Ö´ĞĞ·µ»Ø
-							txtMoney.setText("");// ÉèÖÃ½ğ¶îÎÄ±¾¿òÎª¿Õ
-							txtMoney.setHint("0.00");// Îª½ğ¶îÎÄ±¾¿òÉèÖÃÌáÊ¾
-							txtTime.setText("");// ÉèÖÃÊ±¼äÎÄ±¾¿òÎª¿Õ
-							txtAddress.setText("");// ÉèÖÃµØÖ·ÎÄ±¾¿òÎª¿Õ
-							txtMark.setText("");// ÉèÖÃ±¸×¢ÎÄ±¾¿òÎª¿Õ
-							// txtInhandler.setText("");// ÉèÖÃ±¸×¢ÎÄ±¾¿òÎª¿Õ
-							spType.setSelection(0);// ÉèÖÃÀà±ğÏÂÀ­ÁĞ±íÄ¬ÈÏÑ¡ÔñµÚÒ»Ïî
+			@SuppressLint("NewApi")
+			@Override
+			public void onClick(View arg0) {
+				textreAddres = txtAddress.getText().toString();
+				textreMark = txtMark.getText().toString();
+				if (textphoto == null) {
+					textphoto = "";
+				}
+				if (typemode == "add") { // æ·»åŠ æ¨¡å¼
+					String strMoney = txtMoney.getText().toString();// è·å–é‡‘é¢æ–‡æœ¬æ¡†çš„å€¼
+					if (type == "pay") { // æ”¯å‡º
+						if (!strMoney.isEmpty()) {// åˆ¤æ–­é‡‘é¢ä¸ä¸ºç©º
+							// åˆ›å»ºInaccountDAOå¯¹è±¡
+							PayDAO payDAO = new PayDAO(AddPay.this);
+							// åˆ›å»ºTb_inaccountå¯¹è±¡
+							Tb_pay tb_pay = new Tb_pay(
+									userid,
+									payDAO.getMaxNo(userid) + 1,
+									get2Double(strMoney),
+									setTimeFormat(null),
+									(spType.getSelectedItemPosition() + 1),
+									textreAddres, textreMark, textphoto);
+							payDAO.add(tb_pay);// æ·»åŠ æ”¶å…¥ä¿¡æ¯
+							Toast.makeText(AddPay.this,
+									"ã€–æ–°å¢æ”¶å…¥ã€—æ•°æ®æ·»åŠ æˆåŠŸï¼", Toast.LENGTH_SHORT)
+									.show();
 							gotoback();
-						} else { // ĞŞ¸ÄÄ£Ê½Ö´ĞĞÉ¾³ı
-							if (type == "pay") { // Ö§³ö
-								payDAO.detele(userid, Integer.parseInt(strno));// ¸ù¾İ±àºÅÉ¾³ıÖ§³öĞÅÏ¢
-								gotoback();
-							} else { // ÊÕÈë
-								incomeDAO.detele(userid,
-										Integer.parseInt(strno));// ¸ù¾İ±àºÅÉ¾³ıÊÕÈëĞÅÏ¢
-								gotoback();
-							}
-							Toast.makeText(AddPay.this, "¡¼Êı¾İ¡½É¾³ı³É¹¦£¡",
+						} else {
+							Toast.makeText(AddPay.this, "è¯·è¾“å…¥æ”¶å…¥é‡‘é¢ï¼",
+									Toast.LENGTH_SHORT).show();
+						}
+					} else { // æ”¶å…¥
+						if (!strMoney.isEmpty()) {// åˆ¤æ–­é‡‘é¢ä¸ä¸ºç©º
+							// åˆ›å»ºInaccountDAOå¯¹è±¡
+							IncomeDAO incomeDAO = new IncomeDAO(
+									AddPay.this);
+							// åˆ›å»ºTb_inaccountå¯¹è±¡
+							Tb_income tb_income = new Tb_income(
+									userid,
+									payDAO.getMaxNo(userid) + 1,
+									get2Double(strMoney),
+									setTimeFormat(null),
+									(spType.getSelectedItemPosition() + 1),
+									// txtInhandler.getText().toString(),
+									textreAddres, textreMark,
+									textphoto, "æ”¯å‡º");
+							incomeDAO.add(tb_income);// æ·»åŠ æ”¶å…¥ä¿¡æ¯
+							// å¼¹å‡ºä¿¡æ¯æç¤º
+							Toast.makeText(AddPay.this,
+									"ã€–æ–°å¢æ”¶å…¥ã€—æ•°æ®æ·»åŠ æˆåŠŸï¼", Toast.LENGTH_SHORT)
+									.show();
+							gotoback();
+						} else {
+							Toast.makeText(AddPay.this, "è¯·è¾“å…¥æ”¶å…¥é‡‘é¢ï¼",
 									Toast.LENGTH_SHORT).show();
 						}
 					}
-				});
+				} else { // ä¿®æ”¹æ¨¡å¼
+					if (type == "pay") { // æ”¯å‡º
+						if (!txtMoney.getText().toString().isEmpty()) {// åˆ¤æ–­é‡‘é¢ä¸ä¸ºç©º
+							Tb_pay tb_pay = new Tb_pay(); // åˆ›å»ºTb_payå¯¹è±¡
+							tb_pay.set_id(userid); // è®¾ç½®userid
+							tb_pay.setNo(Integer.parseInt(strno)); // è®¾ç½®ç¼–å·
+							tb_pay.setMoney(get2Double(txtMoney
+									.getText().toString()));// è®¾ç½®é‡‘é¢
+							tb_pay.setTime(setTimeFormat(txtTime
+									.getText().toString()));// è®¾ç½®æ—¶é—´
+							tb_pay.setType(spType
+									.getSelectedItemPosition() + 1);// è®¾ç½®ç±»åˆ«
+							tb_pay.setAddress(textreAddres);// è®¾ç½®åœ°ç‚¹
+							tb_pay.setMark(textreMark);// è®¾ç½®å¤‡æ³¨
+							tb_pay.setPhoto(textphoto);// è®¾ç½®å¤‡æ³¨
+							payDAO.update(tb_pay);// æ›´æ–°æ”¯å‡ºä¿¡æ¯
+							Toast.makeText(AddPay.this, "ã€–æ•°æ®ã€—ä¿®æ”¹æˆåŠŸï¼",
+									Toast.LENGTH_SHORT).show();
+							gotoback();
+						} else {
+							Toast.makeText(AddPay.this, "è¯·è¾“å…¥æ”¶å…¥é‡‘é¢ï¼",
+									Toast.LENGTH_SHORT).show();
+						}
+					} else { // æ”¶å…¥
+						if (!txtMoney.getText().toString().isEmpty()) {// åˆ¤æ–­é‡‘é¢ä¸ä¸ºç©º
+							Tb_income tb_income = new Tb_income();// åˆ›å»ºTb_incomeå¯¹è±¡
+							tb_income.set_id(userid);// è®¾ç½®ç¼–å·
+							tb_income.setNo(Integer.parseInt(strno));// è®¾ç½®ç¼–å·
+							tb_income.setMoney(get2Double(txtMoney
+									.getText().toString()));// è®¾ç½®é‡‘é¢
+							tb_income.setTime(setTimeFormat(txtTime
+									.getText().toString()));// è®¾ç½®æ—¶é—´
+							tb_income.setType(spType
+									.getSelectedItemPosition() + 1);// è®¾ç½®ç±»åˆ«
+							tb_income.setHandler(textreAddres);// è®¾ç½®ä»˜æ¬¾æ–¹
+							tb_income.setMark(textreMark);// è®¾ç½®å¤‡æ³¨
+							tb_income.setPhoto(textphoto);// è®¾ç½®å¤‡æ³¨
+							incomeDAO.update(tb_income);// æ›´æ–°æ”¶å…¥ä¿¡æ¯
+							Toast.makeText(AddPay.this, "ã€–æ•°æ®ã€—ä¿®æ”¹æˆåŠŸï¼",
+									Toast.LENGTH_SHORT).show();
+							gotoback();
+						} else {
+							Toast.makeText(AddPay.this, "è¯·è¾“å…¥æ”¶å…¥é‡‘é¢ï¼",
+									Toast.LENGTH_SHORT).show();
+						}
+					}
+				}
+			}
+		});
+		btnCancelButton.setOnClickListener(new OnClickListener() {// ä¸ºå–æ¶ˆæŒ‰é’®è®¾ç½®å•å‡»ç›‘å¬äº‹ä»¶
+			@Override
+			public void onClick(View arg0) {
+
+				if (typemode == "add") { // æ·»åŠ æ¨¡å¼æ‰§è¡Œè¿”å›
+					txtMoney.setText("");// è®¾ç½®é‡‘é¢æ–‡æœ¬æ¡†ä¸ºç©º
+					txtMoney.setHint("0.00");// ä¸ºé‡‘é¢æ–‡æœ¬æ¡†è®¾ç½®æç¤º
+					txtTime.setText("");// è®¾ç½®æ—¶é—´æ–‡æœ¬æ¡†ä¸ºç©º
+					txtAddress.setText("");// è®¾ç½®åœ°å€æ–‡æœ¬æ¡†ä¸ºç©º
+					txtMark.setText("");// è®¾ç½®å¤‡æ³¨æ–‡æœ¬æ¡†ä¸ºç©º
+					// txtInhandler.setText("");// è®¾ç½®å¤‡æ³¨æ–‡æœ¬æ¡†ä¸ºç©º
+					spType.setSelection(0);// è®¾ç½®ç±»åˆ«ä¸‹æ‹‰åˆ—è¡¨é»˜è®¤é€‰æ‹©ç¬¬ä¸€é¡¹
+					gotoback();
+				} else { // ä¿®æ”¹æ¨¡å¼æ‰§è¡Œåˆ é™¤
+					if (type == "pay") { // æ”¯å‡º
+						payDAO.detele(userid, Integer.parseInt(strno));// æ ¹æ®ç¼–å·åˆ é™¤æ”¯å‡ºä¿¡æ¯
+						gotoback();
+					} else { // æ”¶å…¥
+						incomeDAO.detele(userid,
+								Integer.parseInt(strno));// æ ¹æ®ç¼–å·åˆ é™¤æ”¶å…¥ä¿¡æ¯
+						gotoback();
+					}
+					Toast.makeText(AddPay.this, "ã€–æ•°æ®ã€—åˆ é™¤æˆåŠŸï¼",
+							Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
 	}
 
-	// ±£Áô2Î»Ğ¡Êı
-	public static double get2Double(String strMoney) { // ´¦ÀíĞ¡Êıµã
+	// ä¿ç•™2ä½å°æ•°
+	public static double get2Double(String strMoney) { // å¤„ç†å°æ•°ç‚¹
 		Double a = Double.parseDouble(strMoney);
 		DecimalFormat df = new DecimalFormat("0.00");
 		return new Double(df.format(a));
 	}
 
 	@Override
-	protected Dialog onCreateDialog(int id)// ÖØĞ´onCreateDialog·½·¨
+	protected Dialog onCreateDialog(int id)// é‡å†™onCreateDialogæ–¹æ³•
 	{
 		switch (id) {
-		case DATE_DIALOG_ID:// µ¯³öÈÕÆÚÑ¡Ôñ¶Ô»°¿ò
-			return new DatePickerDialog(this, mDateSetListener, mYear, mMonth,
-					mDay);
+			case DATE_DIALOG_ID:// å¼¹å‡ºæ—¥æœŸé€‰æ‹©å¯¹è¯æ¡†
+				return new DatePickerDialog(this, mDateSetListener, mYear, mMonth,
+						mDay);
 		}
 		return null;
 	}
 
 	private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
 		public void onDateSet(DatePicker view, int year, int monthOfYear,
-				int dayOfMonth) {
-			mYear = year;// ÎªÄê·İ¸³Öµ
-			mMonth = monthOfYear;// ÎªÔÂ·İ¸³Öµ
-			mDay = dayOfMonth;// ÎªÌì¸³Öµ
-			updateDisplay();// ÏÔÊ¾ÉèÖÃµÄÈÕÆÚ
+							  int dayOfMonth) {
+			mYear = year;// ä¸ºå¹´ä»½èµ‹å€¼
+			mMonth = monthOfYear;// ä¸ºæœˆä»½èµ‹å€¼
+			mDay = dayOfMonth;// ä¸ºå¤©èµ‹å€¼
+			updateDisplay();// æ˜¾ç¤ºè®¾ç½®çš„æ—¥æœŸ
 		}
 	};
 
 	private void updateDisplay() {
-		// ÏÔÊ¾ÉèÖÃµÄÊ±¼ä
+		// æ˜¾ç¤ºè®¾ç½®çš„æ—¶é—´
 
 		txtTime.setText(new StringBuilder().append(mYear).append("-")
 				.append(mMonth + 1).append("-").append(mDay));
 
 	}
 
-	private String setTimeFormat(String newtxtTime) { // ÉèÖÃÈÕÆÚ¸ñÊ½
+	private String setTimeFormat(String newtxtTime) { // è®¾ç½®æ—¥æœŸæ ¼å¼
 		String date;
 		if (typemode == "add") {
 			date = txtTime.getText().toString();
@@ -664,26 +665,26 @@ public class AddPay extends Activity implements AMapLocationListener,
 
 	}
 
-	void VoiceRecognition() { // µ÷ÓÃ°Ù¶ÈÓïÒôÊ¶±ğ
+	void VoiceRecognition() { // è°ƒç”¨ç™¾åº¦è¯­éŸ³è¯†åˆ«
 		// mResult.setText(null);
 		mCurrentTheme = Config.DIALOG_THEME;
 		if (mDialog != null) {
 			mDialog.dismiss();
 		}
 		Bundle params = new Bundle();
-		params.putString(BaiduASRDigitalDialog.PARAM_API_KEY, Constants.API_KEY); // °Ù¶ÈÓïÒôapi_key
+		params.putString(BaiduASRDigitalDialog.PARAM_API_KEY, Constants.API_KEY); // ç™¾åº¦è¯­éŸ³api_key
 		params.putString(BaiduASRDigitalDialog.PARAM_SECRET_KEY,
 				Constants.SECRET_KEY);
-		params.putInt(BaiduASRDigitalDialog.PARAM_DIALOG_THEME, // °Ù¶ÈÓïÒôÖ÷Ìâ
+		params.putInt(BaiduASRDigitalDialog.PARAM_DIALOG_THEME, // ç™¾åº¦è¯­éŸ³ä¸»é¢˜
 				Config.DIALOG_THEME);
 		mDialog = new BaiduASRDigitalDialog(this, params);
 		mDialog.setDialogRecognitionListener(mRecognitionListener);
-		mDialog.getParams().putInt(BaiduASRDigitalDialog.PARAM_PROP, // °Ù¶ÈÊ¶±ğÀà±ğ
+		mDialog.getParams().putInt(BaiduASRDigitalDialog.PARAM_PROP, // ç™¾åº¦è¯†åˆ«ç±»åˆ«
 				Config.CURRENT_PROP);
-		mDialog.getParams().putString(BaiduASRDigitalDialog.PARAM_LANGUAGE, // °Ù¶ÈÊ¶±ğÓïÑÔ
+		mDialog.getParams().putString(BaiduASRDigitalDialog.PARAM_LANGUAGE, // ç™¾åº¦è¯†åˆ«è¯­è¨€
 				Config.getCurrentLanguage());
 		mDialog.getParams().putBoolean(
-				// °Ù¶ÈÊ¶±ğÒôĞ§Ïà¹Ø
+				// ç™¾åº¦è¯†åˆ«éŸ³æ•ˆç›¸å…³
 				BaiduASRDigitalDialog.PARAM_START_TONE_ENABLE,
 				Config.PLAY_START_SOUND);
 		mDialog.getParams().putBoolean(
@@ -695,90 +696,90 @@ public class AddPay extends Activity implements AMapLocationListener,
 		mDialog.show();
 	}
 
-	void VoiceSuccess() { // Ê¶±ğ³É¹¦Â¼ÈëÊı¾İ
+	void VoiceSuccess() { // è¯†åˆ«æˆåŠŸå½•å…¥æ•°æ®
 		if (DialogShowUtil.dialoggettype() != null) {
 			type = DialogShowUtil.dialoggettype();
 		}
 		VoiceDefault = DialogShowUtil.dialogVoiceDefault();
 		String textreMark = txtMark.getText().toString();
 
-		if (typemode == "add") { // Ìí¼ÓÄ£Ê½
-			if (type == "pay") { // Ö§³ö
+		if (typemode == "add") { // æ·»åŠ æ¨¡å¼
+			if (type == "pay") { // æ”¯å‡º
 				rb1.setChecked(true);
 				// corporation_fl.setVisibility(View.GONE);
 				// address_fl.setVisibility(View.VISIBLE);
 				spdatalist = ptypeDAO.getPtypeName(userid);
-				txtMoney.setText(VoiceSave[1]);// ÏÔÊ¾½ğ¶î
+				txtMoney.setText(VoiceSave[1]);// æ˜¾ç¤ºé‡‘é¢
 				txtMoney.setTextColor(Color.parseColor("#5ea98d"));
-				if (VoiceDefault == "notype") { // Èç¹ûÃ»ÓĞÄ¬ÈÏÀà±ğ
-					spType.setSelection(Integer.parseInt(VoiceSave[5]));// ÏÔÊ¾ÓïÒôÊ¶±ğÀà±ğ
+				if (VoiceDefault == "notype") { // å¦‚æœæ²¡æœ‰é»˜è®¤ç±»åˆ«
+					spType.setSelection(Integer.parseInt(VoiceSave[5]));// æ˜¾ç¤ºè¯­éŸ³è¯†åˆ«ç±»åˆ«
 				} else {
-					spType.setSelection(Integer.parseInt(VoiceSave[0]));// ÏÔÊ¾Àà±ğ
+					spType.setSelection(Integer.parseInt(VoiceSave[0]));// æ˜¾ç¤ºç±»åˆ«
 				}
-				txtMark.setText(textreMark + " " + VoiceSave[2]);// ÏÔÊ¾±¸×¢
-			} else { // ÊÕÈë
+				txtMark.setText(textreMark + " " + VoiceSave[2]);// æ˜¾ç¤ºå¤‡æ³¨
+			} else { // æ”¶å…¥
 				rb2.setChecked(true);
 				// corporation_fl.setVisibility(View.VISIBLE);
 				// address_fl.setVisibility(View.GONE);
 				spdatalist = ptypeDAO.getPtypeName(userid);
-				txtMoney.setText(VoiceSave[1]);// ÏÔÊ¾½ğ¶î
+				txtMoney.setText(VoiceSave[1]);// æ˜¾ç¤ºé‡‘é¢
 				txtMoney.setTextColor(Color.parseColor("#ffff0000"));
-				if (VoiceDefault == "notype") { // Èç¹ûÃ»ÓĞÄ¬ÈÏÀà±ğ
-					spType.setSelection(Integer.parseInt(VoiceSave[5]));// ÏÔÊ¾Àà±ğ
+				if (VoiceDefault == "notype") { // å¦‚æœæ²¡æœ‰é»˜è®¤ç±»åˆ«
+					spType.setSelection(Integer.parseInt(VoiceSave[5]));// æ˜¾ç¤ºç±»åˆ«
 				} else {
-					spType.setSelection(Integer.parseInt(VoiceSave[4]));// ÏÔÊ¾Àà±ğ
+					spType.setSelection(Integer.parseInt(VoiceSave[4]));// æ˜¾ç¤ºç±»åˆ«
 				}
-				txtMark.setText(textreMark + " " + VoiceSave[2]);// ÏÔÊ¾±¸×¢
+				txtMark.setText(textreMark + " " + VoiceSave[2]);// æ˜¾ç¤ºå¤‡æ³¨
 			}
-		} else { // ĞŞ¸ÄÄ£Ê½
-			if (type == "pay") { // Ö§³ö
+		} else { // ä¿®æ”¹æ¨¡å¼
+			if (type == "pay") { // æ”¯å‡º
 				rb1.setChecked(true);
-				// Ñ¡ÔñÁĞ±í³õÊ¼»¯
+				// é€‰æ‹©åˆ—è¡¨åˆå§‹åŒ–
 				spdatalist = ptypeDAO.getPtypeName(userid);
-				spdata = spdatalist.toArray(new String[spdatalist.size()]);// ÔÚtb_itypeÖĞ°´ÓÃ»§id¶ÁÈ¡
+				spdata = spdatalist.toArray(new String[spdatalist.size()]);// åœ¨tb_itypeä¸­æŒ‰ç”¨æˆ·idè¯»å–
 				adapter = new ArrayAdapter<String>(AddPay.this,
-						R.layout.spinner, spdata); // ¶¯Ì¬Éú³ÉÊÕÈëÀàĞÍÁĞ±í
+						R.layout.spinner, spdata); // åŠ¨æ€ç”Ÿæˆæ”¶å…¥ç±»å‹åˆ—è¡¨
 				spType.setAdapter(adapter);
-				txtMoney.setText(VoiceSave[1]);// ÏÔÊ¾½ğ¶î
+				txtMoney.setText(VoiceSave[1]);// æ˜¾ç¤ºé‡‘é¢
 				txtMoney.setTextColor(Color.parseColor("#5ea98d"));
-				if (VoiceDefault == "notype") { // Èç¹ûÃ»ÓĞÄ¬ÈÏÀà±ğ
-					spType.setSelection(Integer.parseInt(VoiceSave[5]));// ÏÔÊ¾ÓïÒôÊ¶±ğÀà±ğ
+				if (VoiceDefault == "notype") { // å¦‚æœæ²¡æœ‰é»˜è®¤ç±»åˆ«
+					spType.setSelection(Integer.parseInt(VoiceSave[5]));// æ˜¾ç¤ºè¯­éŸ³è¯†åˆ«ç±»åˆ«
 				} else {
-					spType.setSelection(Integer.parseInt(VoiceSave[0]));// ÏÔÊ¾Àà±ğ
+					spType.setSelection(Integer.parseInt(VoiceSave[0]));// æ˜¾ç¤ºç±»åˆ«
 				}
-				txtMark.setText(textreMark + " " + VoiceSave[2]);// ÏÔÊ¾±¸×¢
-			} else { // ÊÕÈë
-				// Ñ¡ÔñÁĞ±í³õÊ¼»¯
+				txtMark.setText(textreMark + " " + VoiceSave[2]);// æ˜¾ç¤ºå¤‡æ³¨
+			} else { // æ”¶å…¥
+				// é€‰æ‹©åˆ—è¡¨åˆå§‹åŒ–
 				rb2.setChecked(true);
 				spdatalist = itypeDAO.getItypeName(userid);
-				spdata = spdatalist.toArray(new String[spdatalist.size()]);// ÔÚtb_itypeÖĞ°´ÓÃ»§id¶ÁÈ¡
+				spdata = spdatalist.toArray(new String[spdatalist.size()]);// åœ¨tb_itypeä¸­æŒ‰ç”¨æˆ·idè¯»å–
 				adapter = new ArrayAdapter<String>(AddPay.this,
-						R.layout.spinner, spdata); // ¶¯Ì¬Éú³ÉÊÕÈëÀàĞÍÁĞ±í
+						R.layout.spinner, spdata); // åŠ¨æ€ç”Ÿæˆæ”¶å…¥ç±»å‹åˆ—è¡¨
 				spType.setAdapter(adapter);
-				txtMoney.setText(VoiceSave[1]);// ÏÔÊ¾½ğ¶î
+				txtMoney.setText(VoiceSave[1]);// æ˜¾ç¤ºé‡‘é¢
 				txtMoney.setTextColor(Color.parseColor("#ffff0000"));
-				if (VoiceDefault == "notype") { // Èç¹ûÃ»ÓĞÄ¬ÈÏÀà±ğ
-					spType.setSelection(Integer.parseInt(VoiceSave[5]));// ÏÔÊ¾Àà±ğ
+				if (VoiceDefault == "notype") { // å¦‚æœæ²¡æœ‰é»˜è®¤ç±»åˆ«
+					spType.setSelection(Integer.parseInt(VoiceSave[5]));// æ˜¾ç¤ºç±»åˆ«
 				} else {
-					spType.setSelection(Integer.parseInt(VoiceSave[4]));// ÏÔÊ¾Àà±ğ
+					spType.setSelection(Integer.parseInt(VoiceSave[4]));// æ˜¾ç¤ºç±»åˆ«
 				}
-				txtMark.setText(textreMark + " " + VoiceSave[2]);// ÏÔÊ¾±¸×¢
+				txtMark.setText(textreMark + " " + VoiceSave[2]);// æ˜¾ç¤ºå¤‡æ³¨
 			}
 		}
 	}
 
 	/*
-	 * Ê¶±ğ½á¹û´¦Àíº¯Êı
-	 * 
-	 * @param VoiceSave[0] ÊÕÈëÀà±ğµÄÖµ
-	 * 
-	 * @param VoiceSave[1] ½ğ¶îµÄÖµ
-	 * 
-	 * @param VoiceSave[3] ÖØ¸´Àà±ğµÄÖµ£¬½öÓÃÓÚÏÔÊ¾ÌáĞÑ
-	 * 
-	 * @param VoiceSave[4] Ö§³öÀà±ğµÄÖµ
-	 * 
-	 * @param VoiceSave[5] "ÓïÒôÊ¶±ğ"Àà±ğµÄÖµ
+	 * è¯†åˆ«ç»“æœå¤„ç†å‡½æ•°
+	 *
+	 * @param VoiceSave[0] æ”¶å…¥ç±»åˆ«çš„å€¼
+	 *
+	 * @param VoiceSave[1] é‡‘é¢çš„å€¼
+	 *
+	 * @param VoiceSave[3] é‡å¤ç±»åˆ«çš„å€¼ï¼Œä»…ç”¨äºæ˜¾ç¤ºæé†’
+	 *
+	 * @param VoiceSave[4] æ”¯å‡ºç±»åˆ«çš„å€¼
+	 *
+	 * @param VoiceSave[5] "è¯­éŸ³è¯†åˆ«"ç±»åˆ«çš„å€¼
 	 */
 	private void Recognition(String t) {
 		int mfirst = 100, mend = 0, temp = 0;
@@ -788,33 +789,33 @@ public class AddPay extends Activity implements AMapLocationListener,
 		spdatalist = ptypeDAO.getPtypeName(userid);
 		spdatalist2 = itypeDAO.getItypeName(userid);
 		VoiceSave[2] = t;
-		for (int i = 0; i < spdatalist.size(); i++) { // ÅĞ¶ÏÊÇ·ñ°üº¬Ö§³ö
+		for (int i = 0; i < spdatalist.size(); i++) { // åˆ¤æ–­æ˜¯å¦åŒ…å«æ”¯å‡º
 			if (t.indexOf(spdatalist.get(i).toString()) > -1) {
 				type = "pay";
 				intype = true;
 				inname = spdatalist.get(i).toString();
-				VoiceSave[0] = Integer.toString(i); // VoiceSave[0]ÎªÊÕÈëÀà±ğµÄÖµ
+				VoiceSave[0] = Integer.toString(i); // VoiceSave[0]ä¸ºæ”¶å…¥ç±»åˆ«çš„å€¼
 			}
 		}
-		for (int i = 0; i < voice_pay.length; i++) { // ÅĞ¶ÏÊÇ·ñ°üº¬Ö§³öµÄ¶¯´Ê
+		for (int i = 0; i < voice_pay.length; i++) { // åˆ¤æ–­æ˜¯å¦åŒ…å«æ”¯å‡ºçš„åŠ¨è¯
 			if (t.indexOf(voice_pay[i]) > -1) {
 				voice_ptype = true;
 			}
 		}
-		for (int i = 0; i < voice_income.length; i++) { // ÅĞ¶ÏÊÇ·ñ°üº¬Ö§³öµÄ¶¯´Ê
+		for (int i = 0; i < voice_income.length; i++) { // åˆ¤æ–­æ˜¯å¦åŒ…å«æ”¯å‡ºçš„åŠ¨è¯
 			if (t.indexOf(voice_income[i]) > -1) {
 				voice_intype = true;
 			}
 		}
-		for (int i = 0; i < spdatalist2.size(); i++) { // ÅĞ¶ÏÊÇ·ñ°üº¬ÊÕÈë
+		for (int i = 0; i < spdatalist2.size(); i++) { // åˆ¤æ–­æ˜¯å¦åŒ…å«æ”¶å…¥
 			if (t.indexOf(spdatalist2.get(i).toString()) > -1) {
 				type = "income";
 				outtype = true;
 				outname = spdatalist2.get(i).toString();
-				VoiceSave[4] = Integer.toString(i); // VoiceSave[4]ÎªÖ§³öÀà±ğµÄÖµ
+				VoiceSave[4] = Integer.toString(i); // VoiceSave[4]ä¸ºæ”¯å‡ºç±»åˆ«çš„å€¼
 			}
 		}
-		for (int i = 0; i < number.length; i++) { // ÅĞ¶ÏÊÇ·ñ°üº¬½ğ¶î£¬»ñµÃ¿ªÍ·
+		for (int i = 0; i < number.length; i++) { // åˆ¤æ–­æ˜¯å¦åŒ…å«é‡‘é¢ï¼Œè·å¾—å¼€å¤´
 			if (t.indexOf(number[i]) > -1) {
 				temp = t.indexOf(number[i]);
 				if (temp < mfirst) {
@@ -822,7 +823,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 				}
 			}
 		}
-		for (int i = 0; i < money.length; i++) { // ÅĞ¶ÏÊÇ·ñ°üº¬½ğ¶î£¬»ñµÃ½áÎ²
+		for (int i = 0; i < money.length; i++) { // åˆ¤æ–­æ˜¯å¦åŒ…å«é‡‘é¢ï¼Œè·å¾—ç»“å°¾
 			if (t.indexOf(money[i]) > -1) {
 				temp = t.indexOf(money[i]);
 				if (temp > -1 && temp >= mend) {
@@ -830,7 +831,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 				}
 			}
 		}
-		for (int i = 0; i < money2.length; i++) { // ÅĞ¶ÏÊÇ·ñ°üº¬½ğ¶î£¬»ñµÃ½áÎ²
+		for (int i = 0; i < money2.length; i++) { // åˆ¤æ–­æ˜¯å¦åŒ…å«é‡‘é¢ï¼Œè·å¾—ç»“å°¾
 			if (t.indexOf(money2[i]) > -1) {
 				temp = t.indexOf(money2[i]);
 				if (temp > -1 && temp >= mend) {
@@ -839,10 +840,10 @@ public class AddPay extends Activity implements AMapLocationListener,
 				mend = mend + 1;
 			}
 		}
-		if (!(mfirst == 100 || mend == 0)) { // ×ª»»Îª°¢À­²®Êı×Ö
+		if (!(mfirst == 100 || mend == 0)) { // è½¬æ¢ä¸ºé˜¿æ‹‰ä¼¯æ•°å­—
 			ismoney = true;
 			strmoney = t.substring(mfirst, mend);
-			// ÅĞ¶ÏÓï¾äÊÇ·ñ°üº¬·ÇÊı×Ö
+			// åˆ¤æ–­è¯­å¥æ˜¯å¦åŒ…å«éæ•°å­—
 			char[] chs = strmoney.toCharArray();
 			List<String> num = Arrays.asList(number);
 			List<String> mon = Arrays.asList(money);
@@ -854,10 +855,10 @@ public class AddPay extends Activity implements AMapLocationListener,
 							ismoney = false;
 			if (ismoney) {
 				DigitUtil Util = new DigitUtil();
-				VoiceSave[1] = Integer.toString(Util.parse(strmoney)); // µ÷ÓÃ¹¤¾ßÀà´¦Àíºº×ÖµÄ½ğ¶î
+				VoiceSave[1] = Integer.toString(Util.parse(strmoney)); // è°ƒç”¨å·¥å…·ç±»å¤„ç†æ±‰å­—çš„é‡‘é¢
 			}
 		}
-		if (intype && outtype) { // Èç¹ûÍ¬Ê±º¬ÓĞÊÕÈë/Ö§³öµÄÀà±ğ
+		if (intype && outtype) { // å¦‚æœåŒæ—¶å«æœ‰æ”¶å…¥/æ”¯å‡ºçš„ç±»åˆ«
 			if (outname.equals(inname)) {
 				if (ismoney) {
 					if (voice_intype) {
@@ -867,35 +868,35 @@ public class AddPay extends Activity implements AMapLocationListener,
 						type = "pay";
 						dialogShowUtil.dialogShow("rotatebottom", "OK", t, w);
 					} else {
-						VoiceSave[3] = outname; // VoiceSave[3]ÎªÖØ¸´Àà±ğµÄÖµ£¬½öÓÃÓÚÏÔÊ¾ÌáĞÑ
-						dialogShowUtil.dialogShow("shake", "judge", t, w); // Èç¹ûº¬ÓĞ½ğ¶î
+						VoiceSave[3] = outname; // VoiceSave[3]ä¸ºé‡å¤ç±»åˆ«çš„å€¼ï¼Œä»…ç”¨äºæ˜¾ç¤ºæé†’
+						dialogShowUtil.dialogShow("shake", "judge", t, w); // å¦‚æœå«æœ‰é‡‘é¢
 					}
 				} else {
-					w = "ÌáÊ¾£º\nÄãµÄ»°ÖĞÃ»ÓĞ°üº¬Ïû·Ñ»ò¿ªÖ§µÄ<½ğ¶î>\n";
+					w = "æç¤ºï¼š\nä½ çš„è¯ä¸­æ²¡æœ‰åŒ…å«æ¶ˆè´¹æˆ–å¼€æ”¯çš„<é‡‘é¢>\n";
 					dialogShowUtil.dialogShow("shake", "wrong", t, w);
 				}
 			} else {
-				w = "**ÌáÊ¾£º\nÒ»´ÎÖ»ÄÜ¼ÇÂ¼Ò»Ìõ¼ÇÂ¼Å¶\n"; // Èç¹ûº¬ÓĞÊÕÈë²¢ÇÒÖ§³öµÄÀà±ğ
+				w = "**æç¤ºï¼š\nä¸€æ¬¡åªèƒ½è®°å½•ä¸€æ¡è®°å½•å“¦\n"; // å¦‚æœå«æœ‰æ”¶å…¥å¹¶ä¸”æ”¯å‡ºçš„ç±»åˆ«
 				dialogShowUtil.dialogShow("shake", "wrong", t, w);
 			}
 		} else {
-			if (!((intype || outtype) || ismoney)) { // Èç¹û²»º¬½ğ¶î
-				w = "**ÌáÊ¾£º\nÄãµÄ»°ÖĞÃ»ÓĞ°üº¬<Àà±ğ>£¨" + listToString(spdatalist, '£¬')
-						+ "£¬" + listToString(spdatalist2, '£¬')
-						+ "£©\n\n**ÌáÊ¾£º\nÄãµÄ»°ÖĞÃ»ÓĞ°üº¬Ïû·Ñ»ò¿ªÖ§µÄ<½ğ¶î>";
+			if (!((intype || outtype) || ismoney)) { // å¦‚æœä¸å«é‡‘é¢
+				w = "**æç¤ºï¼š\nä½ çš„è¯ä¸­æ²¡æœ‰åŒ…å«<ç±»åˆ«>ï¼ˆ" + listToString(spdatalist, 'ï¼Œ')
+						+ "ï¼Œ" + listToString(spdatalist2, 'ï¼Œ')
+						+ "ï¼‰\n\n**æç¤ºï¼š\nä½ çš„è¯ä¸­æ²¡æœ‰åŒ…å«æ¶ˆè´¹æˆ–å¼€æ”¯çš„<é‡‘é¢>";
 				dialogShowUtil.dialogShow("shake", "wrong", t, w);
 			} else if ((intype || outtype) && (!ismoney)) {
-				w = "ÌáÊ¾£º\nÄãµÄ»°ÖĞÃ»ÓĞ°üº¬Ïû·Ñ»ò¿ªÖ§µÄ<½ğ¶î>\n»òÕß³öÏÖ¶à´Î½ğ¶î";
+				w = "æç¤ºï¼š\nä½ çš„è¯ä¸­æ²¡æœ‰åŒ…å«æ¶ˆè´¹æˆ–å¼€æ”¯çš„<é‡‘é¢>\næˆ–è€…å‡ºç°å¤šæ¬¡é‡‘é¢";
 				dialogShowUtil.dialogShow("shake", "wrong", t, w);
 			} else if ((!(intype || outtype)) && ismoney) {
-				for (int i = 0; i < spdatalist.size(); i++) { // ÅĞ¶ÏÊÇ·ñ°üº¬Ö§³ö
-					if ("ÓïÒôÊ¶±ğ".indexOf(spdatalist.get(i).toString()) > -1) {
+				for (int i = 0; i < spdatalist.size(); i++) { // åˆ¤æ–­æ˜¯å¦åŒ…å«æ”¯å‡º
+					if ("è¯­éŸ³è¯†åˆ«".indexOf(spdatalist.get(i).toString()) > -1) {
 						VoiceSave[5] = Integer.toString(i);
-						VoiceSave[3] = "ÓïÒôÊ¶±ğ";
+						VoiceSave[3] = "è¯­éŸ³è¯†åˆ«";
 					}
 				}
-				w = "**ÌáÊ¾£º\nÄãµÄ»°ÖĞÃ»ÓĞ°üº¬<£¨Ä¬ÈÏ£©Àà±ğ>£¨" + listToString(spdatalist, '£¬')
-						+ "£©\n\n\n½«»á¼ÇÂ¼Îª<ÓïÒôÊ¶±ğ>Àà±ğ£¬ÊÇ·ñÒÀÈ»¼ÇÂ¼£¿\n";
+				w = "**æç¤ºï¼š\nä½ çš„è¯ä¸­æ²¡æœ‰åŒ…å«<ï¼ˆé»˜è®¤ï¼‰ç±»åˆ«>ï¼ˆ" + listToString(spdatalist, 'ï¼Œ')
+						+ "ï¼‰\n\n\nå°†ä¼šè®°å½•ä¸º<è¯­éŸ³è¯†åˆ«>ç±»åˆ«ï¼Œæ˜¯å¦ä¾ç„¶è®°å½•ï¼Ÿ\n";
 				dialogShowUtil.dialogShow("shake", "notype", t, w);
 			} else {
 				dialogShowUtil.dialogShow("rotatebottom", "OK", t, w);
@@ -914,7 +915,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 		return sb.toString();
 	}
 
-	private boolean gotoback() { // ·µ»Ø
+	private boolean gotoback() { // è¿”å›
 		Intent intent = null;
 		type = "pay";
 		typemode = "add";
@@ -925,7 +926,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 		Bimp.flag = 0;
 		if (bundle.containsKey("cwp.frament3")) {
 			intent = new Intent(AddPay.this, MainActivity.class);
-			intent.putExtra("cwp.Fragment", "3");// ÉèÖÃ´«µİÊı¾İ
+			intent.putExtra("cwp.Fragment", "3");// è®¾ç½®ä¼ é€’æ•°æ®
 		} else if (bundle.containsKey("cwp.search")) {
 			this.setResult(3);
 			this.finish();
@@ -941,7 +942,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) { // ¼à¿Ø/À¹½Ø/ÆÁ±Î·µ»Ø¼ü
+		if (keyCode == KeyEvent.KEYCODE_BACK) { // ç›‘æ§/æ‹¦æˆª/å±è”½è¿”å›é”®
 			gotoback();
 		}
 		return super.onKeyDown(keyCode, event);
@@ -961,9 +962,9 @@ public class AddPay extends Activity implements AMapLocationListener,
 	@Override
 	protected void onPause() {
 		super.onPause();
-		// ÒÆ³ı¶¨Î»ÇëÇó
+		// ç§»é™¤å®šä½è¯·æ±‚
 		mLocationManagerProxy.removeUpdates(this);
-		// Ïú»Ù¶¨Î»
+		// é”€æ¯å®šä½
 		mLocationManagerProxy.destroy();
 	}
 
@@ -973,7 +974,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 				MODE_WORLD_READABLE);
 		CrashApplication myApplaction = (CrashApplication) getApplication();
 		if ((myApplaction.isLocked)
-				&& (sp.getString("gesturepw", "").equals("¿ª"))) {// ÅĞ¶ÏÊÇ·ñĞèÒªÌø×ªµ½ÃÜÂë½çÃæ
+				&& (sp.getString("gesturepw", "").equals("å¼€"))) {// åˆ¤æ–­æ˜¯å¦éœ€è¦è·³è½¬åˆ°å¯†ç ç•Œé¢
 			Intent intent = new Intent(this,
 					UnlockGesturePasswordActivity.class);
 			startActivity(intent);
@@ -1000,9 +1001,9 @@ public class AddPay extends Activity implements AMapLocationListener,
 	public void onLocationChanged(AMapLocation amapLocation) {
 		if (amapLocation != null
 				&& amapLocation.getAMapException().getErrorCode() == 0) {
-			// ¶¨Î»³É¹¦»Øµ÷ĞÅÏ¢£¬ÉèÖÃÏà¹ØÏûÏ¢
+			// å®šä½æˆåŠŸå›è°ƒä¿¡æ¯ï¼Œè®¾ç½®ç›¸å…³æ¶ˆæ¯
 			txtAddress.setText(amapLocation.getPoiName() + " [ "
-					+ amapLocation.getAddress() + " ÇøºÅ£º"
+					+ amapLocation.getAddress() + " åŒºå·ï¼š"
 					+ amapLocation.getCityCode() + " ]");
 		} else {
 			Log.e("AmapErr", "Location ERR:"
@@ -1013,43 +1014,43 @@ public class AddPay extends Activity implements AMapLocationListener,
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.btn_loacte:
-			// ×¢Òâ¸ü»»¶¨Î»Ê±¼äºó£¬ĞèÒªÏÈ½«¶¨Î»ÇëÇóÉ¾³ı£¬ÔÙ½øĞĞ¶¨Î»ÇëÇó
-			mLocationManagerProxy.removeUpdates(this);
-			int randomTime = mRandom.nextInt(1000);
-			mLocationManagerProxy.requestLocationData(
-					LocationProviderProxy.AMapNetwork, 60 * 1000 + randomTime,
-					15, this);
-			mLocationManagerProxy.setGpsEnable(false);
-			break;
+			case R.id.btn_loacte:
+				// æ³¨æ„æ›´æ¢å®šä½æ—¶é—´åï¼Œéœ€è¦å…ˆå°†å®šä½è¯·æ±‚åˆ é™¤ï¼Œå†è¿›è¡Œå®šä½è¯·æ±‚
+				mLocationManagerProxy.removeUpdates(this);
+				int randomTime = mRandom.nextInt(1000);
+				mLocationManagerProxy.requestLocationData(
+						LocationProviderProxy.AMapNetwork, 60 * 1000 + randomTime,
+						15, this);
+				mLocationManagerProxy.setGpsEnable(false);
+				break;
 		}
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
-		case 102:
-			if (resultCode == 3 || resultCode == 0) {
-				// for (int i = 0; i < Bimp.drr.size(); i++) {
-				// System.out.println("Bimp.drr" + i + " " + Bimp.drr.get(i));
-				// System.out.println("list" + i + " " + Bimp.smdrr.get(i));
-				// }
+			case 102:
+				if (resultCode == 3 || resultCode == 0) {
+					// for (int i = 0; i < Bimp.drr.size(); i++) {
+					// System.out.println("Bimp.drr" + i + " " + Bimp.drr.get(i));
+					// System.out.println("list" + i + " " + Bimp.smdrr.get(i));
+					// }
 
-				if ((Bimp.drr.size() != 0) && (Bimp.smdrr.size() != 0)) {
-					StringBuilder sb = new StringBuilder();
-					for (int i = 0; i < Bimp.drr.size(); i++) {
-						sb.append(Bimp.drr.get(i) + ",");
+					if ((Bimp.drr.size() != 0) && (Bimp.smdrr.size() != 0)) {
+						StringBuilder sb = new StringBuilder();
+						for (int i = 0; i < Bimp.drr.size(); i++) {
+							sb.append(Bimp.drr.get(i) + ",");
+						}
+						for (int i = 0; i < Bimp.drr.size(); i++) {
+							sb.append(Bimp.smdrr.get(i) + ",");
+						}
+						textphoto = sb.toString().substring(0, sb.length() - 1);
+						initphoto();
+					} else {
+						textphoto = "";
+						initphoto();
 					}
-					for (int i = 0; i < Bimp.drr.size(); i++) {
-						sb.append(Bimp.smdrr.get(i) + ",");
-					}
-					textphoto = sb.toString().substring(0, sb.length() - 1);
-					initphoto();
-				} else {
-					textphoto = "";
-					initphoto();
+					break;
 				}
-				break;
-			}
 
 		}
 	}
@@ -1058,3 +1059,993 @@ public class AddPay extends Activity implements AMapLocationListener,
 		dialogShowUtil.dialogShow("rotatebottom", "first", "", "");
 	}
 }
+
+
+
+
+
+
+
+
+
+//
+//public class AddPay extends Activity implements AMapLocationListener,
+//		OnClickListener {
+//	protected static final int DATE_DIALOG_ID = 0;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶Ô»ï¿½ï¿½ï¿½ï¿½ï¿½
+//	static String type = "pay";
+//	String VoiceDefault = "";
+//	protected static String typemode = "add";
+//	EditText txtMoney, txtTime, txtAddress, txtMark;// ï¿½ï¿½ï¿½ï¿½EditTextï¿½ï¿½ï¿½ï¿½
+//	Spinner spType;// ï¿½ï¿½ï¿½ï¿½Spinnerï¿½ï¿½ï¿½ï¿½
+//	Button btnSaveButton;// ï¿½ï¿½ï¿½ï¿½Buttonï¿½ï¿½ï¿½ó¡°±ï¿½ï¿½æ¡±
+//	Button btnCancelButton;// ï¿½ï¿½ï¿½ï¿½Buttonï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
+//	Button btnVoice;// ï¿½ï¿½ï¿½ï¿½Buttonï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½
+//	int userid;
+//	int Selection = 0;
+//	Bundle bundle = null;
+//	String[] strInfos = null;// ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//	String strno, strType;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½Ï¢ï¿½ï¿½ÅºÍ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//	private FrameLayout corporation_fl, address_fl = null;
+//	private RadioButton rb1 = null;
+//	private RadioButton rb2 = null;
+//	ImageView left_back;
+//
+//	private BaiduASRDigitalDialog mDialog = null; // ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//	private DialogRecognitionListener mRecognitionListener;
+//	private int mCurrentTheme = Config.DIALOG_THEME;
+//	private Effectstype effect; // ï¿½Ô¶ï¿½ï¿½ï¿½Dialog
+//	NiftyDialogBuilder dialogBuilder = null;
+//	Boolean firstin = true;
+//
+//	private int mYear;// ï¿½ï¿½
+//	private int mMonth;// ï¿½ï¿½
+//	private int mDay;// ï¿½ï¿½
+//
+//	private ArrayAdapter<String> adapter;
+//	private String[] spdata;
+//
+//	private LocationManagerProxy mLocationManagerProxy;// ï¿½ßµÂµï¿½Í¼api
+//	private Random mRandom = new Random();
+//
+//	String[] number = { "Ò»", "ï¿½ï¿½", "ï¿½ï¿½", "ï¿½ï¿½", "ï¿½ï¿½", "ï¿½ï¿½", "ï¿½ï¿½", "ï¿½ï¿½", "ï¿½ï¿½", "ï¿½ï¿½", "Ê®" };
+//	String[] money = { "Ôª", "ï¿½ï¿½", "Ç®" };
+//	String[] money2 = { "Ê®", "ï¿½ï¿½", "Ç§", "ï¿½ï¿½", "ï¿½ï¿½" };
+//	String[] voice_pay = { "ï¿½ï¿½", "ï¿½ï¿½" };
+//	String[] voice_income = { "ï¿½ï¿½", "ï¿½ï¿½" };
+//
+//	String[] VoiceSave = new String[6];
+//	static DialogShowUtil dialogShowUtil;
+//	PtypeDAO ptypeDAO = new PtypeDAO(AddPay.this);
+//	ItypeDAO itypeDAO = new ItypeDAO(AddPay.this);
+//	PayDAO payDAO = new PayDAO(AddPay.this);// ï¿½ï¿½ï¿½ï¿½PayDAOï¿½ï¿½ï¿½ï¿½
+//	IncomeDAO incomeDAO = new IncomeDAO(AddPay.this);// ï¿½ï¿½ï¿½ï¿½IncomeDAOï¿½ï¿½ï¿½ï¿½
+//	List<String> spdatalist, spdatalist2;
+//	private SystemBarTintManager mTintManager;
+//	private ImageView btn_loacte;
+//	private ImageView addphoto;
+//	protected String textphoto = "";
+//	private int incount = 0;
+//	private boolean keycount = true;
+//	private FrameLayout bottom_empty;
+//	private LinearLayout bottom_full;
+//	private KeyboardUtil keyBoard;
+//
+//	public AddPay() {
+//
+//	}
+//
+//	@Override
+//	protected void onCreate(Bundle savedInstanceState) {
+//		super.onCreate(savedInstanceState);
+//
+//		requestWindowFeature(Window.FEATURE_NO_TITLE);
+//		setContentView(R.layout.add);// ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
+//
+//		SysApplication.getInstance().addActivity(this); // ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½this
+//		super.onStart();// Êµï¿½Ö»ï¿½ï¿½ï¿½ï¿½ĞµÄ·ï¿½ï¿½ï¿½
+//
+//		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//			setTranslucentStatus(true);
+//			findViewById(R.id.top).setVisibility(View.VISIBLE);
+//		}
+//		mTintManager = new SystemBarTintManager(this);
+//		mTintManager.setStatusBarTintEnabled(true);
+//		mTintManager.setStatusBarTintResource(R.color.statusbar_bg);
+//
+//		txtMoney = (EditText) findViewById(R.id.txtMoney);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+//		txtTime = (EditText) findViewById(R.id.txtTime);// ï¿½ï¿½È¡Ê±ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+//		txtAddress = (EditText) findViewById(R.id.txtAddress);// ï¿½ï¿½È¡ï¿½Øµï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+//		txtMark = (EditText) findViewById(R.id.txtMark);// ï¿½ï¿½È¡ï¿½ï¿½×¢ï¿½Ä±ï¿½ï¿½ï¿½
+//		spType = (Spinner) findViewById(R.id.spType);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½
+//		btnSaveButton = (Button) findViewById(R.id.btnSave);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½æ°´Å¥
+//		btnCancelButton = (Button) findViewById(R.id.btnCancel);// ï¿½ï¿½È¡È¡ï¿½ï¿½ï¿½ï¿½Å¥
+//		btnVoice = (Button) findViewById(R.id.btnVoice);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½Å¥
+//		rb1 = (RadioButton) findViewById(R.id.payout_tab_rb);
+//		rb2 = (RadioButton) findViewById(R.id.income_tab_rb);
+//		left_back = (ImageView) findViewById(R.id.example_left3);
+//		btn_loacte = (ImageView) findViewById(R.id.btn_loacte);
+//		addphoto = (ImageView) findViewById(R.id.addphoto);
+//		bottom_empty = (FrameLayout) findViewById(R.id.bottom_empty);
+//		bottom_full = (LinearLayout) findViewById(R.id.bottom_full);
+//
+//		dialogShowUtil = new DialogShowUtil(this, this, VoiceSave, type, // ï¿½ï¿½Ê¼ï¿½ï¿½dialog
+//				VoiceDefault);
+//		btn_loacte.setOnClickListener(this); // ï¿½ï¿½Î»
+//
+//		// ï¿½ï¿½ï¿½Ø²Ëµï¿½
+//		bottom_empty.setOnClickListener(new OnClickListener() {
+//			public void onClick(View v) {
+//				keyBoard.hideKeyboard();
+//				bottom_empty.setVisibility(View.GONE);
+//				bottom_full.setVisibility(View.VISIBLE);
+//			}
+//		});
+//
+//		// ï¿½ï¿½ï¿½Í¼Æ¬
+//		addphoto.setOnClickListener(new OnClickListener() {
+//			public void onClick(View v) {
+//				Intent intent = new Intent(AddPay.this, PublishedActivity.class);
+//				intent.putExtra("cwp.id", userid);
+//				startActivityForResult(intent, 102);
+//			}
+//		});
+//
+//		// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç¶¨Î»
+//		mLocationManagerProxy = LocationManagerProxy.getInstance(this);
+//		mLocationManagerProxy.setGpsEnable(false);
+//		// ï¿½Ë·ï¿½ï¿½ï¿½ÎªÃ¿ï¿½ï¿½ï¿½Ì¶ï¿½Ê±ï¿½ï¿½á·¢ï¿½ï¿½Ò»ï¿½Î¶ï¿½Î»ï¿½ï¿½ï¿½ï¿½Îªï¿½Ë¼ï¿½ï¿½Ùµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½
+//		// ×¢ï¿½ï¿½ï¿½ï¿½ï¿½Ãºï¿½ï¿½ÊµÄ¶ï¿½Î»Ê±ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½Ö§ï¿½ï¿½Îª2000msï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úºï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½removeUpdates()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½
+//		// ï¿½Ú¶ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úºï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½destroy()ï¿½ï¿½ï¿½ï¿½
+//		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Îª-1ï¿½ï¿½ï¿½ï¿½Î»Ö»ï¿½ï¿½Ò»ï¿½ï¿½,
+//		// ï¿½Úµï¿½ï¿½Î¶ï¿½Î»ï¿½ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½Û³É¹ï¿½ï¿½ï¿½ñ£¬¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½removeUpdates()ï¿½ï¿½ï¿½ï¿½ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ó£¬¶ï¿½Î»sdkï¿½Ú²ï¿½ï¿½ï¿½ï¿½Æ³ï¿½
+//
+//		left_back.setOnClickListener(new OnClickListener() {
+//
+//			public void onClick(View v) {
+//				Intent intent = null;
+//				type = "pay";
+//				typemode = "add";
+//				if (bundle.containsKey("cwp.frament3")) {
+//					intent = new Intent(AddPay.this, MainActivity.class);
+//					intent.putExtra("cwp.Fragment", "3");// ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//				} else {
+//					intent = new Intent(AddPay.this, MainActivity.class);
+//				}
+//				intent.putExtra("cwp.id", userid);
+//				startActivity(intent);
+//				finish();// ï¿½ï¿½ï¿½ï¿½Ç¹Ø¼ï¿½
+//			}
+//		});
+//
+//		mRecognitionListener = new DialogRecognitionListener() { // ï¿½Ù¶ï¿½Ê¶ï¿½ğ·µ»ï¿½ï¿½ï¿½ï¿½ï¿½
+//
+//			@Override
+//			public void onResults(Bundle results) {
+//				ArrayList<String> rs = results != null ? results
+//						.getStringArrayList(RESULTS_RECOGNITION) : null;
+//				if (rs != null && rs.size() > 0) {
+//					Recognition(rs.get(0)); // ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½İ´ï¿½ï¿½ï¿½Ê¶ï¿½ğ·½·ï¿½
+//					// Toast.makeText(AddPay.this, rs.get(0),
+//					// Toast.LENGTH_SHORT).show();
+//				}
+//			}
+//		};
+//
+//		corporation_fl = (FrameLayout) findViewById(R.id.corporation_fl);
+//		address_fl = (FrameLayout) findViewById(R.id.address_fl);
+//
+//		rb1.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+//			@Override
+//			public void onCheckedChanged(CompoundButton buttonView,
+//					boolean isChecked) {
+//
+//				if (rb1.isChecked()) { // Ö§ï¿½ï¿½
+//					type = "pay";
+//				} else // ï¿½ï¿½ï¿½ï¿½
+//				{
+//					type = "income";
+//				}
+//				updatetype();
+//			}
+//		});
+//
+//		final Calendar c = Calendar.getInstance();// ï¿½ï¿½È¡ï¿½ï¿½Ç°ÏµÍ³ï¿½ï¿½ï¿½ï¿½
+//		mYear = c.get(Calendar.YEAR);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½
+//		mMonth = c.get(Calendar.MONTH);// ï¿½ï¿½È¡ï¿½Â·ï¿½
+//		mDay = c.get(Calendar.DAY_OF_MONTH);// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
+//	}
+//
+//	@TargetApi(19)
+//	private void setTranslucentStatus(boolean on) {
+//		Window win = getWindow();
+//		WindowManager.LayoutParams winParams = win.getAttributes();
+//		final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+//		if (on) {
+//			winParams.flags |= bits;
+//		} else {
+//			winParams.flags &= ~bits;
+//		}
+//		win.setAttributes(winParams);
+//	}
+//
+//	private void initData(int userid) { // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		if (typemode == "add") { // ï¿½ï¿½ï¿½Ä£Ê½
+//			if (type == "pay") { // Ö§ï¿½ï¿½
+//				rb1.setChecked(true);
+//				spdatalist = ptypeDAO.getPtypeName(userid);
+//				txtMoney.setTextColor(Color.parseColor("#5ea98d"));
+//			} else { // ï¿½ï¿½ï¿½ï¿½
+//				rb2.setChecked(true);
+//				spdatalist = itypeDAO.getItypeName(userid);
+//				txtMoney.setTextColor(Color.parseColor("#ffff0000"));
+//			}
+//		} else { // ï¿½Ş¸ï¿½Ä£Ê½
+//			bottom_empty.setVisibility(View.GONE);
+//			bottom_full.setVisibility(View.VISIBLE);
+//			rb1.setOnCheckedChangeListener(null);
+//			btnSaveButton.setText("ï¿½Ş¸ï¿½"); // ï¿½æ»»ï¿½Ş¸Ä°ï¿½Å¥
+//			btnCancelButton.setText("É¾ï¿½ï¿½"); // ï¿½æ»»É¾ï¿½ï¿½ï¿½ï¿½Å¥
+//			CharSequence textreAddres;
+//			String textreMark;
+//			if (type == "pay") { // Ö§ï¿½ï¿½
+//				rb1.setChecked(true);
+//				rb1.setClickable(false);
+//				rb2.setClickable(false);
+//				// Ñ¡ï¿½ï¿½ï¿½Ğ±ï¿½ï¿½Ê¼ï¿½ï¿½
+//				spdatalist = ptypeDAO.getPtypeName(userid);
+//				// ï¿½ï¿½ï¿½İ±ï¿½Å²ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½æ´¢ï¿½ï¿½Tb_payï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//				Tb_pay tb_pay = payDAO.find(userid, Integer.parseInt(strno));
+//				txtMoney.setText(tb_pay.getMoney2());// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+//				txtMoney.setTextColor(Color.parseColor("#5ea98d"));
+//				txtTime.setText(tb_pay.getTime());// ï¿½ï¿½Ê¾Ê±ï¿½ï¿½
+//				Selection = tb_pay.getType() - 1;
+//				initphotodata(tb_pay.getPhoto());
+//				textreAddres = tb_pay.getAddress();
+//				textreMark = tb_pay.getMark();
+//				txtAddress.setText(textreAddres);// ï¿½ï¿½Ê¾ï¿½Øµï¿½
+//				txtMark.setText(textreMark);// ï¿½ï¿½Ê¾ï¿½ï¿½×¢
+//			} else { // ï¿½ï¿½ï¿½ï¿½
+//				// Ñ¡ï¿½ï¿½ï¿½Ğ±ï¿½ï¿½Ê¼ï¿½ï¿½
+//				rb2.setChecked(true);
+//				rb1.setClickable(false);
+//				rb2.setClickable(false);
+//				spdatalist = itypeDAO.getItypeName(userid);
+//				// ï¿½ï¿½ï¿½İ±ï¿½Å²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½æ´¢ï¿½ï¿½Tb_payï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//				Tb_income tb_income = incomeDAO.find(userid,
+//						Integer.parseInt(strno));
+//				txtMoney.setText(tb_income.getMoney2());// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+//				txtMoney.setTextColor(Color.parseColor("#ffff0000"));
+//				txtTime.setText(tb_income.getTime());// ï¿½ï¿½Ê¾Ê±ï¿½ï¿½
+//				Selection = tb_income.getType() - 1; // ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+//				initphotodata(tb_income.getPhoto());
+//				textreAddres = tb_income.getHandler();
+//				textreMark = tb_income.getMark();
+//				txtAddress.setText(textreAddres);// ï¿½ï¿½Ê¾ï¿½Øµï¿½
+//				txtMark.setText(textreMark);// ï¿½ï¿½Ê¾ï¿½ï¿½×¢
+//			}
+//		}
+//	}
+//
+//	private void initphotodata(String photo) { // ï¿½ï¿½Ê¼ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½
+//		if ((incount == 0) && (!photo.equals(""))) {
+//			String[] photoall = photo.split(",");
+//			for (int i = 0; i < photoall.length / 2; i++) {
+//				if (Bimp.drr.size() < 9) {
+//					Bimp.drr.add(photoall[i]);
+//				}
+//			}
+//			for (int i = photoall.length / 2; i < photoall.length; i++) {
+//				if (Bimp.smdrr.size() < 9) {
+//					Bimp.smdrr.add(photoall[i]);
+//				}
+//			}
+//			textphoto = photo;
+//			initphoto();
+//			incount++;
+//		}
+//	}
+//
+//	@SuppressWarnings("deprecation")
+//	private void initphoto() {// ï¿½ï¿½Ê¼ï¿½ï¿½Í¼Æ¬
+//		try {
+//			if (textphoto.equals("")) {
+//				addphoto.setImageResource(R.drawable.addphoto_btn);
+//			} else if (Bimp.getbitmap(Bimp.smdrr.get(0)) == null) {
+//				Toast.makeText(AddPay.this, "Í¼Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", Toast.LENGTH_SHORT).show();
+//			} else {
+//				addphoto.setImageBitmap(Bimp.getbitmap(Bimp.smdrr.get(0)));
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
+//
+//	private void updatetype() { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		initData(userid);
+//		spdata = spdatalist.toArray(new String[spdatalist.size()]);// ï¿½ï¿½tb_itypeï¿½Ğ°ï¿½ï¿½Ã»ï¿½idï¿½ï¿½È¡
+//		adapter = new ArrayAdapter<String>(AddPay.this, R.layout.spinner,
+//				spdata); // ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½
+//		spType.setAdapter(adapter);
+//		if (Selection > 0) {
+//			spType.setSelection(Selection);// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+//		}
+//	}
+//
+//	@Override
+//	protected void onStart() { // ï¿½ï¿½Ğ´onstart
+//		super.onStart();// Êµï¿½Ö»ï¿½ï¿½ï¿½ï¿½ĞµÄ·ï¿½ï¿½ï¿½
+//		updateDisplay();// ï¿½ï¿½Ê¾ï¿½ï¿½Ç°ÏµÍ³Ê±ï¿½ï¿½
+//
+//		Intent intentr = getIntent();
+//		userid = intentr.getIntExtra("cwp.id", 100000001);
+//		bundle = intentr.getExtras();// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ£ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Bundleï¿½ï¿½Â¼
+//		if (bundle.containsKey("cwp.message")) {
+//			strInfos = bundle.getStringArray("cwp.message");// ï¿½ï¿½È¡Bundleï¿½Ğ¼ï¿½Â¼ï¿½ï¿½ï¿½ï¿½Ï¢
+//			strno = strInfos[0];// ï¿½ï¿½Â¼id
+//			strType = strInfos[1];// ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
+//			typemode = "ModifyInP";
+//			if (strType.equals("btnininfo")) { // ï¿½ï¿½ï¿½ï¿½
+//				type = "income";
+//			} else {
+//				type = "pay";
+//			}
+//		}
+//		keyBoard = new KeyboardUtil(this, this, txtMoney, typemode); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		if (bundle.containsKey("cwp.voice")) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//			if (firstin) {
+//				bottom_empty.setVisibility(View.GONE);
+//				bottom_full.setVisibility(View.VISIBLE);
+//				dialogShowUtil.dialogShow("rotatebottom", "first", "", "");
+//				firstin = false;
+//			}
+//		}
+//		if (bundle.containsKey("cwp.photo")) {// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//			if (firstin) {
+//				bottom_empty.setVisibility(View.GONE);
+//				bottom_full.setVisibility(View.VISIBLE);
+//				Intent intent = new Intent(AddPay.this, PublishedActivity.class);
+//				intent.putExtra("cwp.id", userid);
+//				intent.putExtra("cwp.photo", "photo");
+//				startActivityForResult(intent, 102);
+//				firstin = false;
+//			}
+//		}
+//		if (bundle.containsKey("keyboard")) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
+//			if (keycount) {
+//				InputMethodManager imm = (InputMethodManager) getSystemService(AddPay.this.INPUT_METHOD_SERVICE); // ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
+//				imm.hideSoftInputFromWindow(txtMoney.getWindowToken(), 0); // ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½Ì¡ï¿½
+//				keyBoard.showKeyboard();
+//				keycount = false;
+//			}
+//		}
+//		updatetype();
+//		txtTime.setOnTouchListener(new OnTouchListener() { // ÎªÊ±ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
+//			@Override
+//			public boolean onTouch(View v, MotionEvent event) {
+//
+//				showDialog(DATE_DIALOG_ID);// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ô»ï¿½ï¿½ï¿½
+//				return false;
+//			}
+//		});
+//
+//		txtMoney.setOnTouchListener(new OnTouchListener() { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½
+//			@Override
+//			public boolean onTouch(View v, MotionEvent event) {
+//				InputMethodManager imm = (InputMethodManager) getSystemService(AddPay.this.INPUT_METHOD_SERVICE); // ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
+//				imm.hideSoftInputFromWindow(txtMoney.getWindowToken(), 0); // ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½Ì¡ï¿½
+//				keyBoard.showKeyboard();
+//				return false;
+//			}
+//		});
+//
+//		btnVoice.setOnClickListener(new OnClickListener() {// ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½
+//
+//			@Override
+//			public void onClick(View v) {
+//				dialogShowUtil.dialogShow("rotatebottom", "first", "", "");
+//			}
+//		});
+//
+//		btnSaveButton.setOnClickListener(new OnClickListener() {// Îªï¿½ï¿½ï¿½æ°´Å¥ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
+//					private String textreAddres;
+//					private String textreMark;
+//
+//					@SuppressLint("NewApi")
+//					@Override
+//					public void onClick(View arg0) {
+//						textreAddres = txtAddress.getText().toString();
+//						textreMark = txtMark.getText().toString();
+//						if (textphoto == null) {
+//							textphoto = "";
+//						}
+//						if (typemode == "add") { // ï¿½ï¿½ï¿½Ä£Ê½
+//							String strMoney = txtMoney.getText().toString();// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½Öµ
+//							if (type == "pay") { // Ö§ï¿½ï¿½
+//								if (!strMoney.isEmpty()) {// ï¿½Ğ¶Ï½ï¿½î²»Îªï¿½ï¿½
+//									// ï¿½ï¿½ï¿½ï¿½InaccountDAOï¿½ï¿½ï¿½ï¿½
+//									PayDAO payDAO = new PayDAO(AddPay.this);
+//									// ï¿½ï¿½ï¿½ï¿½Tb_inaccountï¿½ï¿½ï¿½ï¿½
+//									Tb_pay tb_pay = new Tb_pay(
+//											userid,
+//											payDAO.getMaxNo(userid) + 1,
+//											get2Double(strMoney),
+//											setTimeFormat(null),
+//											(spType.getSelectedItemPosition() + 1),
+//											textreAddres, textreMark, textphoto);
+//									payDAO.add(tb_pay);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+//									Toast.makeText(AddPay.this,
+//											"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¡½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó³É¹ï¿½ï¿½ï¿½", Toast.LENGTH_SHORT)
+//											.show();
+//									gotoback();
+//								} else {
+//									Toast.makeText(AddPay.this, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î£¡",
+//											Toast.LENGTH_SHORT).show();
+//								}
+//							} else { // ï¿½ï¿½ï¿½ï¿½
+//								if (!strMoney.isEmpty()) {// ï¿½Ğ¶Ï½ï¿½î²»Îªï¿½ï¿½
+//									// ï¿½ï¿½ï¿½ï¿½InaccountDAOï¿½ï¿½ï¿½ï¿½
+//									IncomeDAO incomeDAO = new IncomeDAO(
+//											AddPay.this);
+//									// ï¿½ï¿½ï¿½ï¿½Tb_inaccountï¿½ï¿½ï¿½ï¿½
+//									Tb_income tb_income = new Tb_income(
+//											userid,
+//											payDAO.getMaxNo(userid) + 1,
+//											get2Double(strMoney),
+//											setTimeFormat(null),
+//											(spType.getSelectedItemPosition() + 1),
+//											// txtInhandler.getText().toString(),
+//											textreAddres, textreMark,
+//											textphoto, "Ö§ï¿½ï¿½");
+//									incomeDAO.add(tb_income);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+//									// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Ê¾
+//									Toast.makeText(AddPay.this,
+//											"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¡½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó³É¹ï¿½ï¿½ï¿½", Toast.LENGTH_SHORT)
+//											.show();
+//									gotoback();
+//								} else {
+//									Toast.makeText(AddPay.this, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î£¡",
+//											Toast.LENGTH_SHORT).show();
+//								}
+//							}
+//						} else { // ï¿½Ş¸ï¿½Ä£Ê½
+//							if (type == "pay") { // Ö§ï¿½ï¿½
+//								if (!txtMoney.getText().toString().isEmpty()) {// ï¿½Ğ¶Ï½ï¿½î²»Îªï¿½ï¿½
+//									Tb_pay tb_pay = new Tb_pay(); // ï¿½ï¿½ï¿½ï¿½Tb_payï¿½ï¿½ï¿½ï¿½
+//									tb_pay.set_id(userid); // ï¿½ï¿½ï¿½ï¿½userid
+//									tb_pay.setNo(Integer.parseInt(strno)); // ï¿½ï¿½ï¿½Ã±ï¿½ï¿½
+//									tb_pay.setMoney(get2Double(txtMoney
+//											.getText().toString()));// ï¿½ï¿½ï¿½Ã½ï¿½ï¿½
+//									tb_pay.setTime(setTimeFormat(txtTime
+//											.getText().toString()));// ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+//									tb_pay.setType(spType
+//											.getSelectedItemPosition() + 1);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//									tb_pay.setAddress(textreAddres);// ï¿½ï¿½ï¿½ÃµØµï¿½
+//									tb_pay.setMark(textreMark);// ï¿½ï¿½ï¿½Ã±ï¿½×¢
+//									tb_pay.setPhoto(textphoto);// ï¿½ï¿½ï¿½Ã±ï¿½×¢
+//									payDAO.update(tb_pay);// ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½Ï¢
+//									Toast.makeText(AddPay.this, "ï¿½ï¿½ï¿½ï¿½ï¿½İ¡ï¿½ï¿½Ş¸Ä³É¹ï¿½ï¿½ï¿½",
+//											Toast.LENGTH_SHORT).show();
+//									gotoback();
+//								} else {
+//									Toast.makeText(AddPay.this, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î£¡",
+//											Toast.LENGTH_SHORT).show();
+//								}
+//							} else { // ï¿½ï¿½ï¿½ï¿½
+//								if (!txtMoney.getText().toString().isEmpty()) {// ï¿½Ğ¶Ï½ï¿½î²»Îªï¿½ï¿½
+//									Tb_income tb_income = new Tb_income();// ï¿½ï¿½ï¿½ï¿½Tb_incomeï¿½ï¿½ï¿½ï¿½
+//									tb_income.set_id(userid);// ï¿½ï¿½ï¿½Ã±ï¿½ï¿½
+//									tb_income.setNo(Integer.parseInt(strno));// ï¿½ï¿½ï¿½Ã±ï¿½ï¿½
+//									tb_income.setMoney(get2Double(txtMoney
+//											.getText().toString()));// ï¿½ï¿½ï¿½Ã½ï¿½ï¿½
+//									tb_income.setTime(setTimeFormat(txtTime
+//											.getText().toString()));// ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+//									tb_income.setType(spType
+//											.getSelectedItemPosition() + 1);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//									tb_income.setHandler(textreAddres);// ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½î·½
+//									tb_income.setMark(textreMark);// ï¿½ï¿½ï¿½Ã±ï¿½×¢
+//									tb_income.setPhoto(textphoto);// ï¿½ï¿½ï¿½Ã±ï¿½×¢
+//									incomeDAO.update(tb_income);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+//									Toast.makeText(AddPay.this, "ï¿½ï¿½ï¿½ï¿½ï¿½İ¡ï¿½ï¿½Ş¸Ä³É¹ï¿½ï¿½ï¿½",
+//											Toast.LENGTH_SHORT).show();
+//									gotoback();
+//								} else {
+//									Toast.makeText(AddPay.this, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î£¡",
+//											Toast.LENGTH_SHORT).show();
+//								}
+//							}
+//						}
+//					}
+//				});
+//		btnCancelButton.setOnClickListener(new OnClickListener() {// ÎªÈ¡ï¿½ï¿½ï¿½ï¿½Å¥ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
+//					@Override
+//					public void onClick(View arg0) {
+//
+//						if (typemode == "add") { // ï¿½ï¿½ï¿½Ä£Ê½Ö´ï¿½Ğ·ï¿½ï¿½ï¿½
+//							txtMoney.setText("");// ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½Îªï¿½ï¿½
+//							txtMoney.setHint("0.00");// Îªï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾
+//							txtTime.setText("");// ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½Îªï¿½ï¿½
+//							txtAddress.setText("");// ï¿½ï¿½ï¿½Ãµï¿½Ö·ï¿½Ä±ï¿½ï¿½ï¿½Îªï¿½ï¿½
+//							txtMark.setText("");// ï¿½ï¿½ï¿½Ã±ï¿½×¢ï¿½Ä±ï¿½ï¿½ï¿½Îªï¿½ï¿½
+//							// txtInhandler.setText("");// ï¿½ï¿½ï¿½Ã±ï¿½×¢ï¿½Ä±ï¿½ï¿½ï¿½Îªï¿½ï¿½
+//							spType.setSelection(0);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½Ä¬ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
+//							gotoback();
+//						} else { // ï¿½Ş¸ï¿½Ä£Ê½Ö´ï¿½ï¿½É¾ï¿½ï¿½
+//							if (type == "pay") { // Ö§ï¿½ï¿½
+//								payDAO.detele(userid, Integer.parseInt(strno));// ï¿½ï¿½ï¿½İ±ï¿½ï¿½É¾ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½Ï¢
+//								gotoback();
+//							} else { // ï¿½ï¿½ï¿½ï¿½
+//								incomeDAO.detele(userid,
+//										Integer.parseInt(strno));// ï¿½ï¿½ï¿½İ±ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+//								gotoback();
+//							}
+//							Toast.makeText(AddPay.this, "ï¿½ï¿½ï¿½ï¿½ï¿½İ¡ï¿½É¾ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½",
+//									Toast.LENGTH_SHORT).show();
+//						}
+//					}
+//				});
+//	}
+//
+//	// ï¿½ï¿½ï¿½ï¿½2Î»Ğ¡ï¿½ï¿½
+//	public static double get2Double(String strMoney) { // ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½
+//		Double a = Double.parseDouble(strMoney);
+//		DecimalFormat df = new DecimalFormat("0.00");
+//		return new Double(df.format(a));
+//	}
+//
+//	@Override
+//	protected Dialog onCreateDialog(int id)// ï¿½ï¿½Ğ´onCreateDialogï¿½ï¿½ï¿½ï¿½
+//	{
+//		switch (id) {
+//		case DATE_DIALOG_ID:// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ô»ï¿½ï¿½ï¿½
+//			return new DatePickerDialog(this, mDateSetListener, mYear, mMonth,
+//					mDay);
+//		}
+//		return null;
+//	}
+//
+//	private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+//		public void onDateSet(DatePicker view, int year, int monthOfYear,
+//				int dayOfMonth) {
+//			mYear = year;// Îªï¿½ï¿½İ¸ï¿½Öµ
+//			mMonth = monthOfYear;// Îªï¿½Â·İ¸ï¿½Öµ
+//			mDay = dayOfMonth;// Îªï¿½ì¸³Öµ
+//			updateDisplay();// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½
+//		}
+//	};
+//
+//	private void updateDisplay() {
+//		// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ãµï¿½Ê±ï¿½ï¿½
+//
+//		txtTime.setText(new StringBuilder().append(mYear).append("-")
+//				.append(mMonth + 1).append("-").append(mDay));
+//
+//	}
+//
+//	private String setTimeFormat(String newtxtTime) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½Ê½
+//		String date;
+//		if (typemode == "add") {
+//			date = txtTime.getText().toString();
+//		} else {
+//			date = newtxtTime;
+//		}
+//
+//		int y, m, d;
+//		String sm, sd;
+//		int i = 0, j = 0, k = 0;
+//
+//		for (i = 0; i < date.length(); i++) {
+//			if (date.substring(i, i + 1).equals("-") && j == 0)
+//				j = i;
+//			else if (date.substring(i, i + 1).equals("-"))
+//				k = i;
+//		}
+//		y = Integer.valueOf(date.substring(0, j));
+//		m = Integer.valueOf(date.substring(j + 1, k));
+//		d = Integer.valueOf(date.substring(k + 1));
+//		if (m < 10) {
+//			sm = "0" + String.valueOf(m);
+//		} else
+//			sm = String.valueOf(m);
+//		if (d < 10) {
+//			sd = "0" + String.valueOf(d);
+//		} else
+//			sd = String.valueOf(d);
+//
+//		return String.valueOf(y) + "-" + sm + "-" + sd;
+//
+//	}
+//
+//	void VoiceRecognition() { // ï¿½ï¿½ï¿½Ã°Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½
+//		// mResult.setText(null);
+//		mCurrentTheme = Config.DIALOG_THEME;
+//		if (mDialog != null) {
+//			mDialog.dismiss();
+//		}
+//		Bundle params = new Bundle();
+//		params.putString(BaiduASRDigitalDialog.PARAM_API_KEY, Constants.API_KEY); // ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½api_key
+//		params.putString(BaiduASRDigitalDialog.PARAM_SECRET_KEY,
+//				Constants.SECRET_KEY);
+//		params.putInt(BaiduASRDigitalDialog.PARAM_DIALOG_THEME, // ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//				Config.DIALOG_THEME);
+//		mDialog = new BaiduASRDigitalDialog(this, params);
+//		mDialog.setDialogRecognitionListener(mRecognitionListener);
+//		mDialog.getParams().putInt(BaiduASRDigitalDialog.PARAM_PROP, // ï¿½Ù¶ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½
+//				Config.CURRENT_PROP);
+//		mDialog.getParams().putString(BaiduASRDigitalDialog.PARAM_LANGUAGE, // ï¿½Ù¶ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//				Config.getCurrentLanguage());
+//		mDialog.getParams().putBoolean(
+//				// ï¿½Ù¶ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½Ğ§ï¿½ï¿½ï¿½
+//				BaiduASRDigitalDialog.PARAM_START_TONE_ENABLE,
+//				Config.PLAY_START_SOUND);
+//		mDialog.getParams().putBoolean(
+//				BaiduASRDigitalDialog.PARAM_END_TONE_ENABLE,
+//				Config.PLAY_END_SOUND);
+//		mDialog.getParams().putBoolean(
+//				BaiduASRDigitalDialog.PARAM_TIPS_TONE_ENABLE,
+//				Config.DIALOG_TIPS_SOUND);
+//		mDialog.show();
+//	}
+//
+//	void VoiceSuccess() { // Ê¶ï¿½ï¿½É¹ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		if (DialogShowUtil.dialoggettype() != null) {
+//			type = DialogShowUtil.dialoggettype();
+//		}
+//		VoiceDefault = DialogShowUtil.dialogVoiceDefault();
+//		String textreMark = txtMark.getText().toString();
+//
+//		if (typemode == "add") { // ï¿½ï¿½ï¿½Ä£Ê½
+//			if (type == "pay") { // Ö§ï¿½ï¿½
+//				rb1.setChecked(true);
+//				// corporation_fl.setVisibility(View.GONE);
+//				// address_fl.setVisibility(View.VISIBLE);
+//				spdatalist = ptypeDAO.getPtypeName(userid);
+//				txtMoney.setText(VoiceSave[1]);// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+//				txtMoney.setTextColor(Color.parseColor("#5ea98d"));
+//				if (VoiceDefault == "notype") { // ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½
+//					spType.setSelection(Integer.parseInt(VoiceSave[5]));// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½
+//				} else {
+//					spType.setSelection(Integer.parseInt(VoiceSave[0]));// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+//				}
+//				txtMark.setText(textreMark + " " + VoiceSave[2]);// ï¿½ï¿½Ê¾ï¿½ï¿½×¢
+//			} else { // ï¿½ï¿½ï¿½ï¿½
+//				rb2.setChecked(true);
+//				// corporation_fl.setVisibility(View.VISIBLE);
+//				// address_fl.setVisibility(View.GONE);
+//				spdatalist = ptypeDAO.getPtypeName(userid);
+//				txtMoney.setText(VoiceSave[1]);// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+//				txtMoney.setTextColor(Color.parseColor("#ffff0000"));
+//				if (VoiceDefault == "notype") { // ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½
+//					spType.setSelection(Integer.parseInt(VoiceSave[5]));// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+//				} else {
+//					spType.setSelection(Integer.parseInt(VoiceSave[4]));// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+//				}
+//				txtMark.setText(textreMark + " " + VoiceSave[2]);// ï¿½ï¿½Ê¾ï¿½ï¿½×¢
+//			}
+//		} else { // ï¿½Ş¸ï¿½Ä£Ê½
+//			if (type == "pay") { // Ö§ï¿½ï¿½
+//				rb1.setChecked(true);
+//				// Ñ¡ï¿½ï¿½ï¿½Ğ±ï¿½ï¿½Ê¼ï¿½ï¿½
+//				spdatalist = ptypeDAO.getPtypeName(userid);
+//				spdata = spdatalist.toArray(new String[spdatalist.size()]);// ï¿½ï¿½tb_itypeï¿½Ğ°ï¿½ï¿½Ã»ï¿½idï¿½ï¿½È¡
+//				adapter = new ArrayAdapter<String>(AddPay.this,
+//						R.layout.spinner, spdata); // ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½
+//				spType.setAdapter(adapter);
+//				txtMoney.setText(VoiceSave[1]);// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+//				txtMoney.setTextColor(Color.parseColor("#5ea98d"));
+//				if (VoiceDefault == "notype") { // ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½
+//					spType.setSelection(Integer.parseInt(VoiceSave[5]));// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½
+//				} else {
+//					spType.setSelection(Integer.parseInt(VoiceSave[0]));// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+//				}
+//				txtMark.setText(textreMark + " " + VoiceSave[2]);// ï¿½ï¿½Ê¾ï¿½ï¿½×¢
+//			} else { // ï¿½ï¿½ï¿½ï¿½
+//				// Ñ¡ï¿½ï¿½ï¿½Ğ±ï¿½ï¿½Ê¼ï¿½ï¿½
+//				rb2.setChecked(true);
+//				spdatalist = itypeDAO.getItypeName(userid);
+//				spdata = spdatalist.toArray(new String[spdatalist.size()]);// ï¿½ï¿½tb_itypeï¿½Ğ°ï¿½ï¿½Ã»ï¿½idï¿½ï¿½È¡
+//				adapter = new ArrayAdapter<String>(AddPay.this,
+//						R.layout.spinner, spdata); // ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½
+//				spType.setAdapter(adapter);
+//				txtMoney.setText(VoiceSave[1]);// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+//				txtMoney.setTextColor(Color.parseColor("#ffff0000"));
+//				if (VoiceDefault == "notype") { // ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½
+//					spType.setSelection(Integer.parseInt(VoiceSave[5]));// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+//				} else {
+//					spType.setSelection(Integer.parseInt(VoiceSave[4]));// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+//				}
+//				txtMark.setText(textreMark + " " + VoiceSave[2]);// ï¿½ï¿½Ê¾ï¿½ï¿½×¢
+//			}
+//		}
+//	}
+//
+//	/*
+//	 * Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//	 *
+//	 * @param VoiceSave[0] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+//	 *
+//	 * @param VoiceSave[1] ï¿½ï¿½ï¿½ï¿½Öµ
+//	 *
+//	 * @param VoiceSave[3] ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
+//	 *
+//	 * @param VoiceSave[4] Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+//	 *
+//	 * @param VoiceSave[5] "ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½"ï¿½ï¿½ï¿½ï¿½Öµ
+//	 */
+//	private void Recognition(String t) {
+//		int mfirst = 100, mend = 0, temp = 0;
+//		Boolean ismoney = false, intype = false, outtype = false;
+//		Boolean voice_ptype = false, voice_intype = false;
+//		String w = "", strmoney = "", inname = "1", outname = "2";
+//		spdatalist = ptypeDAO.getPtypeName(userid);
+//		spdatalist2 = itypeDAO.getItypeName(userid);
+//		VoiceSave[2] = t;
+//		for (int i = 0; i < spdatalist.size(); i++) { // ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½
+//			if (t.indexOf(spdatalist.get(i).toString()) > -1) {
+//				type = "pay";
+//				intype = true;
+//				inname = spdatalist.get(i).toString();
+//				VoiceSave[0] = Integer.toString(i); // VoiceSave[0]Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+//			}
+//		}
+//		for (int i = 0; i < voice_pay.length; i++) { // ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½
+//			if (t.indexOf(voice_pay[i]) > -1) {
+//				voice_ptype = true;
+//			}
+//		}
+//		for (int i = 0; i < voice_income.length; i++) { // ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½
+//			if (t.indexOf(voice_income[i]) > -1) {
+//				voice_intype = true;
+//			}
+//		}
+//		for (int i = 0; i < spdatalist2.size(); i++) { // ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//			if (t.indexOf(spdatalist2.get(i).toString()) > -1) {
+//				type = "income";
+//				outtype = true;
+//				outname = spdatalist2.get(i).toString();
+//				VoiceSave[4] = Integer.toString(i); // VoiceSave[4]ÎªÖ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+//			}
+//		}
+//		for (int i = 0; i < number.length; i++) { // ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î£¬ï¿½ï¿½Ã¿ï¿½Í·
+//			if (t.indexOf(number[i]) > -1) {
+//				temp = t.indexOf(number[i]);
+//				if (temp < mfirst) {
+//					mfirst = temp;
+//				}
+//			}
+//		}
+//		for (int i = 0; i < money.length; i++) { // ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î£¬ï¿½ï¿½Ã½ï¿½Î²
+//			if (t.indexOf(money[i]) > -1) {
+//				temp = t.indexOf(money[i]);
+//				if (temp > -1 && temp >= mend) {
+//					mend = temp;
+//				}
+//			}
+//		}
+//		for (int i = 0; i < money2.length; i++) { // ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î£¬ï¿½ï¿½Ã½ï¿½Î²
+//			if (t.indexOf(money2[i]) > -1) {
+//				temp = t.indexOf(money2[i]);
+//				if (temp > -1 && temp >= mend) {
+//					mend = temp;
+//				}
+//				mend = mend + 1;
+//			}
+//		}
+//		if (!(mfirst == 100 || mend == 0)) { // ×ªï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//			ismoney = true;
+//			strmoney = t.substring(mfirst, mend);
+//			// ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//			char[] chs = strmoney.toCharArray();
+//			List<String> num = Arrays.asList(number);
+//			List<String> mon = Arrays.asList(money);
+//			List<String> mon2 = Arrays.asList(money2);
+//			for (int l = 0; l < chs.length; l++)
+//				if (!num.contains(String.valueOf(chs[l])))
+//					if (!mon.contains(String.valueOf(chs[l])))
+//						if (!mon2.contains(String.valueOf(chs[l])))
+//							ismoney = false;
+//			if (ismoney) {
+//				DigitUtil Util = new DigitUtil();
+//				VoiceSave[1] = Integer.toString(Util.parse(strmoney)); // ï¿½ï¿½ï¿½Ã¹ï¿½ï¿½ï¿½ï¿½à´¦ï¿½ï¿½ï¿½ÖµÄ½ï¿½ï¿½
+//			}
+//		}
+//		if (intype && outtype) { // ï¿½ï¿½ï¿½Í¬Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//			if (outname.equals(inname)) {
+//				if (ismoney) {
+//					if (voice_intype) {
+//						type = "income";
+//						dialogShowUtil.dialogShow("rotatebottom", "OK", t, w);
+//					} else if (voice_ptype) {
+//						type = "pay";
+//						dialogShowUtil.dialogShow("rotatebottom", "OK", t, w);
+//					} else {
+//						VoiceSave[3] = outname; // VoiceSave[3]Îªï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
+//						dialogShowUtil.dialogShow("shake", "judge", t, w); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ½ï¿½ï¿½
+//					}
+//				} else {
+//					w = "ï¿½ï¿½Ê¾ï¿½ï¿½\nï¿½ï¿½Ä»ï¿½ï¿½ï¿½Ã»ï¿½Ğ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ»ï¿½Ö§ï¿½ï¿½<ï¿½ï¿½ï¿½>\n";
+//					dialogShowUtil.dialogShow("shake", "wrong", t, w);
+//				}
+//			} else {
+//				w = "**ï¿½ï¿½Ê¾ï¿½ï¿½\nÒ»ï¿½ï¿½Ö»ï¿½Ü¼ï¿½Â¼Ò»ï¿½ï¿½ï¿½ï¿½Â¼Å¶\n"; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë²¢ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//				dialogShowUtil.dialogShow("shake", "wrong", t, w);
+//			}
+//		} else {
+//			if (!((intype || outtype) || ismoney)) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//				w = "**ï¿½ï¿½Ê¾ï¿½ï¿½\nï¿½ï¿½Ä»ï¿½ï¿½ï¿½Ã»ï¿½Ğ°ï¿½ï¿½ï¿½<ï¿½ï¿½ï¿½>ï¿½ï¿½" + listToString(spdatalist, 'ï¿½ï¿½')
+//						+ "ï¿½ï¿½" + listToString(spdatalist2, 'ï¿½ï¿½')
+//						+ "ï¿½ï¿½\n\n**ï¿½ï¿½Ê¾ï¿½ï¿½\nï¿½ï¿½Ä»ï¿½ï¿½ï¿½Ã»ï¿½Ğ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ»ï¿½Ö§ï¿½ï¿½<ï¿½ï¿½ï¿½>";
+//				dialogShowUtil.dialogShow("shake", "wrong", t, w);
+//			} else if ((intype || outtype) && (!ismoney)) {
+//				w = "ï¿½ï¿½Ê¾ï¿½ï¿½\nï¿½ï¿½Ä»ï¿½ï¿½ï¿½Ã»ï¿½Ğ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ»ï¿½Ö§ï¿½ï¿½<ï¿½ï¿½ï¿½>\nï¿½ï¿½ï¿½ß³ï¿½ï¿½Ö¶ï¿½Î½ï¿½ï¿½";
+//				dialogShowUtil.dialogShow("shake", "wrong", t, w);
+//			} else if ((!(intype || outtype)) && ismoney) {
+//				for (int i = 0; i < spdatalist.size(); i++) { // ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½
+//					if ("ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½".indexOf(spdatalist.get(i).toString()) > -1) {
+//						VoiceSave[5] = Integer.toString(i);
+//						VoiceSave[3] = "ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½";
+//					}
+//				}
+//				w = "**ï¿½ï¿½Ê¾ï¿½ï¿½\nï¿½ï¿½Ä»ï¿½ï¿½ï¿½Ã»ï¿½Ğ°ï¿½ï¿½ï¿½<ï¿½ï¿½Ä¬ï¿½Ï£ï¿½ï¿½ï¿½ï¿½>ï¿½ï¿½" + listToString(spdatalist, 'ï¿½ï¿½')
+//						+ "ï¿½ï¿½\n\n\nï¿½ï¿½ï¿½ï¿½ï¿½Â¼Îª<ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½>ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½È»ï¿½ï¿½Â¼ï¿½ï¿½\n";
+//				dialogShowUtil.dialogShow("shake", "notype", t, w);
+//			} else {
+//				dialogShowUtil.dialogShow("rotatebottom", "OK", t, w);
+//			}
+//		}
+//	}
+//
+//	public String listToString(List list, char separator) {
+//		StringBuilder sb = new StringBuilder();
+//		for (int i = 0; i < list.size(); i++) {
+//			sb.append(list.get(i));
+//			if (i < list.size() - 1) {
+//				sb.append(separator);
+//			}
+//		}
+//		return sb.toString();
+//	}
+//
+//	private boolean gotoback() { // ï¿½ï¿½ï¿½ï¿½
+//		Intent intent = null;
+//		type = "pay";
+//		typemode = "add";
+//		Bimp.drr = new ArrayList<String>();
+//		Bimp.smdrr = new ArrayList<String>();
+//		Bimp.bmp = new ArrayList<Bitmap>();
+//		Bimp.max = 0;
+//		Bimp.flag = 0;
+//		if (bundle.containsKey("cwp.frament3")) {
+//			intent = new Intent(AddPay.this, MainActivity.class);
+//			intent.putExtra("cwp.Fragment", "3");// ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		} else if (bundle.containsKey("cwp.search")) {
+//			this.setResult(3);
+//			this.finish();
+//			return true;
+//		} else {
+//			intent = new Intent(AddPay.this, MainActivity.class);
+//			intent.putExtra("cwp.Fragment", "1");
+//		}
+//		intent.putExtra("cwp.id", userid);
+//		startActivity(intent);
+//		finish();
+//		return true;
+//	}
+//
+//	public boolean onKeyDown(int keyCode, KeyEvent event) {
+//		if (keyCode == KeyEvent.KEYCODE_BACK) { // ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½Î·ï¿½ï¿½Ø¼ï¿½
+//			gotoback();
+//		}
+//		return super.onKeyDown(keyCode, event);
+//	}
+//
+//	@Override
+//	protected void onDestroy() {
+//		if (mDialog != null) {
+//			mDialog.dismiss();
+//		}
+//		if (dialogBuilder != null) {
+//			dialogBuilder.dismiss();
+//		}
+//		super.onDestroy();
+//	}
+//
+//	@Override
+//	protected void onPause() {
+//		super.onPause();
+//		// ï¿½Æ³ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½
+//		mLocationManagerProxy.removeUpdates(this);
+//		// ï¿½ï¿½ï¿½Ù¶ï¿½Î»
+//		mLocationManagerProxy.destroy();
+//	}
+//
+//	protected void onResume() {
+//		super.onResume();
+//		SharedPreferences sp = this.getSharedPreferences("preferences",
+//				MODE_WORLD_READABLE);
+//		CrashApplication myApplaction = (CrashApplication) getApplication();
+//		if ((myApplaction.isLocked)
+//				&& (sp.getString("gesturepw", "").equals("ï¿½ï¿½"))) {// ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Òªï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//			Intent intent = new Intent(this,
+//					UnlockGesturePasswordActivity.class);
+//			startActivity(intent);
+//		}
+//	}
+//
+//	@Override
+//	public void onLocationChanged(Location location) {
+//	}
+//
+//	@Override
+//	public void onStatusChanged(String provider, int status, Bundle extras) {
+//	}
+//
+//	@Override
+//	public void onProviderEnabled(String provider) {
+//	}
+//
+//	@Override
+//	public void onProviderDisabled(String provider) {
+//	}
+//
+//	@Override
+//	public void onLocationChanged(AMapLocation amapLocation) {
+//		if (amapLocation != null
+//				&& amapLocation.getAMapException().getErrorCode() == 0) {
+//			// ï¿½ï¿½Î»ï¿½É¹ï¿½ï¿½Øµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+//			txtAddress.setText(amapLocation.getPoiName() + " [ "
+//					+ amapLocation.getAddress() + " ï¿½ï¿½ï¿½Å£ï¿½"
+//					+ amapLocation.getCityCode() + " ]");
+//		} else {
+//			Log.e("AmapErr", "Location ERR:"
+//					+ amapLocation.getAMapException().getErrorCode());
+//		}
+//	}
+//
+//	@Override
+//	public void onClick(View v) {
+//		switch (v.getId()) {
+//		case R.id.btn_loacte:
+//			// ×¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½È½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½Ù½ï¿½ï¿½Ğ¶ï¿½Î»ï¿½ï¿½ï¿½ï¿½
+//			mLocationManagerProxy.removeUpdates(this);
+//			int randomTime = mRandom.nextInt(1000);
+//			mLocationManagerProxy.requestLocationData(
+//					LocationProviderProxy.AMapNetwork, 60 * 1000 + randomTime,
+//					15, this);
+//			mLocationManagerProxy.setGpsEnable(false);
+//			break;
+//		}
+//	}
+//
+//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//		switch (requestCode) {
+//		case 102:
+//			if (resultCode == 3 || resultCode == 0) {
+//				// for (int i = 0; i < Bimp.drr.size(); i++) {
+//				// System.out.println("Bimp.drr" + i + " " + Bimp.drr.get(i));
+//				// System.out.println("list" + i + " " + Bimp.smdrr.get(i));
+//				// }
+//
+//				if ((Bimp.drr.size() != 0) && (Bimp.smdrr.size() != 0)) {
+//					StringBuilder sb = new StringBuilder();
+//					for (int i = 0; i < Bimp.drr.size(); i++) {
+//						sb.append(Bimp.drr.get(i) + ",");
+//					}
+//					for (int i = 0; i < Bimp.drr.size(); i++) {
+//						sb.append(Bimp.smdrr.get(i) + ",");
+//					}
+//					textphoto = sb.toString().substring(0, sb.length() - 1);
+//					initphoto();
+//				} else {
+//					textphoto = "";
+//					initphoto();
+//				}
+//				break;
+//			}
+//
+//		}
+//	}
+//
+//	public static void showVoiveDialog() {
+//		dialogShowUtil.dialogShow("rotatebottom", "first", "", "");
+//	}
+//}
