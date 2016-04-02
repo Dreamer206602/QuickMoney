@@ -1,7 +1,7 @@
 package com.cwp.chart.fragment;
 
 import com.cwp.chart.manager.SystemBarTintManager;
-import com.cwp.cmoneycharge.PayChart;
+import com.cwp.cmoneycharge.activity.PayChart;
 import com.cwp.cmoneycharge.R;
 
 import android.annotation.TargetApi;

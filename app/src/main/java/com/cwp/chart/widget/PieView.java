@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.cwp.chart.ChartProp;
 import com.cwp.chart.listener.ChartPropChangeListener;
 import com.cwp.chart.PiewController;
-import com.cwp.cmoneycharge.PayChart;
+import com.cwp.cmoneycharge.activity.PayChart;
 import com.cwp.cmoneycharge.R;
 
 import android.content.Context;

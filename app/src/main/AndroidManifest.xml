@@ -21,7 +21,7 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
     <application
-        android:name=".CrashApplication"
+        android:name=".app.CrashApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -43,7 +43,7 @@
             android:value="Umeng" />
 
         <activity
-            android:name="com.cwp.cmoneycharge.MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,24 +51,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.cwp.cmoneycharge.About" />
+        <activity android:name=".activity.About" />
         <!--<activity android:name="com.cwp.cmoneycharge.Account" />-->
         <!--<activity android:name="com.cwp.cmoneycharge.AddIncome" />-->
         <!--<activity android:name="com.cwp.cmoneycharge.AddNote" />-->
-        <activity android:name="com.cwp.cmoneycharge.AddPay" />
-        <activity android:name="com.cwp.cmoneycharge.Author" />
+        <activity android:name=".activity.AddPay" />
+        <activity android:name=".activity.Author" />
         <!--<activity android:name="com.cwp.cmoneycharge.ChangePwd" />-->
         <!--<activity android:name="com.cwp.cmoneycharge.Data" />-->
-        <activity android:name="com.cwp.cmoneycharge.Description" />
+        <activity android:name=".activity.Description" />
         <!--<activity android:name="com.cwp.cmoneycharge.Income" />-->
-        <activity android:name="com.cwp.cmoneycharge.IncomeData" />
-        <activity android:name="com.cwp.cmoneycharge.InPtypeManager" />
+        <activity android:name=".activity.IncomeData" />
+        <activity android:name=".activity.InPtypeManager" />
         <!--<activity android:name="com.cwp.cmoneycharge.Login" />-->
-        <activity android:name="com.cwp.cmoneycharge.ModifyInP" />
+        <activity android:name=".activity.ModifyInP" />
         <!--<activity android:name="com.cwp.cmoneycharge.ModifyNote" />-->
         <!--<activity android:name="com.cwp.cmoneycharge.Note" />-->
         <!--<activity android:name="com.cwp.cmoneycharge.Pay" />-->
-        <activity android:name="com.cwp.cmoneycharge.PayData" />
+        <activity android:name=".activity.PayData" />
         <!--<activity android:name="com.cwp.cmoneycharge.PIData" />-->
         <!--<activity android:name="com.cwp.cmoneycharge.Register" />-->
         <!--<activity android:name="com.cwp.cmoneycharge.Setting" />-->
@@ -89,8 +89,8 @@
         <!--<activity android:name="cwp.moneycharge.model.Tb_note" />-->
         <!--<activity android:name="cwp.moneycharge.model.Tb_pay" />-->
         <!--<activity android:name="cwp.moneycharge.model.Tb_ptype" />-->
-        <activity android:name="com.cwp.cmoneycharge.SettingActivity" />
-        <activity android:name="com.cwp.cmoneycharge.PayChart" />
+        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.PayChart" />
         <activity
             android:name="com.umeng.fb.example.CustomActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -98,7 +98,7 @@
             android:name="com.example.testpic.PublishedActivity"
             android:theme="@style/HalfTransparent" />
         <activity
-            android:name="com.cwp.cmoneycharge.SearchActivity"
+            android:name=".activity.SearchActivity"
             android:theme="@style/HalfTransparent"
             android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity

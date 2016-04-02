@@ -1,8 +1,7 @@
-package com.cwp.cmoneycharge;
+package com.cwp.cmoneycharge.activity;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -12,16 +11,12 @@ import org.achartengine.model.CategorySeries;
 import org.achartengine.model.SeriesSelection;
 import org.achartengine.renderer.DefaultRenderer;
 import org.achartengine.renderer.SimpleSeriesRenderer;
-import org.w3c.dom.Text;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.format.Time;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,9 +28,12 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.app.SysApplication;
+
 import cwp.moneycharge.dao.PayDAO;
 import cwp.moneycharge.dao.PtypeDAO;
-import cwp.moneycharge.model.ActivityManager;
 import cwp.moneycharge.model.KindData;
 
 public class PayData extends Activity {

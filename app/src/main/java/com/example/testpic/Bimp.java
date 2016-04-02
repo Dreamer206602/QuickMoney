@@ -7,12 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cwp.cmoneycharge.AddPay;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Environment;
-import android.widget.Toast;
 
 public class Bimp {
 	public static int max = 0;
@@ -21,14 +17,14 @@ public class Bimp {
 	public static boolean act_bool = true;
 	public static List<Bitmap> bmp = new ArrayList<Bitmap>();
 
-	// Í¼Æ¬sdµØÖ· ÉÏ´«·þÎñÆ÷Ê±°ÑÍ¼Æ¬µ÷ÓÃÏÂÃæ·½·¨Ñ¹Ëõºó ±£´æµ½ÁÙÊ±ÎÄ¼þ¼Ð Í¼Æ¬Ñ¹ËõºóÐ¡ÓÚ100KB£¬Ê§Õæ¶È²»Ã÷ÏÔ
+	// Í¼Æ¬sdï¿½ï¿½Ö· ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ·½ï¿½ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½æµ½ï¿½ï¿½Ê±ï¿½Ä¼ï¿½ï¿½ï¿½ Í¼Æ¬Ñ¹ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½100KBï¿½ï¿½Ê§ï¿½ï¿½È²ï¿½ï¿½ï¿½ï¿½ï¿½
 	public static List<String> drr = new ArrayList<String>();
 	public static List<String> smdrr = new ArrayList<String>();
 
 	public static Bitmap getbitmap(String path) throws IOException {
 		Bitmap bitmap = null;
 		File f = new File(path);
-		if (f.exists()) { /* ²úÉúBitmap¶ÔÏó£¬²¢·ÅÈëmImageViewÖÐ */
+		if (f.exists()) { /* ï¿½ï¿½ï¿½ï¿½Bitmapï¿½ï¿½ï¿½ó£¬²ï¿½ï¿½ï¿½ï¿½ï¿½mImageViewï¿½ï¿½ */
 			bitmap = BitmapFactory.decodeFile(path);
 		}
 		return bitmap;

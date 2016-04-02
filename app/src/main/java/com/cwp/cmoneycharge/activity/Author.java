@@ -1,36 +1,37 @@
-package com.cwp.cmoneycharge;
+package com.cwp.cmoneycharge.activity;
 
+import cwp.moneycharge.model.ActivityManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import cwp.moneycharge.model.ActivityManager;
 
-public class Description extends Activity{
+import com.cwp.cmoneycharge.R;
 
+public class Author extends Activity {
 	Intent intentr;
 	int userid;
-	public Description() {
+	public Author() {
 		// TODO Auto-generated constructor stub
 	}
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.description);
+		setContentView(R.layout.author);
 		ActivityManager.getInstance().addActivity(this);
 	}	
 	
 	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
-		super.onStart();// ÊµÏÖ»ùÀàÖÐµÄ·½·¨//  µ÷ÓÃ×Ô¶¨Òå·½·¨ÏÔÊ¾ÊÕÈëÐÅÏ¢
+		super.onStart();// Êµï¿½Ö»ï¿½ï¿½ï¿½ï¿½ÐµÄ·ï¿½ï¿½ï¿½//  ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½å·½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 		Intent intentr=getIntent();
 		userid=intentr.getIntExtra("cwp.id",100000001);}
+	
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-	    if(keyCode == KeyEvent.KEYCODE_BACK) { //¼à¿Ø/À¹½Ø/ÆÁ±Î·µ»Ø¼ü
-	    	Intent intent=new Intent(Description.this,About.class);
+	    if(keyCode == KeyEvent.KEYCODE_BACK) { //ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½Î·ï¿½ï¿½Ø¼ï¿½
+	    	Intent intent=new Intent(Author.this,About.class);
 			intent.putExtra("cwp.id",userid);
 			startActivity(intent);
 	        return true;

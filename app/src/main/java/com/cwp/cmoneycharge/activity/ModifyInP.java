@@ -1,4 +1,4 @@
-package com.cwp.cmoneycharge;
+package com.cwp.cmoneycharge.activity;
 
 import java.util.Calendar;
 import java.util.List;
@@ -12,7 +12,6 @@ import cwp.moneycharge.model.ActivityManager;
 import cwp.moneycharge.model.Tb_income;
 import cwp.moneycharge.model.Tb_pay;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -28,7 +27,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import cwp.moneycharge.dao.IncomeDAO;
+import com.cwp.cmoneycharge.R;
+
 import cwp.moneycharge.dao.PayDAO;
 
 public class ModifyInP extends Activity{
@@ -59,7 +59,7 @@ public class ModifyInP extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.modifyinp);// ���ò����ļ� 
+		setContentView(R.layout.modifyinp);// ���ò����ļ�
 		ActivityManager.getInstance().addActivity(this); //����Activity,�˳���ť���ʱ����
 		tvtitle = (TextView) findViewById(R.id.inouttitle);// ��ȡ�����ǩ����
 		textView = (TextView) findViewById(R.id.tvInOut);// ��ȡ�ص�/�����ǩ����

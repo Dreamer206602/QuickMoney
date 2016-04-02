@@ -1,10 +1,9 @@
 package com.cwp.fragment;
 
-import com.cwp.cmoneycharge.About;
-import com.cwp.cmoneycharge.InPtypeManager;
+import com.cwp.cmoneycharge.activity.About;
+import com.cwp.cmoneycharge.activity.InPtypeManager;
 import com.cwp.cmoneycharge.R;
-import com.cwp.cmoneycharge.SettingActivity;
-import com.cwp.fragment.FragmentPage2;
+import com.cwp.cmoneycharge.activity.SettingActivity;
 
 import cwp.moneycharge.dao.IncomeDAO;
 import cwp.moneycharge.dao.ItypeDAO;

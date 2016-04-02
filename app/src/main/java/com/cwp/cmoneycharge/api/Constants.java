@@ -1,9 +1,9 @@
-package com.cwp.cmoneycharge;
+package com.cwp.cmoneycharge.api;
 
 public class Constants {
     /*
-     * ÇëµÇÂ¼http://developer.baidu.com£¬×¢²á³ÉÎª°Ù¶È¿ª·¢
-     * ½«¶ÔÓ¦µÄApiKeyºÍSecretKeyÌîÐ´ºóÔÙ²âÊÔ
+     * ï¿½ï¿½ï¿½Â¼http://developer.baidu.comï¿½ï¿½×¢ï¿½ï¿½ï¿½Îªï¿½Ù¶È¿ï¿½ï¿½ï¿½
+     * ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ApiKeyï¿½ï¿½SecretKeyï¿½ï¿½Ð´ï¿½ï¿½ï¿½Ù²ï¿½ï¿½ï¿½
      */
     public static final String API_KEY = "8MAxI5o7VjKSZOKeBzS4XtxO";
 

@@ -1,4 +1,4 @@
-package com.cwp.cmoneycharge;
+package com.cwp.cmoneycharge.activity;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -15,6 +15,16 @@ import com.amap.api.location.LocationProviderProxy;
 import com.baidu.voicerecognition.android.ui.BaiduASRDigitalDialog;
 import com.baidu.voicerecognition.android.ui.DialogRecognitionListener;
 import com.cwp.chart.manager.SystemBarTintManager;
+import com.cwp.cmoneycharge.Config;
+import com.cwp.cmoneycharge.utils.DialogShowUtil;
+import com.cwp.cmoneycharge.Effectstype;
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.api.Constants;
+import com.cwp.cmoneycharge.app.CrashApplication;
+import com.cwp.cmoneycharge.app.SysApplication;
+import com.cwp.cmoneycharge.utils.DigitUtil;
+import com.cwp.cmoneycharge.utils.KeyboardUtil;
+import com.cwp.cmoneycharge.widget.NiftyDialogBuilder;
 import com.cwp.pattern.UnlockGesturePasswordActivity;
 import com.example.testpic.Bimp;
 import com.example.testpic.PublishedActivity;

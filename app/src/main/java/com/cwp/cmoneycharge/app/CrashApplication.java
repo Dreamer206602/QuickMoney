@@ -1,5 +1,6 @@
-package com.cwp.cmoneycharge;
+package com.cwp.cmoneycharge.app;
 
+import com.cwp.cmoneycharge.handler.CrashHandler;
 import com.cwp.pattern.LockPatternUtils;
 
 import android.app.Application;
@@ -41,7 +42,7 @@ public class CrashApplication extends Application {
 	class LockScreenReceiver extends BroadcastReceiver {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			/* ÔÚÕâÀï´¦Àí¹ã²¥ */
+			/* ï¿½ï¿½ï¿½ï¿½ï¿½ï´¦ï¿½ï¿½ã²¥ */
 			if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
 				isLocked  = true;
 			}

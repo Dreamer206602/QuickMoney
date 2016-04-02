@@ -1,4 +1,4 @@
-package com.cwp.cmoneycharge;
+package com.cwp.cmoneycharge.utils;
 
 /**
  *  @author loiy

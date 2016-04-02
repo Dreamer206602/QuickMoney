@@ -1,6 +1,9 @@
-package com.cwp.cmoneycharge;
+package com.cwp.cmoneycharge.activity;
 
 import com.baidu.voicerecognition.android.ui.BaiduASRDigitalDialog;
+import com.cwp.cmoneycharge.Config;
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.app.SysApplication;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,7 +19,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Spinner;
 
 /**
- * Demoµ÷ÕûÊ¶±ð²ÎÊýÊ¹ÓÃ£¬¿ª·¢ßC?Ðë¹Ø×¢
+ * Demoï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½C?ï¿½ï¿½ï¿½×¢
  * 
  * @author yangliang02
  */
@@ -47,7 +50,7 @@ public class SettingActivity extends Activity implements
 
 		Intent intentr = getIntent();
 		userid = intentr.getIntExtra("cwp.id", 100000001);
-		SysApplication.getInstance().addActivity(this); // ÔÚÏú»Ù¶ÓÁÐÖÐÌí¼Óthis
+		SysApplication.getInstance().addActivity(this); // ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½this
 		startSoundCheckBox = (CheckBox) findViewById(R.id.cb_play_start_sound);
 		startSoundCheckBox.setChecked(Config.PLAY_START_SOUND);
 		startSoundCheckBox.setOnCheckedChangeListener(this);
@@ -191,10 +194,10 @@ public class SettingActivity extends Activity implements
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) { // ¼à¿Ø/À¹½Ø/ÆÁ±Î·µ»Ø¼ü
+		if (keyCode == KeyEvent.KEYCODE_BACK) { // ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½Î·ï¿½ï¿½Ø¼ï¿½
 			Intent intent = new Intent(SettingActivity.this, MainActivity.class);
 			intent.putExtra("cwp.id", userid);
-			intent.putExtra("cwp.Fragment", "4");// ÉèÖÃ´«µÝÊý¾Ý
+			intent.putExtra("cwp.Fragment", "4");// ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			startActivity(intent);
 			return true;
 		}

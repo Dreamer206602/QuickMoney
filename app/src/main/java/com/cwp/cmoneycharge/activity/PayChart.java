@@ -1,4 +1,4 @@
-package com.cwp.cmoneycharge;
+package com.cwp.cmoneycharge.activity;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -13,6 +13,10 @@ import com.cwp.chart.fragment.MenuFragment;
 import com.cwp.chart.widget.MyButton;
 import com.cwp.chart.widget.PieView;
 import com.cwp.chart.manager.SystemBarTintManager;
+import com.cwp.cmoneycharge.utils.DialogShowUtil;
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.app.SysApplication;
+import com.cwp.cmoneycharge.app.CrashApplication;
 import com.cwp.pattern.UnlockGesturePasswordActivity;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingActivity;

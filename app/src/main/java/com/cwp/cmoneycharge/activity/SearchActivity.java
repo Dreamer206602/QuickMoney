@@ -1,4 +1,4 @@
-package com.cwp.cmoneycharge;
+package com.cwp.cmoneycharge.activity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ import java.util.Map;
 import com.cwp.chart.widget.CustomMultiChoiceDialog;
 import com.cwp.chart.adapter.MyAdspter;
 import com.cwp.chart.manager.SystemBarTintManager;
+import com.cwp.cmoneycharge.R;
 import com.cwp.fragment.FragmentPage3;
 
 import cwp.moneycharge.dao.IncomeDAO;

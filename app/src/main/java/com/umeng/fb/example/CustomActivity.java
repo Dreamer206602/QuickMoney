@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.cwp.chart.manager.SystemBarTintManager;
 import com.cwp.cmoneycharge.R;
-import com.cwp.cmoneycharge.SysApplication;
+import com.cwp.cmoneycharge.app.SysApplication;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.fb.SyncListener;
 import com.umeng.fb.model.Conversation;

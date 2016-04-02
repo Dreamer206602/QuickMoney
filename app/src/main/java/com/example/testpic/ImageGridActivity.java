@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import com.cwp.cmoneycharge.About;
-import com.cwp.cmoneycharge.MainActivity;
 import com.cwp.cmoneycharge.R;
 import com.example.testpic.ImageGridAdapter.TextCallback;
 
@@ -31,10 +29,10 @@ import android.widget.GridView;
 public class ImageGridActivity extends Activity {
 	public static final String EXTRA_IMAGE_LIST = "imagelist";
 
-	// ArrayList<Entity> dataList;//ÓÃÀ´×°ÔØÊý¾ÝÔ´µÄÁÐ±í
+	// ArrayList<Entity> dataList;//ï¿½ï¿½ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½Ð±ï¿½
 	List<ImageItem> dataList;
 	GridView gridView;
-	ImageGridAdapter adapter;// ×Ô¶¨ÒåµÄÊÊÅä‡’
+	ImageGridAdapter adapter;// ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ä‡’
 	AlbumHelper helper;
 	Button bt;
 
@@ -43,7 +41,7 @@ public class ImageGridActivity extends Activity {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case 0:
-				Toast.makeText(ImageGridActivity.this, "×î¶àÑ¡Ôñ9ÕÅÍ¼Æ¬", 400).show();
+				Toast.makeText(ImageGridActivity.this, "ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½9ï¿½ï¿½Í¼Æ¬", 400).show();
 				break;
 
 			default:
@@ -134,7 +132,7 @@ public class ImageGridActivity extends Activity {
 	}
 
 	/**
-	 * ³õæª»¯viewÊÓÍ¼
+	 * ï¿½ï¿½æª»ï¿½viewï¿½ï¿½Í¼
 	 */
 	private void initView() {
 		gridView = (GridView) findViewById(R.id.gridview);
@@ -144,7 +142,7 @@ public class ImageGridActivity extends Activity {
 		gridView.setAdapter(adapter);
 		adapter.setTextCallback(new TextCallback() {
 			public void onListen(int count) {
-				bt.setText("Íê³É" + " (" + count + ")");
+				bt.setText("ï¿½ï¿½ï¿½" + " (" + count + ")");
 			}
 		});
 
@@ -154,8 +152,8 @@ public class ImageGridActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				/**
-				 * ¸ù¾Ýposition²ÎÊý£¬¿ÉÒÔ»ñµÃ¸úGridViewµÄ×ÓViewÏà°ó¶¨µÄÊµÌåÀà£¬È»ºó¸ù¾ÝËüµÄisSelected×´’½ *
-				 * ?£ß À´ÅÐ¶ÏÊÇ·ñÏÔÊ¾??Ð§¹û?ÖÁÓÚÑ¡ÖÐÐ§¹ûµÄÓ[Ôò£¬ÏÂÃæÊÊÅäÆ÷µÄ´úÂëÖÐ»áÓÐËµ•p
+				 * ï¿½ï¿½ï¿½positionï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½Ã¸ï¿½GridViewï¿½ï¿½ï¿½ï¿½Viewï¿½ï¿½ó¶¨µï¿½Êµï¿½ï¿½ï¿½à£¬È»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½isSelected×´ï¿½ï¿½ *
+				 * ?ï¿½ï¿½ ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ê¾??Ð§ï¿½ï¿½?ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½Ëµï¿½p
 				 */
 				// if(dataList.get(position).isSelected()){
 				// dataList.get(position).setSelected(false);
@@ -163,7 +161,7 @@ public class ImageGridActivity extends Activity {
 				// dataList.get(position).setSelected(true);
 				// }
 				/**
-				 * Í¨ÖªÊÊÅäÆ÷£¬°ó¶¨µÄÊý¾Ý·¢ÉúÁË¸Ä±ä£¬Ó¦µ±Ë¢ÐÂÓWàó
+				 * Í¨Öªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó¶¨µï¿½ï¿½ï¿½Ý·ï¿½ï¿½ï¿½ï¿½Ë¸Ä±ä£¬Ó¦ï¿½ï¿½Ë¢ï¿½ï¿½ï¿½Wï¿½ï¿½
 				 */
 				adapter.notifyDataSetChanged();
 			}
@@ -172,7 +170,7 @@ public class ImageGridActivity extends Activity {
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) { // ¼à¿Ø/À¹½Ø/ÆÁ±Î·µ»Ø¼ü
+		if (keyCode == KeyEvent.KEYCODE_BACK) { // ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½Î·ï¿½ï¿½Ø¼ï¿½
 			Intent intent = new Intent(ImageGridActivity.this,
 					TestPicActivity.class);
 			startActivity(intent);

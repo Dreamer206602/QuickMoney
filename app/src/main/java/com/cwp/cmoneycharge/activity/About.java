@@ -1,6 +1,9 @@
-package com.cwp.cmoneycharge;
+package com.cwp.cmoneycharge.activity;
 
 import com.cwp.chart.manager.SystemBarTintManager;
+import com.cwp.cmoneycharge.app.CrashApplication;
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.app.SysApplication;
 import com.cwp.pattern.UnlockGesturePasswordActivity;
 import com.cwp.pattern.UpdateManager;
 import com.umeng.fb.example.CustomActivity;

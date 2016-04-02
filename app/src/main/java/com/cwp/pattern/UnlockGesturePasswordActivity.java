@@ -3,10 +3,10 @@ package com.cwp.pattern;
 import java.util.List;
 
 import com.cwp.chart.manager.SystemBarTintManager;
-import com.cwp.cmoneycharge.CrashApplication;
-import com.cwp.cmoneycharge.DialogShowUtil;
+import com.cwp.cmoneycharge.app.CrashApplication;
+import com.cwp.cmoneycharge.utils.DialogShowUtil;
 import com.cwp.cmoneycharge.R;
-import com.cwp.cmoneycharge.SysApplication;
+import com.cwp.cmoneycharge.app.SysApplication;
 import com.cwp.pattern.LockPatternView.Cell;
 
 import android.annotation.TargetApi;

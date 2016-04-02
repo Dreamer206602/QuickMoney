@@ -1,15 +1,20 @@
-package com.cwp.cmoneycharge;
+package com.cwp.cmoneycharge.utils;
 
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;
-import android.widget.EditText;
+
+import com.cwp.cmoneycharge.Effectstype;
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.activity.AddPay;
+import com.cwp.cmoneycharge.app.SysApplication;
+import com.cwp.cmoneycharge.widget.NiftyDialogBuilder;
 
 public class DialogShowUtil {
 	private Context ctx;
 	private Activity act;
 	NiftyDialogBuilder dialogBuilder = null;
-	private Effectstype effect; // ×Ô¶¨ÒåDialog
+	private Effectstype effect; // ï¿½Ô¶ï¿½ï¿½ï¿½Dialog
 	String[] VoiceSave;
 	static String type;
 	static String VoiceDefault;
@@ -25,7 +30,7 @@ public class DialogShowUtil {
 
 	public void dialogShow(String showtype, String style,
 			final String context1, String context2) {
-		dialogBuilder = new NiftyDialogBuilder(ctx, R.style.dialog_untran); // ×Ô¶¨ÒådialogBuilder
+		dialogBuilder = new NiftyDialogBuilder(ctx, R.style.dialog_untran); // ï¿½Ô¶ï¿½ï¿½ï¿½dialogBuilder
 		switch (showtype) {
 		case "rotatebottom":
 			effect = Effectstype.RotateBottom;
@@ -37,13 +42,13 @@ public class DialogShowUtil {
 
 		switch (style) {
 		case "first":
-			dialogBuilder.withTitle("ÓïÒô¼ÇÕË")
+			dialogBuilder.withTitle("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")
 					// .withTitle(null) no title
 					.withTitleColor("#FFFFFF")
 					// def
 					.withDividerColor("#11000000")
 					// def
-					.withMessage("ÓïÒô¸ñÊ½£º\nÔç²ÍÔÚ²ÍÌüÊ³ÁË20Ôª¡£\n\n")
+					.withMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½\nï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½Ê³ï¿½ï¿½20Ôªï¿½ï¿½\n\n")
 					// .withMessage(null) no Msg
 					.withMessageColor("#FFFFFF")
 					// def
@@ -52,8 +57,8 @@ public class DialogShowUtil {
 														// isCancelable(true)
 					.withDuration(700) // def
 					.withEffect(effect) // def Effectstype.Slidetop
-					.withButton1Text("È¡Ïû") // def gone
-					.withButton2Text("¿ªÊ¼ÓïÒô") // def gone
+					.withButton1Text("È¡ï¿½ï¿½") // def gone
+					.withButton2Text("ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½") // def gone
 					.setButton1Click(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
@@ -68,13 +73,13 @@ public class DialogShowUtil {
 					}).show();
 			break;
 		case "notype":
-			dialogBuilder.withTitle("Ê¶±ð³É¹¦")
+			dialogBuilder.withTitle("Ê¶ï¿½ï¿½É¹ï¿½")
 					// .withTitle(null) no title
 					.withTitleColor("#FFFFFF")
 					// def
 					.withDividerColor("#11000000")
 					// def
-					.withMessage("Äã¸Õ¸ÕËµÁË¡° " + context1 + "¡±\n\n" + context2)
+					.withMessage("ï¿½ï¿½Õ¸ï¿½Ëµï¿½Ë¡ï¿½ " + context1 + "ï¿½ï¿½\n\n" + context2)
 					// .withMessage(null) no Msg
 					.withMessageColor("#FFFFFF")
 					// def
@@ -82,8 +87,8 @@ public class DialogShowUtil {
 					.isCancelableOnTouchOutside(false) // def |//
 					.withDuration(700) // def
 					.withEffect(effect) // def Effectstype.Slidetop
-					.withButton1Text("È¡Ïû") // def gone
-					.withButton2Text("ÊÇ") // def gone
+					.withButton1Text("È¡ï¿½ï¿½") // def gone
+					.withButton2Text("ï¿½ï¿½") // def gone
 					.setButton1Click(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
@@ -101,14 +106,14 @@ public class DialogShowUtil {
 			break;
 		case "wrong":
 			dialogBuilder
-					.withTitle("Ê¶±ðÊ§°Ü")
+					.withTitle("Ê¶ï¿½ï¿½Ê§ï¿½ï¿½")
 					// .withTitle(null) no title
 					.withTitleColor("#FFFFFF")
 					// def
 					.withDividerColor("#11000000")
 					// def
 					.withMessage(
-							"Äã¸Õ¸ÕËµÁË¡° " + context1 + "¡±²»·ûºÏ¸ñÊ½£¬ÇëÔÙÊÔÒ»´Î\n\n"
+							"ï¿½ï¿½Õ¸ï¿½Ëµï¿½Ë¡ï¿½ " + context1 + "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½\n\n"
 									+ context2)
 					// .withMessage(null) no Msg
 					.withMessageColor("#FFFFFF")
@@ -118,8 +123,8 @@ public class DialogShowUtil {
 														// isCancelable(true)
 					.withDuration(700) // def
 					.withEffect(effect) // def Effectstype.Slidetop
-					.withButton1Text("È¡Ïû") // def gone
-					.withButton2Text("ÔÙ´ÎÓïÒô") // def gone
+					.withButton1Text("È¡ï¿½ï¿½") // def gone
+					.withButton2Text("ï¿½Ù´ï¿½ï¿½ï¿½ï¿½ï¿½") // def gone
 					.setButton1Click(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
@@ -134,13 +139,13 @@ public class DialogShowUtil {
 					}).show();
 			break;
 		case "OK":
-			dialogBuilder.withTitle("Ê¶±ð³É¹¦")
+			dialogBuilder.withTitle("Ê¶ï¿½ï¿½É¹ï¿½")
 					// .withTitle(null) no title
 					.withTitleColor("#FFFFFF")
 					// def
 					.withDividerColor("#11000000")
 					// def
-					.withMessage("³É¹¦£¡\nÄã¸Õ¸ÕËµÁË¡°" + context1 + "¡±£¬\nÊÇ·ñÈ·¶¨Òª¼ÇÂ¼ÕâÌõÊý¾Ý?")
+					.withMessage("ï¿½É¹ï¿½ï¿½ï¿½\nï¿½ï¿½Õ¸ï¿½Ëµï¿½Ë¡ï¿½" + context1 + "ï¿½ï¿½ï¿½ï¿½\nï¿½Ç·ï¿½È·ï¿½ï¿½Òªï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?")
 					// .withMessage(null) no Msg
 					.withMessageColor("#FFFFFF")
 					// def
@@ -149,8 +154,8 @@ public class DialogShowUtil {
 														// isCancelable(true)
 					.withDuration(700) // def
 					.withEffect(effect) // def Effectstype.Slidetop
-					.withButton1Text("È¡Ïû") // def gone
-					.withButton2Text("È·¶¨") // def gone
+					.withButton1Text("È¡ï¿½ï¿½") // def gone
+					.withButton2Text("È·ï¿½ï¿½") // def gone
 					.setButton1Click(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
@@ -166,15 +171,15 @@ public class DialogShowUtil {
 			break;
 		case "judge":
 			dialogBuilder
-					.withTitle("Ê¶±ð³É¹¦")
+					.withTitle("Ê¶ï¿½ï¿½É¹ï¿½")
 					// .withTitle(null) no title
 					.withTitleColor("#FFFFFF")
 					// def
 					.withDividerColor("#11000000")
 					// def
 					.withMessage(
-							"³É¹¦£¡\nÄã¸Õ¸ÕËµÁË¡°" + context1 + "¡±£¬\n<" + VoiceSave[3]
-									+ ">Àà±ðÐèÒªÄãÇëÈ·ÈÏ¸Ã±ÊÊÇ<¿ªÖ§>»¹ÊÇ<ÊÕÈë>?\n")
+							"ï¿½É¹ï¿½ï¿½ï¿½\nï¿½ï¿½Õ¸ï¿½Ëµï¿½Ë¡ï¿½" + context1 + "ï¿½ï¿½ï¿½ï¿½\n<" + VoiceSave[3]
+									+ ">ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½È·ï¿½Ï¸Ã±ï¿½ï¿½ï¿½<ï¿½ï¿½Ö§>ï¿½ï¿½ï¿½ï¿½<ï¿½ï¿½ï¿½ï¿½>?\n")
 					// .withMessage(null) no Msg
 					.withMessageColor("#FFFFFF")
 					// def
@@ -183,8 +188,8 @@ public class DialogShowUtil {
 														// isCancelable(true)
 					.withDuration(700) // def
 					.withEffect(effect) // def Effectstype.Slidetop
-					.withButton1Text("¿ªÖ§") // def gone
-					.withButton2Text("ÊÕÈë") // def gone
+					.withButton1Text("ï¿½ï¿½Ö§") // def gone
+					.withButton2Text("ï¿½ï¿½ï¿½ï¿½") // def gone
 					.setButton1Click(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
@@ -202,13 +207,13 @@ public class DialogShowUtil {
 					}).show();
 			break;
 		case "quit":
-			dialogBuilder.withTitle("ÍË³ö³ÌÐò")
+			dialogBuilder.withTitle("ï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½")
 					// .withTitle(null) no title
 					.withTitleColor("#FFFFFF")
 					// def
 					.withDividerColor("#11000000")
 					// def
-					.withMessage("ÊÇ·ñÒªÍË³ö³ÌÐò£¿\n\n")
+					.withMessage("ï¿½Ç·ï¿½Òªï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½\n\n")
 					// .withMessage(null) no Msg
 					.withMessageColor("#FFFFFF")
 					// def
@@ -217,8 +222,8 @@ public class DialogShowUtil {
 														// isCancelable(true)
 					.withDuration(700) // def
 					.withEffect(effect) // def Effectstype.Slidetop
-					.withButton1Text("È¡Ïû") // def gone
-					.withButton2Text("ÍË³ö") // def gone
+					.withButton1Text("È¡ï¿½ï¿½") // def gone
+					.withButton2Text("ï¿½Ë³ï¿½") // def gone
 					.setButton1Click(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {

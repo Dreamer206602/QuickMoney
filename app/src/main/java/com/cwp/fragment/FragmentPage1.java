@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.cwp.chart.adapter.MyAdspter;
-import com.cwp.cmoneycharge.AddPay;
+import com.cwp.cmoneycharge.activity.AddPay;
 import com.cwp.cmoneycharge.R;
 
 import cwp.moneycharge.dao.IncomeDAO;

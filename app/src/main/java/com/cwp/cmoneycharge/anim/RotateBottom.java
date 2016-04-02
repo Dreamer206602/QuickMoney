@@ -1,15 +1,12 @@
-package com.cwp.cmoneycharge;
+package com.cwp.cmoneycharge.anim;
 
 import android.view.View;
-import android.widget.RelativeLayout;
 
+import com.cwp.cmoneycharge.anim.BaseEffects;
 import com.nineoldandroids.animation.ObjectAnimator;
-import com.nineoldandroids.view.ViewHelper;
 
-/**
- * Created by lee on 2014/7/31.
- */
-public class RotateBottom extends BaseEffects{
+
+public class RotateBottom extends BaseEffects {
 
     @Override
     protected void setupAnimation(View view) {

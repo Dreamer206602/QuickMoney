@@ -1,4 +1,4 @@
-package com.cwp.cmoneycharge;
+package com.cwp.cmoneycharge.handler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,13 +16,13 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.cwp.cmoneycharge.app.SysApplication;
 import com.umeng.fb.example.CustomActivity;
 
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;

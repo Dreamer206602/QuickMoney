@@ -1,9 +1,11 @@
-package com.cwp.cmoneycharge;
+package com.cwp.cmoneycharge.activity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.cwp.chart.manager.SystemBarTintManager;
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.app.SysApplication;
 
 import cwp.moneycharge.dao.ItypeDAO;
 import cwp.moneycharge.dao.PtypeDAO;

@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import com.cwp.chart.manager.SystemBarTintManager;
 import com.cwp.cmoneycharge.R;
-import com.cwp.cmoneycharge.SysApplication;
+import com.cwp.cmoneycharge.app.SysApplication;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;

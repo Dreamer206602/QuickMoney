@@ -1,19 +1,16 @@
-package com.cwp.cmoneycharge;
+package com.cwp.cmoneycharge.utils;
 
+import com.cwp.cmoneycharge.activity.AddPay;
 import com.cwp.cmoneycharge.R;
 
 import android.app.Activity;
 import android.content.Context;
 import android.inputmethodservice.Keyboard;
-import android.inputmethodservice.Keyboard.Key;
 import android.inputmethodservice.KeyboardView;
 import android.inputmethodservice.KeyboardView.OnKeyboardActionListener;
 import android.text.Editable;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class KeyboardUtil {
 	private Context ctx;

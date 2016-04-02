@@ -1,8 +1,13 @@
-package com.cwp.cmoneycharge;
+package com.cwp.cmoneycharge.activity;
 
 import java.util.Calendar;
 
 import com.cwp.chart.manager.SystemBarTintManager;
+import com.cwp.cmoneycharge.utils.DialogShowUtil;
+import com.cwp.cmoneycharge.Effectstype;
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.app.SysApplication;
+import com.cwp.cmoneycharge.app.CrashApplication;
 import com.cwp.fragment.FragmentPage2;
 import com.cwp.fragment.FragmentPage3;
 import com.cwp.pattern.UnlockGesturePasswordActivity;

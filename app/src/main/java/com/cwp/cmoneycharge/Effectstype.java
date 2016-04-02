@@ -1,7 +1,7 @@
 package com.cwp.cmoneycharge;
 
-import com.cwp.cmoneycharge.RotateBottom;
-import com.cwp.cmoneycharge.Shake;
+import com.cwp.cmoneycharge.anim.BaseEffects;
+import com.cwp.cmoneycharge.anim.SlideTop;
 
 
 /**
@@ -10,8 +10,8 @@ import com.cwp.cmoneycharge.Shake;
 public enum  Effectstype {
 
 	Slidetop(SlideTop.class),
-    RotateBottom(RotateBottom.class),
-    Shake(Shake.class);
+    RotateBottom(com.cwp.cmoneycharge.anim.RotateBottom.class),
+    Shake(com.cwp.cmoneycharge.anim.Shake.class);
     
     private Class effectsClazz;
 

@@ -1,4 +1,4 @@
-package com.cwp.cmoneycharge;
+package com.cwp.cmoneycharge.anim;
 
 import android.view.View;
 
@@ -6,7 +6,7 @@ import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.view.ViewHelper;
 
 /**
- * Created by lee on 2014/7/30.
+ *
  *
  *
  * The MIT License (MIT)

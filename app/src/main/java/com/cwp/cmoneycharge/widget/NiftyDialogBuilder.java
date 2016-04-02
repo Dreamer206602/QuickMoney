@@ -1,5 +1,7 @@
-package com.cwp.cmoneycharge;
+package com.cwp.cmoneycharge.widget;
 
+import com.cwp.cmoneycharge.anim.BaseEffects;
+import com.cwp.cmoneycharge.Effectstype;
 import com.cwp.cmoneycharge.R;
 
 import android.app.Dialog;

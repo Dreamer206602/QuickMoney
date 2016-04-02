@@ -1,9 +1,9 @@
 package com.cwp.pattern;
 
 import com.cwp.chart.manager.SystemBarTintManager;
-import com.cwp.cmoneycharge.CrashApplication;
+import com.cwp.cmoneycharge.app.CrashApplication;
 import com.cwp.cmoneycharge.R;
-import com.cwp.cmoneycharge.SysApplication;
+import com.cwp.cmoneycharge.app.SysApplication;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

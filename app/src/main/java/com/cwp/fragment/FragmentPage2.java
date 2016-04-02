@@ -1,15 +1,14 @@
 package com.cwp.fragment;
 
-import com.cwp.cmoneycharge.AddPay;
-import com.cwp.cmoneycharge.MainActivity;
-import com.cwp.cmoneycharge.PayChart;
+import com.cwp.cmoneycharge.activity.AddPay;
+import com.cwp.cmoneycharge.activity.MainActivity;
+import com.cwp.cmoneycharge.activity.PayChart;
 import com.cwp.cmoneycharge.R;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.util.DisplayMetrics;
