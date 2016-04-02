@@ -1,15 +1,9 @@
 package com.example.testpic;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.cwp.chart.SystemBarTintManager;
-import com.cwp.cmoneycharge.AddPay;
+import com.cwp.chart.manager.SystemBarTintManager;
 import com.cwp.cmoneycharge.R;
 import com.cwp.cmoneycharge.SysApplication;
 
@@ -77,7 +71,7 @@ public class PublishedActivity extends Activity {
 		mTintManager.setStatusBarTintEnabled(true);
 		mTintManager.setStatusBarTintResource(R.color.statusbar_bg);
 
-		SysApplication.getInstance().addActivity(this); // ÔÚÏú»Ù¶ÓÁÐÖÐÌí¼Óthis
+		SysApplication.getInstance().addActivity(this); // ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½this
 
 	}
 
@@ -97,7 +91,7 @@ public class PublishedActivity extends Activity {
 	public void Init() {
 		Intent intentr = getIntent();
 		userid = intentr.getIntExtra("cwp.id", 100000001);
-		bundle = intentr.getExtras();// »ñÈ¡´«ÈëµÄÊý¾Ý£¬²¢Ê¹ÓÃBundle¼ÇÂ¼
+		bundle = intentr.getExtras();// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Bundleï¿½ï¿½Â¼
 		if ((bundle != null)) {
 			if ((bundle.containsKey("cwp.photo"))) {
 				if (firstin) {
@@ -130,11 +124,11 @@ public class PublishedActivity extends Activity {
 		activity_selectimg_send.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				setResult(3);// this.setResult(int resultCode)£¬resultCode ¿ÉÒÔ×Ô¶¨Òå
+				setResult(3);// this.setResult(int resultCode)ï¿½ï¿½resultCode ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½
 				finish();
-				// ¸ßÇåµÄÑ¹Ëõ¹ýµÄÍ¼Æ¬È«²¿¾ÍÔÚ list Â·¾¶ÀïÃæÁË
-				// ¸ßÇåµÄÑ¹Ëõ¹ýµÄ bmp ¶ÔÏó ¶¼ÔÚ Bimp.bmpÀïÃæ
-				// Íê³ÉÉÏ´«·þÎñÆ÷ºó .........
+				// ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ list Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+				// ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½ bmp ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Bimp.bmpï¿½ï¿½ï¿½ï¿½
+				// ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ .........
 				// FileUtils.deleteDir();
 			}
 		});
@@ -142,8 +136,8 @@ public class PublishedActivity extends Activity {
 
 	@SuppressLint("HandlerLeak")
 	public class GridAdapter extends BaseAdapter {
-		private LayoutInflater inflater; // ÊÓÍ¼ÈÝÆ÷
-		private int selectedPosition = -1;// Ñ¡ÖÐµÄÎ»ÖÃ
+		private LayoutInflater inflater; // ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½
+		private int selectedPosition = -1;// Ñ¡ï¿½Ðµï¿½Î»ï¿½ï¿½
 		private boolean shape;
 
 		public boolean isShape() {
@@ -188,7 +182,7 @@ public class PublishedActivity extends Activity {
 		}
 
 		/**
-		 * ListView ItemÉèÖÃ
+		 * ListView Itemï¿½ï¿½ï¿½ï¿½
 		 */
 		public View getView(int position, View convertView, ViewGroup parent) {
 			final int coord = position;
@@ -243,7 +237,7 @@ public class PublishedActivity extends Activity {
 							break;
 						} else {
 							Intent intentr = getIntent();
-							bundle = intentr.getExtras();// »ñÈ¡´«ÈëµÄÊý¾Ý£¬²¢Ê¹ÓÃBundle¼ÇÂ¼
+							bundle = intentr.getExtras();// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Bundleï¿½ï¿½Â¼
 							try {
 								if (Bimp.drr.size() >= Bimp.max) {
 									String path = Bimp.drr.get(Bimp.max);
@@ -280,7 +274,7 @@ public class PublishedActivity extends Activity {
 		return path;
 	}
 
-	public class PopupWindows extends PopupWindow { // µ¯³ö²Ëµ¥
+	public class PopupWindows extends PopupWindow { // ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½
 
 		public PopupWindows(Context mContext, View parent) {
 
@@ -303,11 +297,11 @@ public class PublishedActivity extends Activity {
 			update();
 
 			Button bt1 = (Button) view
-					.findViewById(R.id.item_popupwindows_camera); // Ïà»ú
+					.findViewById(R.id.item_popupwindows_camera); // ï¿½ï¿½ï¿½
 			Button bt2 = (Button) view
-					.findViewById(R.id.item_popupwindows_Photo); // Í¼¿â
+					.findViewById(R.id.item_popupwindows_Photo); // Í¼ï¿½ï¿½
 			Button bt3 = (Button) view
-					.findViewById(R.id.item_popupwindows_cancel); // È¡Ïû
+					.findViewById(R.id.item_popupwindows_cancel); // È¡ï¿½ï¿½
 			bt1.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
 					photo();
@@ -371,8 +365,8 @@ public class PublishedActivity extends Activity {
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) { // ¼à¿Ø/À¹½Ø/ÆÁ±Î·µ»Ø¼ü
-			setResult(3);// this.setResult(int resultCode)£¬resultCode ¿ÉÒÔ×Ô¶¨Òå
+		if (keyCode == KeyEvent.KEYCODE_BACK) { // ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½Î·ï¿½ï¿½Ø¼ï¿½
+			setResult(3);// this.setResult(int resultCode)ï¿½ï¿½resultCode ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½
 			finish();
 			return true;
 		}

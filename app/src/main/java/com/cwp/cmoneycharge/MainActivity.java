@@ -2,7 +2,7 @@ package com.cwp.cmoneycharge;
 
 import java.util.Calendar;
 
-import com.cwp.chart.SystemBarTintManager;
+import com.cwp.chart.manager.SystemBarTintManager;
 import com.cwp.fragment.FragmentPage2;
 import com.cwp.fragment.FragmentPage3;
 import com.cwp.pattern.UnlockGesturePasswordActivity;

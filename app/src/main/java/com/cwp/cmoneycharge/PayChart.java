@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Random;
 
 import com.cwp.chart.ChartProp;
-import com.cwp.chart.ChartPropChangeListener;
-import com.cwp.chart.MenuFragment;
-import com.cwp.chart.MyButton;
-import com.cwp.chart.PieView;
-import com.cwp.chart.SystemBarTintManager;
+import com.cwp.chart.listener.ChartPropChangeListener;
+import com.cwp.chart.fragment.MenuFragment;
+import com.cwp.chart.widget.MyButton;
+import com.cwp.chart.widget.PieView;
+import com.cwp.chart.manager.SystemBarTintManager;
 import com.cwp.pattern.UnlockGesturePasswordActivity;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingActivity;

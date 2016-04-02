@@ -1,7 +1,10 @@
-package com.cwp.chart;
+package com.cwp.chart.widget;
 
 import java.util.ArrayList;
 
+import com.cwp.chart.ChartProp;
+import com.cwp.chart.listener.ChartPropChangeListener;
+import com.cwp.chart.PiewController;
 import com.cwp.cmoneycharge.PayChart;
 import com.cwp.cmoneycharge.R;
 
@@ -17,15 +20,12 @@ import android.graphics.Point;
 import android.graphics.RectF;
 
 import android.graphics.Paint;
-import android.graphics.Paint.FontMetrics;
 
-import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 
 import android.view.View;
-import android.view.View.MeasureSpec;
 
 public class PieView extends View implements View.OnTouchListener, Runnable {
 
@@ -33,15 +33,15 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 	private float m_y = 0;
 
 	private static ArrayList<ChartProp> mChartProps;
-	private float screenHight, screenWidth;// ÆÁÄ»µÄ¿íºÍ¸ß
+	private float screenHight, screenWidth;// ï¿½ï¿½Ä»ï¿½Ä¿ï¿½Í¸ï¿½
 
-	private float radius;// »æÖÆÔ²µÄ°ë¾¶
-	private float startAngle;// ?½Ç¶È
-	private float sweepAngle = 0.0f; // É¨¹ıµÄ½Çø
-	private int itemCount;// Ñ¡Ïî¸öÊı
+	private float radius;// ï¿½ï¿½ï¿½ï¿½Ô²ï¿½Ä°ë¾¶
+	private float startAngle;// ï¿½ï¿½?ï¿½Ç¶ï¿½
+	private float sweepAngle = 0.0f; // É¨ï¿½ï¿½Ä½Çï¿½
+	private int itemCount;// Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½
 	private float startSpeed = 0;
 
-	private boolean firstEnter = true; // ³ÌĞòÊÇ·ñÒÑ¾­ßT?
+	private boolean firstEnter = true; // ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ñ¾ï¿½ï¿½T?
 	private boolean rotateEnabled = false;
 	private boolean tounched = false;
 	private boolean done = false;
@@ -102,24 +102,24 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 
 		float f1 = centerPoint.x;
 		float f2 = centerPoint.y;
-		// Ìî³ä±³¾°Üµ
+		// ï¿½ï¿½ä±³ï¿½ï¿½Üµ
 		/*
 		 * mCanvas.drawColor(0xff639EC3); mCanvas.save();
 		 */
 
-		// *********************************È·¶¨²ÎßD?Óò*************************************
-		float f3 = f1 - radius;// X½Î- ˆ
-		float f4 = f2 - radius; // Y½Î- Ø¯
-		float f5 = f1 + radius; // X½Î- …·
-		float f6 = f2 + radius; // Y½Î- Ø¯
+		// *********************************È·ï¿½ï¿½ï¿½ï¿½ï¿½D?ï¿½ï¿½*************************************
+		float f3 = f1 - radius;// Xï¿½ï¿½- ï¿½ï¿½
+		float f4 = f2 - radius; // Yï¿½ï¿½- Ø¯
+		float f5 = f1 + radius; // Xï¿½ï¿½- ï¿½ï¿½
+		float f6 = f2 + radius; // Yï¿½ï¿½- Ø¯
 		RectF rectF = new RectF(f3, f4, f5, f6);
 
-		// *********************************»­Ã¿¸öÇøÓòµÄÑÕÉ«ˆ}********************************
+		// *********************************ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½}********************************
 		drawItem(rectF);
-		// *********************************»­±ßÉÏ½¥±äµÄÔ²»·³öÀ´*******************************
+		// *********************************ï¿½ï¿½ï¿½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ï¿½Ô²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*******************************
 
 		drawableCenterCircle(f1, f2);
-		// ½âËøCanvas£¬²¢äÖÈ¾µ±Ç°Í¼Ïñ
+		// ï¿½ï¿½ï¿½ï¿½Canvasï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¾ï¿½ï¿½Ç°Í¼ï¿½ï¿½
 
 		if (!(mChartProp == tChartProp)) {
 			listener.getChartProp(mChartProp);
@@ -146,21 +146,21 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 	private void init() {
 
 		myThread = new Thread(this);
-		// ´´½¨Ø¯?ĞÂµÄSurfaceHolder£ß²¢·ÖÅäÕâ¸öÀà×÷ÎªËüµÄ»Øµ÷(callback)
+		// ï¿½ï¿½ï¿½ï¿½Ø¯?ï¿½Âµï¿½SurfaceHolderï¿½ß²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ä»Øµï¿½(callback)
 
 		mChartProps = new ArrayList<ChartProp>();
 
-		// Í¼Ïñ»­±Ê
+		// Í¼ï¿½ñ»­±ï¿½
 		mPaint = new Paint();
 
 		mPaint.setAntiAlias(true);
-		// ÎÄ×Ö»­±Ê
+		// ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½
 		textPaint = new Paint();
 		textPaint.setTextSize(22);
 		textPaint.setColor(Color.WHITE);
 		textPaint.setAntiAlias(true);
 
-		// °ë¾¶
+		// ï¿½ë¾¶
 
 		startAngle = 90f;
 
@@ -208,11 +208,11 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 	}
 
 	/**
-	 * create charts' property ´´½¨±ı×´Í¼µÄÊôë
+	 * create charts' property ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param chartsNum
-	 *            charts' number ±ı×´Í¼µÄ¸öÊı
-	 * @return charts' property's list ±ı×´Í¼ÊôĞÔµÄlist
+	 *            charts' number ï¿½ï¿½×´Í¼ï¿½Ä¸ï¿½ï¿½ï¿½
+	 * @return charts' property's list ï¿½ï¿½×´Í¼ï¿½ï¿½ï¿½Ôµï¿½list
 	 */
 	public ArrayList<ChartProp> createCharts(int itemCount) {
 		this.itemCount = itemCount;
@@ -223,13 +223,13 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 		return mChartProps;
 	}
 
-	// ÖØĞÂ³õÊ¼Ää
+	// ï¿½ï¿½ï¿½Â³ï¿½Ê¼ï¿½ï¿½
 	public void reInit() {
 		startAngle = 90f;
-		firstEnter = true; // ³ÌĞòÊÇ·ñÒÑ¾­ßT?
+		firstEnter = true; // ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ñ¾ï¿½ï¿½T?
 	}
 
-	// µÚÒ»´Î²ÎÊı½øĞĞ¸Ä±äºóµÄ³õÊ¼»¯µ÷ÓÃ
+	// ï¿½ï¿½Ò»ï¿½Î²ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¸Ä±ï¿½ï¿½Ä³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void initPercents() {
 
 		for (int i = 0; i < itemCount; i++) {
@@ -246,10 +246,10 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 	}
 
 	/**
-	 * actually create chartProp objects. ÕæÕı´´½¨ÉÈĞÎÊô{?·½›
+	 * actually create chartProp objects. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½{?ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param chartsNum
-	 *            charts' number ±ı×´Í¼µÄ¸öÊı
+	 *            charts' number ï¿½ï¿½×´Í¼ï¿½Ä¸ï¿½ï¿½ï¿½
 	 */
 	private void createChartProp(int chartsNum) {
 		for (int i = 0; i < chartsNum; i++) {
@@ -290,7 +290,7 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
-		// ¸ß¶È
+		// ï¿½ß¶ï¿½
 		screenHight = (float) PiewController.measureWidth(heightMeasureSpec);
 
 		screenWidth = (float) PiewController.measureHeight(widthMeasureSpec);
@@ -301,28 +301,28 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 
 	private int measureWidth(int pWidthMeasureSpec) {
 		int result = 0;
-		int widthMode = MeasureSpec.getMode(pWidthMeasureSpec);// µÃµ½Ä£Ê½
-		int widthSize = MeasureSpec.getSize(pWidthMeasureSpec);// µÃµ½³ß´ç
+		int widthMode = MeasureSpec.getMode(pWidthMeasureSpec);// ï¿½Ãµï¿½Ä£Ê½
+		int widthSize = MeasureSpec.getSize(pWidthMeasureSpec);// ï¿½Ãµï¿½ï¿½ß´ï¿½
 
 		switch (widthMode) {
 		/**
-		 * mode¹²ÓĞÈıÖÖÇé¿ö£¬È¡Öµ·Ö±ğÎªMeasureSpec.UNSPECIFIED, MeasureSpec.EXACTLY,
+		 * modeï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡Öµï¿½Ö±ï¿½ÎªMeasureSpec.UNSPECIFIED, MeasureSpec.EXACTLY,
 		 * MeasureSpec.AT_MOST?
 		 * 
 		 * 
-		 * MeasureSpec.EXACTLYÊÇ¾«È·³ß´ç£¬
-		 * µ±ÎÒÃÇ½«¿Ø¼şµÄlayout_width»òlayout_heightÖ¸¶¨Îª¾ßÌåÊıÖµÊ±Èçandorid
-		 * :layout_width="50dip"£¬»òÕßÎªFILL_PARENTÊÇ£¬¶¼ÊÇ¿Ø¼ş´óĞ¡ÒÑ¾­È·¶¨µÄÇé¿ö£¬¶¼ÊÇ¾«È·³ß´ç?
+		 * MeasureSpec.EXACTLYï¿½Ç¾ï¿½È·ï¿½ß´ç£¬
+		 * ï¿½ï¿½ï¿½ï¿½ï¿½Ç½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½layout_widthï¿½ï¿½layout_heightÖ¸ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÊ±ï¿½ï¿½andorid
+		 * :layout_width="50dip"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªFILL_PARENTï¿½Ç£ï¿½ï¿½ï¿½ï¿½Ç¿Ø¼ï¿½ï¿½ï¿½Ğ¡ï¿½Ñ¾ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½È·ï¿½ß´ï¿½?
 		 * 
 		 * 
-		 * MeasureSpec.AT_MOSTÊÇ×î´ó³ß´ç£¬
-		 * µ±¿Ø¼şµÄlayout_width»òlayout_heightÖ¸¶¨ÎªWRAP_CONTENT•J
-		 * £¬¿Ø¼ş´óĞ¡Ò»°ãËæî£¦¶¼şµÄ×Ó¿Õ¼ä»òÄÚÈİ½øĞĞ±ä»¯£¬´ËÊ±¿Ø¼ş³ß´çÖ»Òª²»³¬¹ı¸¸¿Ø¼şÔÊĞíµÄ–c?³ß´ç¼´¿É
-		 * ¡£Òò´Ë£¬´ËÊ±µÄmodeÊÇAT_MOST£¬size¸ø³öÁË¸¸¿Ø¼şÔÊĞíµÄ×î´ó³ß´ç?
+		 * MeasureSpec.AT_MOSTï¿½ï¿½ï¿½ï¿½ï¿½ß´ç£¬
+		 * ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½layout_widthï¿½ï¿½layout_heightÖ¸ï¿½ï¿½ÎªWRAP_CONTENTï¿½J
+		 * ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½Ğ¡Ò»ï¿½ï¿½ï¿½ï¿½î£¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½İ½ï¿½ï¿½Ğ±ä»¯ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Ø¼ï¿½ï¿½ß´ï¿½Ö»Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½Ä–c?ï¿½ß´ç¼´ï¿½ï¿½
+		 * ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½Ê±ï¿½ï¿½modeï¿½ï¿½AT_MOSTï¿½ï¿½sizeï¿½ï¿½ï¿½ï¿½Ë¸ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß´ï¿½?
 		 * 
 		 * 
-		 * MeasureSpec.UNSPECIFIEDÊÇÎ´Ö¸¶¨³ß´ç£¬ÕâÖÖÇé¿ö²»¶à£¬Ø¯?¶¼ÊÇ¸¸¿Ø¼şÊÇAdapterView£ß
-		 * Í¨¹ımeasure·½·¨´«ÈëµÄÄ£Ê½?
+		 * MeasureSpec.UNSPECIFIEDï¿½ï¿½Î´Ö¸ï¿½ï¿½ï¿½ß´ç£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à£¬Ø¯?ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½AdapterViewï¿½ï¿½
+		 * Í¨ï¿½ï¿½measureï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½?
 		 */
 		case MeasureSpec.AT_MOST:
 		case MeasureSpec.EXACTLY:
@@ -399,14 +399,14 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 		 */
 
 		// Paint localPaint = new Paint();
-		// ÉèÖÃÈ¡Ïû¾â³İĞ§¹û
+		// ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ğ§ï¿½ï¿½
 		// localPaint.setAntiAlias(true);
-		// ·ç¸ñÎªÔ²«x
+		// ï¿½ï¿½ï¿½ÎªÔ²ï¿½x
 		/*
-		 * localPaint.setStyle(Paint.Style.STROKE); // Ô²»·¿í¶È
+		 * localPaint.setStyle(Paint.Style.STROKE); // Ô²ï¿½ï¿½ï¿½ï¿½ï¿½
 		 * localPaint.setStrokeWidth(circleRadius);
 		 */
-		// Ô²»·±³¾°
+		// Ô²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 		mCanvas.drawBitmap(myBg, 0, 0, null);
 		mCanvas.save();
@@ -415,8 +415,8 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 		textPaint.setTextAlign(Paint.Align.CENTER);
 		textPaint.setTextSize(x / 10);
 
-		mCanvas.drawText("×Ü¼Æ", x, y - x / 12, textPaint);
-		mCanvas.drawText(PayChart.getamount(), x, y + x / 10, textPaint); // ×Ü¼Æ
+		mCanvas.drawText("ï¿½Ü¼ï¿½", x, y - x / 12, textPaint);
+		mCanvas.drawText(PayChart.getamount(), x, y + x / 10, textPaint); // ï¿½Ü¼ï¿½
 		mCanvas.save();
 	}
 
@@ -466,7 +466,7 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 		return mChartProp;
 	}
 
-	// *********************************»­Ã¿¸öÉÈ·********************************
+	// *********************************ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½Èï¿½********************************
 	public void drawItem(RectF localRectf) {
 		float temp = startAngle;
 		float borderAngle = getBorderAngle();
@@ -476,15 +476,15 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 				for (int i = 0; i < itemCount; i++) {
 					if (i < mChartProps.size()) {
 						mPaint.setColor(mChartProps.get(i).getColor());
-						// startAngleÎªÃ¿´ÎÒÆ¶¯µÄ½Ç¶È´óĞ¡
+						// startAngleÎªÃ¿ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½Ä½Ç¶È´ï¿½Ğ¡
 						sweepAngle = mChartProps.get(i).getSweepAngle();
 						mChartProps.get(i).setStartAngle(temp);
 
 						/*
-						 * oval£ºÔ²»¡ËùÔÚµÄÍÖÔ²¶ÔÏó?startAngle£ºÔ²»¡µÄÆğÊ¼½Ç¶È¡£sweepAngle£ºÔ²»¡µÄ½Ç¶È?
-						 * useCenter£º
-						 * ÊÇ·ñÏÔÊ¾°ë¾¶Á¬Ïß£¬true±íÊ¾ÏÔÊ¾Ô²»¡ÓëÔ²ĞÄµÄ°ë¾¶Á¬Ïß£¬false±íÊ¾²»ÏÔÊ¾?paint
-						 * £º»æÖÆÊ±³Ğ?ÓÃµÄ»­±Ê
+						 * ovalï¿½ï¿½Ô²ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½Ô²ï¿½ï¿½ï¿½ï¿½?startAngleï¿½ï¿½Ô²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½Ç¶È¡ï¿½sweepAngleï¿½ï¿½Ô²ï¿½ï¿½ï¿½Ä½Ç¶ï¿½?
+						 * useCenterï¿½ï¿½
+						 * ï¿½Ç·ï¿½ï¿½ï¿½Ê¾ï¿½ë¾¶ï¿½ï¿½ï¿½ß£ï¿½trueï¿½ï¿½Ê¾ï¿½ï¿½Ê¾Ô²ï¿½ï¿½ï¿½ï¿½Ô²ï¿½ÄµÄ°ë¾¶ï¿½ï¿½ï¿½ß£ï¿½falseï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Ê¾?paint
+						 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½?ï¿½ÃµÄ»ï¿½ï¿½ï¿½
 						 */
 						mCanvas.drawArc(localRectf, temp, sweepAngle, true,
 								mPaint);

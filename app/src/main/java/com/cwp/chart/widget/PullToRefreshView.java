@@ -1,4 +1,4 @@
-package com.cwp.chart;
+package com.cwp.chart.widget;
 
 import java.util.Date;
 

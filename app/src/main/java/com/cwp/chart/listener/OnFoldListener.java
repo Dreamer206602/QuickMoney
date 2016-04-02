@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.cwp.chart;
+package com.cwp.chart.listener;
 
 /**
  * This interface listens for when the folding layout begins folding (enters

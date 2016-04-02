@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="记账"
+            android:text="@string/account"
             android:textColor="@android:color/black" />
     </RelativeLayout>
 
@@ -49,6 +49,7 @@
         android:layout_marginTop="20dp" >
 
         <ImageView
+
             android:id="@+id/example_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,7 +66,7 @@
             android:src="@drawable/chart_right_btn" />
     </RelativeLayout>
 
-    <com.cwp.chart.PieChart
+    <com.cwp.chart.widget.PieChart
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -73,7 +74,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="30dp" >
 
-        <com.cwp.chart.PieView
+        <com.cwp.chart.widget.PieView
             android:id="@+id/lotteryView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -103,7 +104,7 @@
             android:tag="pieText"
             android:textColor="#ffffffff"
             android:textSize="12sp" />
-    </com.cwp.chart.PieChart>
+    </com.cwp.chart.widget.PieChart>
 
     <LinearLayout
         android:id="@+id/pdataselect"
@@ -134,7 +135,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="从："
+                    android:text="@string/since"
                     android:textColor="#ffffff" />
 
                 <Spinner
@@ -150,7 +151,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="年"
+                    android:text="@string/year"
                     android:textColor="#ffffff" />
 
                 <Spinner
@@ -167,7 +168,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="月"
+                    android:text="@string/month"
                     android:textColor="#ffffff" />
 
                 <Spinner
@@ -190,7 +191,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="到："
+                    android:text="@string/to"
                     android:textColor="#ffffff" />
 
                 <Spinner
@@ -206,7 +207,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="年"
+                    android:text="@string/year"
                     android:textColor="#ffffff" />
 
                 <Spinner
@@ -223,7 +224,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="月"
+                    android:text="@string/month"
                     android:textColor="#ffffff" />
 
                 <Spinner
@@ -245,7 +246,7 @@
             android:layout_weight="2"
             android:background="#e6e6e6"
             android:listSelector="@drawable/selector"
-            android:text="设置"
+            android:text="@string/setting"
             android:textColor="#800000" />
     </LinearLayout>
 
@@ -281,7 +282,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
                     android:layout_marginTop="6.0dip"
-                    android:text="明细"
+                    android:text="@string/details"
                     android:textColor="@color/tab_friendfeed_text"
                     android:textSize="12sp" />
             </FrameLayout>

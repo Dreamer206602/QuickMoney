@@ -143,5 +143,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="account">记账</string>
+    <string name="since">从：</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="to">到：</string>
+    <string name="details">明细</string>
 
 </resources>

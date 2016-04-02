@@ -1,4 +1,4 @@
-package com.cwp.chart;
+package com.cwp.chart.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import com.cwp.chart.PiewController;
 
 public class PieChart extends ViewGroup {
 
@@ -35,7 +37,7 @@ public class PieChart extends ViewGroup {
 	private int m_measureHeight = 0;
 
 	/**
-	 * ¼ÆËã¿Ø¼şµÄ´óÄò
+	 * ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½Ä´ï¿½ï¿½ï¿½
 	 */
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -43,26 +45,26 @@ public class PieChart extends ViewGroup {
 		m_measureWidth = PiewController.measureWidth(widthMeasureSpec);
 		Log.e("caizh", "m_measureWidth=" + m_measureWidth);
 		m_measureHeight = PiewController.measureHeight(heightMeasureSpec);
-		// ¼ÆËã×Ô¶¨ÒåµÄViewGroupÖĞËùÓĞ×Ó¿Ø¼şµÄ´óÄò
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ViewGroupï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿Ø¼ï¿½ï¿½Ä´ï¿½ï¿½ï¿½
 		measureChildren(widthMeasureSpec, heightMeasureSpec);
-		// ÉèÖÃ×Ô¶¨ÒåµÄ¿Ø¼şMyViewGroupµÄ´óÄò
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½Ä¿Ø¼ï¿½MyViewGroupï¿½Ä´ï¿½ï¿½ï¿½
 		setMeasuredDimension(m_measureWidth, m_measureHeight);
 	}
 
 	/**
-	 * ¸²Ğ´onLayout£¬ÆäÄ¿µÄÊÇÎªÁËÖ¸¶¨ÊÓÍ¼µÄÏÔÊ¾Î»ÖÃ£¬·½·¨Ö´ĞĞµÄÇ°ºóË³ĞòÊÇÔÚonMeasureÖ®ºó£¬ÒòÎªÊÓÍ¼¿Ï¶¨ÊÇÖ»ÓĞÖªµÀ´óĞ¡µÄÇé¿öÏÂ£ß
-	 * ²ÅÄÜÈ·¶¨ÔõÃ´°Ú·Å
+	 * ï¿½ï¿½Ğ´onLayoutï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½Ê¾Î»ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ğµï¿½Ç°ï¿½ï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½onMeasureÖ®ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Í¼ï¿½Ï¶ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Öªï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â£ï¿½
+	 * ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½Ã´ï¿½Ú·ï¿½
 	 */
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
-		// ¼ÇÂ¼×Ü¸ßø
+		// ï¿½ï¿½Â¼ï¿½Ü¸ßï¿½
 		Log.e("caizh", "l=" + l);
-		// ±éÀú³Ğ?×ÓÊÓàó
+		// ï¿½ï¿½ï¿½ï¿½ï¿½?ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		int childCount = getChildCount();
 		for (int i = 0; i < childCount; i++) {
 			View childView = getChildAt(i);
 
-			// »ñÈ¡ÔÚonMeasureÖĞ¼ÆËãµÄÊÓÍ¼³ß´ç
+			// ï¿½ï¿½È¡ï¿½ï¿½onMeasureï¿½Ğ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ß´ï¿½
 			int measureHeight = childView.getMeasuredHeight();
 			int measuredWidth = childView.getMeasuredWidth();
 			if (childView.getTag().equals("pieButton")) {

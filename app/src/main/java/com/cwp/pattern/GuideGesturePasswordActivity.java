@@ -1,7 +1,6 @@
 package com.cwp.pattern;
 
-import com.cwp.chart.SystemBarTintManager;
-import com.cwp.cmoneycharge.About;
+import com.cwp.chart.manager.SystemBarTintManager;
 import com.cwp.cmoneycharge.CrashApplication;
 import com.cwp.cmoneycharge.R;
 import com.cwp.cmoneycharge.SysApplication;
@@ -15,7 +14,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
-import android.widget.Toast;
 
 public class GuideGesturePasswordActivity extends Activity {
 
@@ -25,7 +23,7 @@ public class GuideGesturePasswordActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.gesturepassword_guide);
 
-		SysApplication.getInstance().addActivity(this); // ÔÚÏú»Ù¶ÓÁÐÖÐÌí¼Óthis
+		SysApplication.getInstance().addActivity(this); // ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½this
 
 		SystemBarTintManager mTintManager;
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -44,7 +42,7 @@ public class GuideGesturePasswordActivity extends Activity {
 						Intent intent = new Intent(
 								GuideGesturePasswordActivity.this,
 								CreateGesturePasswordActivity.class);
-						// ´ò¿ªÐÂµÄActivity
+						// ï¿½ï¿½ï¿½Âµï¿½Activity
 						startActivityForResult(intent, 1);
 					}
 				});

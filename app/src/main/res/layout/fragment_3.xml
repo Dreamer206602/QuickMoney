@@ -45,7 +45,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="26sp" />
 
-            <com.cwp.chart.RiseNumberTextView
+            <com.cwp.chart.widget.RiseNumberTextView
                 android:id="@+id/sum_total"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -163,7 +163,7 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <com.cwp.chart.PullToRefreshView
+    <com.cwp.chart.widget.PullToRefreshView
         android:id="@+id/main_pull_refresh_view"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
@@ -177,6 +177,6 @@
             android:background="@drawable/rect_white_bg"
             android:drawSelectorOnTop="false" >
         </ExpandableListView>
-    </com.cwp.chart.PullToRefreshView>
+    </com.cwp.chart.widget.PullToRefreshView>
 
 </LinearLayout>

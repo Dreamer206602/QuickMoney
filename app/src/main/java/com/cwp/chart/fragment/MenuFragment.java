@@ -1,11 +1,10 @@
-package com.cwp.chart;
+package com.cwp.chart.fragment;
 
+import com.cwp.chart.manager.SystemBarTintManager;
 import com.cwp.cmoneycharge.PayChart;
-import com.cwp.cmoneycharge.PayData;
 import com.cwp.cmoneycharge.R;
 
 import android.annotation.TargetApi;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 /**
  * menu fragment ，主要是用于显示menu菜单

@@ -1,5 +1,6 @@
-package com.cwp.chart;
+package com.cwp.chart.widget;
 
+import com.cwp.chart.adapter.CheckAdapter;
 import com.cwp.cmoneycharge.R;
 
 import android.app.Dialog;
@@ -12,12 +13,14 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+/**
+ * 自定义多种选择的Dialog
+ */
 
 public class CustomMultiChoiceDialog extends Dialog {
 
@@ -70,10 +73,9 @@ public class CustomMultiChoiceDialog extends Dialog {
 
 		/**
 		 * Set the Dialog message from resource
-		 * 
-		 * @param title
-		 * @return
-		 */
+		 * @param message
+         * @return
+         */
 		public Builder setMessage(int message) {
 			this.message = (String) context.getText(message);
 			return this;

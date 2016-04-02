@@ -1,18 +1,14 @@
 package com.cwp.cmoneycharge;
 
-import com.cwp.chart.SystemBarTintManager;
-import com.cwp.pattern.GuideGesturePasswordActivity;
+import com.cwp.chart.manager.SystemBarTintManager;
 import com.cwp.pattern.UnlockGesturePasswordActivity;
 import com.cwp.pattern.UpdateManager;
 import com.umeng.fb.example.CustomActivity;
 
 import cwp.moneycharge.dao.AccountDAO;
 import cwp.moneycharge.dao.IncomeDAO;
-import cwp.moneycharge.dao.ItypeDAO;
 import cwp.moneycharge.dao.NoteDAO;
 import cwp.moneycharge.dao.PayDAO;
-import cwp.moneycharge.dao.PtypeDAO;
-import cwp.moneycharge.model.ActivityManager;
 import cwp.moneycharge.model.CustomDialog;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -26,14 +22,11 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,7 +43,7 @@ public class About extends Activity {
 	NoteDAO noteDAO = new NoteDAO(About.this);
 	static SharedPreferences sp;
 	Editor edit;
-	private final int REQUESTCODE = 1; // ·µ»ØµÄ½á¹ûÂë
+	private final int REQUESTCODE = 1; // ï¿½ï¿½ï¿½ØµÄ½ï¿½ï¿½ï¿½ï¿½
 	private TextView app_version;
 	private TextView updateapp;
 	private TextView feedback;
@@ -66,7 +59,7 @@ public class About extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.about);
 
-		SysApplication.getInstance().addActivity(this); // ÔÚÏú»Ù¶ÓÁÐÖÐÌí¼Óthis
+		SysApplication.getInstance().addActivity(this); // ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½this
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 			setTranslucentStatus(true);
@@ -111,7 +104,7 @@ public class About extends Activity {
 		intentr = getIntent();
 		userid = intentr.getIntExtra("cwp.id", 100000001);
 		if (userid == 100000001)
-			usernow.setText("Ä¬ÈÏÓÃ»§");
+			usernow.setText("Ä¬ï¿½ï¿½ï¿½Ã»ï¿½");
 		else {
 			usernow.setText(accountDAO.find(userid));
 		}
@@ -130,12 +123,12 @@ public class About extends Activity {
 			@Override
 			public void onClick(View v) {
 				UpdateManager manager = new UpdateManager(About.this);
-				// ¼ì²éÈí¼þ¸üÐÂ
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				manager.checkUpdate("show");
 			}
 		});
 
-		class OnClickListenermd implements OnClickListener { // ÐÞ¸ÄÃÜÂë
+		class OnClickListenermd implements OnClickListener { // ï¿½Þ¸ï¿½ï¿½ï¿½ï¿½ï¿½
 
 			@Override
 			public void onClick(View v) {
@@ -146,23 +139,23 @@ public class About extends Activity {
 			}
 		}
 
-		if (sp.getString("gesturepw", "").equals("¹Ø")
+		if (sp.getString("gesturepw", "").equals("ï¿½ï¿½")
 				|| sp.getString("gesturepw", "").equals("")) {
-			gesturepw.setText("¹Ø");
+			gesturepw.setText("ï¿½ï¿½");
 		} else {
-			gesturepw.setText("¿ª");
+			gesturepw.setText("ï¿½ï¿½");
 			gesturepwmd.setVisibility(View.VISIBLE);
 			if (CrashApplication.getInstance().getLockPatternUtils()
 					.savedPatternExists()) {
-				gesturepwmd.setOnClickListener(new OnClickListenermd()); // ÐÞ¸ÄÃÜÂë
+				gesturepwmd.setOnClickListener(new OnClickListenermd()); // ï¿½Þ¸ï¿½ï¿½ï¿½ï¿½ï¿½
 			}
 		}
 
-		if (sp.getString("sendlog", "").equals("¹Ø")
+		if (sp.getString("sendlog", "").equals("ï¿½ï¿½")
 				|| sp.getString("sendlog", "").equals("")) {
-			sendlog.setText("¹Ø");
+			sendlog.setText("ï¿½ï¿½");
 		} else {
-			sendlog.setText("¿ª");
+			sendlog.setText("ï¿½ï¿½");
 		}
 		countuser.setText(String.valueOf(accountDAO.getCount()));
 		countpay.setText(String.valueOf(payDAO.getCount(userid)));
@@ -174,28 +167,28 @@ public class About extends Activity {
 				CustomDialog.Builder customBuilder = new CustomDialog.Builder(
 						About.this);
 
-				customBuilder.setTitle("ÌáÊ¾"); // ´´½¨±êÌâ
+				customBuilder.setTitle("ï¿½ï¿½Ê¾"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				customBuilder
-						.setMessage("ÊÇ·ñ¿ªÆô/¹Ø±ÕÊÖÊÆÃÜÂë£¿\n×¢Òâ£º¹Ø±ÕÊÖÊÆÃÜÂëÐèÊäÈëÔ­ÃÜÂë£¡")
-						.setPositiveButton("¿ªÆô",
+						.setMessage("ï¿½Ç·ï¿½ï¿½ï¿½/ï¿½Ø±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë£¿\n×¢ï¿½â£ºï¿½Ø±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ë£¡")
+						.setPositiveButton("ï¿½ï¿½ï¿½ï¿½",
 								new DialogInterface.OnClickListener() {
 
 									public void onClick(DialogInterface dialog,
 											int which) {
 										dialog.dismiss();
 										if (!sp.getString("gesturepw", "")
-												.equals("¿ª")) {
+												.equals("ï¿½ï¿½")) {
 											Intent intent = new Intent(
 													About.this,
 													UnlockGesturePasswordActivity.class);
 											intent.putExtra("cwp.pwenable",
 													"enable");
 											startActivityForResult(intent,
-													REQUESTCODE); // ±íÊ¾¿ÉÒÔ·µ»Ø½á¹û
+													REQUESTCODE); // ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ô·ï¿½ï¿½Ø½ï¿½ï¿½
 										}
 									}
 								})
-						.setNegativeButton("¹Ø±Õ",
+						.setNegativeButton("ï¿½Ø±ï¿½",
 								new DialogInterface.OnClickListener() {
 
 									public void onClick(DialogInterface dialog,
@@ -206,11 +199,11 @@ public class About extends Activity {
 												UnlockGesturePasswordActivity.class);
 										intent.putExtra("cwp.pwclear", "clear");
 										startActivityForResult(intent,
-												REQUESTCODE); // ±íÊ¾¿ÉÒÔ·µ»Ø½á¹û
+												REQUESTCODE); // ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ô·ï¿½ï¿½Ø½ï¿½ï¿½
 									}
 								});
-				Dialog dialog = customBuilder.create();// ´´½¨¶Ô»°¿ò
-				dialog.show(); // ÏÔÊ¾¶Ô»°¿ò
+				Dialog dialog = customBuilder.create();// ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½
+				dialog.show(); // ï¿½ï¿½Ê¾ï¿½Ô»ï¿½ï¿½ï¿½
 			}
 		});
 
@@ -220,34 +213,34 @@ public class About extends Activity {
 				CustomDialog.Builder customBuilder = new CustomDialog.Builder(
 						About.this);
 
-				customBuilder.setTitle("ÌáÊ¾"); // ´´½¨±êÌâ
+				customBuilder.setTitle("ï¿½ï¿½Ê¾"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				customBuilder
-						.setMessage("ÊÇ·ñ¿ªÆô/¹Ø±Õ·¢ËÍ´íÎóÈÕÖ¾¹¦ÄÜ£¿\n×¢Òâ£ºÐèÍË³ö³ÌÐòÖØÐÂ½øÈëÍê³É³õÊ¼»¯£¡")
-						.setPositiveButton("¿ªÆô",
+						.setMessage("ï¿½Ç·ï¿½ï¿½ï¿½/ï¿½Ø±Õ·ï¿½ï¿½Í´ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½Ü£ï¿½\n×¢ï¿½â£ºï¿½ï¿½ï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â½ï¿½ï¿½ï¿½ï¿½ï¿½É³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½")
+						.setPositiveButton("ï¿½ï¿½ï¿½ï¿½",
 								new DialogInterface.OnClickListener() {
 
 									public void onClick(DialogInterface dialog,
 											int which) {
-										edit.putString("sendlog", "¿ª");
+										edit.putString("sendlog", "ï¿½ï¿½");
 										edit.commit();
-										sendlog.setText("¿ª");
+										sendlog.setText("ï¿½ï¿½");
 										dialog.dismiss();
 									}
 								})
-						.setNegativeButton("¹Ø±Õ",
+						.setNegativeButton("ï¿½Ø±ï¿½",
 								new DialogInterface.OnClickListener() {
 
 									public void onClick(DialogInterface dialog,
 											int which) {
-										edit.putString("sendlog", "¹Ø");
+										edit.putString("sendlog", "ï¿½ï¿½");
 										edit.commit();
-										sendlog.setText("¹Ø");
+										sendlog.setText("ï¿½ï¿½");
 										dialog.dismiss();
 
 									}
 								});
-				Dialog dialog = customBuilder.create();// ´´½¨¶Ô»°¿ò
-				dialog.show(); // ÏÔÊ¾¶Ô»°¿ò
+				Dialog dialog = customBuilder.create();// ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½
+				dialog.show(); // ï¿½ï¿½Ê¾ï¿½Ô»ï¿½ï¿½ï¿½
 			}
 		});
 
@@ -268,23 +261,23 @@ public class About extends Activity {
 
 		if (requestCode == REQUESTCODE) {
 			if (resultCode == 2) {
-				edit.putString("gesturepw", "¹Ø");
+				edit.putString("gesturepw", "ï¿½ï¿½");
 				edit.commit();
-				gesturepw.setText("¹Ø");
+				gesturepw.setText("ï¿½ï¿½");
 				gesturepwmd.setVisibility(View.GONE);
 			}
 			if (resultCode == 3) {
-				edit.putString("gesturepw", "¿ª");
+				edit.putString("gesturepw", "ï¿½ï¿½");
 				edit.commit();
-				gesturepw.setText("¿ª");
+				gesturepw.setText("ï¿½ï¿½");
 				gesturepwmd.setVisibility(View.VISIBLE);
 			}
 		} else {
-			Toast.makeText(About.this, "²Ù×÷Ê§°Ü£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(About.this, "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½", Toast.LENGTH_LONG).show();
 		}
 	}
 
-	public static String getVersion(Context context)// »ñÈ¡°æ±¾ºÅ
+	public static String getVersion(Context context)// ï¿½ï¿½È¡ï¿½æ±¾ï¿½ï¿½
 	{
 		try {
 			PackageInfo pi = context.getPackageManager().getPackageInfo(
@@ -298,10 +291,10 @@ public class About extends Activity {
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) { // ¼à¿Ø/À¹½Ø/ÆÁ±Î·µ»Ø¼ü
+		if (keyCode == KeyEvent.KEYCODE_BACK) { // ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½Î·ï¿½ï¿½Ø¼ï¿½
 			Intent intent = new Intent(About.this, MainActivity.class);
 			intent.putExtra("cwp.id", userid);
-			intent.putExtra("cwp.Fragment", "4");// ÉèÖÃ´«µÝÊý¾Ý
+			intent.putExtra("cwp.Fragment", "4");// ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			startActivity(intent);
 			return true;
 		}

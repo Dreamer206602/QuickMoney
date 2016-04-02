@@ -1,4 +1,4 @@
-package com.cwp.chart;
+package com.cwp.chart.adapter;
 
 import java.util.List;
 import java.util.Map;
@@ -39,7 +39,7 @@ public class MyAdspter extends BaseAdapter {
 	}
 
 	/**
-	 * »ñµÃÄ³Ò»Î»ÖÃµÄÊý¾Ý
+	 * ï¿½ï¿½ï¿½Ä³Ò»Î»ï¿½Ãµï¿½ï¿½ï¿½ï¿½
 	 */
 	@Override
 	public Object getItem(int position) {
@@ -47,7 +47,7 @@ public class MyAdspter extends BaseAdapter {
 	}
 
 	/**
-	 * »ñµÃÎ¨Ò»±êÊ¶
+	 * ï¿½ï¿½ï¿½Î¨Ò»ï¿½ï¿½Ê¶
 	 */
 	@Override
 	public long getItemId(int position) {
@@ -55,7 +55,7 @@ public class MyAdspter extends BaseAdapter {
 	}
 
 	/**
-	 * ×é¼þ¼¯ºÏ£¬¶ÔÓ¦list.xmlÖÐµÄ¿Ø¼þ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï£ï¿½ï¿½ï¿½Ó¦list.xmlï¿½ÐµÄ¿Ø¼ï¿½
 	 * 
 	 * @author Administrator
 	 */
@@ -78,7 +78,7 @@ public class MyAdspter extends BaseAdapter {
 		Zujian zujian = null;
 		if (convertView == null) {
 			zujian = new Zujian();
-			// »ñµÃ×é¼þ£¬ÊµÀý»¯×é¼þ
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½
 			convertView = layoutInflater.inflate(R.layout.list, null);
 			zujian.image = (ImageView) convertView
 					.findViewById(R.id.search_img);
@@ -100,7 +100,7 @@ public class MyAdspter extends BaseAdapter {
 		} else {
 			zujian = (Zujian) convertView.getTag();
 		}
-		// °ó¶¨Êý¾Ý
+		// ï¿½ï¿½ï¿½ï¿½ï¿½
 		zujian.image.setBackgroundResource((Integer) data.get(position).get(
 				"img"));
 		zujian.no.setText((String) data.get(position).get("no"));
@@ -116,7 +116,7 @@ public class MyAdspter extends BaseAdapter {
 					.setText((String) data.get(position).get("date"));
 		}
 
-		if (data.get(position).get("kind").toString().equals("[ÊÕÈë]")) {
+		if (data.get(position).get("kind").toString().equals("[ï¿½ï¿½ï¿½ï¿½]")) {
 			zujian.money.setTextColor(Color.parseColor("#ffff0000"));
 		} else {
 			zujian.money.setTextColor(Color.parseColor("#5ea98d"));

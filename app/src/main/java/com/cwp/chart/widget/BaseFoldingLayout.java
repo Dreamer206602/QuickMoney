@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.cwp.chart;
+package com.cwp.chart.widget;
 
 //import com.cwp.cmoneycharge.R;
 
@@ -34,6 +34,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cwp.chart.listener.OnFoldListener;
+import com.cwp.chart.utils.Util;
 import com.cwp.cmoneycharge.R;
 
 /**

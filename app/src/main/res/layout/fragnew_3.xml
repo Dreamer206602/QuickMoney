@@ -72,7 +72,7 @@
                 android:tag="service_arrow" />
         </RelativeLayout>
 
-        <com.cwp.chart.FoldingLayout
+        <com.cwp.chart.widget.FoldingLayout
             android:id="@+id/December_item"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -109,7 +109,7 @@
                     android:textSize="40sp"
                     android:visibility="gone" />
             </LinearLayout>
-        </com.cwp.chart.FoldingLayout>
+        </com.cwp.chart.widget.FoldingLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -180,7 +180,7 @@
                 android:tag="service_arrow" />
         </RelativeLayout>
 
-        <com.cwp.chart.FoldingLayout
+        <com.cwp.chart.widget.FoldingLayout
             android:id="@+id/November_item"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -217,7 +217,7 @@
                     android:textSize="40sp"
                     android:visibility="gone" />
             </LinearLayout>
-        </com.cwp.chart.FoldingLayout>
+        </com.cwp.chart.widget.FoldingLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -288,7 +288,7 @@
                 android:tag="service_arrow" />
         </RelativeLayout>
 
-        <com.cwp.chart.FoldingLayout
+        <com.cwp.chart.widget.FoldingLayout
             android:id="@+id/October_item"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -325,7 +325,7 @@
                     android:textSize="40sp"
                     android:visibility="gone" />
             </LinearLayout>
-        </com.cwp.chart.FoldingLayout>
+        </com.cwp.chart.widget.FoldingLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -396,7 +396,7 @@
                 android:tag="service_arrow" />
         </RelativeLayout>
 
-        <com.cwp.chart.FoldingLayout
+        <com.cwp.chart.widget.FoldingLayout
             android:id="@+id/September_item"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -433,7 +433,7 @@
                     android:textSize="40sp"
                     android:visibility="gone" />
             </LinearLayout>
-        </com.cwp.chart.FoldingLayout>
+        </com.cwp.chart.widget.FoldingLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -504,7 +504,7 @@
                 android:tag="service_arrow" />
         </RelativeLayout>
 
-        <com.cwp.chart.FoldingLayout
+        <com.cwp.chart.widget.FoldingLayout
             android:id="@+id/August_item"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -541,7 +541,7 @@
                     android:textSize="40sp"
                     android:visibility="gone" />
             </LinearLayout>
-        </com.cwp.chart.FoldingLayout>
+        </com.cwp.chart.widget.FoldingLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -612,7 +612,7 @@
                 android:tag="service_arrow" />
         </RelativeLayout>
 
-        <com.cwp.chart.FoldingLayout
+        <com.cwp.chart.widget.FoldingLayout
             android:id="@+id/July_item"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -649,7 +649,7 @@
                     android:textSize="40sp"
                     android:visibility="gone" />
             </LinearLayout>
-        </com.cwp.chart.FoldingLayout>
+        </com.cwp.chart.widget.FoldingLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -720,7 +720,7 @@
                 android:tag="service_arrow" />
         </RelativeLayout>
 
-        <com.cwp.chart.FoldingLayout
+        <com.cwp.chart.widget.FoldingLayout
             android:id="@+id/June_item"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -757,7 +757,7 @@
                     android:textSize="40sp"
                     android:visibility="gone" />
             </LinearLayout>
-        </com.cwp.chart.FoldingLayout>
+        </com.cwp.chart.widget.FoldingLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -829,7 +829,7 @@
                 android:tag="service_arrow" />
         </RelativeLayout>
 
-        <com.cwp.chart.FoldingLayout
+        <com.cwp.chart.widget.FoldingLayout
             android:id="@+id/May_item"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -866,7 +866,7 @@
                     android:textSize="40sp"
                     android:visibility="gone" />
             </LinearLayout>
-        </com.cwp.chart.FoldingLayout>
+        </com.cwp.chart.widget.FoldingLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -937,7 +937,7 @@
                 android:tag="service_arrow" />
         </RelativeLayout>
 
-        <com.cwp.chart.FoldingLayout
+        <com.cwp.chart.widget.FoldingLayout
             android:id="@+id/April_item"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -974,7 +974,7 @@
                     android:textSize="40sp"
                     android:visibility="gone" />
             </LinearLayout>
-        </com.cwp.chart.FoldingLayout>
+        </com.cwp.chart.widget.FoldingLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -1045,7 +1045,7 @@
                 android:tag="service_arrow" />
         </RelativeLayout>
 
-        <com.cwp.chart.FoldingLayout
+        <com.cwp.chart.widget.FoldingLayout
             android:id="@+id/March_item"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -1082,7 +1082,7 @@
                     android:textSize="40sp"
                     android:visibility="gone" />
             </LinearLayout>
-        </com.cwp.chart.FoldingLayout>
+        </com.cwp.chart.widget.FoldingLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -1154,7 +1154,7 @@
                 android:tag="service_arrow" />
         </RelativeLayout>
 
-        <com.cwp.chart.FoldingLayout
+        <com.cwp.chart.widget.FoldingLayout
             android:id="@+id/February_item"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -1191,7 +1191,7 @@
                     android:textSize="40sp"
                     android:visibility="gone" />
             </LinearLayout>
-        </com.cwp.chart.FoldingLayout>
+        </com.cwp.chart.widget.FoldingLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -1262,7 +1262,7 @@
                 android:tag="service_arrow" />
         </RelativeLayout>
 
-        <com.cwp.chart.FoldingLayout
+        <com.cwp.chart.widget.FoldingLayout
             android:id="@+id/January_item"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -1299,7 +1299,7 @@
                     android:textSize="40sp"
                     android:visibility="gone" />
             </LinearLayout>
-        </com.cwp.chart.FoldingLayout>
+        </com.cwp.chart.widget.FoldingLayout>
     </LinearLayout>
 
     <View

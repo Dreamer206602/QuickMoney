@@ -2,10 +2,8 @@ package com.cwp.pattern;
 
 import java.util.List;
 
-import com.cwp.chart.SystemBarTintManager;
-import com.cwp.cmoneycharge.About;
+import com.cwp.chart.manager.SystemBarTintManager;
 import com.cwp.cmoneycharge.CrashApplication;
-import com.cwp.cmoneycharge.Description;
 import com.cwp.cmoneycharge.DialogShowUtil;
 import com.cwp.cmoneycharge.R;
 import com.cwp.cmoneycharge.SysApplication;
@@ -13,9 +11,7 @@ import com.cwp.pattern.LockPatternView.Cell;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.ContextWrapper;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,7 +20,6 @@ import android.os.Handler;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;

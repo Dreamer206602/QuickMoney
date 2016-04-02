@@ -3,7 +3,7 @@ package com.cwp.pattern;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cwp.chart.SystemBarTintManager;
+import com.cwp.chart.manager.SystemBarTintManager;
 import com.cwp.cmoneycharge.CrashApplication;
 import com.cwp.cmoneycharge.R;
 import com.cwp.cmoneycharge.SysApplication;
@@ -12,7 +12,6 @@ import com.cwp.pattern.LockPatternView.DisplayMode;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -164,7 +163,7 @@ public class CreateGesturePasswordActivity extends Activity implements
 		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.gesturepassword_create);
-		SysApplication.getInstance().addActivity(this); // ÔÚÏú»Ù¶ÓÁÐÖÐÌí¼Óthis
+		SysApplication.getInstance().addActivity(this); // ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½this
 
 		SystemBarTintManager mTintManager;
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -174,7 +173,7 @@ public class CreateGesturePasswordActivity extends Activity implements
 		mTintManager.setStatusBarTintEnabled(true);
 		mTintManager.setStatusBarTintResource(R.color.statusbar_bg);
 
-		// ³õÊ¼»¯ÑÝÊ¾¶¯»­
+		// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
 		mAnimatePattern.add(LockPatternView.Cell.of(0, 0));
 		mAnimatePattern.add(LockPatternView.Cell.of(0, 1));
 		mAnimatePattern.add(LockPatternView.Cell.of(1, 1));
@@ -443,8 +442,8 @@ public class CreateGesturePasswordActivity extends Activity implements
 	private void saveChosenPatternAndFinish() {
 		CrashApplication.getInstance().getLockPatternUtils()
 				.saveLockPattern(mChosenPattern);
-		showToast("ÃÜÂëÉèÖÃ³É¹¦");
-		this.setResult(3);// this.setResult(int resultCode)£¬resultCode ¿ÉÒÔ×Ô¶¨Òå
+		showToast("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã³É¹ï¿½");
+		this.setResult(3);// this.setResult(int resultCode)ï¿½ï¿½resultCode ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½
 		this.finish();
 	}
 }

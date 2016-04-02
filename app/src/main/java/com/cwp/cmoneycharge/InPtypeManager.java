@@ -1,14 +1,12 @@
 package com.cwp.cmoneycharge;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import com.cwp.chart.SystemBarTintManager;
+import com.cwp.chart.manager.SystemBarTintManager;
 
 import cwp.moneycharge.dao.ItypeDAO;
 import cwp.moneycharge.dao.PtypeDAO;
-import cwp.moneycharge.model.ActivityManager;
 import cwp.moneycharge.model.CustomDialog;
 import cwp.moneycharge.model.Tb_itype;
 import cwp.moneycharge.model.Tb_ptype;
@@ -20,20 +18,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
 public class InPtypeManager extends Activity {
@@ -68,9 +63,9 @@ public class InPtypeManager extends Activity {
 		mTintManager.setStatusBarTintEnabled(true);
 		mTintManager.setStatusBarTintResource(R.color.statusbar_bg);
 
-		SysApplication.getInstance().addActivity(this); // ÔÚÏú»Ù¶ÓÁÐÖÐÌí¼Óthis
+		SysApplication.getInstance().addActivity(this); // ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½this
 		inptext = (TextView) findViewById(R.id.inptext);
-		lv = (ListView) findViewById(R.id.typelist);// µÃµ½ListView¶ÔÏóµÄÒýÓÃ
+		lv = (ListView) findViewById(R.id.typelist);// ï¿½Ãµï¿½ListViewï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		add = (Button) findViewById(R.id.addtype);
 		delete = (Button) findViewById(R.id.deletetype);
 	}
@@ -91,7 +86,7 @@ public class InPtypeManager extends Activity {
 	@Override
 	public void onStart() {
 		super.onStart();
-		// »ñÈ¡Êý¾Ý
+		// ï¿½ï¿½È¡ï¿½ï¿½ï¿½
 		intentr = getIntent();
 		userid = intentr.getIntExtra("cwp.id", 100000001);
 		type = intentr.getIntExtra("type", 0);
@@ -99,13 +94,13 @@ public class InPtypeManager extends Activity {
 		ptypeDAO = new PtypeDAO(InPtypeManager.this);
 		if (type == 0) {
 			typename = itypeDAO.getItypeName(userid);
-			inptext.setText("ÊÕÈëÀàÐÍ¹ÜÀí");
+			inptext.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¹ï¿½ï¿½ï¿½");
 		} else {
 			typename = ptypeDAO.getPtypeName(userid);
-			inptext.setText("Ö§³öÀàÐÍ¹ÜÀí");
+			inptext.setText("Ö§ï¿½ï¿½ï¿½ï¿½ï¿½Í¹ï¿½ï¿½ï¿½");
 		}
 
-		/* ÎªListViewÉèÖÃAdapterÀ´°ó¶¨Êý¾Ý */
+		/* ÎªListViewï¿½ï¿½ï¿½ï¿½Adapterï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 		lv.setAdapter(new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_checked, typename));
 
@@ -130,15 +125,15 @@ public class InPtypeManager extends Activity {
 		inputServer.setFocusable(true);
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Ìí¼ÓÀàÐÍ").setView(inputServer)
-				.setNegativeButton("È¡Ïû", null);
-		builder.setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+		builder.setTitle("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½").setView(inputServer)
+				.setNegativeButton("È¡ï¿½ï¿½", null);
+		builder.setPositiveButton("È·ï¿½ï¿½", new DialogInterface.OnClickListener() {
 
 			public void onClick(DialogInterface dialog, int which) {
 				inputStr = inputServer.getText().toString();
 				int i = (int) itypeDAO.getCount(userid) + 1;
 				if (inputStr.trim().equals("")) {
-					Toast.makeText(InPtypeManager.this, "ÊäÈëÄÚÈÝ²»ÄÜÎª¿Õ£¡",
+					Toast.makeText(InPtypeManager.this, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý²ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½",
 							Toast.LENGTH_LONG).show();
 					refresh();
 				} else if (type == 0) {
@@ -152,47 +147,47 @@ public class InPtypeManager extends Activity {
 		builder.show();
 	}
 
-	private void deleteDialog() { // ÍË³ö³ÌÐòµÄ·½·¨
+	private void deleteDialog() { // ï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½
 		Dialog dialog = null;
 
 		CustomDialog.Builder customBuilder = new CustomDialog.Builder(
 				InPtypeManager.this);
 
 		customBuilder
-				.setTitle("É¾³ý")
-				// ´´½¨±êÌâ
+				.setTitle("É¾ï¿½ï¿½")
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-				.setMessage("ÄúÈ·¶¨ÒªÉ¾³ýÂð£¿")
-				.setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+				.setMessage("ï¿½ï¿½È·ï¿½ï¿½ÒªÉ¾ï¿½ï¿½ï¿½ï¿½")
+				.setPositiveButton("È·ï¿½ï¿½", new DialogInterface.OnClickListener() {
 
 					public void onClick(DialogInterface dialog, int which) {
 						onDeleteClick();
-						Toast.makeText(InPtypeManager.this, "ÒÑÉ¾³ý£¡",
+						Toast.makeText(InPtypeManager.this, "ï¿½ï¿½É¾ï¿½ï¿½",
 								Toast.LENGTH_LONG).show();
 						dialog.dismiss();
 						refresh();
 					}
 
 				})
-				.setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+				.setNegativeButton("È¡ï¿½ï¿½", new DialogInterface.OnClickListener() {
 
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
 
 					}
 				});
-		dialog = customBuilder.create();// ´´½¨¶Ô»°¿ò
-		dialog.show(); // ÏÔÊ¾¶Ô»°¿ò
+		dialog = customBuilder.create();// ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½
+		dialog.show(); // ï¿½ï¿½Ê¾ï¿½Ô»ï¿½ï¿½ï¿½
 
 	}
 
 	public void onDeleteClick() {
-		// »ñÈ¡Ñ¡ÖÐµÄÐÐ
+		// ï¿½ï¿½È¡Ñ¡ï¿½Ðµï¿½ï¿½ï¿½
 		SparseBooleanArray checked = lv.getCheckedItemPositions();
 		List<String> checkList = new ArrayList<String>();
 		for (int i = 0; i < lv.getCount(); i++) {
 			if (checked.get(i) == true) {
-				// »ñÈ¡µ½Ñ¡ÔñµÄÐÐµÄÊý¾Ý
+				// ï¿½ï¿½È¡ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½
 				checkList.add(typename.get(i).toString());
 			}
 		}
@@ -204,11 +199,11 @@ public class InPtypeManager extends Activity {
 					itypeDAO.deleteByName(userid, lchecked);
 			}
 		} else {
-			Toast.makeText(InPtypeManager.this, "ÄúÎ´Ñ¡ÖÐÈÎºÎÏî,ÇëÑ¡Ôñ",
+			Toast.makeText(InPtypeManager.this, "ï¿½ï¿½Î´Ñ¡ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½,ï¿½ï¿½Ñ¡ï¿½ï¿½",
 					Toast.LENGTH_LONG).show();
 		}
 
-		lv.clearChoices();// Çå¿ÕlistViewµÄÑ¡Ôñ×´Ì¬£¬·½±ãÏÂ´ÎÑ¡Ôñ
+		lv.clearChoices();// ï¿½ï¿½ï¿½listViewï¿½ï¿½Ñ¡ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½Ñ¡ï¿½ï¿½
 	}
 
 	public void refresh() {
@@ -220,10 +215,10 @@ public class InPtypeManager extends Activity {
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) { // ¼à¿Ø/À¹½Ø/ÆÁ±Î·µ»Ø¼ü
+		if (keyCode == KeyEvent.KEYCODE_BACK) { // ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½Î·ï¿½ï¿½Ø¼ï¿½
 			Intent intent = new Intent(InPtypeManager.this, MainActivity.class);
 			intent.putExtra("cwp.id", userid);
-			intent.putExtra("cwp.Fragment", "4");// ÉèÖÃ´«µÝÊý¾Ý
+			intent.putExtra("cwp.Fragment", "4");// ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			startActivity(intent);
 			return true;
 		}

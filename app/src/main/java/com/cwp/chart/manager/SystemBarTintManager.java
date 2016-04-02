@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.cwp.chart;
+package com.cwp.chart.manager;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

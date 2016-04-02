@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import com.cwp.chart.SystemBarTintManager;
+import com.cwp.chart.manager.SystemBarTintManager;
 import com.cwp.cmoneycharge.R;
 import com.cwp.cmoneycharge.SysApplication;
 import com.umeng.fb.FeedbackAgent;
@@ -71,7 +71,7 @@ public class CustomActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_custom);
 
-		SysApplication.getInstance().addActivity(this); // ÔÚÏú»Ù¶ÓÁÐÖÐÌí¼Óthis
+		SysApplication.getInstance().addActivity(this); // ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½this
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 			setTranslucentStatus(true);
@@ -89,18 +89,18 @@ public class CustomActivity extends Activity {
 		initView();
 
 		Intent intentr = getIntent();
-		Bundle bundle = intentr.getExtras();// »ñÈ¡´«ÈëµÄÊý¾Ý£¬²¢Ê¹ÓÃBundle¼ÇÂ¼
+		Bundle bundle = intentr.getExtras();// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Bundleï¿½ï¿½Â¼
 		if (bundle != null) {
 			if (bundle.containsKey("cwp.md")) {
-				String error = (String) bundle.getString("cwp.md");// »ñÈ¡BundleÖÐ¼ÇÂ¼µÄÐÅÏ¢
+				String error = (String) bundle.getString("cwp.md");// ï¿½ï¿½È¡Bundleï¿½Ð¼ï¿½Â¼ï¿½ï¿½ï¿½ï¿½Ï¢
 				inputEdit.setText(error);
 			}
 		}
 		mAgent = new FeedbackAgent(this);
 		mComversation = new FeedbackAgent(this).getDefaultConversation();
 		if (!firstfb.equals(sp.getString("firstfb", ""))) {
-			mComversation.addUserReply("ÄúºÃ£¬»¶Ó­Ê¹ÓÃ¿ìËÙ¼Ç£¬Çë·´À¡Ê¹ÓÃ²úÆ·µÄ¸ÐÊÜºÍ½¨Òé");
-			edit.putString("firstfb", "true"); // Ò»ÌìÖ»¼ì²éÒ»´Î
+			mComversation.addUserReply("ï¿½ï¿½Ã£ï¿½ï¿½ï¿½Ó­Ê¹ï¿½Ã¿ï¿½ï¿½Ù¼Ç£ï¿½ï¿½ë·´ï¿½ï¿½Ê¹ï¿½Ã²ï¿½Æ·ï¿½Ä¸ï¿½ï¿½ÜºÍ½ï¿½ï¿½ï¿½");
+			edit.putString("firstfb", "true"); // Ò»ï¿½ï¿½Ö»ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 			edit.commit();
 		}
 		adapter = new ReplyAdapter();
@@ -127,7 +127,7 @@ public class CustomActivity extends Activity {
 		sendBtn = (Button) findViewById(R.id.fb_send_btn);
 		inputEdit = (EditText) findViewById(R.id.fb_send_content);
 		example_left2 = (ImageView) findViewById(R.id.example_left2);
-		// ÏÂÀ­Ë¢ÐÂ×é¼þ
+		// ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½ï¿½ï¿½ï¿½
 
 		mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.fb_reply_refresh);
 		example_left2.setOnClickListener(new OnClickListener() {
@@ -144,17 +144,17 @@ public class CustomActivity extends Activity {
 				String content = inputEdit.getText().toString();
 				inputEdit.getEditableText().clear();
 				if (!TextUtils.isEmpty(content)) {
-					// ½«ÄÚÈÝÌí¼Óµ½»á»°ÁÐ±í
+					// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½á»°ï¿½Ð±ï¿½
 					mComversation.addUserReply(content);
-					// Ë¢ÐÂÐÂListView
+					// Ë¢ï¿½ï¿½ï¿½ï¿½ListView
 					mHandler.sendMessage(new Message());
-					// Êý¾ÝÍ¬²½
+					// ï¿½ï¿½ï¿½Í¬ï¿½ï¿½
 					sync();
 				}
 			}
 		});
 
-		// ÏÂÀ­Ë¢ÐÂ
+		// ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½
 		mSwipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
 			@Override
 			public void onRefresh() {
@@ -163,7 +163,7 @@ public class CustomActivity extends Activity {
 		});
 	}
 
-	// Êý¾ÝÍ¬²½
+	// ï¿½ï¿½ï¿½Í¬ï¿½ï¿½
 	private void sync() {
 
 		mComversation.sync(new SyncListener() {
@@ -174,17 +174,17 @@ public class CustomActivity extends Activity {
 
 			@Override
 			public void onReceiveDevReply(List<Reply> replyList) {
-				// SwipeRefreshLayoutÍ£Ö¹Ë¢ÐÂ
+				// SwipeRefreshLayoutÍ£Ö¹Ë¢ï¿½ï¿½
 				mSwipeRefreshLayout.setRefreshing(false);
-				// ·¢ËÍÏûÏ¢£¬Ë¢ÐÂListView
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Ë¢ï¿½ï¿½ListView
 				mHandler.sendMessage(new Message());
-				// Èç¹û¿ª·¢ÕßÃ»ÓÐÐÂµÄ»Ø¸´Êý¾Ý£¬Ôò·µ»Ø
+				// ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ÂµÄ»Ø¸ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ò·µ»ï¿½
 				if (replyList == null || replyList.size() < 1) {
 					return;
 				}
 			}
 		});
-		// ¸üÐÂadapter£¬Ë¢ÐÂListView
+		// ï¿½ï¿½ï¿½ï¿½adapterï¿½ï¿½Ë¢ï¿½ï¿½ListView
 		adapter.notifyDataSetChanged();
 	}
 
@@ -208,19 +208,19 @@ public class CustomActivity extends Activity {
 
 		@Override
 		public int getViewTypeCount() {
-			// Á½ÖÖ²»Í¬µÄTiem²¼¾Ö
+			// ï¿½ï¿½ï¿½Ö²ï¿½Í¬ï¿½ï¿½Tiemï¿½ï¿½ï¿½ï¿½
 			return VIEW_TYPE_COUNT;
 		}
 
 		@Override
 		public int getItemViewType(int position) {
-			// »ñÈ¡µ¥Ìõ»Ø¸´
+			// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½
 			Reply reply = mComversation.getReplyList().get(position);
 			if (Reply.TYPE_DEV_REPLY.equals(reply.type)) {
-				// ¿ª·¢Õß»Ø¸´Item²¼¾Ö
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ß»Ø¸ï¿½Itemï¿½ï¿½ï¿½ï¿½
 				return VIEW_TYPE_DEV;
 			} else {
-				// ÓÃ»§·´À¡¡¢»Ø¸´Item²¼¾Ö
+				// ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½Itemï¿½ï¿½ï¿½ï¿½
 				return VIEW_TYPE_USER;
 			}
 		}
@@ -229,16 +229,16 @@ public class CustomActivity extends Activity {
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ViewHolder holder = null;
 
-			// »ñÈ¡µ¥Ìõ»Ø¸´
+			// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½
 			Reply reply = mComversation.getReplyList().get(position);
 			if (convertView == null) {
-				// ¸ù¾ÝTypeµÄÀàÐÍÀ´¼ÓÔØ²»Í¬µÄItem²¼¾Ö
+				// ï¿½ï¿½ï¿½Typeï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø²ï¿½Í¬ï¿½ï¿½Itemï¿½ï¿½ï¿½ï¿½
 				if (Reply.TYPE_DEV_REPLY.equals(reply.type)) {
-					// ¿ª·¢ÕßµÄ»Ø¸´
+					// ï¿½ï¿½ï¿½ï¿½ï¿½ßµÄ»Ø¸ï¿½
 					convertView = LayoutInflater.from(mContext).inflate(
 							R.layout.custom_fb_user_reply, null);
 				} else {
-					// ÓÃ»§µÄ·´À¡¡¢»Ø¸´
+					// ï¿½Ã»ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½
 					convertView = LayoutInflater.from(mContext).inflate(
 							R.layout.custom_fb_dev_reply, null);
 
@@ -248,7 +248,7 @@ public class CustomActivity extends Activity {
 					}
 				}
 
-				// ´´½¨ViewHolder²¢»ñÈ¡¸÷ÖÖView
+				// ï¿½ï¿½ï¿½ï¿½ViewHolderï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½View
 				holder = new ViewHolder();
 				holder.replyContent = (TextView) convertView
 						.findViewById(R.id.fb_reply_content);
@@ -263,19 +263,19 @@ public class CustomActivity extends Activity {
 				holder = (ViewHolder) convertView.getTag();
 			}
 
-			// ÒÔÏÂÊÇÌî³äÊý¾Ý
-			// ÉèÖÃReplyµÄÄÚÈÝ
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			// ï¿½ï¿½ï¿½ï¿½Replyï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			holder.replyContent.setText(reply.content);
-			// ÔÚAppÓ¦ÓÃ½çÃæ£¬¶ÔÓÚ¿ª·¢ÕßµÄReplyÀ´½²statusÃ»ÓÐÒâÒå
+			// ï¿½ï¿½AppÓ¦ï¿½Ã½ï¿½ï¿½æ£¬ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ßµï¿½Replyï¿½ï¿½ï¿½ï¿½statusÃ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			if (!Reply.TYPE_DEV_REPLY.equals(reply.type)) {
-				// ¸ù¾ÝReplyµÄ×´Ì¬À´ÉèÖÃreplyStateFailedµÄ×´Ì¬
+				// ï¿½ï¿½ï¿½Replyï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½replyStateFailedï¿½ï¿½×´Ì¬
 				if (Reply.STATUS_NOT_SENT.equals(reply.status)) {
 					holder.replyStateFailed.setVisibility(View.VISIBLE);
 				} else {
 					holder.replyStateFailed.setVisibility(View.GONE);
 				}
 
-				// ¸ù¾ÝReplyµÄ×´Ì¬À´ÉèÖÃreplyProgressBarµÄ×´Ì¬
+				// ï¿½ï¿½ï¿½Replyï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½replyProgressBarï¿½ï¿½×´Ì¬
 				if (Reply.STATUS_SENDING.equals(reply.status)) {
 					holder.replyProgressBar.setVisibility(View.VISIBLE);
 				} else {
@@ -283,7 +283,7 @@ public class CustomActivity extends Activity {
 				}
 			}
 
-			// »Ø¸´µÄÊ±¼äÊý¾Ý£¬ÕâÀï·ÂÕÕQQÁ½ÌõReplyÖ®¼äÏà²î100000msÔòÕ¹Ê¾Ê±¼ä
+			// ï¿½Ø¸ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½QQï¿½ï¿½ï¿½ï¿½ReplyÖ®ï¿½ï¿½ï¿½ï¿½ï¿½100000msï¿½ï¿½Õ¹Ê¾Ê±ï¿½ï¿½
 			if ((position + 1) < mComversation.getReplyList().size()) {
 				Reply nextReply = mComversation.getReplyList()
 						.get(position + 1);
