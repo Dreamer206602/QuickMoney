@@ -29,4 +29,8 @@ public  abstract class BaseFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_base, container, false);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }
