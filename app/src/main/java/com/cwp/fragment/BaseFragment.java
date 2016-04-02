@@ -22,12 +22,6 @@ public  abstract class BaseFragment extends Fragment {
     public abstract void filngtonpre();
 
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_base, container, false);
-    }
 
     @Override
     public void onResume() {
