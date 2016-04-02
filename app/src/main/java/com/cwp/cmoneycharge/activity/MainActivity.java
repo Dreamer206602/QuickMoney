@@ -10,8 +10,8 @@ import com.cwp.cmoneycharge.app.SysApplication;
 import com.cwp.cmoneycharge.app.CrashApplication;
 import com.cwp.fragment.FragmentPage2;
 import com.cwp.fragment.FragmentPage3;
-import com.cwp.pattern.UnlockGesturePasswordActivity;
-import com.cwp.pattern.UpdateManager;
+import com.cwp.pattern.activity.UnlockGesturePasswordActivity;
+import com.cwp.pattern.service.UpdateManager;
 
 import android.annotation.TargetApi;
 import android.content.Intent;

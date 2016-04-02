@@ -25,7 +25,7 @@ import com.cwp.cmoneycharge.app.SysApplication;
 import com.cwp.cmoneycharge.utils.DigitUtil;
 import com.cwp.cmoneycharge.utils.KeyboardUtil;
 import com.cwp.cmoneycharge.widget.NiftyDialogBuilder;
-import com.cwp.pattern.UnlockGesturePasswordActivity;
+import com.cwp.pattern.activity.UnlockGesturePasswordActivity;
 import com.example.testpic.Bimp;
 import com.example.testpic.PublishedActivity;
 

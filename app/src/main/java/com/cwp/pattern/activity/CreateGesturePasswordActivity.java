@@ -1,4 +1,4 @@
-package com.cwp.pattern;
+package com.cwp.pattern.activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,10 @@ import com.cwp.chart.manager.SystemBarTintManager;
 import com.cwp.cmoneycharge.app.CrashApplication;
 import com.cwp.cmoneycharge.R;
 import com.cwp.cmoneycharge.app.SysApplication;
-import com.cwp.pattern.LockPatternView.Cell;
-import com.cwp.pattern.LockPatternView.DisplayMode;
+import com.cwp.pattern.utils.LockPatternUtils;
+import com.cwp.pattern.widget.LockPatternView;
+import com.cwp.pattern.widget.LockPatternView.Cell;
+import com.cwp.pattern.widget.LockPatternView.DisplayMode;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

@@ -102,13 +102,13 @@
             android:theme="@style/HalfTransparent"
             android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity
-            android:name="com.cwp.pattern.CreateGesturePasswordActivity"
+            android:name="com.cwp.pattern.activity.CreateGesturePasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.cwp.pattern.GuideGesturePasswordActivity"
+            android:name="com.cwp.pattern.activity.GuideGesturePasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.cwp.pattern.UnlockGesturePasswordActivity"
+            android:name="com.cwp.pattern.activity.UnlockGesturePasswordActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.example.testpic.ImageGridActivity"

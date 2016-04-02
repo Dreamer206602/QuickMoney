@@ -1,7 +1,7 @@
 package com.cwp.cmoneycharge.app;
 
 import com.cwp.cmoneycharge.handler.CrashHandler;
-import com.cwp.pattern.LockPatternUtils;
+import com.cwp.pattern.utils.LockPatternUtils;
 
 import android.app.Application;
 import android.content.BroadcastReceiver;

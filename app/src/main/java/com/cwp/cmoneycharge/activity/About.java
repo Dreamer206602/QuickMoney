@@ -4,8 +4,8 @@ import com.cwp.chart.manager.SystemBarTintManager;
 import com.cwp.cmoneycharge.app.CrashApplication;
 import com.cwp.cmoneycharge.R;
 import com.cwp.cmoneycharge.app.SysApplication;
-import com.cwp.pattern.UnlockGesturePasswordActivity;
-import com.cwp.pattern.UpdateManager;
+import com.cwp.pattern.activity.UnlockGesturePasswordActivity;
+import com.cwp.pattern.service.UpdateManager;
 import com.umeng.fb.example.CustomActivity;
 
 import cwp.moneycharge.dao.AccountDAO;

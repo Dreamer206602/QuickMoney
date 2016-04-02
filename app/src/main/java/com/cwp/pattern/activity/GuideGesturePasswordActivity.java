@@ -1,4 +1,4 @@
-package com.cwp.pattern;
+package com.cwp.pattern.activity;
 
 import com.cwp.chart.manager.SystemBarTintManager;
 import com.cwp.cmoneycharge.app.CrashApplication;

@@ -1,9 +1,10 @@
-package com.cwp.pattern;
+package com.cwp.pattern.widget;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.cwp.cmoneycharge.R;
+import com.cwp.pattern.utils.LockPatternUtils;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -21,7 +22,6 @@ import android.os.Parcelable;
 import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;

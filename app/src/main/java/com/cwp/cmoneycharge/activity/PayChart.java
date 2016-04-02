@@ -17,7 +17,7 @@ import com.cwp.cmoneycharge.utils.DialogShowUtil;
 import com.cwp.cmoneycharge.R;
 import com.cwp.cmoneycharge.app.SysApplication;
 import com.cwp.cmoneycharge.app.CrashApplication;
-import com.cwp.pattern.UnlockGesturePasswordActivity;
+import com.cwp.pattern.activity.UnlockGesturePasswordActivity;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingActivity;
 

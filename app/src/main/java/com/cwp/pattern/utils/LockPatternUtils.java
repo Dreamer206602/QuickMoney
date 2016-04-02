@@ -1,4 +1,4 @@
-package com.cwp.pattern;
+package com.cwp.pattern.utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,8 +15,10 @@ import android.content.Context;
 import android.os.FileObserver;
 import android.util.Log;
 
+import com.cwp.pattern.widget.LockPatternView;
+
 /**
- * Í¼°¸½âËø¼ÓÃÜ¡¢½âÃÜ¹¤¾ßÀà
+ * Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¡ï¿½ï¿½ï¿½ï¿½Ü¹ï¿½ï¿½ï¿½ï¿½ï¿½
  * 
  * @author way
  * 
@@ -96,7 +98,7 @@ public class LockPatternUtils {
 	}
 
 	/**
-	 * Deserialize a pattern. ½âÃÜ,ÓÃÓÚ±£´æ×´è	 * 
+	 * Deserialize a pattern. ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½×´ï¿½ï¿½	 * 
 	 * @param string
 	 *            The pattern serialized with {@link #patternToString}
 	 * @return The pattern.
@@ -113,7 +115,7 @@ public class LockPatternUtils {
 	}
 
 	/**
-	 * Serialize a pattern. ¼ÓÃÜ
+	 * Serialize a pattern. ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param pattern
 	 *            The pattern.

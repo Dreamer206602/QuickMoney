@@ -1,4 +1,4 @@
-package com.cwp.pattern;
+package com.cwp.pattern.service;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,6 +15,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.cwp.cmoneycharge.R;
+import com.cwp.pattern.ParseXmlService;
 import com.zhy.view.RoundProgressBarWidthNumber;
 
 import android.app.AlertDialog;
