@@ -66,7 +66,7 @@ public class UnlockGesturePasswordActivity extends Activity {
 		mTintManager.setStatusBarTintEnabled(true);
 		mTintManager.setStatusBarTintResource(R.color.statusbar_bg);
 
-		SysApplication.getInstance().addActivity(this); // �����ٶ��������this
+		SysApplication.getInstance().addActivity(this); // 在销毁队列中添加this
 
 		mLockPatternView = (LockPatternView) this
 				.findViewById(R.id.gesturepwd_unlock_lockview);
@@ -77,18 +77,18 @@ public class UnlockGesturePasswordActivity extends Activity {
 		mShakeAnim = AnimationUtils.loadAnimation(this, R.anim.shake_x);
 
 		Intent intentr = getIntent();
-		Bundle bundle = intentr.getExtras();// ��ȡ��������ݣ���ʹ��Bundle��¼
-		if (bundle != null && bundle.containsKey("cwp.pwclear")) { // �������
+		Bundle bundle = intentr.getExtras();// 获取传入的数据，并使用Bundle记录
+		if (bundle != null && bundle.containsKey("cwp.pwclear")) { // 清除密码
 			flag = "clear";
-			mHeadTextView.setText("�����ԭ����");
+			mHeadTextView.setText("请绘制原密码");
 			mforgetTextView.setVisibility(View.GONE);
 		}
-		if (bundle != null && bundle.containsKey("cwp.md")) { // �޸�����
-			mHeadTextView.setText("�����ԭ����");
+		if (bundle != null && bundle.containsKey("cwp.md")) { // 修改密码
+			mHeadTextView.setText("请绘制原密码");
 			flag = "md";
 			mforgetTextView.setVisibility(View.GONE);
 		}
-		if (bundle != null && bundle.containsKey("cwp.pwenable")) { // ��һ�ο���
+		if (bundle != null && bundle.containsKey("cwp.pwenable")) { // 第一次开启
 			flag = "enable";
 			mforgetTextView.setVisibility(View.GONE);
 
@@ -143,7 +143,7 @@ public class UnlockGesturePasswordActivity extends Activity {
 			mLockPatternView.removeCallbacks(mClearPatternRunnable);
 		}
 
-		public void onPatternDetected(List<Cell> pattern) {
+		public void onPatternDetected(List<LockPatternView.Cell> pattern) {
 			if (pattern == null)
 				return;
 			if (CrashApplication.getInstance().getLockPatternUtils()
@@ -153,15 +153,15 @@ public class UnlockGesturePasswordActivity extends Activity {
 							.clearLock();
 					Intent intent = new Intent();
 					setResult(2, intent);
-					showToast("����ɹ�");
-					finish();// ������ǰ��activity����������
+					showToast("清除成功");
+					finish();// 结束当前的activity的生命周期
 				} else if (flag == "md") {
 					Intent intent = new Intent(
 							UnlockGesturePasswordActivity.this,
 							GuideGesturePasswordActivity.class);
 					startActivity(intent);
-					showToast("��ʼ��������");
-					finish();// ������ǰ��activity����������
+					showToast("开始重置密码");
+					finish();// 结束当前的activity的生命周期
 				} else {
 					mLockPatternView
 							.setDisplayMode(LockPatternView.DisplayMode.Correct);
@@ -178,14 +178,14 @@ public class UnlockGesturePasswordActivity extends Activity {
 							- mFailedPatternAttemptsSinceLastTimeout;
 					if (retry >= 0) {
 						if (retry == 0)
-							showToast("����5��������룬60�������");
-						mHeadTextView.setText("������󣬻�����������" + retry + "��");
+							showToast("您已5次输错密码，60秒后再试");
+						mHeadTextView.setText("密码错误，还可以再输入" + retry + "次");
 						mHeadTextView.setTextColor(Color.RED);
 						mHeadTextView.startAnimation(mShakeAnim);
 					}
 
 				} else {
-					showToast("���볤�Ȳ�����������");
+					showToast("输入长度不够，请重试");
 				}
 
 				if (mFailedPatternAttemptsSinceLastTimeout >= LockPatternUtils.FAILED_ATTEMPTS_BEFORE_TIMEOUT) {
@@ -218,9 +218,9 @@ public class UnlockGesturePasswordActivity extends Activity {
 				public void onTick(long millisUntilFinished) {
 					int secondsRemaining = (int) (millisUntilFinished / 1000) - 1;
 					if (secondsRemaining > 0) {
-						mHeadTextView.setText(secondsRemaining + " �������");
+						mHeadTextView.setText(secondsRemaining + " 秒后重试");
 					} else {
-						mHeadTextView.setText("�������������");
+						mHeadTextView.setText("请绘制手势密码");
 						mHeadTextView.setTextColor(Color.WHITE);
 					}
 
@@ -252,7 +252,7 @@ public class UnlockGesturePasswordActivity extends Activity {
 			null);
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) { // ���/����/���η��ؼ�
+		if (keyCode == KeyEvent.KEYCODE_BACK) { // 监控/拦截/屏蔽返回键
 			if ((flag == "clear") || (flag == "md") || (flag == "enable")) {
 				finish();
 			} else {

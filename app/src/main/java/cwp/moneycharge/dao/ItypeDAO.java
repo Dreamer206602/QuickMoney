@@ -16,11 +16,11 @@ import android.database.Cursor;
 /**
  * @author cwpcc
  *
- */ 
+ */
 public class ItypeDAO {
-//(_id INTEGER  NOT NULL PRIMARY KEY,no not null int ,typename varchar(50) 
-	private DBOpenHelper helper;// ´´½¨DBOpenHelper¶ÔÏó
-	private SQLiteDatabase db;// ´´½¨SQLiteDatabase¶ÔÏó
+	//(_id INTEGER  NOT NULL PRIMARY KEY,no not null int ,typename varchar(50)
+	private DBOpenHelper helper;// åˆ›å»ºDBOpenHelperå¯¹è±¡
+	private SQLiteDatabase db;// åˆ›å»ºSQLiteDatabaseå¯¹è±¡
 
 	int[] imageId = new int[] { R.drawable.icon_zysr_gzsr,
 			R.drawable.icon_qtsr_zjsr, R.drawable.icon_zysr_tzsr,
@@ -30,206 +30,204 @@ public class ItypeDAO {
 			R.drawable.icon_lyyp_hwzb, R.drawable.icon_qtsr_jysd,
 			R.drawable.icon_qtsr_jysd, R.drawable.icon_qtsr_jysd,
 			R.drawable.icon_qtsr, R.drawable.icon_qtsr_ljsr, R.drawable.yysb };
-	
+
 	public ItypeDAO(Context context) {
 		// TODO Auto-generated constructor stub
-		helper = new DBOpenHelper(context);// ³õÊ¼»¯DBOpenHelper¶ÔÏó
+		helper = new DBOpenHelper(context);// åˆå§‹åŒ–DBOpenHelperå¯¹è±¡
 	}
 
-/**	
- * ĞÂÔöÊÕÈëÀàĞÍ
- * @param Tb_itype
-*/
-	public void add(Tb_itype tb_itype){
-		db = helper.getWritableDatabase();// ³õÊ¼»¯SQLiteDatabase¶ÔÏó
-		db.execSQL("insert into tb_itype (_id,no,typename) values (?,?,?)", new Object[] {
-				tb_itype.get_id(),tb_itype.getNo(),tb_itype.getTypename()});// Ö´ĞĞÌí¼ÓÊÕÈëÀàĞÍ²Ù×÷
-		
-	}
-	/**	
-	 * ĞŞ¸ÄÊÕÈëÀàĞÍ
-	 * @param Tb_itype
-	*/	
-		public void modify(Tb_itype tb_itype){
-			db=helper.getWritableDatabase();// ³õÊ¼»¯SQLiteDatabase¶ÔÏó
-			db.execSQL("update tb_itype set typename = ? where _id = ? and no=?", new Object[] {
-					tb_itype.get_id(), tb_itype.getNo(),tb_itype.getTypename() });// Ö´ĞĞĞŞ¸ÄÊÕÈëÀàĞÍ²Ù×÷
-		}
-	/**	
-	 * É¾³ıÊÕÈëÀàĞÍ
-	 * @param  ids
-	*/	
-		public void delete(Integer... ids){
-			if (ids.length > 0)// ÅĞ¶ÏÊÇ·ñ´æÔÚÒªÉ¾³ıµÄid
-			{
-				StringBuffer sb = new StringBuffer();// ´´½¨StringBuffer¶ÔÏó
-				for (int i = 0; i < ids.length-1; i++)// ±éÀúÒªÉ¾³ıµÄid¼¯ºÏ
-				{
-					sb.append('?').append(',');// ½«É¾³ıÌõ¼şÌí¼Óµ½StringBuffer¶ÔÏóÖĞ
-				}
-				sb.deleteCharAt(sb.length() - 1);// È¥µô×îºóÒ»¸ö¡°,¡°×Ö·û
-				db = helper.getWritableDatabase();// ´´½¨SQLiteDatabase¶ÔÏó
-				// Ö´ĞĞÉ¾³ı±ãÇ©ĞÅÏ¢²Ù×÷
-				db.execSQL("delete from tb_itype where _id in (?) and no in (" + sb + ")",
-						(Object[]) ids);
-			}
-		}
-
-		public void deleteByName(int id,String typename){
-			db = helper.getWritableDatabase();// ´´½¨SQLiteDatabase¶ÔÏó
-			// Ö´ĞĞÉ¾³ı±ãÇ©ĞÅÏ¢²Ù×÷
-			db.execSQL("delete from tb_itype where _id =? and typename=?", new Object[] { id, typename});
-		}
-
-		public void deleteById(int id){
-			db = helper.getWritableDatabase();// ´´½¨SQLiteDatabase¶ÔÏó
-			// Ö´ĞĞÉ¾³ı±ãÇ©ĞÅÏ¢²Ù×÷
-			db.execSQL("delete from tb_itype where _id =? ", new Object[] { id});
-		}
 	/**
-	 * »ñÈ¡ÊÕÈëÀàĞÍĞÅÏ¢
-	 * 
+	 * æ–°å¢æ”¶å…¥ç±»å‹
+	 */
+	public void add(Tb_itype tb_itype){
+		db = helper.getWritableDatabase();// åˆå§‹åŒ–SQLiteDatabaseå¯¹è±¡
+		db.execSQL("insert into tb_itype (_id,no,typename) values (?,?,?)", new Object[] {
+				tb_itype.get_id(),tb_itype.getNo(),tb_itype.getTypename()});// æ‰§è¡Œæ·»åŠ æ”¶å…¥ç±»å‹æ“ä½œ
+
+	}
+	/**
+	 * ä¿®æ”¹æ”¶å…¥ç±»å‹
+	 */
+	public void modify(Tb_itype tb_itype){
+		db=helper.getWritableDatabase();// åˆå§‹åŒ–SQLiteDatabaseå¯¹è±¡
+		db.execSQL("update tb_itype set typename = ? where _id = ? and no=?", new Object[] {
+				tb_itype.get_id(), tb_itype.getNo(),tb_itype.getTypename() });// æ‰§è¡Œä¿®æ”¹æ”¶å…¥ç±»å‹æ“ä½œ
+	}
+	/**
+	 * åˆ é™¤æ”¶å…¥ç±»å‹
+	 * @param  ids
+	 */
+	public void delete(Integer... ids){
+		if (ids.length > 0)// åˆ¤æ–­æ˜¯å¦å­˜åœ¨è¦åˆ é™¤çš„id
+		{
+			StringBuffer sb = new StringBuffer();// åˆ›å»ºStringBufferå¯¹è±¡
+			for (int i = 0; i < ids.length-1; i++)// éå†è¦åˆ é™¤çš„idé›†åˆ
+			{
+				sb.append('?').append(',');// å°†åˆ é™¤æ¡ä»¶æ·»åŠ åˆ°StringBufferå¯¹è±¡ä¸­
+			}
+			sb.deleteCharAt(sb.length() - 1);// å»æ‰æœ€åä¸€ä¸ªâ€œ,â€œå­—ç¬¦
+			db = helper.getWritableDatabase();// åˆ›å»ºSQLiteDatabaseå¯¹è±¡
+			// æ‰§è¡Œåˆ é™¤ä¾¿ç­¾ä¿¡æ¯æ“ä½œ
+			db.execSQL("delete from tb_itype where _id in (?) and no in (" + sb + ")",
+					(Object[]) ids);
+		}
+	}
+
+	public void deleteByName(int id,String typename){
+		db = helper.getWritableDatabase();// åˆ›å»ºSQLiteDatabaseå¯¹è±¡
+		// æ‰§è¡Œåˆ é™¤ä¾¿ç­¾ä¿¡æ¯æ“ä½œ
+		db.execSQL("delete from tb_itype where _id =? and typename=?", new Object[] { id, typename});
+	}
+
+	public void deleteById(int id){
+		db = helper.getWritableDatabase();// åˆ›å»ºSQLiteDatabaseå¯¹è±¡
+		// æ‰§è¡Œåˆ é™¤ä¾¿ç­¾ä¿¡æ¯æ“ä½œ
+		db.execSQL("delete from tb_itype where _id =? ", new Object[] { id});
+	}
+	/**
+	 * è·å–æ”¶å…¥ç±»å‹ä¿¡æ¯
+	 *
 	 * @param start
-	 *            ÆğÊ¼Î»ÖÃ
+	 *            èµ·å§‹ä½ç½®
 	 * @param count
-	 *            Ã¿Ò³ÏÔÊ¾ÊıÁ¿
+	 *            æ¯é¡µæ˜¾ç¤ºæ•°é‡
 	 * @return
 	 */
-		public List<Tb_itype> getScrollData(int id,int start, int count) {
-			List<Tb_itype> lisTb_itype = new ArrayList<Tb_itype>();// ´´½¨¼¯ºÏ¶ÔÏó
-			db = helper.getWritableDatabase();// ³õÊ¼»¯SQLiteDatabase¶ÔÏó
-			// »ñÈ¡ËùÓĞ±ãÇ©ĞÅÏ¢
-			Cursor cursor = db.rawQuery("select * from tb_itype where _id=? order by no limit ?,?",
-					new String[] { String.valueOf(id),  String.valueOf(start), String.valueOf(count) });
-			while (cursor.moveToNext())// ±éÀúËùÓĞµÄ±ãÇ©ĞÅÏ¢
-			{
-				// ½«±éÀúµ½µÄ±ãÇ©ĞÅÏ¢Ìí¼Óµ½¼¯ºÏÖĞ
-				lisTb_itype.add(new Tb_itype(
-						cursor.getInt(cursor.getColumnIndex("_id")),
-						cursor.getInt(cursor.getColumnIndex("no")),
-						cursor.getString(cursor.getColumnIndex("typename"))));
-			}
-			return lisTb_itype;// ·µ»Ø¼¯ºÏ
+	public List<Tb_itype> getScrollData(int id,int start, int count) {
+		List<Tb_itype> lisTb_itype = new ArrayList<Tb_itype>();// åˆ›å»ºé›†åˆå¯¹è±¡
+		db = helper.getWritableDatabase();// åˆå§‹åŒ–SQLiteDatabaseå¯¹è±¡
+		// è·å–æ‰€æœ‰ä¾¿ç­¾ä¿¡æ¯
+		Cursor cursor = db.rawQuery("select * from tb_itype where _id=? order by no limit ?,?",
+				new String[] { String.valueOf(id),  String.valueOf(start), String.valueOf(count) });
+		while (cursor.moveToNext())// éå†æ‰€æœ‰çš„ä¾¿ç­¾ä¿¡æ¯
+		{
+			// å°†éå†åˆ°çš„ä¾¿ç­¾ä¿¡æ¯æ·»åŠ åˆ°é›†åˆä¸­
+			lisTb_itype.add(new Tb_itype(
+					cursor.getInt(cursor.getColumnIndex("_id")),
+					cursor.getInt(cursor.getColumnIndex("no")),
+					cursor.getString(cursor.getColumnIndex("typename"))));
 		}
-		
-		/**
-		 * »ñÈ¡×Ü¼ÇÂ¼Êı
-		 * 
-		 * @return
-		 */
-		public long getCount() {
-			db = helper.getWritableDatabase();// ³õÊ¼»¯SQLiteDatabase¶ÔÏó
-			Cursor cursor = db.rawQuery("select count(no) from tb_itype", null);// »ñÈ¡ÊÕÈëÀàĞÍµÄ¼ÇÂ¼Êı
-			if (cursor.moveToNext())// ÅĞ¶ÏCursorÖĞÊÇ·ñÓĞÊı¾İ
-			{
-				return cursor.getLong(0);// ·µ»Ø×Ü¼ÇÂ¼Êı
-			}
-			return 0;// Èç¹ûÃ»ÓĞÊı¾İ£¬Ôò·µ»Ø0
-		}
-		public long getCount(int id) {
-			db = helper.getWritableDatabase();// ³õÊ¼»¯SQLiteDatabase¶ÔÏó
-			Cursor cursor = db
-					.rawQuery("select count(no) from tb_itype where _id=?", new String[]{String.valueOf(id)});// »ñÈ¡ÊÕÈëĞÅÏ¢µÄ¼ÇÂ¼Êı
-			if (cursor.moveToNext())// ÅĞ¶ÏCursorÖĞÊÇ·ñÓĞÊı¾İ
-			{
-				return cursor.getLong(0);// ·µ»Ø×Ü¼ÇÂ¼Êı
-			}
-			return 0;// Èç¹ûÃ»ÓĞÊı¾İ£¬Ôò·µ»Ø0
-		}
-		/**
-		 * »ñÈ¡±ãÇ©×î´ó±àºÅ
-		 * 
-		 * @return
-		 */
-		public int getMaxId() {
-			db = helper.getWritableDatabase();// ³õÊ¼»¯SQLiteDatabase¶ÔÏó
-			Cursor cursor = db.rawQuery("select max(no) from tb_itype", null);// »ñÈ¡ÊÕÈëÀàĞÍ±íÖĞµÄ×î´ó±àºÅ
-			while (cursor.moveToLast()) {// ·ÃÎÊCursorÖĞµÄ×îºóÒ»ÌõÊı¾İ
-				return cursor.getInt(0);// »ñÈ¡·ÃÎÊµ½µÄÊı¾İ£¬¼´×î´ó±àºÅ
-			}
-			return 0;// Èç¹ûÃ»ÓĞÊı¾İ£¬Ôò·µ»Ø0
-		}
-		/**
-		 * »ñÈ¡ÀàĞÍÃûÊı×é
-		 * param id
-		 * @return
-		 * */
-		public List<String> getItypeName(int id){
-			List<String> lisString = new ArrayList<String>();// ´´½¨¼¯ºÏ¶ÔÏó
-			db = helper.getWritableDatabase();
-			Cursor cursor = db.rawQuery("select typename from tb_itype where _id=?",new String[]{String.valueOf(id) } );
-			while (cursor.moveToNext()) {// ·ÃÎÊCursorÖĞµÄ×îºóÒ»ÌõÊı¾İ
-				lisString.add(cursor.getString(cursor.getColumnIndex("typename")));
-				
-			}
-			return lisString;
-			
-		}
-		public String getOneName(int id,int no){
-			db = helper.getWritableDatabase();// ³õÊ¼»¯SQLiteDatabase¶ÔÏó
-			Cursor cursor = db.rawQuery("select typename from tb_itype where _id=? and no=?",new String[]{String.valueOf(id),String.valueOf(no) } ); 
-			if (cursor.moveToNext()) { 
-				return cursor.getString(cursor.getColumnIndex("typename"));
-			}
-			return "";
-			
-		}
-		
-		public int getOneImg(int id, int no) {
-			if (imageId.length < no) {
-				return imageId[14];
-			}
-			return imageId[no - 1];
-		}
-		
-		//»ñÈ¡Ö¸¶¨Ê±¼äÄÚÊı¾İ¿âÊı¾İ
-		
-		public List<Datapicker> getDataOnDay(int id,String date1,String date2){
-			db = helper.getWritableDatabase();// ³õÊ¼»¯SQLiteDatabase¶ÔÏó 
-			List<Datapicker> datapicker = new ArrayList<Datapicker>();// ´´½¨¼¯ºÏ¶ÔÏó
-			String sql= "'"+date1+"' and '"+date2+"'";		
-			Cursor cursor = db.rawQuery("select no, time,sum(money) as tmoney from tb_pay where time between "+sql+" and _id =? group BY time order by time",new String[]{String.valueOf(id)} );// »ñÈ¡Ö§³öĞÅÏ¢±íÖĞµÄ×î´ó±àºÅ
-			while (cursor.moveToNext())// ±éÀúËùÓĞµÄÖ§³öĞÅÏ¢
-			{		
-			 
-				// ½«±éÀúµ½µÄÖ§³öĞÅÏ¢Ìí¼Óµ½¼¯ºÏÖĞ
-					datapicker.add(new Datapicker( 
-						cursor.getInt(cursor.getColumnIndex("no")),
-						cursor.getDouble(cursor.getColumnIndex("tmoney")),
-						cursor.getString(cursor.getColumnIndex("time"))));
-			}
-			return datapicker;// ·µ»Ø¼¯ºÏ
-				// ½«±éÀúµ½µÄÖ§³öĞÅÏ¢Ìí¼Óµ½¼¯ºÏÖĞ
-				 
-			} // ·µ»Ø¼¯ºÏ
-		 
-		public void modifyByName(int id,String old,String now){
-			db = helper.getWritableDatabase();
-			db.execSQL("update tb_itype set typename = ? where _id = ? and typename=?", new Object[] {
-					id, now,old});// Ö´ĞĞĞŞ¸ÄÊÕÈëÀàĞÍ²Ù×÷
-		}
-		
-		public void initData(int id) { 
+		return lisTb_itype;// è¿”å›é›†åˆ
+	}
 
-			db = helper.getWritableDatabase();// ³õÊ¼»¯SQLiteDatabase¶ÔÏó    
-			
-			// ±ãÇ©ĞÅÏ¢±í  
-			db.execSQL("delete from tb_itype where _id=?",new String[]{String.valueOf(id)}); // È·±£ÎŞ¸Ãid
-			db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"1","¹¤×Ê"});
-			db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"2","ÖĞ½±"});
-			db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"3","¹ÉÆ±"});
-			db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"4","»¹¿î"});
-			db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"5","»ù½ğ"});
-			db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"6","·Öºì"});
-			db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"7","ÀûÏ¢"});
-			db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"8","¼æÖ°"});
-			db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"9","½±½ğ"});
-			db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"10","×â½ğ"});
-			db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"11","ÏúÊÛ¿î"});
-			db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"12","Ó¦ÊÕ¿î"});
-			db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"13","±¨Ïú¿î"});
-			db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"14","ÆäËû"});
-			db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"15","Àñ½ğ"});
-			db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"16","ÓïÒôÊ¶±ğ"});
+	/**
+	 * è·å–æ€»è®°å½•æ•°
+	 *
+	 * @return
+	 */
+	public long getCount() {
+		db = helper.getWritableDatabase();// åˆå§‹åŒ–SQLiteDatabaseå¯¹è±¡
+		Cursor cursor = db.rawQuery("select count(no) from tb_itype", null);// è·å–æ”¶å…¥ç±»å‹çš„è®°å½•æ•°
+		if (cursor.moveToNext())// åˆ¤æ–­Cursorä¸­æ˜¯å¦æœ‰æ•°æ®
+		{
+			return cursor.getLong(0);// è¿”å›æ€»è®°å½•æ•°
 		}
+		return 0;// å¦‚æœæ²¡æœ‰æ•°æ®ï¼Œåˆ™è¿”å›0
+	}
+	public long getCount(int id) {
+		db = helper.getWritableDatabase();// åˆå§‹åŒ–SQLiteDatabaseå¯¹è±¡
+		Cursor cursor = db
+				.rawQuery("select count(no) from tb_itype where _id=?", new String[]{String.valueOf(id)});// è·å–æ”¶å…¥ä¿¡æ¯çš„è®°å½•æ•°
+		if (cursor.moveToNext())// åˆ¤æ–­Cursorä¸­æ˜¯å¦æœ‰æ•°æ®
+		{
+			return cursor.getLong(0);// è¿”å›æ€»è®°å½•æ•°
+		}
+		return 0;// å¦‚æœæ²¡æœ‰æ•°æ®ï¼Œåˆ™è¿”å›0
+	}
+	/**
+	 * è·å–ä¾¿ç­¾æœ€å¤§ç¼–å·
+	 *
+	 * @return
+	 */
+	public int getMaxId() {
+		db = helper.getWritableDatabase();// åˆå§‹åŒ–SQLiteDatabaseå¯¹è±¡
+		Cursor cursor = db.rawQuery("select max(no) from tb_itype", null);// è·å–æ”¶å…¥ç±»å‹è¡¨ä¸­çš„æœ€å¤§ç¼–å·
+		while (cursor.moveToLast()) {// è®¿é—®Cursorä¸­çš„æœ€åä¸€æ¡æ•°æ®
+			return cursor.getInt(0);// è·å–è®¿é—®åˆ°çš„æ•°æ®ï¼Œå³æœ€å¤§ç¼–å·
+		}
+		return 0;// å¦‚æœæ²¡æœ‰æ•°æ®ï¼Œåˆ™è¿”å›0
+	}
+	/**
+	 * è·å–ç±»å‹åæ•°ç»„
+	 * param id
+	 * @return
+	 * */
+	public List<String> getItypeName(int id){
+		List<String> lisString = new ArrayList<String>();// åˆ›å»ºé›†åˆå¯¹è±¡
+		db = helper.getWritableDatabase();
+		Cursor cursor = db.rawQuery("select typename from tb_itype where _id=?",new String[]{String.valueOf(id) } );
+		while (cursor.moveToNext()) {// è®¿é—®Cursorä¸­çš„æœ€åä¸€æ¡æ•°æ®
+			lisString.add(cursor.getString(cursor.getColumnIndex("typename")));
+
+		}
+		return lisString;
+
+	}
+	public String getOneName(int id,int no){
+		db = helper.getWritableDatabase();// åˆå§‹åŒ–SQLiteDatabaseå¯¹è±¡
+		Cursor cursor = db.rawQuery("select typename from tb_itype where _id=? and no=?",new String[]{String.valueOf(id),String.valueOf(no) } );
+		if (cursor.moveToNext()) {
+			return cursor.getString(cursor.getColumnIndex("typename"));
+		}
+		return "";
+
+	}
+
+	public int getOneImg(int id, int no) {
+		if (imageId.length < no) {
+			return imageId[14];
+		}
+		return imageId[no - 1];
+	}
+
+	//è·å–æŒ‡å®šæ—¶é—´å†…æ•°æ®åº“æ•°æ®
+
+	public List<Datapicker> getDataOnDay(int id,String date1,String date2){
+		db = helper.getWritableDatabase();// åˆå§‹åŒ–SQLiteDatabaseå¯¹è±¡
+		List<Datapicker> datapicker = new ArrayList<Datapicker>();// åˆ›å»ºé›†åˆå¯¹è±¡
+		String sql= "'"+date1+"' and '"+date2+"'";
+		Cursor cursor = db.rawQuery("select no, time,sum(money) as tmoney from tb_pay where time between "+sql+" and _id =? group BY time order by time",new String[]{String.valueOf(id)} );// è·å–æ”¯å‡ºä¿¡æ¯è¡¨ä¸­çš„æœ€å¤§ç¼–å·
+		while (cursor.moveToNext())// éå†æ‰€æœ‰çš„æ”¯å‡ºä¿¡æ¯
+		{
+
+			// å°†éå†åˆ°çš„æ”¯å‡ºä¿¡æ¯æ·»åŠ åˆ°é›†åˆä¸­
+			datapicker.add(new Datapicker(
+					cursor.getInt(cursor.getColumnIndex("no")),
+					cursor.getDouble(cursor.getColumnIndex("tmoney")),
+					cursor.getString(cursor.getColumnIndex("time"))));
+		}
+		return datapicker;// è¿”å›é›†åˆ
+		// å°†éå†åˆ°çš„æ”¯å‡ºä¿¡æ¯æ·»åŠ åˆ°é›†åˆä¸­
+
+	} // è¿”å›é›†åˆ
+
+	public void modifyByName(int id,String old,String now){
+		db = helper.getWritableDatabase();
+		db.execSQL("update tb_itype set typename = ? where _id = ? and typename=?", new Object[] {
+				id, now,old});// æ‰§è¡Œä¿®æ”¹æ”¶å…¥ç±»å‹æ“ä½œ
+	}
+
+	public void initData(int id) {
+
+		db = helper.getWritableDatabase();// åˆå§‹åŒ–SQLiteDatabaseå¯¹è±¡
+
+		// ä¾¿ç­¾ä¿¡æ¯è¡¨
+		db.execSQL("delete from tb_itype where _id=?",new String[]{String.valueOf(id)}); // ç¡®ä¿æ— è¯¥id
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"1","å·¥èµ„"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"2","ä¸­å¥–"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"3","è‚¡ç¥¨"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"4","è¿˜æ¬¾"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"5","åŸºé‡‘"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"6","åˆ†çº¢"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"7","åˆ©æ¯"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"8","å…¼èŒ"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"9","å¥–é‡‘"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"10","ç§Ÿé‡‘"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"11","é”€å”®æ¬¾"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"12","åº”æ”¶æ¬¾"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"13","æŠ¥é”€æ¬¾"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"14","å…¶ä»–"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"15","ç¤¼é‡‘"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(id),"16","è¯­éŸ³è¯†åˆ«"});
+	}
 }

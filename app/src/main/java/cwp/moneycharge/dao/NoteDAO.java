@@ -19,136 +19,136 @@ import android.database.sqlite.SQLiteDatabase;
 public class NoteDAO {
 //_id integer primary key,no integer autoincrement,note varchar(200))
 	/**
-	 * 
+	 *
 	 */
-	private DBOpenHelper helper;// ´´½¨DBOpenHelper¶ÔÏó
-	private SQLiteDatabase db;// ´´½¨SQLiteDatabase¶ÔÏó
+	private DBOpenHelper helper;// åˆ›å»ºDBOpenHelperå¯¹è±¡
+	private SQLiteDatabase db;// åˆ›å»ºSQLiteDatabaseå¯¹è±¡
 
-	 
+
 	public NoteDAO(Context context) {
 		// TODO Auto-generated constructor stub
-		helper = new DBOpenHelper(context);// ³õÊ¼»¯DBOpenHelper¶ÔÏó
+		helper = new DBOpenHelper(context);// åˆå§‹åŒ–DBOpenHelperå¯¹è±¡
 	}
 	/**
-	 * Ìí¼Ó±ãÇ©ĞÅÏ¢
-	 * 
+	 * æ·»åŠ ä¾¿ç­¾ä¿¡æ¯
+	 *
 	 * @param tb_note
 	 */
 	public void add(Tb_note tb_note) {
-		db = helper.getWritableDatabase();// ³õÊ¼»¯SQLiteDatabase¶ÔÏó
+		db = helper.getWritableDatabase();// åˆå§‹åŒ–SQLiteDatabaseå¯¹è±¡
 		db.execSQL("insert into tb_note (_id,no,note) values (?,?,?)", new Object[] {
-				tb_note.get_id(), tb_note.getNo(),tb_note.getNote() });// Ö´ĞĞÌí¼Ó±ãÇ©ĞÅÏ¢²Ù×÷
+				tb_note.get_id(), tb_note.getNo(),tb_note.getNote() });// æ‰§è¡Œæ·»åŠ ä¾¿ç­¾ä¿¡æ¯æ“ä½œ
 	}
 
 	/**
-	 * ¸üĞÂ±ãÇ©ĞÅÏ¢
-	 * 
+	 * æ›´æ–°ä¾¿ç­¾ä¿¡æ¯
+	 *
 	 * @param tb_note
 	 */
 	public void update(Tb_note tb_note) {
-		db = helper.getWritableDatabase();// ³õÊ¼»¯SQLiteDatabase¶ÔÏó
+		db = helper.getWritableDatabase();// åˆå§‹åŒ–SQLiteDatabaseå¯¹è±¡
 		db.execSQL("update tb_note set note = ? where _id = ? and no=?", new Object[] {
-				tb_note.getNote(), tb_note.get_id(),tb_note.getNo() });// Ö´ĞĞĞŞ¸Ä±ãÇ©ĞÅÏ¢²Ù×÷
+				tb_note.getNote(), tb_note.get_id(),tb_note.getNo() });// æ‰§è¡Œä¿®æ”¹ä¾¿ç­¾ä¿¡æ¯æ“ä½œ
 	}
 
 	/**
-	 * ²éÕÒ±ãÇ©ĞÅÏ¢
-	 * 
+	 * æŸ¥æ‰¾ä¾¿ç­¾ä¿¡æ¯
+	 *
 	 * @param id no
 	 * @return
 	 */
 	public Tb_note find(int id,int no) {
-		db = helper.getWritableDatabase();// ³õÊ¼»¯SQLiteDatabase¶ÔÏó
+		db = helper.getWritableDatabase();// åˆå§‹åŒ–SQLiteDatabaseå¯¹è±¡
 		Cursor cursor = db.rawQuery(
 				"select _id,no,note from tb_note where _id = ? and no=?",
-				new String[] { String.valueOf(id) ,String.valueOf(no)});// ¸ù¾İ±àºÅ²éÕÒ±ãÇ©ĞÅÏ¢£¬²¢´æ´¢µ½CursorÀàÖĞ
-		if (cursor.moveToNext())// ±éÀú²éÕÒµ½µÄ±ãÇ©ĞÅÏ¢
+				new String[] { String.valueOf(id) ,String.valueOf(no)});// æ ¹æ®ç¼–å·æŸ¥æ‰¾ä¾¿ç­¾ä¿¡æ¯ï¼Œå¹¶å­˜å‚¨åˆ°Cursorç±»ä¸­
+		if (cursor.moveToNext())// éå†æŸ¥æ‰¾åˆ°çš„ä¾¿ç­¾ä¿¡æ¯
 		{
-			// ½«±éÀúµ½µÄ±ãÇ©ĞÅÏ¢´æ´¢µ½Tb_flagÀàÖĞ
+			// å°†éå†åˆ°çš„ä¾¿ç­¾ä¿¡æ¯å­˜å‚¨åˆ°Tb_flagç±»ä¸­
 			return new Tb_note(cursor.getInt(cursor.getColumnIndex("_id")),
 					cursor.getInt(cursor.getColumnIndex("no")),
 					cursor.getString(cursor.getColumnIndex("note")));
 		}
-		return null;// Èç¹ûÃ»ÓĞĞÅÏ¢£¬Ôò·µ»Ønull
+		return null;// å¦‚æœæ²¡æœ‰ä¿¡æ¯ï¼Œåˆ™è¿”å›null
 	}
 
 	/**
-	 * „h³ı±ãÇ©ĞÅÏ¢
-	 * 
+	 * åˆªé™¤ä¾¿ç­¾ä¿¡æ¯
+	 *
 	 * @param ids
 	 */
 	public void detele(Integer... ids) {
-		if (ids.length > 0)// ÅĞ¶ÏÊÇ·ñ´æÔÚÒªÉ¾³ıµÄid
+		if (ids.length > 0)// åˆ¤æ–­æ˜¯å¦å­˜åœ¨è¦åˆ é™¤çš„id
 		{
-			StringBuffer sb = new StringBuffer();// ´´½¨StringBuffer¶ÔÏó
-			for (int i = 0; i < ids.length-1; i++)// ±éÀúÒªÉ¾³ıµÄid¼¯ºÏ
+			StringBuffer sb = new StringBuffer();// åˆ›å»ºStringBufferå¯¹è±¡
+			for (int i = 0; i < ids.length-1; i++)// éå†è¦åˆ é™¤çš„idé›†åˆ
 			{
-				sb.append('?').append(',');// ½«É¾³ıÌõ¼şÌí¼Óµ½StringBuffer¶ÔÏóÖĞ
+				sb.append('?').append(',');// å°†åˆ é™¤æ¡ä»¶æ·»åŠ åˆ°StringBufferå¯¹è±¡ä¸­
 			}
-			sb.deleteCharAt(sb.length() - 1);// È¥µô×îºóÒ»¸ö¡°,¡°×Ö·û
-			db = helper.getWritableDatabase();// ´´½¨SQLiteDatabase¶ÔÏó
-			// Ö´ĞĞÉ¾³ı±ãÇ©ĞÅÏ¢²Ù×÷
+			sb.deleteCharAt(sb.length() - 1);// å»æ‰æœ€åä¸€ä¸ªâ€œ,â€œå­—ç¬¦
+			db = helper.getWritableDatabase();// åˆ›å»ºSQLiteDatabaseå¯¹è±¡
+			// æ‰§è¡Œåˆ é™¤ä¾¿ç­¾ä¿¡æ¯æ“ä½œ
 			db.execSQL("delete from tb_note where _id in (?) and no in (" + sb + ")",
 					(Object[]) ids);
 		}
 	}
 
 	/**
-	 * »ñÈ¡±ãÇ©ĞÅÏ¢
-	 * 
+	 * è·å–ä¾¿ç­¾ä¿¡æ¯
+	 *
 	 * @param start
-	 *            ÆğÊ¼Î»ÖÃ
+	 *            èµ·å§‹ä½ç½®
 	 * @param count
-	 *            Ã¿Ò³ÏÔÊ¾ÊıÁ¿
+	 *            æ¯é¡µæ˜¾ç¤ºæ•°é‡
 	 * @return
 	 */
 	public List<Tb_note> getScrollData(int id,int start, int count) {
-		List<Tb_note> lisTb_note = new ArrayList<Tb_note>();// ´´½¨¼¯ºÏ¶ÔÏó
-		db = helper.getWritableDatabase();// ³õÊ¼»¯SQLiteDatabase¶ÔÏó
-		// »ñÈ¡ËùÓĞ±ãÇ©ĞÅÏ¢
+		List<Tb_note> lisTb_note = new ArrayList<Tb_note>();// åˆ›å»ºé›†åˆå¯¹è±¡
+		db = helper.getWritableDatabase();// åˆå§‹åŒ–SQLiteDatabaseå¯¹è±¡
+		// è·å–æ‰€æœ‰ä¾¿ç­¾ä¿¡æ¯
 		Cursor cursor = db.rawQuery("select _id,no,note from tb_note where _id=? order by no limit ?,?",
 				new String[] { String.valueOf(id),  String.valueOf(start), String.valueOf(count) });
-		while (cursor.moveToNext())// ±éÀúËùÓĞµÄ±ãÇ©ĞÅÏ¢
+		while (cursor.moveToNext())// éå†æ‰€æœ‰çš„ä¾¿ç­¾ä¿¡æ¯
 		{
-			// ½«±éÀúµ½µÄ±ãÇ©ĞÅÏ¢Ìí¼Óµ½¼¯ºÏÖĞ
+			// å°†éå†åˆ°çš„ä¾¿ç­¾ä¿¡æ¯æ·»åŠ åˆ°é›†åˆä¸­
 			lisTb_note.add(new Tb_note(
 					cursor.getInt(cursor.getColumnIndex("_id")),
 					cursor.getInt(cursor.getColumnIndex("no")),
 					cursor.getString(cursor.getColumnIndex("note"))));
 		}
-		return lisTb_note;// ·µ»Ø¼¯ºÏ
+		return lisTb_note;// è¿”å›é›†åˆ
 	}
 
 	/**
-	 * »ñÈ¡×Ü¼ÇÂ¼Êı
-	 * 
+	 * è·å–æ€»è®°å½•æ•°
+	 *
 	 * @return
 	 */
 	public long getCount(int id) {
-		db = helper.getWritableDatabase();// ³õÊ¼»¯SQLiteDatabase¶ÔÏó
-		Cursor cursor = db.rawQuery("select count(no) from tb_note where _id=?",new String[]{String.valueOf(id)});// »ñÈ¡±ãÇ©ĞÅÏ¢µÄ¼ÇÂ¼Êı
-		if (cursor.moveToNext())// ÅĞ¶ÏCursorÖĞÊÇ·ñÓĞÊı¾İ
+		db = helper.getWritableDatabase();// åˆå§‹åŒ–SQLiteDatabaseå¯¹è±¡
+		Cursor cursor = db.rawQuery("select count(no) from tb_note where _id=?",new String[]{String.valueOf(id)});// è·å–ä¾¿ç­¾ä¿¡æ¯çš„è®°å½•æ•°
+		if (cursor.moveToNext())// åˆ¤æ–­Cursorä¸­æ˜¯å¦æœ‰æ•°æ®
 		{
-			return cursor.getLong(0);// ·µ»Ø×Ü¼ÇÂ¼Êı
+			return cursor.getLong(0);// è¿”å›æ€»è®°å½•æ•°
 		}
-		return 0;// Èç¹ûÃ»ÓĞÊı¾İ£¬Ôò·µ»Ø0
+		return 0;// å¦‚æœæ²¡æœ‰æ•°æ®ï¼Œåˆ™è¿”å›0
 	}
 
 	/**
-	 * »ñÈ¡±ãÇ©×î´ó±àºÅ
-	 * 
+	 * è·å–ä¾¿ç­¾æœ€å¤§ç¼–å·
+	 *
 	 * @return
 	 */
 	public int getMaxNo(int id) {
-		db = helper.getWritableDatabase();// ³õÊ¼»¯SQLiteDatabase¶ÔÏó
-		Cursor cursor = db.rawQuery("select max(no) from tb_note where _id=?",new String[]{String.valueOf(id)});// »ñÈ¡±ãÇ©ĞÅÏ¢±íÖĞµÄ×î´ó±àºÅ
-		while (cursor.moveToLast()) {// ·ÃÎÊCursorÖĞµÄ×îºóÒ»ÌõÊı¾İ
-			return cursor.getInt(0);// »ñÈ¡·ÃÎÊµ½µÄÊı¾İ£¬¼´×î´ó±àºÅ
+		db = helper.getWritableDatabase();// åˆå§‹åŒ–SQLiteDatabaseå¯¹è±¡
+		Cursor cursor = db.rawQuery("select max(no) from tb_note where _id=?",new String[]{String.valueOf(id)});// è·å–ä¾¿ç­¾ä¿¡æ¯è¡¨ä¸­çš„æœ€å¤§ç¼–å·
+		while (cursor.moveToLast()) {// è®¿é—®Cursorä¸­çš„æœ€åä¸€æ¡æ•°æ®
+			return cursor.getInt(0);// è·å–è®¿é—®åˆ°çš„æ•°æ®ï¼Œå³æœ€å¤§ç¼–å·
 		}
-		return 0;// Èç¹ûÃ»ÓĞÊı¾İ£¬Ôò·µ»Ø0
+		return 0;// å¦‚æœæ²¡æœ‰æ•°æ®ï¼Œåˆ™è¿”å›0
 	}
-	public void deleteUserData(int id){//Çå¿ÕÓÃ»§Êı¾İ
-		db = helper.getWritableDatabase();// ³õÊ¼»¯SQLiteDatabase¶ÔÏó 
+	public void deleteUserData(int id){//æ¸…ç©ºç”¨æˆ·æ•°æ®
+		db = helper.getWritableDatabase();// åˆå§‹åŒ–SQLiteDatabaseå¯¹è±¡
 		db.execSQL("delete from tb_note where _id=?",new Object[]{id});
 	}
 }

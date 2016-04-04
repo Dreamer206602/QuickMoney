@@ -5,9 +5,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBOpenHelper extends SQLiteOpenHelper {
-	private static final int VERSION=2;	//ÒÑ¾­×ö³ö¸üĞÂ
+	private static final int VERSION=2;	//å·²ç»åšå‡ºæ›´æ–°
 	private static final String DBNAME="cmoneycharge.db";
-	
+
 	public DBOpenHelper(Context context){
 		super(context,DBNAME,null,VERSION);
 	}
@@ -15,68 +15,68 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-		//ÓÃ»§±í
+		//ç”¨æˆ·è¡¨
 		db.execSQL("create  table tb_account (_id INTEGER  PRIMARY KEY AUTOINCREMENT  NOT NULL,username varchar(20) ,pwd VARCHAR(50) DEFAULT '000000' NOT NULL)");
-		//Ö§³öÀàĞÍ±í
+		//æ”¯å‡ºç±»å‹è¡¨
 		db.execSQL("create  table tb_ptype(_id INTEGER   NOT NULL ,no integer not null,typename varchar(50) )");
-		//ÊÕÈëÀàĞÍ±í
+		//æ”¶å…¥ç±»å‹è¡¨
 		db.execSQL("create   table tb_itype(_id INTEGER   NOT NULL,no integer  not null ,typename varchar(50) )");
-		// Ö§³öĞÅÏ¢±í
+		// æ”¯å‡ºä¿¡æ¯è¡¨
 		db.execSQL("create   table tb_pay (_id INTEGER  NOT NULL,no INTEGER  NOT NULL ,money decimal,time varchar(10),"
 				+ "type integer,address varchar(100),mark varchar(200),photo varchar(200),kind varchar(10))");
-		
-		// ÊÕÈëĞÅÏ¢±í
+
+		// æ”¶å…¥ä¿¡æ¯è¡¨
 		db.execSQL("create   table tb_income (_id INTEGER   NOT NULL,no INTEGER  NOT NULL  ,money decimal,time varchar(10),"
 				+ "type integer ,handler varchar(100),mark varchar(200),photo varchar(200),kind varchar(10))");
-		
-		// ±ãÇ©ĞÅÏ¢±í
+
+		// ä¾¿ç­¾ä¿¡æ¯è¡¨
 		db.execSQL("create  table tb_note (_id integer  ,no integer ,note varchar(200))");
-		db.execSQL("insert into tb_account(_id,username,pwd) values(100000001,\"Ä¬ÈÏÓÃ»§\",\"000000\")");
-		
-		//³õÊ¼»¯Êı¾İ ÊÕÈëÀàĞÍ±í¸ñ
-		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"1","¹¤×Ê"});
-		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"2","»¹¿î"});
-		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"3","¹ÉÆ±"});
-		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"4","»¹¿î"});
-		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"5","»ù½ğ"});
-		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"6","·Öºì"});
-		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"7","ÀûÏ¢"});
-		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"8","¼æÖ°"});
-		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"9","½±½ğ"});
-		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"10","×â½ğ"});
-		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"11","ÏúÊÛ¿î"});
-		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"12","Ó¦ÊÕ¿î"});
-		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"13","±¨Ïú¿î"});
-		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"14","ÆäËû"});
-		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"15","Àñ½ğ"});
-		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"16","ÓïÒôÊ¶±ğ"});
-		//³õÊ¼»¯Êı¾İ Ö§³öÀàĞÍ±í¸ñ
-		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"1","Ôç²Í"});
-		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"2","Îç²Í"});
-		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"3","Íí²Í"});
-		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"4","Ò¹Ïü"});
-		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"5","Éú»îÓÃÆ·"});
-		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"6","¹¤×÷ÓÃÆ·"});
-		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"7","ÒÂ·ş"});
-		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"8","Ó¦³ê"});
-		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"9","µç×Ó²úÆ·"});
-		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"10","Ê³Æ·"});
-		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"11","×â½ğ"});
-		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"12","¹ÉÆ±"});
-		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"13","´òµÄ"});
-		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"14","»ù½ğ"});
-		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"15","ÆäËû"});
-		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"16","ÓïÒôÊ¶±ğ"});
+		db.execSQL("insert into tb_account(_id,username,pwd) values(100000001,\"é»˜è®¤ç”¨æˆ·\",\"000000\")");
+
+		//åˆå§‹åŒ–æ•°æ® æ”¶å…¥ç±»å‹è¡¨æ ¼
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"1","å·¥èµ„"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"2","è¿˜æ¬¾"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"3","è‚¡ç¥¨"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"4","è¿˜æ¬¾"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"5","åŸºé‡‘"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"6","åˆ†çº¢"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"7","åˆ©æ¯"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"8","å…¼èŒ"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"9","å¥–é‡‘"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"10","ç§Ÿé‡‘"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"11","é”€å”®æ¬¾"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"12","åº”æ”¶æ¬¾"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"13","æŠ¥é”€æ¬¾"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"14","å…¶ä»–"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"15","ç¤¼é‡‘"});
+		db.execSQL("insert into tb_itype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"16","è¯­éŸ³è¯†åˆ«"});
+		//åˆå§‹åŒ–æ•°æ® æ”¯å‡ºç±»å‹è¡¨æ ¼
+		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"1","æ—©é¤"});
+		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"2","åˆé¤"});
+		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"3","æ™šé¤"});
+		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"4","å¤œå®µ"});
+		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"5","ç”Ÿæ´»ç”¨å“"});
+		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"6","å·¥ä½œç”¨å“"});
+		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"7","è¡£æœ"});
+		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"8","åº”é…¬"});
+		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"9","ç”µå­äº§å“"});
+		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"10","é£Ÿå“"});
+		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"11","ç§Ÿé‡‘"});
+		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"12","è‚¡ç¥¨"});
+		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"13","æ‰“çš„"});
+		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"14","åŸºé‡‘"});
+		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"15","å…¶ä»–"});
+		db.execSQL("insert into tb_ptype(_id,no,typename) values(?,?,?)",new String[]{String.valueOf(100000001),"16","è¯­éŸ³è¯†åˆ«"});
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		 if(oldVersion < 2) {	//¸üĞÂÊı¾İ¿â
-		        db.execSQL("ALTER TABLE tb_income ADD photo varchar(200)");
-		        db.execSQL("ALTER TABLE tb_pay ADD photo varchar(200)");
-		    }
+		if(oldVersion < 2) {	//æ›´æ–°æ•°æ®åº“
+			db.execSQL("ALTER TABLE tb_income ADD photo varchar(200)");
+			db.execSQL("ALTER TABLE tb_pay ADD photo varchar(200)");
+		}
 	}
-	
+
 	public void droptable(SQLiteDatabase db){
 		db.execSQL("drop table tb_itype");
 		db.execSQL("drop table tb_ptype");

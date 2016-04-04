@@ -24,40 +24,40 @@ import android.util.Log;
 
 public class PayDAO {
 
-	private DBOpenHelper helper;// ¥¥Ω®DBOpenHelper∂‘œÛ
-	private SQLiteDatabase db;// ¥¥Ω®SQLiteDatabase∂‘œÛ
-	private int no = 1;// ±‡∫≈
+	private DBOpenHelper helper;// ÂàõÂª∫DBOpenHelperÂØπË±°
+	private SQLiteDatabase db;// ÂàõÂª∫SQLiteDatabaseÂØπË±°
+	private int no = 1;// ÁºñÂè∑
 	private int userid = 100000001;
 
 	public PayDAO(Context context) {
 		// TODO Auto-generated constructor stub
-		helper = new DBOpenHelper(context);// ≥ı ºªØDBOpenHelper∂‘œÛ
+		helper = new DBOpenHelper(context);// ÂàùÂßãÂåñDBOpenHelperÂØπË±°
 	}
 
 	/**
-	 * ÃÌº”÷ß≥ˆ–≈œ¢
-	 * 
+	 * Ê∑ªÂä†ÊîØÂá∫‰ø°ÊÅØ
+	 *
 	 * @param tb_pay
 	 */
 	public void add(Tb_pay tb_pay) {
-		db = helper.getWritableDatabase();// ≥ı ºªØSQLiteDatabase∂‘œÛ
-		// ÷¥––ÃÌº”÷ß≥ˆ–≈œ¢≤Ÿ◊˜
+		db = helper.getWritableDatabase();// ÂàùÂßãÂåñSQLiteDatabaseÂØπË±°
+		// ÊâßË°åÊ∑ªÂä†ÊîØÂá∫‰ø°ÊÅØÊìç‰Ωú
 		db.execSQL(
 				"insert into tb_pay (_id,no,money,time,type,address,mark,photo,kind) values (?,?,?,?,?,?,?,?,?)",
 				new Object[] { tb_pay.get_id(), tb_pay.getNo(),
 						tb_pay.getMoney(), tb_pay.getTime(), tb_pay.getType(),
 						tb_pay.getAddress(), tb_pay.getMark(),
-						tb_pay.getPhoto(), "÷ß≥ˆ" });
+						tb_pay.getPhoto(), "ÊîØÂá∫" });
 	}
 
 	/**
-	 * ∏¸–¬÷ß≥ˆ–≈œ¢
-	 * 
+	 * Êõ¥Êñ∞ÊîØÂá∫‰ø°ÊÅØ
+	 *
 	 * @param tb_pay
 	 */
 	public void update(Tb_pay tb_pay) {
-		db = helper.getWritableDatabase();// ≥ı ºªØSQLiteDatabase∂‘œÛ
-		// ÷¥–––ﬁ∏ƒ÷ß≥ˆ–≈œ¢≤Ÿ◊˜
+		db = helper.getWritableDatabase();// ÂàùÂßãÂåñSQLiteDatabaseÂØπË±°
+		// ÊâßË°å‰øÆÊîπÊîØÂá∫‰ø°ÊÅØÊìç‰Ωú
 		db.execSQL(
 				"update tb_pay set money = ?,time = ?,type = ?,address = ?,mark = ?,photo = ? where _id = ? and no=?",
 				new Object[] { tb_pay.getMoney(), tb_pay.getTime(),
@@ -67,21 +67,21 @@ public class PayDAO {
 	}
 
 	/**
-	 * ≤È’“÷ß≥ˆ–≈œ¢
-	 * 
+	 * Êü•ÊâæÊîØÂá∫‰ø°ÊÅØ
+	 *
 	 * @param id
 	 *            ,no
 	 * @return
 	 */
 	public Tb_pay find(int id, int no) {
-		db = helper.getWritableDatabase();// ≥ı ºªØSQLiteDatabase∂‘œÛ
+		db = helper.getWritableDatabase();// ÂàùÂßãÂåñSQLiteDatabaseÂØπË±°
 		Cursor cursor = db
 				.rawQuery(
 						"select _id,no,money,time,type,address,mark,photo from tb_pay where _id = ? and no=?",
-						new String[] { String.valueOf(id), String.valueOf(no) });// ∏˘æ›±‡∫≈≤È’“÷ß≥ˆ–≈œ¢£¨≤¢¥Ê¥¢µΩCursor¿‡÷–
-		if (cursor.moveToNext())// ±È¿˙≤È’“µΩµƒ÷ß≥ˆ–≈œ¢
+						new String[] { String.valueOf(id), String.valueOf(no) });// Ê†πÊçÆÁºñÂè∑Êü•ÊâæÊîØÂá∫‰ø°ÊÅØÔºåÂπ∂Â≠òÂÇ®Âà∞CursorÁ±ª‰∏≠
+		if (cursor.moveToNext())// ÈÅçÂéÜÊü•ÊâæÂà∞ÁöÑÊîØÂá∫‰ø°ÊÅØ
 		{
-			// Ω´±È¿˙µΩµƒ÷ß≥ˆ–≈œ¢¥Ê¥¢µΩTb_outaccount¿‡÷–
+			// Â∞ÜÈÅçÂéÜÂà∞ÁöÑÊîØÂá∫‰ø°ÊÅØÂ≠òÂÇ®Âà∞Tb_outaccountÁ±ª‰∏≠
 			return new Tb_pay(cursor.getInt(cursor.getColumnIndex("_id")),
 					cursor.getInt(cursor.getColumnIndex("no")),
 					cursor.getDouble(cursor.getColumnIndex("money")),
@@ -91,102 +91,102 @@ public class PayDAO {
 					cursor.getString(cursor.getColumnIndex("mark")),
 					cursor.getString(cursor.getColumnIndex("photo")));
 		}
-		return null;// »Áπ˚√ª”––≈œ¢£¨‘Ú∑µªÿnull
+		return null;// Â¶ÇÊûúÊ≤°Êúâ‰ø°ÊÅØÔºåÂàôËøîÂõûnull
 	}
 
 	/**
-	 * Ñh≥˝÷ß≥ˆ–≈œ¢
-	 * 
+	 * Âà™Èô§ÊîØÂá∫‰ø°ÊÅØ
+	 *
 	 * @param ids
 	 */
 	public void detele(Integer... ids) {
-		if (ids.length > 0)// ≈–∂œ «∑Ò¥Ê‘⁄“™…æ≥˝µƒid
+		if (ids.length > 0)// Âà§Êñ≠ÊòØÂê¶Â≠òÂú®Ë¶ÅÂà†Èô§ÁöÑid
 		{
-			StringBuffer sb = new StringBuffer();// ¥¥Ω®StringBuffer∂‘œÛ
-			for (int i = 0; i < ids.length - 1; i++)// ±È¿˙“™…æ≥˝µƒidºØ∫œ
+			StringBuffer sb = new StringBuffer();// ÂàõÂª∫StringBufferÂØπË±°
+			for (int i = 0; i < ids.length - 1; i++)// ÈÅçÂéÜË¶ÅÂà†Èô§ÁöÑidÈõÜÂêà
 			{
-				sb.append('?').append(',');// Ω´…æ≥˝Ãıº˛ÃÌº”µΩStringBuffer∂‘œÛ÷–
+				sb.append('?').append(',');// Â∞ÜÂà†Èô§Êù°‰ª∂Ê∑ªÂä†Âà∞StringBufferÂØπË±°‰∏≠
 			}
-			sb.deleteCharAt(sb.length() - 1);// »•µÙ◊Ó∫Û“ª∏ˆ°∞,°∞◊÷∑˚
-			db = helper.getWritableDatabase();// ≥ı ºªØSQLiteDatabase∂‘œÛ
-			// ÷¥––…æ≥˝÷ß≥ˆ–≈œ¢≤Ÿ◊˜
+			sb.deleteCharAt(sb.length() - 1);// ÂéªÊéâÊúÄÂêé‰∏Ä‰∏™‚Äú,‚ÄúÂ≠óÁ¨¶
+			db = helper.getWritableDatabase();// ÂàùÂßãÂåñSQLiteDatabaseÂØπË±°
+			// ÊâßË°åÂà†Èô§ÊîØÂá∫‰ø°ÊÅØÊìç‰Ωú
 			db.execSQL("delete from tb_pay where _id in (?) and no in (" + sb
 					+ ")", (Object[]) ids);
 		}
 	}
 
 	/**
-	 * ªÒ»°÷ß≥ˆ–≈œ¢
-	 * 
+	 * Ëé∑ÂèñÊîØÂá∫‰ø°ÊÅØ
+	 *
 	 * @param start
-	 *            ∆ ºŒª÷√
+	 *            Ëµ∑Âßã‰ΩçÁΩÆ
 	 * @param count
-	 *            √ø“≥œ‘ æ ˝¡ø
+	 *            ÊØèÈ°µÊòæÁ§∫Êï∞Èáè
 	 * @return
 	 */
 	public List<Tb_pay> getScrollData(int id, int start, int count) {
-		List<Tb_pay> tb_pay = new ArrayList<Tb_pay>();// ¥¥Ω®ºØ∫œ∂‘œÛ
-		db = helper.getWritableDatabase();// ≥ı ºªØSQLiteDatabase∂‘œÛ
-		// ªÒ»°À˘”–÷ß≥ˆ–≈œ¢
+		List<Tb_pay> tb_pay = new ArrayList<Tb_pay>();// ÂàõÂª∫ÈõÜÂêàÂØπË±°
+		db = helper.getWritableDatabase();// ÂàùÂßãÂåñSQLiteDatabaseÂØπË±°
+		// Ëé∑ÂèñÊâÄÊúâÊîØÂá∫‰ø°ÊÅØ
 		Cursor cursor = db
 				.rawQuery(
 						"select _id,no,money,time,type,address,mark,photo from tb_pay where _id=? order by no limit ?,?",
 						new String[] { String.valueOf(id),
 								String.valueOf(start), String.valueOf(count) });
-		while (cursor.moveToNext())// ±È¿˙À˘”–µƒ÷ß≥ˆ–≈œ¢
+		while (cursor.moveToNext())// ÈÅçÂéÜÊâÄÊúâÁöÑÊîØÂá∫‰ø°ÊÅØ
 		{
-			// Ω´±È¿˙µΩµƒ÷ß≥ˆ–≈œ¢ÃÌº”µΩºØ∫œ÷–
+			// Â∞ÜÈÅçÂéÜÂà∞ÁöÑÊîØÂá∫‰ø°ÊÅØÊ∑ªÂä†Âà∞ÈõÜÂêà‰∏≠
 			tb_pay.add(new Tb_pay(cursor.getInt(cursor.getColumnIndex("_id")),
 					cursor.getInt(cursor.getColumnIndex("no")), cursor
-							.getDouble(cursor.getColumnIndex("money")), cursor
-							.getString(cursor.getColumnIndex("time")), cursor
-							.getInt(cursor.getColumnIndex("type")), cursor
-							.getString(cursor.getColumnIndex("address")),
+					.getDouble(cursor.getColumnIndex("money")), cursor
+					.getString(cursor.getColumnIndex("time")), cursor
+					.getInt(cursor.getColumnIndex("type")), cursor
+					.getString(cursor.getColumnIndex("address")),
 					cursor.getString(cursor.getColumnIndex("mark")), cursor
-							.getString(cursor.getColumnIndex("photo"))));
+					.getString(cursor.getColumnIndex("photo"))));
 		}
-		return tb_pay;// ∑µªÿºØ∫œ
+		return tb_pay;// ËøîÂõûÈõÜÂêà
 	}
 
 	/**
-	 * ªÒ»°◊‹º«¬º ˝
-	 * 
+	 * Ëé∑ÂèñÊÄªËÆ∞ÂΩïÊï∞
+	 *
 	 * @return
 	 */
 	public long getCount() {
-		db = helper.getWritableDatabase();// ≥ı ºªØSQLiteDatabase∂‘œÛ
-		Cursor cursor = db.rawQuery("select count(no) from tb_pay", null);// ªÒ»°÷ß≥ˆ–≈œ¢µƒº«¬º ˝
-		if (cursor.moveToNext())// ≈–∂œCursor÷– «∑Ò”– ˝æ›
+		db = helper.getWritableDatabase();// ÂàùÂßãÂåñSQLiteDatabaseÂØπË±°
+		Cursor cursor = db.rawQuery("select count(no) from tb_pay", null);// Ëé∑ÂèñÊîØÂá∫‰ø°ÊÅØÁöÑËÆ∞ÂΩïÊï∞
+		if (cursor.moveToNext())// Âà§Êñ≠Cursor‰∏≠ÊòØÂê¶ÊúâÊï∞ÊçÆ
 		{
-			return cursor.getLong(0);// ∑µªÿ◊‹º«¬º ˝
+			return cursor.getLong(0);// ËøîÂõûÊÄªËÆ∞ÂΩïÊï∞
 		}
-		return 0;// »Áπ˚√ª”– ˝æ›£¨‘Ú∑µªÿ0
+		return 0;// Â¶ÇÊûúÊ≤°ÊúâÊï∞ÊçÆÔºåÂàôËøîÂõû0
 	}
 
 	public long getCount(int id) {
-		db = helper.getWritableDatabase();// ≥ı ºªØSQLiteDatabase∂‘œÛ
+		db = helper.getWritableDatabase();// ÂàùÂßãÂåñSQLiteDatabaseÂØπË±°
 		Cursor cursor = db.rawQuery("select count(no) from tb_pay where _id=?",
-				new String[] { String.valueOf(id) });// ªÒ»° ’»Î–≈œ¢µƒº«¬º ˝
-		if (cursor.moveToNext())// ≈–∂œCursor÷– «∑Ò”– ˝æ›
+				new String[] { String.valueOf(id) });// Ëé∑ÂèñÊî∂ÂÖ•‰ø°ÊÅØÁöÑËÆ∞ÂΩïÊï∞
+		if (cursor.moveToNext())// Âà§Êñ≠Cursor‰∏≠ÊòØÂê¶ÊúâÊï∞ÊçÆ
 		{
-			return cursor.getLong(0);// ∑µªÿ◊‹º«¬º ˝
+			return cursor.getLong(0);// ËøîÂõûÊÄªËÆ∞ÂΩïÊï∞
 		}
-		return 0;// »Áπ˚√ª”– ˝æ›£¨‘Ú∑µªÿ0
+		return 0;// Â¶ÇÊûúÊ≤°ÊúâÊï∞ÊçÆÔºåÂàôËøîÂõû0
 	}
 
 	/**
-	 * ªÒ»°÷ß≥ˆ◊Ó¥Û±‡∫≈
-	 * 
+	 * Ëé∑ÂèñÊîØÂá∫ÊúÄÂ§ßÁºñÂè∑
+	 *
 	 * @return
 	 */
 	public int getMaxNo(int id) {
-		db = helper.getWritableDatabase();// ≥ı ºªØSQLiteDatabase∂‘œÛ
+		db = helper.getWritableDatabase();// ÂàùÂßãÂåñSQLiteDatabaseÂØπË±°
 		Cursor cursor = db.rawQuery("select max(no) from tb_pay where _id=?",
-				new String[] { String.valueOf(id) });// ªÒ»°÷ß≥ˆ–≈œ¢±Ì÷–µƒ◊Ó¥Û±‡∫≈
-		while (cursor.moveToLast()) {// ∑√Œ Cursor÷–µƒ◊Ó∫Û“ªÃı ˝æ›
-			return cursor.getInt(0);// ªÒ»°∑√Œ µΩµƒ ˝æ›£¨º¥◊Ó¥Û±‡∫≈
+				new String[] { String.valueOf(id) });// Ëé∑ÂèñÊîØÂá∫‰ø°ÊÅØË°®‰∏≠ÁöÑÊúÄÂ§ßÁºñÂè∑
+		while (cursor.moveToLast()) {// ËÆøÈóÆCursor‰∏≠ÁöÑÊúÄÂêé‰∏ÄÊù°Êï∞ÊçÆ
+			return cursor.getInt(0);// Ëé∑ÂèñËÆøÈóÆÂà∞ÁöÑÊï∞ÊçÆÔºåÂç≥ÊúÄÂ§ßÁºñÂè∑
 		}
-		return 0;// »Áπ˚√ª”– ˝æ›£¨‘Ú∑µªÿ0
+		return 0;// Â¶ÇÊûúÊ≤°ÊúâÊï∞ÊçÆÔºåÂàôËøîÂõû0
 	}
 
 	@SuppressLint("SimpleDateFormat")
@@ -208,15 +208,15 @@ public class PayDAO {
 	}
 
 	public Double getamountData(int userid) {
-		db = helper.getWritableDatabase();// ≥ı ºªØSQLiteDatabase∂‘œÛ
+		db = helper.getWritableDatabase();// ÂàùÂßãÂåñSQLiteDatabaseÂØπË±°
 		Double data = 0.0;
 		Cursor cursor = db.rawQuery(
 				"select sum(money) from tb_pay where _id=?",
 				new String[] { String.valueOf(userid) });
-		// ªÒ»°÷ß≥ˆ–≈œ¢±Ì÷–µƒ◊Ó¥Û±‡∫≈
-		while (cursor.moveToNext())// ±È¿˙À˘”–µƒ÷ß≥ˆ–≈œ¢
+		// Ëé∑ÂèñÊîØÂá∫‰ø°ÊÅØË°®‰∏≠ÁöÑÊúÄÂ§ßÁºñÂè∑
+		while (cursor.moveToNext())// ÈÅçÂéÜÊâÄÊúâÁöÑÊîØÂá∫‰ø°ÊÅØ
 		{
-			// Ω´±È¿˙µΩµƒ÷ß≥ˆ–≈œ¢ÃÌº”µΩºØ∫œ÷–
+			// Â∞ÜÈÅçÂéÜÂà∞ÁöÑÊîØÂá∫‰ø°ÊÅØÊ∑ªÂä†Âà∞ÈõÜÂêà‰∏≠
 			data = cursor.getDouble(0);
 		}
 		cursor.close();
@@ -224,26 +224,26 @@ public class PayDAO {
 	}
 
 	public Datapicker getDataOnDay(String date1, String date2) {
-		db = helper.getWritableDatabase();// ≥ı ºªØSQLiteDatabase∂‘œÛ
+		db = helper.getWritableDatabase();// ÂàùÂßãÂåñSQLiteDatabaseÂØπË±°
 		Double data = 0.0;
 		Datapicker datapicker;
 		Cursor cursor = db
 				.rawQuery(
 						"select total(money) as tmoney from tb_pay  where time >= ? and time <= ? and  _id =?",
-						new String[] { date1, date2, String.valueOf(userid) });// ªÒ»°÷ß≥ˆ–≈œ¢±Ì÷–µƒ◊Ó¥Û±‡∫≈
-		while (cursor.moveToNext())// ±È¿˙À˘”–µƒ÷ß≥ˆ–≈œ¢
+						new String[] { date1, date2, String.valueOf(userid) });// Ëé∑ÂèñÊîØÂá∫‰ø°ÊÅØË°®‰∏≠ÁöÑÊúÄÂ§ßÁºñÂè∑
+		while (cursor.moveToNext())// ÈÅçÂéÜÊâÄÊúâÁöÑÊîØÂá∫‰ø°ÊÅØ
 		{
 
-			// Ω´±È¿˙µΩµƒ÷ß≥ˆ–≈œ¢ÃÌº”µΩºØ∫œ÷–
+			// Â∞ÜÈÅçÂéÜÂà∞ÁöÑÊîØÂá∫‰ø°ÊÅØÊ∑ªÂä†Âà∞ÈõÜÂêà‰∏≠
 			data = cursor.getDouble(cursor.getColumnIndex("tmoney"));
 		}
 		cursor.close();
 		datapicker = new Datapicker(no, data, date1);
 		no++;
 		return datapicker;
-		// Ω´±È¿˙µΩµƒ÷ß≥ˆ–≈œ¢ÃÌº”µΩºØ∫œ÷–
+		// Â∞ÜÈÅçÂéÜÂà∞ÁöÑÊîØÂá∫‰ø°ÊÅØÊ∑ªÂä†Âà∞ÈõÜÂêà‰∏≠
 
-	} // ∑µªÿºØ∫œ
+	} // ËøîÂõûÈõÜÂêà
 
 	public List<Datapicker> getDataMonth(int id, int year, int month) {
 		String d1, d2;
@@ -252,65 +252,65 @@ public class PayDAO {
 		userid = id;
 		no = 1;
 		switch (month) {
-		case 1:
-			d1 += "0" + String.valueOf(month) + "-01";
-			d2 += "0" + String.valueOf(month) + "-31";
-			break;
-		case 2:
-			if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+			case 1:
 				d1 += "0" + String.valueOf(month) + "-01";
-				d2 += "0" + String.valueOf(month) + "-29";
-			} else {
+				d2 += "0" + String.valueOf(month) + "-31";
+				break;
+			case 2:
+				if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+					d1 += "0" + String.valueOf(month) + "-01";
+					d2 += "0" + String.valueOf(month) + "-29";
+				} else {
+					d1 += "0" + String.valueOf(month) + "-01";
+					d2 += "0" + String.valueOf(month) + "-28";
+				}
+				break;
+			case 3:
 				d1 += "0" + String.valueOf(month) + "-01";
-				d2 += "0" + String.valueOf(month) + "-28";
-			}
-			break;
-		case 3:
-			d1 += "0" + String.valueOf(month) + "-01";
-			d2 += "0" + String.valueOf(month) + "-31";
-			break;
-		case 4:
-			d1 += "0" + String.valueOf(month) + "-01";
-			d2 += "0" + String.valueOf(month) + "-30";
-			break;
-		case 5:
-			d1 += "0" + String.valueOf(month) + "-01";
-			d2 += "0" + String.valueOf(month) + "-31";
-			break;
-		case 6:
-			d1 += "0" + String.valueOf(month) + "-01";
-			d2 += "0" + String.valueOf(month) + "-30";
-			break;
-		case 7:
-			d1 += "0" + String.valueOf(month) + "-01";
-			d2 += "0" + String.valueOf(month) + "-31";
-			break;
-		case 8:
-			d1 += "0" + String.valueOf(month) + "-01";
-			d2 += "0" + String.valueOf(month) + "-31";
-			break;
-		case 9:
-			d1 += "0" + String.valueOf(month) + "-01";
-			d2 += "0" + String.valueOf(month) + "-30";
-			break;
-		case 10:
-			d1 += String.valueOf(month) + "-01";
-			d2 += String.valueOf(month) + "-31";
-			break;
-		case 11:
-			d1 += String.valueOf(month) + "-01";
-			d2 += String.valueOf(month) + "-30";
-			break;
-		case 12:
-			d1 += String.valueOf(month) + "-01";
-			d2 += String.valueOf(month) + "-31";
-			break;
+				d2 += "0" + String.valueOf(month) + "-31";
+				break;
+			case 4:
+				d1 += "0" + String.valueOf(month) + "-01";
+				d2 += "0" + String.valueOf(month) + "-30";
+				break;
+			case 5:
+				d1 += "0" + String.valueOf(month) + "-01";
+				d2 += "0" + String.valueOf(month) + "-31";
+				break;
+			case 6:
+				d1 += "0" + String.valueOf(month) + "-01";
+				d2 += "0" + String.valueOf(month) + "-30";
+				break;
+			case 7:
+				d1 += "0" + String.valueOf(month) + "-01";
+				d2 += "0" + String.valueOf(month) + "-31";
+				break;
+			case 8:
+				d1 += "0" + String.valueOf(month) + "-01";
+				d2 += "0" + String.valueOf(month) + "-31";
+				break;
+			case 9:
+				d1 += "0" + String.valueOf(month) + "-01";
+				d2 += "0" + String.valueOf(month) + "-30";
+				break;
+			case 10:
+				d1 += String.valueOf(month) + "-01";
+				d2 += String.valueOf(month) + "-31";
+				break;
+			case 11:
+				d1 += String.valueOf(month) + "-01";
+				d2 += String.valueOf(month) + "-30";
+				break;
+			case 12:
+				d1 += String.valueOf(month) + "-01";
+				d2 += String.valueOf(month) + "-31";
+				break;
 
 		}
 		List<Datapicker> datapickerlist = new ArrayList<Datapicker>();
 		Datapicker datapicker;
 		for (String temp = d1; temp.compareTo(d2) <= 0;) {
-			// ¥¥Ω®ºØ∫œ∂‘œÛ
+			// ÂàõÂª∫ÈõÜÂêàÂØπË±°
 			datapicker = getDataOnDay(temp, temp);
 			datapickerlist.add(datapicker);
 			temp = addDays(temp, 1);
@@ -327,7 +327,7 @@ public class PayDAO {
 		List<Datapicker> datapickerlist = new ArrayList<Datapicker>();
 		Datapicker datapicker;
 		for (String temp = date1; temp.compareTo(date2) <= 0;) {
-			// ¥¥Ω®ºØ∫œ∂‘œÛ
+			// ÂàõÂª∫ÈõÜÂêàÂØπË±°
 			datapicker = getDataOnDay(temp, temp);
 			datapickerlist.add(datapicker);
 			temp = addDays(temp, 1);
@@ -336,115 +336,115 @@ public class PayDAO {
 		return datapickerlist;
 	}
 
-	public void deleteUserData(int id) {// «Âø’”√ªß ˝æ›
-		db = helper.getWritableDatabase();// ≥ı ºªØSQLiteDatabase∂‘œÛ
+	public void deleteUserData(int id) {// Ê∏ÖÁ©∫Áî®Êà∑Êï∞ÊçÆ
+		db = helper.getWritableDatabase();// ÂàùÂßãÂåñSQLiteDatabaseÂØπË±°
 		db.execSQL("delete from tb_pay where _id=?", new Object[] { id });
 	}
 
 	public List<Tb_pay> getScrollData(int id, int start, int count,
-			String date1, String date2) {
-		List<Tb_pay> tb_pay = new ArrayList<Tb_pay>();// ¥¥Ω®ºØ∫œ∂‘œÛ
-		db = helper.getWritableDatabase();// ≥ı ºªØSQLiteDatabase∂‘œÛ
-		// ªÒ»°À˘”–÷ß≥ˆ–≈œ¢
+									  String date1, String date2) {
+		List<Tb_pay> tb_pay = new ArrayList<Tb_pay>();// ÂàõÂª∫ÈõÜÂêàÂØπË±°
+		db = helper.getWritableDatabase();// ÂàùÂßãÂåñSQLiteDatabaseÂØπË±°
+		// Ëé∑ÂèñÊâÄÊúâÊîØÂá∫‰ø°ÊÅØ
 		Cursor cursor = db
 				.rawQuery(
 						"select _id,no,money,time,type,address,mark,photo from tb_pay where _id=? and time >= ? and time <= ? order by time DESC",
 						new String[] { String.valueOf(id), date1, date2 });
-		while (cursor.moveToNext())// ±È¿˙À˘”–µƒ÷ß≥ˆ–≈œ¢
+		while (cursor.moveToNext())// ÈÅçÂéÜÊâÄÊúâÁöÑÊîØÂá∫‰ø°ÊÅØ
 		{
-			// Ω´±È¿˙µΩµƒ÷ß≥ˆ–≈œ¢ÃÌº”µΩºØ∫œ÷–
+			// Â∞ÜÈÅçÂéÜÂà∞ÁöÑÊîØÂá∫‰ø°ÊÅØÊ∑ªÂä†Âà∞ÈõÜÂêà‰∏≠
 			tb_pay.add(new Tb_pay(cursor.getInt(cursor.getColumnIndex("_id")),
 					cursor.getInt(cursor.getColumnIndex("no")), cursor
-							.getDouble(cursor.getColumnIndex("money")), cursor
-							.getString(cursor.getColumnIndex("time")), cursor
-							.getInt(cursor.getColumnIndex("type")), cursor
-							.getString(cursor.getColumnIndex("address")),
+					.getDouble(cursor.getColumnIndex("money")), cursor
+					.getString(cursor.getColumnIndex("time")), cursor
+					.getInt(cursor.getColumnIndex("type")), cursor
+					.getString(cursor.getColumnIndex("address")),
 					cursor.getString(cursor.getColumnIndex("mark")), cursor
-							.getString(cursor.getColumnIndex("photo"))));
+					.getString(cursor.getColumnIndex("photo"))));
 		}
-		return tb_pay;// ∑µªÿºØ∫œ
+		return tb_pay;// ËøîÂõûÈõÜÂêà
 	}
 
 	public List<KindData> getKDataOnDay(int id, String date1, String date2) {
-		db = helper.getWritableDatabase();// ≥ı ºªØSQLiteDatabase∂‘œÛ
+		db = helper.getWritableDatabase();// ÂàùÂßãÂåñSQLiteDatabaseÂØπË±°
 		List<KindData> kinddatalist = new ArrayList<KindData>();
 		Cursor cursor = db
 				.rawQuery(
 						"select type,  total(money) as tmoney from tb_pay  where time >= ? and time <= ? and  _id =? group by type",
-						new String[] { date1, date2, String.valueOf(id) });// ªÒ»°÷ß≥ˆ–≈œ¢±Ì÷–µƒ◊Ó¥Û±‡∫≈
-		while (cursor.moveToNext())// ±È¿˙À˘”–µƒ÷ß≥ˆ–≈œ¢
+						new String[] { date1, date2, String.valueOf(id) });// Ëé∑ÂèñÊîØÂá∫‰ø°ÊÅØË°®‰∏≠ÁöÑÊúÄÂ§ßÁºñÂè∑
+		while (cursor.moveToNext())// ÈÅçÂéÜÊâÄÊúâÁöÑÊîØÂá∫‰ø°ÊÅØ
 		{
 
-			// Ω´±È¿˙µΩµƒ÷ß≥ˆ–≈œ¢ÃÌº”µΩºØ∫œ÷–
+			// Â∞ÜÈÅçÂéÜÂà∞ÁöÑÊîØÂá∫‰ø°ÊÅØÊ∑ªÂä†Âà∞ÈõÜÂêà‰∏≠
 			kinddatalist.add(new KindData(cursor.getInt(cursor
 					.getColumnIndex("type")), cursor.getDouble(cursor
 					.getColumnIndex("tmoney"))));
 		}
 		cursor.close();
 
-		return kinddatalist;// ∑µªÿºØ∫œ
-		// Ω´±È¿˙µΩµƒ÷ß≥ˆ–≈œ¢ÃÌº”µΩºØ∫œ÷–
+		return kinddatalist;// ËøîÂõûÈõÜÂêà
+		// Â∞ÜÈÅçÂéÜÂà∞ÁöÑÊîØÂá∫‰ø°ÊÅØÊ∑ªÂä†Âà∞ÈõÜÂêà‰∏≠
 
-	} // ∑µªÿºØ∫œ
+	} // ËøîÂõûÈõÜÂêà
 
 	public List<KindData> getKDataOnMonth(int id, int year, int month) {
 		String d1, d2;
 		d1 = String.valueOf(year) + "-";
 		d2 = String.valueOf(year) + "-";
 		switch (month) {
-		case 1:
-			d1 += "0" + String.valueOf(month) + "-01";
-			d2 += "0" + String.valueOf(month) + "-31";
-			break;
-		case 2:
-			if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+			case 1:
 				d1 += "0" + String.valueOf(month) + "-01";
-				d2 += "0" + String.valueOf(month) + "-29";
-			} else {
+				d2 += "0" + String.valueOf(month) + "-31";
+				break;
+			case 2:
+				if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+					d1 += "0" + String.valueOf(month) + "-01";
+					d2 += "0" + String.valueOf(month) + "-29";
+				} else {
+					d1 += "0" + String.valueOf(month) + "-01";
+					d2 += "0" + String.valueOf(month) + "-28";
+				}
+				break;
+			case 3:
 				d1 += "0" + String.valueOf(month) + "-01";
-				d2 += "0" + String.valueOf(month) + "-28";
-			}
-			break;
-		case 3:
-			d1 += "0" + String.valueOf(month) + "-01";
-			d2 += "0" + String.valueOf(month) + "-31";
-			break;
-		case 4:
-			d1 += "0" + String.valueOf(month) + "-01";
-			d2 += "0" + String.valueOf(month) + "-30";
-			break;
-		case 5:
-			d1 += "0" + String.valueOf(month) + "-01";
-			d2 += "0" + String.valueOf(month) + "-31";
-			break;
-		case 6:
-			d1 += "0" + String.valueOf(month) + "-01";
-			d2 += "0" + String.valueOf(month) + "-30";
-			break;
-		case 7:
-			d1 += "0" + String.valueOf(month) + "-01";
-			d2 += "0" + String.valueOf(month) + "-31";
-			break;
-		case 8:
-			d1 += "0" + String.valueOf(month) + "-01";
-			d2 += "0" + String.valueOf(month) + "-31";
-			break;
-		case 9:
-			d1 += "0" + String.valueOf(month) + "-01";
-			d2 += "0" + String.valueOf(month) + "-30";
-			break;
-		case 10:
-			d1 += String.valueOf(month) + "-01";
-			d2 += String.valueOf(month) + "-31";
-			break;
-		case 11:
-			d1 += String.valueOf(month) + "-01";
-			d2 += String.valueOf(month) + "-30";
-			break;
-		case 12:
-			d1 += String.valueOf(month) + "-01";
-			d2 += String.valueOf(month) + "-31";
-			break;
+				d2 += "0" + String.valueOf(month) + "-31";
+				break;
+			case 4:
+				d1 += "0" + String.valueOf(month) + "-01";
+				d2 += "0" + String.valueOf(month) + "-30";
+				break;
+			case 5:
+				d1 += "0" + String.valueOf(month) + "-01";
+				d2 += "0" + String.valueOf(month) + "-31";
+				break;
+			case 6:
+				d1 += "0" + String.valueOf(month) + "-01";
+				d2 += "0" + String.valueOf(month) + "-30";
+				break;
+			case 7:
+				d1 += "0" + String.valueOf(month) + "-01";
+				d2 += "0" + String.valueOf(month) + "-31";
+				break;
+			case 8:
+				d1 += "0" + String.valueOf(month) + "-01";
+				d2 += "0" + String.valueOf(month) + "-31";
+				break;
+			case 9:
+				d1 += "0" + String.valueOf(month) + "-01";
+				d2 += "0" + String.valueOf(month) + "-30";
+				break;
+			case 10:
+				d1 += String.valueOf(month) + "-01";
+				d2 += String.valueOf(month) + "-31";
+				break;
+			case 11:
+				d1 += String.valueOf(month) + "-01";
+				d2 += String.valueOf(month) + "-30";
+				break;
+			case 12:
+				d1 += String.valueOf(month) + "-01";
+				d2 += String.valueOf(month) + "-31";
+				break;
 
 		}
 		return getKDataOnDay(id, d1, d2);

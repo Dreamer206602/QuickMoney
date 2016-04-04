@@ -7,25 +7,25 @@ import android.database.sqlite.SQLiteDatabase;
 import cwp.moneycharge.model.*;
 
 public class AccountDAO {
-	private DBOpenHelper helper;// ´´½¨DBOpenHelper¶ÔÏó
+	private DBOpenHelper helper;// åˆ›å»ºDBOpenHelperå¯¹è±¡
 
-	private SQLiteDatabase db;// ´´½¨SQLiteDatabase¶ÔÏó
+	private SQLiteDatabase db;// åˆ›å»ºSQLiteDatabaseå¯¹è±¡
 
-	public AccountDAO(Context context)// ¶¨Òå¹¹Ôìº¯Êı
+	public AccountDAO(Context context)// å®šä¹‰æ„é€ å‡½æ•°
 	{
-		helper = new DBOpenHelper(context);// ³õÊ¼»¯DBOpenHelper¶ÔÏó
+		helper = new DBOpenHelper(context);// åˆå§‹åŒ–DBOpenHelperå¯¹è±¡
 
 	}
 
 	/**
-	 * Ìí¼ÓÃÜÂëĞÅÏ¢
-	 * 
+	 * æ·»åŠ å¯†ç ä¿¡æ¯
+	 *
 	 * @param tb_account
 	 */
 	public int add(Tb_account tb_account) {
 
-		db = helper.getWritableDatabase();// ³õÊ¼»¯SQLiteDatabase¶ÔÏó
-		// Ö´ĞĞÌí¼ÓÃÜÂë²Ù×÷
+		db = helper.getWritableDatabase();// åˆå§‹åŒ–SQLiteDatabaseå¯¹è±¡
+		// æ‰§è¡Œæ·»åŠ å¯†ç æ“ä½œ
 		if (tb_account.get_id() == 0) {
 			db.execSQL(
 					"insert into tb_account (username,pwd) values (?,?)",
@@ -38,77 +38,75 @@ public class AccountDAO {
 		Cursor cursor = db.rawQuery(
 				"select _id from tb_account where username=? and pwd=?",
 				new String[] { tb_account.getUsername(), tb_account.getPwd() });
-		if (cursor.moveToNext())// ±éÀú²éÕÒµ½µÄÃÜÂëĞÅÏ¢
+		if (cursor.moveToNext())// éå†æŸ¥æ‰¾åˆ°çš„å¯†ç ä¿¡æ¯
 		{
-			// ½«ÃÜÂë´æ´¢µ½Tb_accountÀàÖĞ
+			// å°†å¯†ç å­˜å‚¨åˆ°Tb_accountç±»ä¸­
 			return cursor.getInt(cursor.getColumnIndex("_id"));
 		} else
 			return 100000001;
 	}
 
 	/**
-	 * ÉèÖÃÃÜÂëĞÅÏ¢
-	 * 
-	 * @param tb_account
+	 * è®¾ç½®å¯†ç ä¿¡æ¯
 	 */
 	public void update(int id, String username, String pwd) {
-		db = helper.getWritableDatabase();// ³õÊ¼»¯SQLiteDatabase¶ÔÏó
-		// Ö´ĞĞĞŞ¸ÄÃÜÂë²Ù×÷
+		db = helper.getWritableDatabase();// åˆå§‹åŒ–SQLiteDatabaseå¯¹è±¡
+		// æ‰§è¡Œä¿®æ”¹å¯†ç æ“ä½œ
 		db.execSQL("update tb_account set username=? , pwd = ? where _id=?  ",
 				new String[] { username, pwd, String.valueOf(id) });
 	}
 
 	public void deleteById(int id) {
-		db = helper.getWritableDatabase();// ´´½¨SQLiteDatabase¶ÔÏó
-		// Ö´ĞĞÉ¾³ı±ãÇ©ĞÅÏ¢²Ù×÷
+		db = helper.getWritableDatabase();// åˆ›å»ºSQLiteDatabaseå¯¹è±¡
+		// æ‰§è¡Œåˆ é™¤ä¾¿ç­¾ä¿¡æ¯æ“ä½œ
 		db.execSQL("delete from tb_account where _id =? ", new Object[] { id });
 	}
 
 	/**
-	 * ²éÕÒÃÜÂëĞÅÏ¢
-	 * 
+	 * æŸ¥æ‰¾å¯†ç ä¿¡æ¯
+	 *
 	 * @return
 	 */
 	public Tb_account find(String username, String pwd) {
-		db = helper.getWritableDatabase();// ³õÊ¼»¯SQLiteDatabase¶ÔÏó
-		// ²éÕÒÃÜÂë²¢´æ´¢µ½CursorÀàÖĞ
+		db = helper.getWritableDatabase();// åˆå§‹åŒ–SQLiteDatabaseå¯¹è±¡
+		// æŸ¥æ‰¾å¯†ç å¹¶å­˜å‚¨åˆ°Cursorç±»ä¸­
 		Cursor cursor = db
 				.rawQuery(
 						"select _id, username, pwd from tb_account where pwd=? and username=? ",
 						new String[] { pwd, username });
-		if (cursor.moveToNext())// ±éÀú²éÕÒµ½µÄÃÜÂëĞÅÏ¢
+		if (cursor.moveToNext())// éå†æŸ¥æ‰¾åˆ°çš„å¯†ç ä¿¡æ¯
 		{
-			// ½«ÃÜÂë´æ´¢µ½Tb_accountÀàÖĞ
+			// å°†å¯†ç å­˜å‚¨åˆ°Tb_accountç±»ä¸­
 			return new Tb_account(cursor.getInt(cursor.getColumnIndex("_id")),
 					cursor.getString(cursor.getColumnIndex("username")),
 					cursor.getString(cursor.getColumnIndex("pwd")));
 		}
-		return null;// Èç¹ûÃ»ÓĞĞÅÏ¢£¬Ôò·µ»Ønull
+		return null;// å¦‚æœæ²¡æœ‰ä¿¡æ¯ï¼Œåˆ™è¿”å›null
 	}
 
 	public String find(int id) {
-		db = helper.getWritableDatabase();// ³õÊ¼»¯SQLiteDatabase¶ÔÏó
-		// ²éÕÒÃÜÂë²¢´æ´¢µ½CursorÀàÖĞ
+		db = helper.getWritableDatabase();// åˆå§‹åŒ–SQLiteDatabaseå¯¹è±¡
+		// æŸ¥æ‰¾å¯†ç å¹¶å­˜å‚¨åˆ°Cursorç±»ä¸­
 		Cursor cursor = db.rawQuery(
 				"select username from tb_account where _id=? ",
 				new String[] { String.valueOf(id) });
-		if (cursor.moveToNext())// ±éÀú²éÕÒµ½µÄÃÜÂëĞÅÏ¢
+		if (cursor.moveToNext())// éå†æŸ¥æ‰¾åˆ°çš„å¯†ç ä¿¡æ¯
 		{
-			// ½«ÃÜÂë´æ´¢µ½Tb_accountÀàÖĞ
+			// å°†å¯†ç å­˜å‚¨åˆ°Tb_accountç±»ä¸­
 			return cursor.getString(cursor.getColumnIndex("username"));
 
 		} else
-			return "ÎŞÃûÊÏ";// Èç¹ûÃ»ÓĞĞÅÏ¢£¬Ôò·µ»Ønull
+			return "æ— åæ°";// å¦‚æœæ²¡æœ‰ä¿¡æ¯ï¼Œåˆ™è¿”å›null
 	}
 
 	public long getCount() {
-		db = helper.getWritableDatabase();// ³õÊ¼»¯SQLiteDatabase¶ÔÏó
-		Cursor cursor = db.rawQuery("select count(_id) from tb_account ", null);// »ñÈ¡ÃÜÂëĞÅÏ¢µÄ¼ÇÂ¼Êı
-		if (cursor.moveToNext())// ÅĞ¶ÏCursorÖĞÊÇ·ñÓĞÊı¾İ
+		db = helper.getWritableDatabase();// åˆå§‹åŒ–SQLiteDatabaseå¯¹è±¡
+		Cursor cursor = db.rawQuery("select count(_id) from tb_account ", null);// è·å–å¯†ç ä¿¡æ¯çš„è®°å½•æ•°
+		if (cursor.moveToNext())// åˆ¤æ–­Cursorä¸­æ˜¯å¦æœ‰æ•°æ®
 		{
-			return cursor.getLong(0);// ·µ»Ø×Ü¼ÇÂ¼Êı
+			return cursor.getLong(0);// è¿”å›æ€»è®°å½•æ•°
 		}
-		return 0;// Èç¹ûÃ»ÓĞÊı¾İ£¬Ôò·µ»Ø0
+		return 0;// å¦‚æœæ²¡æœ‰æ•°æ®ï¼Œåˆ™è¿”å›0
 	}
 
 }
