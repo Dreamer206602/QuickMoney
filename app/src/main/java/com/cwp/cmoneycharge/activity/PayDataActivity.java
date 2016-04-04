@@ -36,7 +36,7 @@ import cwp.moneycharge.dao.PayDAO;
 import cwp.moneycharge.dao.PtypeDAO;
 import cwp.moneycharge.model.KindData;
 
-public class PayData extends Activity {
+public class PayDataActivity extends Activity {
 	int userid;
 	Intent intentr;
 	PayDAO payDAO;
@@ -64,7 +64,7 @@ public class PayData extends Activity {
 			Color.rgb(217, 190, 100), Color.rgb(50, 150, 100),
 			Color.rgb(150, 150, 100), Color.rgb(150, 150, 190) };
 
-	public PayData() {
+	public PayDataActivity() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -92,15 +92,15 @@ public class PayData extends Activity {
 		mSeries = new CategorySeries("");
 		mRenderer = new DefaultRenderer();// PieChart����Ҫ�����
 		yearlist = new ArrayList<String>(); // ��������б� spinner
-		payDAO = new PayDAO(PayData.this);
+		payDAO = new PayDAO(PayDataActivity.this);
 		KindDatap = new ArrayList<KindData>();
-		ptypeDAO = new PtypeDAO(PayData.this);
+		ptypeDAO = new PtypeDAO(PayDataActivity.this);
 
 		// ������
 		for (int i = 0; i <= 10; i++) {
 			yearlist.add(String.valueOf(defaultYear - i));
 		}
-		adapter = new ArrayAdapter<String>(PayData.this,
+		adapter = new ArrayAdapter<String>(PayDataActivity.this,
 				android.R.layout.simple_spinner_item, yearlist);
 		year.setAdapter((SpinnerAdapter) adapter);
 		yeare.setAdapter((SpinnerAdapter) adapter);
@@ -115,7 +115,7 @@ public class PayData extends Activity {
 		defaultMonth = intentr.getIntExtra("default", defaultMonth);
 		defaultYear = intentr.getIntExtra("defaulty", defaultYear);
 		int type = intentr.getIntExtra("type", 0);// Ϊ0��ѡ�������£�Ϊ1��ѡ������ʱ��
-		payDAO = new PayDAO(PayData.this);
+		payDAO = new PayDAO(PayDataActivity.this);
 
 		mRenderer.setZoomButtonsVisible(true); // ��ʾ�Ŵ���С���ܰ�ť
 		mRenderer.setStartAngle(180); // ����Ϊˮƽ��ʼ
@@ -216,7 +216,7 @@ public class PayData extends Activity {
 					defaultYear = defaultYear - 1;
 				}
 				mSeries.clear();
-				Intent intentp = new Intent(PayData.this, PayData.class);
+				Intent intentp = new Intent(PayDataActivity.this, PayDataActivity.class);
 				intentp.putExtra("defaulty", defaultYear);
 				intentp.putExtra("default", defaultMonth);
 				intentp.putExtra("cwp.id", userid);
@@ -235,7 +235,7 @@ public class PayData extends Activity {
 					defaultYear = defaultYear + 1;
 				}
 				mSeries.clear();
-				Intent intentp = new Intent(PayData.this, PayData.class);
+				Intent intentp = new Intent(PayDataActivity.this, PayDataActivity.class);
 				intentp.putExtra("defaulty", defaultYear);
 				intentp.putExtra("default", defaultMonth);
 				intentp.putExtra("cwp.id", userid);
@@ -250,7 +250,7 @@ public class PayData extends Activity {
 				// TODO Auto-generated method stub
 				getAnyDate();
 				mSeries.clear();
-				Intent intentp = new Intent(PayData.this, PayData.class);
+				Intent intentp = new Intent(PayDataActivity.this, PayDataActivity.class);
 				intentp.putExtra("type", 1);
 				intentp.putExtra("date1", date1);
 				intentp.putExtra("date2", date2);
@@ -280,7 +280,7 @@ public class PayData extends Activity {
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) { // ���/����/���η��ؼ�
-			Intent intent = new Intent(PayData.this, MainActivity.class);
+			Intent intent = new Intent(PayDataActivity.this, MainActivity.class);
 			intent.putExtra("cwp.id", userid);
 			intent.putExtra("cwp.Fragment", "2");// ���ô�������
 			startActivity(intent);

@@ -52,8 +52,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class SearchActivity extends Activity {
-	private String arrs[] = { "�Զ���ʱ���", "����", "����", "����", "����", "����", "����",
-			"����", "�ϼ�", "����" };
+	private String arrs[] = { "自定义时间段", "今天", "昨天", "本周", "上周", "本月", "上月",
+			"本季", "上季", "本年" };
 	private boolean boos[] = { false, false, false, false, false, false, false,
 			false, false, false };
 	private CustomMultiChoiceDialog.Builder multiChoiceDialogBuilder;
@@ -61,7 +61,7 @@ public class SearchActivity extends Activity {
 	public String contact_name;
 
 	private CustomMultiChoiceDialog multiChoiceDialog;
-	protected static final int DATE_DIALOG_ID = 0;// �������ڶԻ�����
+	protected static final int DATE_DIALOG_ID = 0;// 创建日期对话框常量
 	EditText query_dialog;
 	ListView mListView;
 	LinearLayout mlayout;
@@ -70,7 +70,7 @@ public class SearchActivity extends Activity {
 	IncomeDAO incomeDAO = new IncomeDAO(this);
 	PtypeDAO ptypeDAO = new PtypeDAO(this);
 	ItypeDAO itypeDAO = new ItypeDAO(this);
-	PayDAO payDAO = new PayDAO(this);// ����PayDAO����
+	PayDAO payDAO = new PayDAO(this);// 创建PayDAO对象
 	private String[] strInfos;
 	private TextView searchincome;
 	private TextView searchpay;
@@ -136,119 +136,119 @@ public class SearchActivity extends Activity {
 		Intent intentr = getIntent();
 		userid = intentr.getIntExtra("cwp.id", 100000001);
 
-		mlayout = (LinearLayout) findViewById(R.id.mlayout);// ��ȡ����ı���
-		search_list_timeall = (LinearLayout) findViewById(R.id.search_list_timeall);// ��ȡ����ı���
-		search_more_list = (LinearLayout) findViewById(R.id.search_more_list);// ��ȡ����ı���
-		search_more = (RelativeLayout) findViewById(R.id.search_more);// ��ȡ����ı���
-		search_more_close = (RelativeLayout) findViewById(R.id.search_more_close);// ��ȡ����ı���
+		mlayout = (LinearLayout) findViewById(R.id.mlayout);// 获取金额文本框
+		search_list_timeall = (LinearLayout) findViewById(R.id.search_list_timeall);// 获取金额文本框
+		search_more_list = (LinearLayout) findViewById(R.id.search_more_list);// 获取金额文本框
+		search_more = (RelativeLayout) findViewById(R.id.search_more);// 获取金额文本框
+		search_more_close = (RelativeLayout) findViewById(R.id.search_more_close);// 获取金额文本框
 
-		search_list_time = (RelativeLayout) findViewById(R.id.search_list_time);// ��ȡ����ı���
-		search_list_starttime = (RelativeLayout) findViewById(R.id.search_list_starttime);// ��ȡ����ı���
-		search_list_endtime = (RelativeLayout) findViewById(R.id.search_list_endtime);// ��ȡ����ı���
-		search_list_paytype = (RelativeLayout) findViewById(R.id.search_list_paytype);// ��ȡ����ı���
-		search_list_incometype = (RelativeLayout) findViewById(R.id.search_list_incometype);// ��ȡ����ı���
+		search_list_time = (RelativeLayout) findViewById(R.id.search_list_time);// 获取金额文本框
+		search_list_starttime = (RelativeLayout) findViewById(R.id.search_list_starttime);// 获取金额文本框
+		search_list_endtime = (RelativeLayout) findViewById(R.id.search_list_endtime);// 获取金额文本框
+		search_list_paytype = (RelativeLayout) findViewById(R.id.search_list_paytype);// 获取金额文本框
+		search_list_incometype = (RelativeLayout) findViewById(R.id.search_list_incometype);// 获取金额文本框
 
-		mListView = (ListView) findViewById(R.id.mListView);// ��ȡ����ı���
-		query_dialog = (EditText) findViewById(R.id.query_dialog);// ��ȡ����ı���
-		searchincome = (TextView) findViewById(R.id.searchincome);// ��ȡ����ı���
-		seachbalance = (TextView) findViewById(R.id.seachbalance);// ��ȡ����ı���
-		searchpay = (TextView) findViewById(R.id.searchpay);// ��ȡ����ı���
-		search_quit = (TextView) findViewById(R.id.search_quit);// ��ȡ����ı���
+		mListView = (ListView) findViewById(R.id.mListView);// 获取金额文本框
+		query_dialog = (EditText) findViewById(R.id.query_dialog);// 获取金额文本框
+		searchincome = (TextView) findViewById(R.id.searchincome);// 获取金额文本框
+		seachbalance = (TextView) findViewById(R.id.seachbalance);// 获取金额文本框
+		searchpay = (TextView) findViewById(R.id.searchpay);// 获取金额文本框
+		search_quit = (TextView) findViewById(R.id.search_quit);// 获取金额文本框
 
-		search_list_time_text = (TextView) findViewById(R.id.search_list_time_text);// ��ȡ����ı���
-		search_starttime = (TextView) findViewById(R.id.search_starttime);// ��ȡ����ı���
-		search_endtime = (TextView) findViewById(R.id.search_endtime);// ��ȡ����ı���
-		search_paytype = (TextView) findViewById(R.id.search_paytype);// ��ȡ����ı���
-		search_incometype = (TextView) findViewById(R.id.search_incometype);// ��ȡ����ı���
+		search_list_time_text = (TextView) findViewById(R.id.search_list_time_text);// 获取金额文本框
+		search_starttime = (TextView) findViewById(R.id.search_starttime);// 获取金额文本框
+		search_endtime = (TextView) findViewById(R.id.search_endtime);// 获取金额文本框
+		search_paytype = (TextView) findViewById(R.id.search_paytype);// 获取金额文本框
+		search_incometype = (TextView) findViewById(R.id.search_incometype);// 获取金额文本框
 
-		c = Calendar.getInstance();// ��ȡ��ǰϵͳ����
-		mYear = c.get(Calendar.YEAR);// ��ȡ���
-		mMonth = c.get(Calendar.MONTH) + 1;// ��ȡ�·�
-		mDay = c.get(Calendar.DAY_OF_MONTH);// ��ȡ����
+		c = Calendar.getInstance();// 获取当前系统日期
+		mYear = c.get(Calendar.YEAR);// 获取年份
+		mMonth = c.get(Calendar.MONTH) + 1;// 获取月份
+		mDay = c.get(Calendar.DAY_OF_MONTH);// 获取天数
 
-		search_list_endtime.setOnTouchListener(new OnTouchListener() { // Ϊʱ���ı������õ��������¼�
-					@Override
-					public boolean onTouch(View v, MotionEvent event) {
+		search_list_endtime.setOnTouchListener(new OnTouchListener() { // 为时间文本框设置单击监听事件
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
 
-						showDialog(DATE_DIALOG_ID);// ��ʾ����ѡ��Ի���
-						timetype = "end";
-						return false;
-					}
-				});
+				showDialog(DATE_DIALOG_ID);// 显示日期选择对话框
+				timetype = "end";
+				return false;
+			}
+		});
 
-		search_list_starttime.setOnTouchListener(new OnTouchListener() { // Ϊʱ���ı������õ��������¼�
-					@Override
-					public boolean onTouch(View v, MotionEvent event) {
+		search_list_starttime.setOnTouchListener(new OnTouchListener() { // 为时间文本框设置单击监听事件
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
 
-						showDialog(DATE_DIALOG_ID);// ��ʾ����ѡ��Ի���
-						timetype = "start";
-						return false;
-					}
-				});
+				showDialog(DATE_DIALOG_ID);// 显示日期选择对话框
+				timetype = "start";
+				return false;
+			}
+		});
 
 		spdatalistpay = ptypeDAO.getPtypeName(userid);
 		spdatalistincome = itypeDAO.getItypeName(userid);
-		spdatapay = spdatalistpay.toArray(new String[spdatalistpay.size()]);// ��tb_itype�а��û�id��ȡ
+		spdatapay = spdatalistpay.toArray(new String[spdatalistpay.size()]);// 在tb_itype中按用户id读取
 		spdataincome = spdatalistincome.toArray(new String[spdatalistincome
-				.size()]);// ��tb_itype�а��û�id��ȡ
+				.size()]);// 在tb_itype中按用户id读取
 
-		search_list_time.setOnClickListener(new OnClickListener() { // �߼�����ʱ���б�
+		search_list_time.setOnClickListener(new OnClickListener() { // 高级搜索时间列表
 
-					@Override
-					public void onClick(View v) {
-						showMultiChoiceDialog(v, null);
-					}
-				});
+			@Override
+			public void onClick(View v) {
+				showMultiChoiceDialog(v, null);
+			}
+		});
 
-		search_list_paytype.setOnClickListener(new OnClickListener() {// �߼�����֧���б�
+		search_list_paytype.setOnClickListener(new OnClickListener() {// 高级搜索支出列表
 
-					@Override
-					public void onClick(View v) {
-						showMultiChoiceDialog(v, "pay");
-						searchtype = "pay";
-					}
-				});
+			@Override
+			public void onClick(View v) {
+				showMultiChoiceDialog(v, "pay");
+				searchtype = "pay";
+			}
+		});
 
-		search_list_incometype.setOnClickListener(new OnClickListener() {// �߼����������б�
+		search_list_incometype.setOnClickListener(new OnClickListener() {// 高级搜索收入列表
 
-					@Override
-					public void onClick(View v) {
-						showMultiChoiceDialog(v, "income");
-						searchtype = "income";
-					}
-				});
+			@Override
+			public void onClick(View v) {
+				showMultiChoiceDialog(v, "income");
+				searchtype = "income";
+			}
+		});
 
-		search_more_close.setOnClickListener(new OnClickListener() { // ���˸���ѡ��
-					@Override
-					public void onClick(View v) {
-						closemore();
-					}
-				});
+		search_more_close.setOnClickListener(new OnClickListener() { // 按了更多选项
+			@Override
+			public void onClick(View v) {
+				closemore();
+			}
+		});
 
-		search_more.setOnClickListener(new OnClickListener() { // ���˸���ѡ��
-					@Override
-					public void onClick(View v) {
-						InputMethodManager imm = (InputMethodManager) getApplicationContext()
-								.getSystemService(Context.INPUT_METHOD_SERVICE);
-						imm.hideSoftInputFromWindow(v.getWindowToken(), 0); // ǿ�ƹر������
-						search_more.setVisibility(View.GONE);
-						mlayout.setVisibility(View.GONE);
-						search_more_list.setVisibility(View.VISIBLE);
-						search_quit.setText("��ʼ��ѯ");
-						searchstate = "search";
-						search_starttime.setText(mYear + "-01-01");
-						search_endtime.setText(mYear + "-12-31");
-						search_paytype.setText("");
-						search_incometype.setText("");
-						resultincome = null;
-						resultpay = null;
-						paychoice = null;
-						incomechoice = null;
+		search_more.setOnClickListener(new OnClickListener() { // 按了更多选项
+			@Override
+			public void onClick(View v) {
+				InputMethodManager imm = (InputMethodManager) getApplicationContext()
+						.getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(v.getWindowToken(), 0); // 强制关闭软键盘
+				search_more.setVisibility(View.GONE);
+				mlayout.setVisibility(View.GONE);
+				search_more_list.setVisibility(View.VISIBLE);
+				search_quit.setText("开始查询");
+				searchstate = "search";
+				search_starttime.setText(mYear + "-01-01");
+				search_endtime.setText(mYear + "-12-31");
+				search_paytype.setText("");
+				search_incometype.setText("");
+				resultincome = null;
+				resultpay = null;
+				paychoice = null;
+				incomechoice = null;
 
-					}
-				});
+			}
+		});
 
-		class OnClickListenernormal implements OnClickListener { // ִ�в�ѯ
+		class OnClickListenernormal implements OnClickListener { // 执行查询
 			private String String;
 
 			@Override
@@ -281,10 +281,10 @@ public class SearchActivity extends Activity {
 						resultpay[0] = (String) search_paytype.getText();
 					}
 					// for (int i = 0; i < resultincome.length; i++) {
-					// System.out.println("���� " + resultincome[i]);
+					// System.out.println("收入 " + resultincome[i]);
 					// }
 					// for (int i = 0; i < resultpay.length; i++) {
-					// System.out.println("֧�� " + resultpay[i]);
+					// System.out.println("支出 " + resultpay[i]);
 					// }
 					if (text == null) {
 						String = "";
@@ -303,57 +303,57 @@ public class SearchActivity extends Activity {
 
 		search_quit.setOnClickListener(new OnClickListenernormal());
 
-		mListView.setOnItemClickListener(new OnItemClickListener()// ΪListView�������¼�
-				{
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id) {
-						TextView txno = (TextView) view.findViewById(R.id.no);
-						TextView txkind = (TextView) view
-								.findViewById(R.id.kind);
-						String strtype = ((String) txkind.getText()).substring(
-								1, ((String) txkind.getText()).indexOf(']'))
-								.trim();// ��������Ϣ�н�ȡ��֧����
-						String strno = (String) txno.getText(); // ����Ϣ�н�ȡ��֧���
-						Intent intent = new Intent(SearchActivity.this,
-								AddPay.class);// ����Intent����
-						if (strtype.equals("����")) {
-							intent.putExtra("cwp.message", new String[] {
-									strno, "btnininfo" });// ���ô�������
-						}
-						if (strtype.equals("֧��")) {
-							intent.putExtra("cwp.message", new String[] {
-									strno, "btnoutinfo" });// ���ô�������
-						}
-						intent.putExtra("cwp.id", userid);
-						intent.putExtra("cwp.search", "search");
-						startActivityForResult(intent, 101);// ִ��Intent����
-					}
-				});
+		mListView.setOnItemClickListener(new OnItemClickListener()// 为ListView添加项单击事件
+		{
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+									int position, long id) {
+				TextView txno = (TextView) view.findViewById(R.id.no);
+				TextView txkind = (TextView) view
+						.findViewById(R.id.kind);
+				String strtype = ((String) txkind.getText()).substring(
+						1, ((String) txkind.getText()).indexOf(']'))
+						.trim();// 从收入信息中截取收支类型
+				String strno = (String) txno.getText(); // 从信息中截取收支编号
+				Intent intent = new Intent(SearchActivity.this,
+						AddPayActivity.class);// 创建Intent对象
+				if (strtype.equals("收入")) {
+					intent.putExtra("cwp.message", new String[] {
+							strno, "btnininfo" });// 设置传递数据
+				}
+				if (strtype.equals("支出")) {
+					intent.putExtra("cwp.message", new String[] {
+							strno, "btnoutinfo" });// 设置传递数据
+				}
+				intent.putExtra("cwp.id", userid);
+				intent.putExtra("cwp.search", "search");
+				startActivityForResult(intent, 101);// 执行Intent操作
+			}
+		});
 		query_dialog.addTextChangedListener(new TextWatcher() {
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// text ������иı�ǰ���ַ�����Ϣ
-				// start ������иı�ǰ���ַ�������ʼλ��
-				// count ������иı�ǰ����ַ����ı�����һ��Ϊ0
-				// after ������иı����ַ�������ʼλ�õ�ƫ����
+										  int after) {
+				// text 输入框中改变前的字符串信息
+				// start 输入框中改变前的字符串的起始位置
+				// count 输入框中改变前后的字符串改变数量一般为0
+				// after 输入框中改变后的字符串与起始位置的偏移量
 
 			}
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// text ������иı����ַ�����Ϣ
-				// start ������иı����ַ�������ʼλ��
-				// before ������иı�ǰ���ַ�����λ�� Ĭ��Ϊ0
-				// count ������иı���һ�������ַ���������
+									  int count) {
+				// text 输入框中改变后的字符串信息
+				// start 输入框中改变后的字符串的起始位置
+				// before 输入框中改变前的字符串的位置 默认为0
+				// count 输入框中改变后的一共输入字符串的数量
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// edit �������������������е���Ϣ
+				// edit 输入结束呈现在输入框中的信息
 				text = s;
 				update(text.toString());
 			}
@@ -366,7 +366,7 @@ public class SearchActivity extends Activity {
 		imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
 		search_more.setVisibility(View.VISIBLE);
 		search_more_list.setVisibility(View.GONE);
-		search_quit.setText("ȡ��");
+		search_quit.setText("取消");
 		searchstate = "quit";
 		search_more.setBackgroundColor(Color.parseColor("#00000000"));
 	}
@@ -386,7 +386,7 @@ public class SearchActivity extends Activity {
 			return months[3];
 	}
 
-	public void showMultiChoiceDialog(View view, String type) { // ����ѡ��
+	public void showMultiChoiceDialog(View view, String type) { // 类型选择
 		paychoice = new boolean[spdatalistpay.size()];
 		incomechoice = new boolean[spdatalistincome.size()];
 		for (int i = 0; i < paychoice.length; i++) {
@@ -398,19 +398,19 @@ public class SearchActivity extends Activity {
 		multiChoiceDialogBuilder = new CustomMultiChoiceDialog.Builder(this);
 		if (type == "pay") {
 			multiChoiceDialog = multiChoiceDialogBuilder
-					.setTitle("�������")
+					.setTitle("收入类别")
 					.setMultiChoiceItems(true, spdatapay, paychoice, null, true)
-					.setPositiveButton("ȷ��", new PositiveClickListener())
-					.setNegativeButton("ȡ��", null).create();
+					.setPositiveButton("确定", new PositiveClickListener())
+					.setNegativeButton("取消", null).create();
 		} else if (type == "income") {
 			multiChoiceDialog = multiChoiceDialogBuilder
-					.setTitle("֧�����")
+					.setTitle("支出类别")
 					.setMultiChoiceItems(true, spdataincome, incomechoice,
 							null, true)
-					.setPositiveButton("ȷ��", new PositiveClickListener())
-					.setNegativeButton("ȡ��", null).create();
+					.setPositiveButton("确定", new PositiveClickListener())
+					.setNegativeButton("取消", null).create();
 		} else {
-			multiChoiceDialog = multiChoiceDialogBuilder.setTitle("ʱ�䷶Χ")
+			multiChoiceDialog = multiChoiceDialogBuilder.setTitle("时间范围")
 					.setMultiChoiceItems(false, arrs, boos, new onitem(), true)
 					.setPositiveButton(null, null)
 					.setNegativeButton(null, null).create();
@@ -420,7 +420,7 @@ public class SearchActivity extends Activity {
 		multiChoiceDialog.show();
 	}
 
-	class PositiveClickListener implements DialogInterface.OnClickListener { // ��ȷ����ť
+	class PositiveClickListener implements DialogInterface.OnClickListener { // 点确定按钮
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
 			if (CustomMultiChoiceDialog.Builder.getisMultiChoice()) {
@@ -446,7 +446,7 @@ public class SearchActivity extends Activity {
 						if (resultpay.length != 0) {
 							search_paytype.setText(resultpay[0]);
 						} else {
-							search_paytype.setText("���");
+							search_paytype.setText("早餐");
 						}
 					}
 				} else if (searchtype == "income") {
@@ -471,7 +471,7 @@ public class SearchActivity extends Activity {
 						if (resultincome.length != 0) {
 							search_incometype.setText(resultincome[0]);
 						} else {
-							search_incometype.setText("���");
+							search_incometype.setText("早餐");
 						}
 					}
 				}
@@ -484,147 +484,147 @@ public class SearchActivity extends Activity {
 		}
 	}
 
-	class onitem implements OnItemClickListener { // ʱ�䷶Χ��Ӧ�¼�
+	class onitem implements OnItemClickListener { // 时间范围响应事件
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
+								long id) {
 			TextView cn = (TextView) view.findViewById(R.id.contact_name);
 			search_list_time_text.setText(cn.getText());
 			switch (position) {
-			case 0: // �Զ���ʱ��
-				search_starttime.setText(mYear + "-01-01");
-				search_endtime.setText(mYear + "-12-31");
-				search_list_timeall.setVisibility(view.VISIBLE);
-				timeselect = true;
-				break;
-			case 1:// ����
-				search_list_timeall.setVisibility(view.GONE);
-				timeselect = false;
-				search_starttime.setText(incomeDAO.gettime(mYear, mMonth, mDay,
-						false, false));
-				search_endtime.setText(incomeDAO.gettime(mYear, mMonth, mDay,
-						false, false));
-				break;
-			case 2:// ����
-				search_list_timeall.setVisibility(view.GONE);
-				timeselect = false;
-				if (mDay == 1) {
-					search_starttime.setText(incomeDAO.gettime(mYear,
-							mMonth - 1, mDay, false, true));
+				case 0: // 自定义时间
+					search_starttime.setText(mYear + "-01-01");
+					search_endtime.setText(mYear + "-12-31");
+					search_list_timeall.setVisibility(view.VISIBLE);
+					timeselect = true;
+					break;
+				case 1:// 今天
+					search_list_timeall.setVisibility(view.GONE);
+					timeselect = false;
+					search_starttime.setText(incomeDAO.gettime(mYear, mMonth, mDay,
+							false, false));
+					search_endtime.setText(incomeDAO.gettime(mYear, mMonth, mDay,
+							false, false));
+					break;
+				case 2:// 昨天
+					search_list_timeall.setVisibility(view.GONE);
+					timeselect = false;
+					if (mDay == 1) {
+						search_starttime.setText(incomeDAO.gettime(mYear,
+								mMonth - 1, mDay, false, true));
+						search_endtime.setText(incomeDAO.gettime(mYear, mMonth - 1,
+								mDay, false, true));
+					} else {
+						search_starttime.setText(incomeDAO.gettime(mYear, mMonth,
+								mDay - 1, false, false));
+						search_endtime.setText(incomeDAO.gettime(mYear, mMonth,
+								mDay - 1, false, false));
+					}
+					// System.out.println(search_starttime.getText() + "  "
+					// + search_endtime.getText());
+					break;
+				case 3:// 本周
+					search_list_timeall.setVisibility(view.GONE);
+					timeselect = false;
+					int n = 0;
+					// n为推迟的周数，0本周，-1向前推迟一周，1下周，依次类推
+					c.add(Calendar.DATE, n * 7);
+					// 想周几，这里就传几Calendar.MONDAY（TUESDAY...）
+					c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+					search_starttime.setText(incomeDAO.gettime(
+							c.get(Calendar.YEAR), (c.get(Calendar.MONTH) + 1),
+							c.get(Calendar.DAY_OF_MONTH), false, false));
+					c.add(Calendar.DATE, 6);
+					search_endtime.setText(incomeDAO.gettime(c.get(Calendar.YEAR),
+							(c.get(Calendar.MONTH) + 1),
+							c.get(Calendar.DAY_OF_MONTH), false, false));
+					break;
+				case 4:// 上周
+					timeselect = false;
+					search_list_timeall.setVisibility(view.GONE);
+					// n为推迟的周数，0本周，-1向前推迟一周，1下周，依次类推
+					c.add(Calendar.DATE, (-1) * 7);
+					// 想周几，这里就传几Calendar.MONDAY（TUESDAY...）
+					c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+					search_starttime.setText(incomeDAO.gettime(
+							c.get(Calendar.YEAR), (c.get(Calendar.MONTH) + 1),
+							c.get(Calendar.DAY_OF_MONTH), false, false));
+					c.add(Calendar.DATE, 6);
+					search_endtime.setText(incomeDAO.gettime(c.get(Calendar.YEAR),
+							(c.get(Calendar.MONTH) + 1),
+							c.get(Calendar.DAY_OF_MONTH), false, false));
+					break;
+				case 5:// 本月
+					timeselect = false;
+					search_list_timeall.setVisibility(view.GONE);
+					search_starttime.setText(incomeDAO.gettime(mYear, mMonth, mDay,
+							true, false));
+					search_endtime.setText(incomeDAO.gettime(mYear, mMonth, mDay,
+							false, true));
+					break;
+				case 6:// 上月
+					timeselect = false;
+					search_list_timeall.setVisibility(view.GONE);
+					search_starttime.setText(incomeDAO.gettime(mYear, mMonth - 1,
+							mDay, true, false));
 					search_endtime.setText(incomeDAO.gettime(mYear, mMonth - 1,
 							mDay, false, true));
-				} else {
-					search_starttime.setText(incomeDAO.gettime(mYear, mMonth,
-							mDay - 1, false, false));
-					search_endtime.setText(incomeDAO.gettime(mYear, mMonth,
-							mDay - 1, false, false));
-				}
-				// System.out.println(search_starttime.getText() + "  "
-				// + search_endtime.getText());
-				break;
-			case 3:// ����
-				search_list_timeall.setVisibility(view.GONE);
-				timeselect = false;
-				int n = 0;
-				// nΪ�Ƴٵ�������0���ܣ�-1��ǰ�Ƴ�һ�ܣ�1���ܣ���������
-				c.add(Calendar.DATE, n * 7);
-				// ���ܼ�������ʹ���Calendar.MONDAY��TUESDAY...��
-				c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-				search_starttime.setText(incomeDAO.gettime(
-						c.get(Calendar.YEAR), (c.get(Calendar.MONTH) + 1),
-						c.get(Calendar.DAY_OF_MONTH), false, false));
-				c.add(Calendar.DATE, 6);
-				search_endtime.setText(incomeDAO.gettime(c.get(Calendar.YEAR),
-						(c.get(Calendar.MONTH) + 1),
-						c.get(Calendar.DAY_OF_MONTH), false, false));
-				break;
-			case 4:// ����
-				timeselect = false;
-				search_list_timeall.setVisibility(view.GONE);
-				// nΪ�Ƴٵ�������0���ܣ�-1��ǰ�Ƴ�һ�ܣ�1���ܣ���������
-				c.add(Calendar.DATE, (-1) * 7);
-				// ���ܼ�������ʹ���Calendar.MONDAY��TUESDAY...��
-				c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-				search_starttime.setText(incomeDAO.gettime(
-						c.get(Calendar.YEAR), (c.get(Calendar.MONTH) + 1),
-						c.get(Calendar.DAY_OF_MONTH), false, false));
-				c.add(Calendar.DATE, 6);
-				search_endtime.setText(incomeDAO.gettime(c.get(Calendar.YEAR),
-						(c.get(Calendar.MONTH) + 1),
-						c.get(Calendar.DAY_OF_MONTH), false, false));
-				break;
-			case 5:// ����
-				timeselect = false;
-				search_list_timeall.setVisibility(view.GONE);
-				search_starttime.setText(incomeDAO.gettime(mYear, mMonth, mDay,
-						true, false));
-				search_endtime.setText(incomeDAO.gettime(mYear, mMonth, mDay,
-						false, true));
-				break;
-			case 6:// ����
-				timeselect = false;
-				search_list_timeall.setVisibility(view.GONE);
-				search_starttime.setText(incomeDAO.gettime(mYear, mMonth - 1,
-						mDay, true, false));
-				search_endtime.setText(incomeDAO.gettime(mYear, mMonth - 1,
-						mDay, false, true));
-				break;
-			case 7:// ����
-				timeselect = false;
-				search_list_timeall.setVisibility(view.GONE);
-				Calendar calendar = new GregorianCalendar();
-				calendar.setTime(new Date());
-				int month = getQuarterInMonth(calendar.get(Calendar.MONTH) + 1,
-						true);
-				calendar.set(Calendar.MONTH, month);
-				calendar.set(Calendar.DAY_OF_MONTH, 1);
-				search_starttime.setText(incomeDAO.gettime(
-						calendar.get(Calendar.YEAR),
-						(calendar.get(Calendar.MONTH) + 1),
-						calendar.get(Calendar.DAY_OF_MONTH), false, false));
-				// ����ĩ
-				calendar.setTime(new Date());
-				month = getQuarterInMonth(calendar.get(Calendar.MONTH) + 1,
-						false);
-				calendar.set(Calendar.MONTH, month + 1);
-				calendar.set(Calendar.DAY_OF_MONTH, 0);
-				search_endtime.setText(incomeDAO.gettime(
-						calendar.get(Calendar.YEAR),
-						(calendar.get(Calendar.MONTH) + 1),
-						calendar.get(Calendar.DAY_OF_MONTH), false, false));
-				break;
-			case 8:// �ϼ�
-				timeselect = false;
-				search_list_timeall.setVisibility(view.GONE);
-				Calendar calendar2 = new GregorianCalendar();
-				calendar2.setTime(new Date());
-				int month2 = getQuarterInMonth(
-						calendar2.get(calendar2.MONTH) + 1, true);
-				calendar2.set(calendar2.MONTH, month2 - 3);
-				calendar2.set(calendar2.DAY_OF_MONTH, 1);
-				search_starttime.setText(incomeDAO.gettime(
-						calendar2.get(calendar2.YEAR),
-						(calendar2.get(calendar2.MONTH) + 1),
-						calendar2.get(calendar2.DAY_OF_MONTH), false, false));
-				calendar2.setTime(new Date());
-				month2 = getQuarterInMonth(calendar2.get(calendar2.MONTH) + 1,
-						false);
-				calendar2.set(calendar2.MONTH, month2 - 2);
-				calendar2.set(calendar2.DAY_OF_MONTH, 0);
-				search_endtime.setText(incomeDAO.gettime(
-						calendar2.get(calendar2.YEAR),
-						(calendar2.get(calendar2.MONTH) + 1),
-						calendar2.get(calendar2.DAY_OF_MONTH), false, false));
-				break;
-			case 9:// ����
-				timeselect = false;
-				search_list_timeall.setVisibility(view.GONE);
-				search_starttime.setText(incomeDAO.gettime(mYear - 1, 1, 1,
-						false, false));
-				search_endtime.setText(incomeDAO.gettime(mYear - 1, 12, 31,
-						false, false));
-				break;
+					break;
+				case 7:// 本季
+					timeselect = false;
+					search_list_timeall.setVisibility(view.GONE);
+					Calendar calendar = new GregorianCalendar();
+					calendar.setTime(new Date());
+					int month = getQuarterInMonth(calendar.get(Calendar.MONTH) + 1,
+							true);
+					calendar.set(Calendar.MONTH, month);
+					calendar.set(Calendar.DAY_OF_MONTH, 1);
+					search_starttime.setText(incomeDAO.gettime(
+							calendar.get(Calendar.YEAR),
+							(calendar.get(Calendar.MONTH) + 1),
+							calendar.get(Calendar.DAY_OF_MONTH), false, false));
+					// 季度末
+					calendar.setTime(new Date());
+					month = getQuarterInMonth(calendar.get(Calendar.MONTH) + 1,
+							false);
+					calendar.set(Calendar.MONTH, month + 1);
+					calendar.set(Calendar.DAY_OF_MONTH, 0);
+					search_endtime.setText(incomeDAO.gettime(
+							calendar.get(Calendar.YEAR),
+							(calendar.get(Calendar.MONTH) + 1),
+							calendar.get(Calendar.DAY_OF_MONTH), false, false));
+					break;
+				case 8:// 上季
+					timeselect = false;
+					search_list_timeall.setVisibility(view.GONE);
+					Calendar calendar2 = new GregorianCalendar();
+					calendar2.setTime(new Date());
+					int month2 = getQuarterInMonth(
+							calendar2.get(calendar2.MONTH) + 1, true);
+					calendar2.set(calendar2.MONTH, month2 - 3);
+					calendar2.set(calendar2.DAY_OF_MONTH, 1);
+					search_starttime.setText(incomeDAO.gettime(
+							calendar2.get(calendar2.YEAR),
+							(calendar2.get(calendar2.MONTH) + 1),
+							calendar2.get(calendar2.DAY_OF_MONTH), false, false));
+					calendar2.setTime(new Date());
+					month2 = getQuarterInMonth(calendar2.get(calendar2.MONTH) + 1,
+							false);
+					calendar2.set(calendar2.MONTH, month2 - 2);
+					calendar2.set(calendar2.DAY_OF_MONTH, 0);
+					search_endtime.setText(incomeDAO.gettime(
+							calendar2.get(calendar2.YEAR),
+							(calendar2.get(calendar2.MONTH) + 1),
+							calendar2.get(calendar2.DAY_OF_MONTH), false, false));
+					break;
+				case 9:// 上年
+					timeselect = false;
+					search_list_timeall.setVisibility(view.GONE);
+					search_starttime.setText(incomeDAO.gettime(mYear - 1, 1, 1,
+							false, false));
+					search_endtime.setText(incomeDAO.gettime(mYear - 1, 12, 31,
+							false, false));
+					break;
 			}
 			multiChoiceDialog.dismiss();
 		}
@@ -639,25 +639,25 @@ public class SearchActivity extends Activity {
 		mlayout.setVisibility(View.VISIBLE);
 		search_more.setBackgroundColor(Color.parseColor("#e8e8e8"));
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-		int m = 0, income = 0, pay = 0;// ����һ����ʼ��ʶ
+		int m = 0, income = 0, pay = 0;// 定义一个开始标识
 		strInfos = new String[listinfos2.size()];
-		if (listinfos2.size() == 0) { // ����listview
-			seachbalance.setText("�� 0.0");
-			searchpay.setText("�� 0.0");
-			searchincome.setText("�� 0.0");
+		if (listinfos2.size() == 0) { // 处理listview
+			seachbalance.setText("￥ 0.0");
+			searchpay.setText("￥ 0.0");
+			searchincome.setText("￥ 0.0");
 			mListView.setVisibility(View.GONE);
 		} else {
 			mListView.setVisibility(View.VISIBLE);
-			for (Tb_income tb_income : listinfos2) {// ����List���ͼ���
-				// �����������Ϣ��ϳ�һ���ַ������洢���ַ����������Ӧλ��
-				if (tb_income.getKind().equals("����")) { // ����
+			for (Tb_income tb_income : listinfos2) {// 遍历List泛型集合
+				// 将收入相关信息组合成一个字符串，存储到字符串数组的相应位置
+				if (tb_income.getKind().equals("收入")) { // 收入
 					Map<String, Object> map = new HashMap<String, Object>();
 					map.put("img",
 							itypeDAO.getOneImg(userid, tb_income.getType()));
 					map.put("no", tb_income.getNo() + "");
 					map.put("kind", "[" + tb_income.getKind() + "]");
 					map.put("address", tb_income.getHandler());
-					map.put("money", "�� " + tb_income.getMoney2() + "Ԫ");
+					map.put("money", "￥ " + tb_income.getMoney2() + "元");
 					map.put("title",
 							itypeDAO.getOneName(userid, tb_income.getType()));
 					map.put("info", tb_income.getTime());
@@ -665,15 +665,15 @@ public class SearchActivity extends Activity {
 							FragmentPage3.gofordate(tb_income.getTime()));
 					list.add(map);
 					income += tb_income.getMoney();
-					m++;// ��ʶ��1
-				} else { // ֧��
+					m++;// 标识加1
+				} else { // 支出
 					Map<String, Object> map = new HashMap<String, Object>();
 					map.put("img",
 							ptypeDAO.getOneImg(userid, tb_income.getType()));
 					map.put("no", tb_income.getNo() + "");
 					map.put("kind", "[" + tb_income.getKind() + "]");
 					map.put("address", tb_income.getHandler());
-					map.put("money", "�� " + tb_income.getMoney2() + "Ԫ");
+					map.put("money", "￥ " + tb_income.getMoney2() + "元");
 					map.put("title",
 							ptypeDAO.getOneName(userid, tb_income.getType()));
 					map.put("info", tb_income.getTime());
@@ -681,12 +681,12 @@ public class SearchActivity extends Activity {
 							FragmentPage3.gofordate(tb_income.getTime()));
 					list.add(map);
 					pay += tb_income.getMoney();
-					m++;// ��ʶ��1
+					m++;// 标识加1
 				}
 			}
-			seachbalance.setText("�� " + String.valueOf(income - pay));
-			searchpay.setText("�� " + String.valueOf(-pay));
-			searchincome.setText("�� " + String.valueOf(income));
+			seachbalance.setText("￥ " + String.valueOf(income - pay));
+			searchpay.setText("￥ " + String.valueOf(-pay));
+			searchincome.setText("￥ " + String.valueOf(income));
 			adapter = new MyAdspter(this, list, true);
 			mListView.setAdapter(adapter);
 		}
@@ -707,21 +707,21 @@ public class SearchActivity extends Activity {
 	DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
 
 		public void onDateSet(DatePicker view, int year, int monthOfYear,
-				int dayOfMonth) {
-			mYear = year;// Ϊ��ݸ�ֵ
-			mMonth = monthOfYear;// Ϊ�·ݸ�ֵ
-			mDay = dayOfMonth;// Ϊ�츳ֵ
-			updateDisplay();// ��ʾ���õ�����
+							  int dayOfMonth) {
+			mYear = year;// 为年份赋值
+			mMonth = monthOfYear;// 为月份赋值
+			mDay = dayOfMonth;// 为天赋值
+			updateDisplay();// 显示设置的日期
 		}
 	};
 
 	@Override
-	protected Dialog onCreateDialog(int id)// ��дonCreateDialog����
+	protected Dialog onCreateDialog(int id)// 重写onCreateDialog方法
 	{
 		switch (id) {
-		case DATE_DIALOG_ID:// ��������ѡ��Ի���
-			return new DatePickerDialog(this, AlertDialog.THEME_HOLO_LIGHT,
-					mDateSetListener, mYear, mMonth, mDay);
+			case DATE_DIALOG_ID:// 弹出日期选择对话框
+				return new DatePickerDialog(this, AlertDialog.THEME_HOLO_LIGHT,
+						mDateSetListener, mYear, mMonth, mDay);
 		}
 		return null;
 	}
@@ -738,12 +738,12 @@ public class SearchActivity extends Activity {
 
 	public static void DateCompare(CharSequence s1, CharSequence s2)
 			throws Exception {
-		// �趨ʱ���ģ��
+		// 设定时间的模板
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		// �õ�ָ��ģ����ʱ��
+		// 得到指定模范的时间
 		Date d1 = sdf.parse(s1 + "");
 		Date d2 = sdf.parse(s2 + "");
-		// �Ƚ�
+		// 比较
 		if (d1.getTime() - d2.getTime() > 0) {
 			CharSequence a = search_starttime.getText();
 			search_starttime.setText(search_endtime.getText());

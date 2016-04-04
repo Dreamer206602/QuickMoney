@@ -1,7 +1,7 @@
 package com.cwp.chart.fragment;
 
 import com.cwp.chart.manager.SystemBarTintManager;
-import com.cwp.cmoneycharge.activity.PayChart;
+import com.cwp.cmoneycharge.activity.PayChartActivity;
 import com.cwp.cmoneycharge.R;
 
 import android.annotation.TargetApi;
@@ -67,26 +67,26 @@ public class MenuFragment extends PreferenceFragment implements
 	public boolean onPreferenceClick(Preference preference) {
 		String key = preference.getKey();
 		if ("mpaychart".equals(key)) {
-			Intent intentl = new Intent(getActivity(), PayChart.class);
+			Intent intentl = new Intent(getActivity(), PayChartActivity.class);
 			intentl.putExtra("datatype", "pay");
 			intentl.putExtra("type", 0);
 			startActivity(intentl);
 
 		} else if ("mincomechart".equals(key)) {
 
-			Intent intentl = new Intent(getActivity(), PayChart.class);
+			Intent intentl = new Intent(getActivity(), PayChartActivity.class);
 			intentl.putExtra("datatype", "income");
 			intentl.putExtra("type", 0);
 			startActivity(intentl);
 
 		} else if ("dpaychart".equals(key)) {
-			Intent intentp = new Intent(getActivity(), PayChart.class);
+			Intent intentp = new Intent(getActivity(), PayChartActivity.class);
 			intentp.putExtra("datatype", "pay");
 			intentp.putExtra("type", 1);
 			startActivity(intentp);
 
 		} else if ("dincomehart".equals(key)) {
-			Intent intentp = new Intent(getActivity(), PayChart.class);
+			Intent intentp = new Intent(getActivity(), PayChartActivity.class);
 			intentp.putExtra("datatype", "income");
 			intentp.putExtra("type", 1);
 			startActivity(intentp);

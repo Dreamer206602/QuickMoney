@@ -1,8 +1,8 @@
 package com.cwp.fragment;
 
-import com.cwp.cmoneycharge.activity.AddPay;
+import com.cwp.cmoneycharge.activity.AddPayActivity;
 import com.cwp.cmoneycharge.activity.MainActivity;
-import com.cwp.cmoneycharge.activity.PayChart;
+import com.cwp.cmoneycharge.activity.PayChartActivity;
 import com.cwp.cmoneycharge.R;
 
 import android.content.Context;
@@ -30,26 +30,26 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
 	private FragmentPage2 fragmentPage2;
 	private static FragmentPage3 fragmentPage3;
 	private static FragmentPage4 fragmentPage4;
-	// ���岼�ֶ���
+	// 定义布局对象
 	private static FrameLayout friendfeedFl;
 	private static FrameLayout myfeedFl;
 	private static FrameLayout homeFl;
 	private static FrameLayout moreFl;
 
-	// ����ͼƬ�������
+	// 定义图片组件对象
 	private static ImageView friendfeedIv;
 	private static ImageView myfeedIv;
 	private static ImageView homeIv;
 	private static ImageView moreIv;
 
-	// ���尴ťͼƬ���
+	// 定义按钮图片组件
 	private ImageView toggleImageView, plusImageView;
 
-	// ����PopupWindow
+	// 定义PopupWindow
 	private PopupWindow popWindow;
 	private LinearLayout popWinLayout;
 
-	// ����pop���
+	// 定义pop组件
 	private LinearLayout pop_voiceView;
 	private LinearLayout pop_quickView;
 
@@ -59,25 +59,15 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
 	static FragmentActivity act;
 
 	public FragmentPage2(FragmentActivity activity) {
-		this.act = activity;
+		act = activity;
 	}
 
 	public FragmentPage2() {
 	}
 
 	@Override
-	public void filngtonext() {
-
-	}
-
-	@Override
-	public void filngtonpre() {
-
-	}
-
-	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+							 Bundle savedInstanceState) {
 
 		return inflater.inflate(R.layout.fragment_2, null);
 	}
@@ -92,112 +82,112 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
 		initData();
 
 		switch (value) {
-		case 0:
-			clickFriendfeedBtn();
-			break;
-		case 1:
-			clickFriendfeedBtn();
-			break;
-		case 2:
-			clickMyfeedBtn();
-			break;
-		case 3:
-			clickHomeBtn();
-			break;
-		case 4:
-			clickMoreBtn();
-			break;
+			case 0:
+				clickFriendfeedBtn();
+				break;
+			case 1:
+				clickFriendfeedBtn();
+				break;
+			case 2:
+				clickMyfeedBtn();
+				break;
+			case 3:
+				clickHomeBtn();
+				break;
+			case 4:
+				clickMoreBtn();
+				break;
 		}
 	}
 
 	/**
-	 * ��ʼ�����
+	 * 初始化组件
 	 */
 	public void initView() {
 		value = MainActivity.getValueFM();
-		// ʵ�������ֶ���
+		// 实例化布局对象
 		friendfeedFl = (FrameLayout) getActivity().findViewById(
 				R.id.layout_friendfeed);
 		myfeedFl = (FrameLayout) getActivity().findViewById(R.id.layout_myfeed);
 		homeFl = (FrameLayout) getActivity().findViewById(R.id.layout_home);
 		moreFl = (FrameLayout) getActivity().findViewById(R.id.layout_more);
 
-		// ʵ����ͼƬ�������
+		// 实例化图片组件对象
 		friendfeedIv = (ImageView) getActivity().findViewById(
 				R.id.image_friendfeed);
 		myfeedIv = (ImageView) getActivity().findViewById(R.id.image_myfeed);
 		homeIv = (ImageView) getActivity().findViewById(R.id.image_home);
 		moreIv = (ImageView) getActivity().findViewById(R.id.image_more);
 
-		// ʵ������ťͼƬ���
+		// 实例化按钮图片组件
 		toggleImageView = (ImageView) getActivity().findViewById(
 				R.id.toggle_btn);
 		plusImageView = (ImageView) getActivity().findViewById(R.id.plus_btn);
 	}
 
 	private void initData() {
-		// �����ֶ������ü���
+		// 给布局对象设置监听
 		friendfeedFl.setOnClickListener(this);
 		myfeedFl.setOnClickListener(this);
 		homeFl.setOnClickListener(this);
 		moreFl.setOnClickListener(this);
 
-		// ����ťͼƬ���ü���
+		// 给按钮图片设置监听
 		toggleImageView.setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View v) {
-		// System.out.println("�Ұ���" + v.getId());
+		// System.out.println("我按了" + v.getId());
 		switch (v.getId()) {
-		// �����̬��ť
-		case R.id.layout_friendfeed:
-			clickFriendfeedBtn();
-			break;
-		// ���������ذ�ť
-		case R.id.layout_myfeed:
-			clickMyfeedBtn();
-			break;
-		// ����ҵĿռ䰴ť
-		case R.id.layout_home:
-			clickHomeBtn();
-			break;
-		// ������ఴť
-		case R.id.layout_more:
-			clickMoreBtn();
-			break;
-		// ����м䰴ť
-		case R.id.toggle_btn:
-			clickToggleBtn();
-			break;
-		// ����м䰴ť
-		case R.id.pop_voice:
-			clickPop_voiceBtn();
-			break;
-		case R.id.pop_quick:
-			clickPop_quickBtn();
-			break;
-		case R.id.pop_photo:
-			clickPop_photoViewBtn();
-			break;
+			// 点击动态按钮
+			case R.id.layout_friendfeed:
+				clickFriendfeedBtn();
+				break;
+			// 点击与我相关按钮
+			case R.id.layout_myfeed:
+				clickMyfeedBtn();
+				break;
+			// 点击我的空间按钮
+			case R.id.layout_home:
+				clickHomeBtn();
+				break;
+			// 点击更多按钮
+			case R.id.layout_more:
+				clickMoreBtn();
+				break;
+			// 点击中间按钮
+			case R.id.toggle_btn:
+				clickToggleBtn();
+				break;
+			// 点击中间按钮
+			case R.id.pop_voice:
+				clickPop_voiceBtn();
+				break;
+			case R.id.pop_quick:
+				clickPop_quickBtn();
+				break;
+			case R.id.pop_photo:
+				clickPop_photoViewBtn();
+				break;
 		}
 	}
 
 	private void clickPop_photoViewBtn() {
-		Intent intent = new Intent(getActivity(), AddPay.class);// ����Intent����
+		Intent intent = new Intent(getActivity(), AddPayActivity.class);// 创建Intent对象
 		intent.putExtra("cwp.id", userid);
-		intent.putExtra("cwp.photo", "");// ���ô�������
+		intent.putExtra("cwp.photo", "");// 设置传递数据
 		startActivity(intent);
 	}
 
 	/**
-	 * ��ʾPopupWindow�����˵�
+	 * 显示PopupWindow弹出菜单
 	 */
 	private void showPopupWindow(View parent) {
 		DisplayMetrics dm = parent.getResources().getDisplayMetrics();
 		int w_screen = dm.widthPixels;
 		int h_screen = dm.heightPixels;
-		// System.out.println("����豸w_screen��" + w_screen + " h_screen��" +
+		// System.out.println("你的设备w_screen：" + w_screen + " h_screen：" +
 		// h_screen);
 		if (popWindow == null) {
 			LayoutInflater layoutInflater = (LayoutInflater) getActivity()
@@ -205,13 +195,13 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
 
 			View view = layoutInflater.inflate(R.layout.popwindow_layout, null);
 			popWinLayout = (LinearLayout) view.findViewById(R.id.popwindow);
-			// ����һ��PopuWidow����
+			// 创建一个PopuWidow对象
 			float radiowith = w_screen / 480.0f;
 			float radioheight = h_screen / 800.0f;
 			popWindow = new PopupWindow(view,
 					(int) (popWinLayout.getLayoutParams().width), h_screen / 4);
 		}
-		// ʹ��ۼ� ��Ҫ������˵���ؼ����¼��ͱ���Ҫ���ô˷���
+		// 使其聚集 ，要想监听菜单里控件的事件就必须要调用此方法
 		popWindow.setFocusable(true);
 
 		pop_voiceView = (LinearLayout) popWinLayout
@@ -224,30 +214,30 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
 		pop_quickView.setOnClickListener(this);
 		pop_photoView.setOnClickListener(this);
 
-		// ����������������ʧ
+		// 设置允许在外点击消失
 		popWindow.setOutsideTouchable(true);
-		// ���ñ����������Ϊ�˵��������Back��Ҳ��ʹ����ʧ�����Ҳ�����Ӱ����ı���
+		// 设置背景，这个是为了点击“返回Back”也能使其消失，并且并不会影响你的背景
 		popWindow.setBackgroundDrawable(new BitmapDrawable());
-		// ���ò˵���ʾ��λ��
+		// 设置菜单显示的位置
 
 		int xPos = (w_screen - popWinLayout.getLayoutParams().width) / 2;
 		popWindow.showAsDropDown(parent, xPos, 12);
 		// popWindow.showAsDropDown(parent, Gravity.CENTER, 0);
 
-		// �����˵��Ĺر��¼�
+		// 监听菜单的关闭事件
 		popWindow.setOnDismissListener(new OnDismissListener() {
 			@Override
 			public void onDismiss() {
-				// �ı���ʾ�İ�ťͼƬΪ����״̬
+				// 改变显示的按钮图片为正常状态
 				changeButtonImage();
 			}
 		});
 
-		// ���������¼�
+		// 监听触屏事件
 		popWindow.setTouchInterceptor(new OnTouchListener() {
 			public boolean onTouch(View view, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-					// �ı���ʾ�İ�ťͼƬΪ����״̬
+					// 改变显示的按钮图片为正常状态
 					changeButtonImage();
 				}
 
@@ -257,19 +247,19 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
 	}
 
 	/**
-	 * ����ˡ���̬����ť
+	 * 点击了“动态”按钮
 	 */
 	public static void clickFriendfeedBtn() {
-		// ʵ����Fragmentҳ��
+		// 实例化Fragment页面
 		fragmentPage1 = new FragmentPage1();
-		// �õ�Fragment���������
+		// 得到Fragment事务管理器
 		FragmentTransaction fragmentTransaction;
 		fragmentTransaction = act.getSupportFragmentManager()
 				.beginTransaction();
 
-		// �滻��ǰ��ҳ��
+		// 替换当前的页面
 		fragmentTransaction.replace(R.id.frame_content, fragmentPage1);
-		// ��������ύ
+		// 事务管理提交
 		fragmentTransaction.commit();
 
 		friendfeedFl.setSelected(true);
@@ -286,12 +276,12 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
 	}
 
 	/**
-	 * ����ˡ�������ء���ť
+	 * 点击了“与我相关”按钮
 	 */
 	public static void clickMyfeedBtn() {
 
 		// Intent intentr = new Intent(getActivity(), PayData.class);
-		Intent intentr = new Intent(act, PayChart.class);
+		Intent intentr = new Intent(act, PayChartActivity.class);
 		intentr.putExtra("cwp.id", userid);
 		intentr.putExtra("type", 0);
 		act.startActivity(intentr);
@@ -301,17 +291,17 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
 	}
 
 	/**
-	 * ����ˡ��ҵĿռ䡱��ť
+	 * 点击了“我的空间”按钮
 	 */
 	public static void clickHomeBtn() {
-		// ʵ����Fragmentҳ��
+		// 实例化Fragment页面
 		fragmentPage3 = new FragmentPage3();
-		// �õ�Fragment���������
+		// 得到Fragment事务管理器
 		FragmentTransaction fragmentTransaction = act
 				.getSupportFragmentManager().beginTransaction();
-		// �滻��ǰ��ҳ��
+		// 替换当前的页面
 		fragmentTransaction.replace(R.id.frame_content, fragmentPage3);
-		// ��������ύ
+		// 事务管理提交
 		fragmentTransaction.commit();
 
 		friendfeedFl.setSelected(false);
@@ -328,17 +318,17 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
 	}
 
 	/**
-	 * ����ˡ����ࡱ��ť
+	 * 点击了“更多”按钮
 	 */
 	public static void clickMoreBtn() {
-		// ʵ����Fragmentҳ��
+		// 实例化Fragment页面
 		fragmentPage4 = new FragmentPage4();
-		// �õ�Fragment���������
+		// 得到Fragment事务管理器
 		FragmentTransaction fragmentTransaction = act
 				.getSupportFragmentManager().beginTransaction();
-		// �滻��ǰ��ҳ��
+		// 替换当前的页面
 		fragmentTransaction.replace(R.id.frame_content, fragmentPage4);
-		// ��������ύ
+		// 事务管理提交
 		fragmentTransaction.commit();
 
 		friendfeedFl.setSelected(false);
@@ -356,36 +346,45 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
 
 	private void clickPop_voiceBtn() {
 
-		Intent intent = new Intent(getActivity(), AddPay.class);// ����Intent����
+		Intent intent = new Intent(getActivity(), AddPayActivity.class);// 创建Intent对象
 		intent.putExtra("cwp.id", userid);
-		intent.putExtra("cwp.voice", "");// ���ô�������
+		intent.putExtra("cwp.voice", "");// 设置传递数据
 		startActivity(intent);
 	}
 
 	private void clickPop_quickBtn() {
 
-		Intent intent = new Intent(getActivity(), AddPay.class);// ����Intent����
+		Intent intent = new Intent(getActivity(), AddPayActivity.class);// 创建Intent对象
 		intent.putExtra("cwp.id", userid);
 		intent.putExtra("keyboard", "true");
 		startActivity(intent);
 	}
 
 	/**
-	 * ������м䰴ť
+	 * 点击了中间按钮
 	 */
 	private void clickToggleBtn() {
 		showPopupWindow(plusImageView);
-		// �ı䰴ť��ʾ��ͼƬΪ����ʱ��״̬
+		// 改变按钮显示的图片为按下时的状态
 		plusImageView.setImageResource(R.drawable.toolbar_plusback);
 		toggleImageView.setImageResource(R.drawable.toolbar_btn_pressed);
 	}
 
 	/**
-	 * �ı���ʾ�İ�ťͼƬΪ����״̬
+	 * 改变显示的按钮图片为正常状态
 	 */
 	private void changeButtonImage() {
 		plusImageView.setImageResource(R.drawable.toolbar_plus);
 		toggleImageView.setImageResource(R.drawable.toolbar_btn_normal);
 	}
 
+	@Override
+	public void filngtonext() {
+
+	}
+
+	@Override
+	public void filngtonpre() {
+
+	}
 }

@@ -28,7 +28,7 @@ import android.view.WindowManager;
 import android.view.View.OnClickListener;
 
 public class MainActivity extends FragmentActivity implements OnClickListener {
-	// ����Fragmentҳ��
+	// 定义Fragment页面
 	private FragmentPage2 fragmentPage2;
 	SharedPreferences sp;
 	int userid;
@@ -36,7 +36,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	DialogShowUtil dialogShowUtil = new DialogShowUtil(this, this, null, null,
 			null);
 
-	private Effectstype effect; // �Զ���Dialog
+	private Effectstype effect; // 自定义Dialog
 	private FragmentPage3 fragmentPage3;
 	private String updatedate;
 	private Editor edit;
@@ -50,7 +50,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 
 		sp = this.getSharedPreferences("preferences", MODE_WORLD_READABLE);
 		edit = sp.edit();
-		// initdefault();// ��ʼ������
+		// initdefault();// 初始化数据
 
 		SystemBarTintManager mTintManager;
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -61,23 +61,23 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		mTintManager.setStatusBarTintResource(R.color.statusbar_bg);
 
 		fragmentPage2 = new FragmentPage2(this);
-		// �õ�Fragment���������
+		// 得到Fragment事务管理器
 		FragmentTransaction fragmentTransaction = this
 				.getSupportFragmentManager().beginTransaction();
-		// �滻��ǰ��ҳ��
+		// 替换当前的页面
 		fragmentTransaction.replace(R.id.frame_foot, fragmentPage2);
 		fragmentTransaction.commit();
 
-		SysApplication.getInstance().addActivity(this); // �����ٶ��������this
+		SysApplication.getInstance().addActivity(this); // 在销毁队列中添加this
 		Intent intentr = getIntent();
 		userid = intentr.getIntExtra("cwp.id", 100000001);
-		if (intentr.getStringExtra("cwp.Fragment") != null) { // ȡ����ת��Ŀ��ҳ��
+		if (intentr.getStringExtra("cwp.Fragment") != null) { // 取回跳转的目的页面
 			value = Integer.parseInt(intentr.getStringExtra("cwp.Fragment"));
 		}
-		Calendar c = Calendar.getInstance();// ��ȡ��ǰϵͳ����
-		int mYear = c.get(Calendar.YEAR);// ��ȡ���
-		int mMonth = c.get(Calendar.MONTH);// ��ȡ�·�
-		int mDay = c.get(Calendar.DAY_OF_MONTH);// ��ȡ����
+		Calendar c = Calendar.getInstance();// 获取当前系统日期
+		int mYear = c.get(Calendar.YEAR);// 获取年份
+		int mMonth = c.get(Calendar.MONTH);// 获取月份
+		int mDay = c.get(Calendar.DAY_OF_MONTH);// 获取天数
 		updatedate = mYear + "-" + mMonth + 1 + "-" + mDay;
 
 		// StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
@@ -88,9 +88,9 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		// .penaltyLog().penaltyDeath().build());
 	}
 
-	private void initdefault() { // ��ʼ������
-		edit.putString("sendlog", "��"); // ��log
-		edit.putString("gesturepw", "��"); // ���ƿ�
+	private void initdefault() { // 初始化数据
+		edit.putString("sendlog", "开"); // 报log
+		edit.putString("gesturepw", "开"); // 手势开
 		edit.commit();
 	}
 
@@ -100,7 +100,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) { // ���/����/���η��ؼ�
+		if (keyCode == KeyEvent.KEYCODE_BACK) { // 监控/拦截/屏蔽返回键
 			dialogShowUtil.dialogShow("shake", "quit", "", "");
 		}
 		return super.onKeyDown(keyCode, event);
@@ -127,16 +127,16 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		super.onResume();
 		CrashApplication myApplaction = (CrashApplication) getApplication();
 		if ((myApplaction.isLocked)
-				&& (sp.getString("gesturepw", "").equals("��"))) {// �ж��Ƿ���Ҫ��ת���������
+				&& (sp.getString("gesturepw", "").equals("开"))) {// 判断是否需要跳转到密码界面
 			Intent intent = new Intent(this,
 					UnlockGesturePasswordActivity.class);
 			startActivity(intent);
 		}
 
-		if (!updatedate.equals(sp.getString("updatedate", ""))) { // �����Ѿ������Ͳ��Զ������
+		if (!updatedate.equals(sp.getString("updatedate", ""))) { // 今天已经检查过就不自动检查了
 			UpdateManager manager = new UpdateManager(MainActivity.this);
 			manager.checkUpdate("noshow");
-			edit.putString("updatedate", updatedate); // һ��ֻ���һ��
+			edit.putString("updatedate", updatedate); // 一天只检查一次
 			edit.commit();
 		}
 	};

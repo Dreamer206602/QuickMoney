@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.cwp.chart.ChartProp;
 import com.cwp.chart.listener.ChartPropChangeListener;
 import com.cwp.chart.PiewController;
-import com.cwp.cmoneycharge.activity.PayChart;
+import com.cwp.cmoneycharge.activity.PayChartActivity;
 import com.cwp.cmoneycharge.R;
 
 import android.content.Context;
@@ -33,15 +33,15 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 	private float m_y = 0;
 
 	private static ArrayList<ChartProp> mChartProps;
-	private float screenHight, screenWidth;// ��Ļ�Ŀ�͸�
+	private float screenHight, screenWidth;// 屏幕的宽和高
 
-	private float radius;// ����Բ�İ뾶
-	private float startAngle;// ��?�Ƕ�
-	private float sweepAngle = 0.0f; // ɨ��Ľǎ�
-	private int itemCount;// ѡ�����
+	private float radius;// 绘制圆的半径
+	private float startAngle;// 弿?角度
+	private float sweepAngle = 0.0f; // 扫过的角庿
+	private int itemCount;// 选项个数
 	private float startSpeed = 0;
 
-	private boolean firstEnter = true; // �����Ƿ��Ѿ��T?
+	private boolean firstEnter = true; // 程序是否已经逿?
 	private boolean rotateEnabled = false;
 	private boolean tounched = false;
 	private boolean done = false;
@@ -102,24 +102,24 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 
 		float f1 = centerPoint.x;
 		float f2 = centerPoint.y;
-		// ��䱳��ܵ
+		// 填充背景艿
 		/*
 		 * mCanvas.drawColor(0xff639EC3); mCanvas.save();
 		 */
 
-		// *********************************ȷ�����D?��*************************************
-		float f3 = f1 - radius;// X��- ��
-		float f4 = f2 - radius; // Y��- د
-		float f5 = f1 + radius; // X��- ��
-		float f6 = f2 + radius; // Y��- د
+		// *********************************确定参逥?域*************************************
+		float f3 = f1 - radius;// X轿- 巿
+		float f4 = f2 - radius; // Y轿- 丿
+		float f5 = f1 + radius; // X轿- 叿
+		float f6 = f2 + radius; // Y轿- 丿
 		RectF rectF = new RectF(f3, f4, f5, f6);
 
-		// *********************************��ÿ���������ɫ�}********************************
+		// *********************************画每个区域的颜色坿********************************
 		drawItem(rectF);
-		// *********************************�����Ͻ����Բ������*******************************
+		// *********************************画边上渐变的圆环出来*******************************
 
 		drawableCenterCircle(f1, f2);
-		// ����Canvas������Ⱦ��ǰͼ��
+		// 解锁Canvas，并渲染当前图像
 
 		if (!(mChartProp == tChartProp)) {
 			listener.getChartProp(mChartProp);
@@ -146,21 +146,21 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 	private void init() {
 
 		myThread = new Thread(this);
-		// ����د?�µ�SurfaceHolder�߲������������Ϊ��Ļص�(callback)
+		// 创建丿?新的SurfaceHolder＿并分配这个类作为它的回调(callback)
 
 		mChartProps = new ArrayList<ChartProp>();
 
-		// ͼ�񻭱�
+		// 图像画笔
 		mPaint = new Paint();
 
 		mPaint.setAntiAlias(true);
-		// ���ֻ���
+		// 文字画笔
 		textPaint = new Paint();
 		textPaint.setTextSize(22);
 		textPaint.setColor(Color.WHITE);
 		textPaint.setAntiAlias(true);
 
-		// �뾶
+		// 半径
 
 		startAngle = 90f;
 
@@ -207,13 +207,14 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 		return resizeBmp;
 	}
 
+
 	/**
-	 * create charts' property ������״ͼ������
-	 * 
-	 * @param chartsNum
-	 *            charts' number ��״ͼ�ĸ���
-	 * @return charts' property's list ��״ͼ���Ե�list
-	 */
+	 *  create charts' property 创建饼状图的属濍
+	 *            charts' number 饼状图的个数
+	 * @return charts' property's list 饼状图属性的list
+	 * @param itemCount
+	 * @return
+     */
 	public ArrayList<ChartProp> createCharts(int itemCount) {
 		this.itemCount = itemCount;
 		percents = new float[itemCount];
@@ -223,13 +224,13 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 		return mChartProps;
 	}
 
-	// ���³�ʼ��
+	// 重新初始化
 	public void reInit() {
 		startAngle = 90f;
-		firstEnter = true; // �����Ƿ��Ѿ��T?
+		firstEnter = true; // 程序是否已经启动过
 	}
 
-	// ��һ�β�����иı��ĳ�ʼ������
+	// 第一次参数进行改变后的初始化调用
 	public void initPercents() {
 
 		for (int i = 0; i < itemCount; i++) {
@@ -246,10 +247,10 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 	}
 
 	/**
-	 * actually create chartProp objects. �����������{?����
-	 * 
+	 * actually create chartProp objects. 真正创建扇形属瀧?方泿
+	 *
 	 * @param chartsNum
-	 *            charts' number ��״ͼ�ĸ���
+	 *            charts' number 饼状图的个数
 	 */
 	private void createChartProp(int chartsNum) {
 		for (int i = 0; i < chartsNum; i++) {
@@ -301,33 +302,33 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 
 	private int measureWidth(int pWidthMeasureSpec) {
 		int result = 0;
-		int widthMode = MeasureSpec.getMode(pWidthMeasureSpec);// �õ�ģʽ
-		int widthSize = MeasureSpec.getSize(pWidthMeasureSpec);// �õ��ߴ�
+		int widthMode = MeasureSpec.getMode(pWidthMeasureSpec);// 得到模式
+		int widthSize = MeasureSpec.getSize(pWidthMeasureSpec);// 得到尺寸
 
 		switch (widthMode) {
-		/**
-		 * mode�������������ȡֵ�ֱ�ΪMeasureSpec.UNSPECIFIED, MeasureSpec.EXACTLY,
-		 * MeasureSpec.AT_MOST?
-		 * 
-		 * 
-		 * MeasureSpec.EXACTLY�Ǿ�ȷ�ߴ磬
-		 * �����ǽ��ؼ���layout_width��layout_heightָ��Ϊ������ֵʱ��andorid
-		 * :layout_width="50dip"������ΪFILL_PARENT�ǣ����ǿؼ���С�Ѿ�ȷ������������Ǿ�ȷ�ߴ�?
-		 * 
-		 * 
-		 * MeasureSpec.AT_MOST�����ߴ磬
-		 * ���ؼ���layout_width��layout_heightָ��ΪWRAP_CONTENT�J
-		 * ���ؼ���Сһ����������ӿռ�����ݽ��б仯����ʱ�ؼ��ߴ�ֻҪ������ؼ�����Ėc?�ߴ缴��
-		 * ����ˣ���ʱ��mode��AT_MOST��size����˸��ؼ���������ߴ�?
-		 * 
-		 * 
-		 * MeasureSpec.UNSPECIFIED��δָ���ߴ磬����������࣬د?���Ǹ��ؼ���AdapterView��
-		 * ͨ��measure���������ģʽ?
-		 */
-		case MeasureSpec.AT_MOST:
-		case MeasureSpec.EXACTLY:
-			result = widthSize;
-			break;
+			/**
+			 * mode共有三种情况，取值分别为MeasureSpec.UNSPECIFIED, MeasureSpec.EXACTLY,
+			 * MeasureSpec.AT_MOST?
+			 *
+			 *
+			 * MeasureSpec.EXACTLY是精确尺寸，
+			 * 当我们将控件的layout_width或layout_height指定为具体数值时如andorid
+			 * :layout_width="50dip"，或者为FILL_PARENT是，都是控件大小已经确定的情况，都是精确尺寸?
+			 *
+			 *
+			 * MeasureSpec.AT_MOST是最大尺寸，
+			 * 当控件的layout_width或layout_height指定为WRAP_CONTENT旿
+			 * ，控件大小一般随睿Χ件的子空间或内容进行变化，此时控件尺寸只要不超过父控件允许的朿?尺寸即可
+			 * 。因此，此时的mode是AT_MOST，size给出了父控件允许的最大尺寸?
+			 *
+			 *
+			 * MeasureSpec.UNSPECIFIED是未指定尺寸，这种情况不多，丿?都是父控件是AdapterView＿
+			 * 通过measure方法传入的模式?
+			 */
+			case MeasureSpec.AT_MOST:
+			case MeasureSpec.EXACTLY:
+				result = widthSize;
+				break;
 		}
 		return result;
 	}
@@ -339,10 +340,10 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 		int heightSize = MeasureSpec.getSize(pHeightMeasureSpec);
 
 		switch (heightMode) {
-		case MeasureSpec.AT_MOST:
-		case MeasureSpec.EXACTLY:
-			result = heightSize;
-			break;
+			case MeasureSpec.AT_MOST:
+			case MeasureSpec.EXACTLY:
+				result = heightSize;
+				break;
 		}
 		return result;
 	}
@@ -393,20 +394,20 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 		/*
 		 * Paint centerCirclePaint = new Paint();
 		 * centerCirclePaint.setColor(Color.BLACK);
-		 * 
+		 *
 		 * centerCirclePaint.setAlpha(150); mCanvas.drawCircle(x, y, radius / 3,
 		 * centerCirclePaint);
 		 */
 
 		// Paint localPaint = new Paint();
-		// ����ȡ����Ч��
+		// 设置取消锯齿效果
 		// localPaint.setAntiAlias(true);
-		// ���ΪԲ�x
+		// 风格为圆玿
 		/*
-		 * localPaint.setStyle(Paint.Style.STROKE); // Բ�����
+		 * localPaint.setStyle(Paint.Style.STROKE); // 圆环宽度
 		 * localPaint.setStrokeWidth(circleRadius);
 		 */
-		// Բ������
+		// 圆环背景
 
 		mCanvas.drawBitmap(myBg, 0, 0, null);
 		mCanvas.save();
@@ -415,8 +416,8 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 		textPaint.setTextAlign(Paint.Align.CENTER);
 		textPaint.setTextSize(x / 10);
 
-		mCanvas.drawText("�ܼ�", x, y - x / 12, textPaint);
-		mCanvas.drawText(PayChart.getamount(), x, y + x / 10, textPaint); // �ܼ�
+		mCanvas.drawText("总计", x, y - x / 12, textPaint);
+		mCanvas.drawText(PayChartActivity.getamount(), x, y + x / 10, textPaint); // 总计
 		mCanvas.save();
 	}
 
@@ -466,7 +467,7 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 		return mChartProp;
 	}
 
-	// *********************************��ÿ���ȏ�********************************
+	// *********************************画每个扇彿********************************
 	public void drawItem(RectF localRectf) {
 		float temp = startAngle;
 		float borderAngle = getBorderAngle();
@@ -476,15 +477,15 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 				for (int i = 0; i < itemCount; i++) {
 					if (i < mChartProps.size()) {
 						mPaint.setColor(mChartProps.get(i).getColor());
-						// startAngleΪÿ���ƶ��ĽǶȴ�С
+						// startAngle为每次移动的角度大小
 						sweepAngle = mChartProps.get(i).getSweepAngle();
 						mChartProps.get(i).setStartAngle(temp);
 
 						/*
-						 * oval��Բ�����ڵ���Բ����?startAngle��Բ������ʼ�Ƕȡ�sweepAngle��Բ���ĽǶ�?
-						 * useCenter��
-						 * �Ƿ���ʾ�뾶���ߣ�true��ʾ��ʾԲ����Բ�ĵİ뾶���ߣ�false��ʾ����ʾ?paint
-						 * ������ʱ��?�õĻ���
+						 * oval：圆弧所在的椭圆对象?startAngle：圆弧的起始角度。sweepAngle：圆弧的角度?
+						 * useCenter：
+						 * 是否显示半径连线，true表示显示圆弧与圆心的半径连线，false表示不显示?paint
+						 * ：绘制时承?用的画笔
 						 */
 						mCanvas.drawArc(localRectf, temp, sweepAngle, true,
 								mPaint);
@@ -503,6 +504,7 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 		}
 
 	}
+
 
 	public boolean isRotateEnabled() {
 		return rotateEnabled;

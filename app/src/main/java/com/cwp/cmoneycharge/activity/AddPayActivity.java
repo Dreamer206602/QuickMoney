@@ -71,7 +71,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 
-public class AddPay extends Activity implements AMapLocationListener,
+public class AddPayActivity extends Activity implements AMapLocationListener,
 		OnClickListener {
 	protected static final int DATE_DIALOG_ID = 0;// 创建日期对话框常量
 	static String type = "pay";
@@ -117,10 +117,10 @@ public class AddPay extends Activity implements AMapLocationListener,
 
 	String[] VoiceSave = new String[6];
 	static DialogShowUtil dialogShowUtil;
-	PtypeDAO ptypeDAO = new PtypeDAO(AddPay.this);
-	ItypeDAO itypeDAO = new ItypeDAO(AddPay.this);
-	PayDAO payDAO = new PayDAO(AddPay.this);// 创建PayDAO对象
-	IncomeDAO incomeDAO = new IncomeDAO(AddPay.this);// 创建IncomeDAO对象
+	PtypeDAO ptypeDAO = new PtypeDAO(AddPayActivity.this);
+	ItypeDAO itypeDAO = new ItypeDAO(AddPayActivity.this);
+	PayDAO payDAO = new PayDAO(AddPayActivity.this);// 创建PayDAO对象
+	IncomeDAO incomeDAO = new IncomeDAO(AddPayActivity.this);// 创建IncomeDAO对象
 	List<String> spdatalist, spdatalist2;
 	private SystemBarTintManager mTintManager;
 	private ImageView btn_loacte;
@@ -132,7 +132,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 	private LinearLayout bottom_full;
 	private KeyboardUtil keyBoard;
 
-	public AddPay() {
+	public AddPayActivity() {
 
 	}
 
@@ -186,7 +186,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 		// 添加图片
 		addphoto.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(AddPay.this, PublishedActivity.class);
+				Intent intent = new Intent(AddPayActivity.this, PublishedActivity.class);
 				intent.putExtra("cwp.id", userid);
 				startActivityForResult(intent, 102);
 			}
@@ -208,10 +208,10 @@ public class AddPay extends Activity implements AMapLocationListener,
 				type = "pay";
 				typemode = "add";
 				if (bundle.containsKey("cwp.frament3")) {
-					intent = new Intent(AddPay.this, MainActivity.class);
+					intent = new Intent(AddPayActivity.this, MainActivity.class);
 					intent.putExtra("cwp.Fragment", "3");// 设置传递数据
 				} else {
-					intent = new Intent(AddPay.this, MainActivity.class);
+					intent = new Intent(AddPayActivity.this, MainActivity.class);
 				}
 				intent.putExtra("cwp.id", userid);
 				startActivity(intent);
@@ -227,7 +227,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 						.getStringArrayList(RESULTS_RECOGNITION) : null;
 				if (rs != null && rs.size() > 0) {
 					Recognition(rs.get(0)); // 把识别数据传入识别方法
-					// Toast.makeText(AddPay.this, rs.get(0),
+					// Toast.makeText(AddPayActivity.this, rs.get(0),
 					// Toast.LENGTH_SHORT).show();
 				}
 			}
@@ -353,7 +353,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 			if (textphoto.equals("")) {
 				addphoto.setImageResource(R.drawable.addphoto_btn);
 			} else if (Bimp.getbitmap(Bimp.smdrr.get(0)) == null) {
-				Toast.makeText(AddPay.this, "图片不存在", Toast.LENGTH_SHORT).show();
+				Toast.makeText(AddPayActivity.this, "图片不存在", Toast.LENGTH_SHORT).show();
 			} else {
 				addphoto.setImageBitmap(Bimp.getbitmap(Bimp.smdrr.get(0)));
 			}
@@ -365,7 +365,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 	private void updatetype() { // 更新类别
 		initData(userid);
 		spdata = spdatalist.toArray(new String[spdatalist.size()]);// 在tb_itype中按用户id读取
-		adapter = new ArrayAdapter<String>(AddPay.this, R.layout.spinner,
+		adapter = new ArrayAdapter<String>(AddPayActivity.this, R.layout.spinner,
 				spdata); // 动态生成收入类型列表
 		spType.setAdapter(adapter);
 		if (Selection > 0) {
@@ -385,7 +385,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 			strInfos = bundle.getStringArray("cwp.message");// 获取Bundle中记录的信息
 			strno = strInfos[0];// 记录id
 			strType = strInfos[1];// 记录类型
-			typemode = "ModifyInP";
+			typemode = "ModifyInPActivity";
 			if (strType.equals("btnininfo")) { // 收入
 				type = "income";
 			} else {
@@ -405,7 +405,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 			if (firstin) {
 				bottom_empty.setVisibility(View.GONE);
 				bottom_full.setVisibility(View.VISIBLE);
-				Intent intent = new Intent(AddPay.this, PublishedActivity.class);
+				Intent intent = new Intent(AddPayActivity.this, PublishedActivity.class);
 				intent.putExtra("cwp.id", userid);
 				intent.putExtra("cwp.photo", "photo");
 				startActivityForResult(intent, 102);
@@ -414,7 +414,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 		}
 		if (bundle.containsKey("keyboard")) { // 进来显示键盘
 			if (keycount) {
-				InputMethodManager imm = (InputMethodManager) getSystemService(AddPay.this.INPUT_METHOD_SERVICE); // 显示键盘
+				InputMethodManager imm = (InputMethodManager) getSystemService(AddPayActivity.this.INPUT_METHOD_SERVICE); // 显示键盘
 				imm.hideSoftInputFromWindow(txtMoney.getWindowToken(), 0); // 隐藏键盘　
 				keyBoard.showKeyboard();
 				keycount = false;
@@ -433,7 +433,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 		txtMoney.setOnTouchListener(new OnTouchListener() { // 数字软键盘监听
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				InputMethodManager imm = (InputMethodManager) getSystemService(AddPay.this.INPUT_METHOD_SERVICE); // 显示键盘
+				InputMethodManager imm = (InputMethodManager) getSystemService(AddPayActivity.this.INPUT_METHOD_SERVICE); // 显示键盘
 				imm.hideSoftInputFromWindow(txtMoney.getWindowToken(), 0); // 隐藏键盘　
 				keyBoard.showKeyboard();
 				return false;
@@ -465,7 +465,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 					if (type == "pay") { // 支出
 						if (!strMoney.isEmpty()) {// 判断金额不为空
 							// 创建InaccountDAO对象
-							PayDAO payDAO = new PayDAO(AddPay.this);
+							PayDAO payDAO = new PayDAO(AddPayActivity.this);
 							// 创建Tb_inaccount对象
 							Tb_pay tb_pay = new Tb_pay(
 									userid,
@@ -475,19 +475,19 @@ public class AddPay extends Activity implements AMapLocationListener,
 									(spType.getSelectedItemPosition() + 1),
 									textreAddres, textreMark, textphoto);
 							payDAO.add(tb_pay);// 添加收入信息
-							Toast.makeText(AddPay.this,
+							Toast.makeText(AddPayActivity.this,
 									"〖新增收入〗数据添加成功！", Toast.LENGTH_SHORT)
 									.show();
 							gotoback();
 						} else {
-							Toast.makeText(AddPay.this, "请输入收入金额！",
+							Toast.makeText(AddPayActivity.this, "请输入收入金额！",
 									Toast.LENGTH_SHORT).show();
 						}
 					} else { // 收入
 						if (!strMoney.isEmpty()) {// 判断金额不为空
 							// 创建InaccountDAO对象
 							IncomeDAO incomeDAO = new IncomeDAO(
-									AddPay.this);
+									AddPayActivity.this);
 							// 创建Tb_inaccount对象
 							Tb_income tb_income = new Tb_income(
 									userid,
@@ -500,12 +500,12 @@ public class AddPay extends Activity implements AMapLocationListener,
 									textphoto, "支出");
 							incomeDAO.add(tb_income);// 添加收入信息
 							// 弹出信息提示
-							Toast.makeText(AddPay.this,
+							Toast.makeText(AddPayActivity.this,
 									"〖新增收入〗数据添加成功！", Toast.LENGTH_SHORT)
 									.show();
 							gotoback();
 						} else {
-							Toast.makeText(AddPay.this, "请输入收入金额！",
+							Toast.makeText(AddPayActivity.this, "请输入收入金额！",
 									Toast.LENGTH_SHORT).show();
 						}
 					}
@@ -525,11 +525,11 @@ public class AddPay extends Activity implements AMapLocationListener,
 							tb_pay.setMark(textreMark);// 设置备注
 							tb_pay.setPhoto(textphoto);// 设置备注
 							payDAO.update(tb_pay);// 更新支出信息
-							Toast.makeText(AddPay.this, "〖数据〗修改成功！",
+							Toast.makeText(AddPayActivity.this, "〖数据〗修改成功！",
 									Toast.LENGTH_SHORT).show();
 							gotoback();
 						} else {
-							Toast.makeText(AddPay.this, "请输入收入金额！",
+							Toast.makeText(AddPayActivity.this, "请输入收入金额！",
 									Toast.LENGTH_SHORT).show();
 						}
 					} else { // 收入
@@ -547,11 +547,11 @@ public class AddPay extends Activity implements AMapLocationListener,
 							tb_income.setMark(textreMark);// 设置备注
 							tb_income.setPhoto(textphoto);// 设置备注
 							incomeDAO.update(tb_income);// 更新收入信息
-							Toast.makeText(AddPay.this, "〖数据〗修改成功！",
+							Toast.makeText(AddPayActivity.this, "〖数据〗修改成功！",
 									Toast.LENGTH_SHORT).show();
 							gotoback();
 						} else {
-							Toast.makeText(AddPay.this, "请输入收入金额！",
+							Toast.makeText(AddPayActivity.this, "请输入收入金额！",
 									Toast.LENGTH_SHORT).show();
 						}
 					}
@@ -580,7 +580,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 								Integer.parseInt(strno));// 根据编号删除收入信息
 						gotoback();
 					}
-					Toast.makeText(AddPay.this, "〖数据〗删除成功！",
+					Toast.makeText(AddPayActivity.this, "〖数据〗删除成功！",
 							Toast.LENGTH_SHORT).show();
 				}
 			}
@@ -657,7 +657,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 
 	}
 
-	void VoiceRecognition() { // 调用百度语音识别
+	public void VoiceRecognition() { // 调用百度语音识别
 		// mResult.setText(null);
 		mCurrentTheme = Config.DIALOG_THEME;
 		if (mDialog != null) {
@@ -688,7 +688,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 		mDialog.show();
 	}
 
-	void VoiceSuccess() { // 识别成功录入数据
+	public void VoiceSuccess() { // 识别成功录入数据
 		if (DialogShowUtil.dialoggettype() != null) {
 			type = DialogShowUtil.dialoggettype();
 		}
@@ -729,7 +729,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 				// 选择列表初始化
 				spdatalist = ptypeDAO.getPtypeName(userid);
 				spdata = spdatalist.toArray(new String[spdatalist.size()]);// 在tb_itype中按用户id读取
-				adapter = new ArrayAdapter<String>(AddPay.this,
+				adapter = new ArrayAdapter<String>(AddPayActivity.this,
 						R.layout.spinner, spdata); // 动态生成收入类型列表
 				spType.setAdapter(adapter);
 				txtMoney.setText(VoiceSave[1]);// 显示金额
@@ -745,7 +745,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 				rb2.setChecked(true);
 				spdatalist = itypeDAO.getItypeName(userid);
 				spdata = spdatalist.toArray(new String[spdatalist.size()]);// 在tb_itype中按用户id读取
-				adapter = new ArrayAdapter<String>(AddPay.this,
+				adapter = new ArrayAdapter<String>(AddPayActivity.this,
 						R.layout.spinner, spdata); // 动态生成收入类型列表
 				spType.setAdapter(adapter);
 				txtMoney.setText(VoiceSave[1]);// 显示金额
@@ -917,14 +917,14 @@ public class AddPay extends Activity implements AMapLocationListener,
 		Bimp.max = 0;
 		Bimp.flag = 0;
 		if (bundle.containsKey("cwp.frament3")) {
-			intent = new Intent(AddPay.this, MainActivity.class);
+			intent = new Intent(AddPayActivity.this, MainActivity.class);
 			intent.putExtra("cwp.Fragment", "3");// 设置传递数据
 		} else if (bundle.containsKey("cwp.search")) {
 			this.setResult(3);
 			this.finish();
 			return true;
 		} else {
-			intent = new Intent(AddPay.this, MainActivity.class);
+			intent = new Intent(AddPayActivity.this, MainActivity.class);
 			intent.putExtra("cwp.Fragment", "1");
 		}
 		intent.putExtra("cwp.id", userid);
@@ -1061,7 +1061,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 
 
 //
-//public class AddPay extends Activity implements AMapLocationListener,
+//public class AddPayActivity extends Activity implements AMapLocationListener,
 //		OnClickListener {
 //	protected static final int DATE_DIALOG_ID = 0;// �������ڶԻ�����
 //	static String type = "pay";
@@ -1107,10 +1107,10 @@ public class AddPay extends Activity implements AMapLocationListener,
 //
 //	String[] VoiceSave = new String[6];
 //	static DialogShowUtil dialogShowUtil;
-//	PtypeDAO ptypeDAO = new PtypeDAO(AddPay.this);
-//	ItypeDAO itypeDAO = new ItypeDAO(AddPay.this);
-//	PayDAO payDAO = new PayDAO(AddPay.this);// ����PayDAO����
-//	IncomeDAO incomeDAO = new IncomeDAO(AddPay.this);// ����IncomeDAO����
+//	PtypeDAO ptypeDAO = new PtypeDAO(AddPayActivity.this);
+//	ItypeDAO itypeDAO = new ItypeDAO(AddPayActivity.this);
+//	PayDAO payDAO = new PayDAO(AddPayActivity.this);// ����PayDAO����
+//	IncomeDAO incomeDAO = new IncomeDAO(AddPayActivity.this);// ����IncomeDAO����
 //	List<String> spdatalist, spdatalist2;
 //	private SystemBarTintManager mTintManager;
 //	private ImageView btn_loacte;
@@ -1122,7 +1122,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 //	private LinearLayout bottom_full;
 //	private KeyboardUtil keyBoard;
 //
-//	public AddPay() {
+//	public AddPayActivity() {
 //
 //	}
 //
@@ -1176,7 +1176,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 //		// ���ͼƬ
 //		addphoto.setOnClickListener(new OnClickListener() {
 //			public void onClick(View v) {
-//				Intent intent = new Intent(AddPay.this, PublishedActivity.class);
+//				Intent intent = new Intent(AddPayActivity.this, PublishedActivity.class);
 //				intent.putExtra("cwp.id", userid);
 //				startActivityForResult(intent, 102);
 //			}
@@ -1198,10 +1198,10 @@ public class AddPay extends Activity implements AMapLocationListener,
 //				type = "pay";
 //				typemode = "add";
 //				if (bundle.containsKey("cwp.frament3")) {
-//					intent = new Intent(AddPay.this, MainActivity.class);
+//					intent = new Intent(AddPayActivity.this, MainActivity.class);
 //					intent.putExtra("cwp.Fragment", "3");// ���ô�������
 //				} else {
-//					intent = new Intent(AddPay.this, MainActivity.class);
+//					intent = new Intent(AddPayActivity.this, MainActivity.class);
 //				}
 //				intent.putExtra("cwp.id", userid);
 //				startActivity(intent);
@@ -1217,7 +1217,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 //						.getStringArrayList(RESULTS_RECOGNITION) : null;
 //				if (rs != null && rs.size() > 0) {
 //					Recognition(rs.get(0)); // ��ʶ�����ݴ���ʶ�𷽷�
-//					// Toast.makeText(AddPay.this, rs.get(0),
+//					// Toast.makeText(AddPayActivity.this, rs.get(0),
 //					// Toast.LENGTH_SHORT).show();
 //				}
 //			}
@@ -1343,7 +1343,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 //			if (textphoto.equals("")) {
 //				addphoto.setImageResource(R.drawable.addphoto_btn);
 //			} else if (Bimp.getbitmap(Bimp.smdrr.get(0)) == null) {
-//				Toast.makeText(AddPay.this, "ͼƬ������", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(AddPayActivity.this, "ͼƬ������", Toast.LENGTH_SHORT).show();
 //			} else {
 //				addphoto.setImageBitmap(Bimp.getbitmap(Bimp.smdrr.get(0)));
 //			}
@@ -1355,7 +1355,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 //	private void updatetype() { // �������
 //		initData(userid);
 //		spdata = spdatalist.toArray(new String[spdatalist.size()]);// ��tb_itype�а��û�id��ȡ
-//		adapter = new ArrayAdapter<String>(AddPay.this, R.layout.spinner,
+//		adapter = new ArrayAdapter<String>(AddPayActivity.this, R.layout.spinner,
 //				spdata); // ��̬�������������б�
 //		spType.setAdapter(adapter);
 //		if (Selection > 0) {
@@ -1375,7 +1375,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 //			strInfos = bundle.getStringArray("cwp.message");// ��ȡBundle�м�¼����Ϣ
 //			strno = strInfos[0];// ��¼id
 //			strType = strInfos[1];// ��¼����
-//			typemode = "ModifyInP";
+//			typemode = "ModifyInPActivity";
 //			if (strType.equals("btnininfo")) { // ����
 //				type = "income";
 //			} else {
@@ -1395,7 +1395,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 //			if (firstin) {
 //				bottom_empty.setVisibility(View.GONE);
 //				bottom_full.setVisibility(View.VISIBLE);
-//				Intent intent = new Intent(AddPay.this, PublishedActivity.class);
+//				Intent intent = new Intent(AddPayActivity.this, PublishedActivity.class);
 //				intent.putExtra("cwp.id", userid);
 //				intent.putExtra("cwp.photo", "photo");
 //				startActivityForResult(intent, 102);
@@ -1404,7 +1404,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 //		}
 //		if (bundle.containsKey("keyboard")) { // ������ʾ����
 //			if (keycount) {
-//				InputMethodManager imm = (InputMethodManager) getSystemService(AddPay.this.INPUT_METHOD_SERVICE); // ��ʾ����
+//				InputMethodManager imm = (InputMethodManager) getSystemService(AddPayActivity.this.INPUT_METHOD_SERVICE); // ��ʾ����
 //				imm.hideSoftInputFromWindow(txtMoney.getWindowToken(), 0); // ���ؼ��̡�
 //				keyBoard.showKeyboard();
 //				keycount = false;
@@ -1423,7 +1423,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 //		txtMoney.setOnTouchListener(new OnTouchListener() { // ��������̼���
 //			@Override
 //			public boolean onTouch(View v, MotionEvent event) {
-//				InputMethodManager imm = (InputMethodManager) getSystemService(AddPay.this.INPUT_METHOD_SERVICE); // ��ʾ����
+//				InputMethodManager imm = (InputMethodManager) getSystemService(AddPayActivity.this.INPUT_METHOD_SERVICE); // ��ʾ����
 //				imm.hideSoftInputFromWindow(txtMoney.getWindowToken(), 0); // ���ؼ��̡�
 //				keyBoard.showKeyboard();
 //				return false;
@@ -1455,7 +1455,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 //							if (type == "pay") { // ֧��
 //								if (!strMoney.isEmpty()) {// �жϽ�Ϊ��
 //									// ����InaccountDAO����
-//									PayDAO payDAO = new PayDAO(AddPay.this);
+//									PayDAO payDAO = new PayDAO(AddPayActivity.this);
 //									// ����Tb_inaccount����
 //									Tb_pay tb_pay = new Tb_pay(
 //											userid,
@@ -1465,19 +1465,19 @@ public class AddPay extends Activity implements AMapLocationListener,
 //											(spType.getSelectedItemPosition() + 1),
 //											textreAddres, textreMark, textphoto);
 //									payDAO.add(tb_pay);// ���������Ϣ
-//									Toast.makeText(AddPay.this,
+//									Toast.makeText(AddPayActivity.this,
 //											"���������롽������ӳɹ���", Toast.LENGTH_SHORT)
 //											.show();
 //									gotoback();
 //								} else {
-//									Toast.makeText(AddPay.this, "�����������",
+//									Toast.makeText(AddPayActivity.this, "�����������",
 //											Toast.LENGTH_SHORT).show();
 //								}
 //							} else { // ����
 //								if (!strMoney.isEmpty()) {// �жϽ�Ϊ��
 //									// ����InaccountDAO����
 //									IncomeDAO incomeDAO = new IncomeDAO(
-//											AddPay.this);
+//											AddPayActivity.this);
 //									// ����Tb_inaccount����
 //									Tb_income tb_income = new Tb_income(
 //											userid,
@@ -1490,12 +1490,12 @@ public class AddPay extends Activity implements AMapLocationListener,
 //											textphoto, "֧��");
 //									incomeDAO.add(tb_income);// ���������Ϣ
 //									// ������Ϣ��ʾ
-//									Toast.makeText(AddPay.this,
+//									Toast.makeText(AddPayActivity.this,
 //											"���������롽������ӳɹ���", Toast.LENGTH_SHORT)
 //											.show();
 //									gotoback();
 //								} else {
-//									Toast.makeText(AddPay.this, "�����������",
+//									Toast.makeText(AddPayActivity.this, "�����������",
 //											Toast.LENGTH_SHORT).show();
 //								}
 //							}
@@ -1515,11 +1515,11 @@ public class AddPay extends Activity implements AMapLocationListener,
 //									tb_pay.setMark(textreMark);// ���ñ�ע
 //									tb_pay.setPhoto(textphoto);// ���ñ�ע
 //									payDAO.update(tb_pay);// ����֧����Ϣ
-//									Toast.makeText(AddPay.this, "�����ݡ��޸ĳɹ���",
+//									Toast.makeText(AddPayActivity.this, "�����ݡ��޸ĳɹ���",
 //											Toast.LENGTH_SHORT).show();
 //									gotoback();
 //								} else {
-//									Toast.makeText(AddPay.this, "�����������",
+//									Toast.makeText(AddPayActivity.this, "�����������",
 //											Toast.LENGTH_SHORT).show();
 //								}
 //							} else { // ����
@@ -1537,11 +1537,11 @@ public class AddPay extends Activity implements AMapLocationListener,
 //									tb_income.setMark(textreMark);// ���ñ�ע
 //									tb_income.setPhoto(textphoto);// ���ñ�ע
 //									incomeDAO.update(tb_income);// ����������Ϣ
-//									Toast.makeText(AddPay.this, "�����ݡ��޸ĳɹ���",
+//									Toast.makeText(AddPayActivity.this, "�����ݡ��޸ĳɹ���",
 //											Toast.LENGTH_SHORT).show();
 //									gotoback();
 //								} else {
-//									Toast.makeText(AddPay.this, "�����������",
+//									Toast.makeText(AddPayActivity.this, "�����������",
 //											Toast.LENGTH_SHORT).show();
 //								}
 //							}
@@ -1570,7 +1570,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 //										Integer.parseInt(strno));// ���ݱ��ɾ��������Ϣ
 //								gotoback();
 //							}
-//							Toast.makeText(AddPay.this, "�����ݡ�ɾ���ɹ���",
+//							Toast.makeText(AddPayActivity.this, "�����ݡ�ɾ���ɹ���",
 //									Toast.LENGTH_SHORT).show();
 //						}
 //					}
@@ -1719,7 +1719,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 //				// ѡ���б��ʼ��
 //				spdatalist = ptypeDAO.getPtypeName(userid);
 //				spdata = spdatalist.toArray(new String[spdatalist.size()]);// ��tb_itype�а��û�id��ȡ
-//				adapter = new ArrayAdapter<String>(AddPay.this,
+//				adapter = new ArrayAdapter<String>(AddPayActivity.this,
 //						R.layout.spinner, spdata); // ��̬�������������б�
 //				spType.setAdapter(adapter);
 //				txtMoney.setText(VoiceSave[1]);// ��ʾ���
@@ -1735,7 +1735,7 @@ public class AddPay extends Activity implements AMapLocationListener,
 //				rb2.setChecked(true);
 //				spdatalist = itypeDAO.getItypeName(userid);
 //				spdata = spdatalist.toArray(new String[spdatalist.size()]);// ��tb_itype�а��û�id��ȡ
-//				adapter = new ArrayAdapter<String>(AddPay.this,
+//				adapter = new ArrayAdapter<String>(AddPayActivity.this,
 //						R.layout.spinner, spdata); // ��̬�������������б�
 //				spType.setAdapter(adapter);
 //				txtMoney.setText(VoiceSave[1]);// ��ʾ���
@@ -1907,14 +1907,14 @@ public class AddPay extends Activity implements AMapLocationListener,
 //		Bimp.max = 0;
 //		Bimp.flag = 0;
 //		if (bundle.containsKey("cwp.frament3")) {
-//			intent = new Intent(AddPay.this, MainActivity.class);
+//			intent = new Intent(AddPayActivity.this, MainActivity.class);
 //			intent.putExtra("cwp.Fragment", "3");// ���ô�������
 //		} else if (bundle.containsKey("cwp.search")) {
 //			this.setResult(3);
 //			this.finish();
 //			return true;
 //		} else {
-//			intent = new Intent(AddPay.this, MainActivity.class);
+//			intent = new Intent(AddPayActivity.this, MainActivity.class);
 //			intent.putExtra("cwp.Fragment", "1");
 //		}
 //		intent.putExtra("cwp.id", userid);

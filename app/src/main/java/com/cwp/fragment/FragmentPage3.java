@@ -13,7 +13,7 @@ import com.cwp.chart.widget.PullToRefreshView;
 import com.cwp.chart.widget.PullToRefreshView.OnFooterRefreshListener;
 import com.cwp.chart.widget.PullToRefreshView.OnHeaderRefreshListener;
 import com.cwp.chart.widget.RiseNumberTextView;
-import com.cwp.cmoneycharge.activity.AddPay;
+import com.cwp.cmoneycharge.activity.AddPayActivity;
 import com.cwp.cmoneycharge.R;
 import com.cwp.cmoneycharge.activity.SearchActivity;
 
@@ -111,7 +111,7 @@ public class FragmentPage3 extends BaseFragment implements
 				String strtype = ((String) txkind.getText()).substring(1,
 						((String) txkind.getText()).indexOf(']')).trim();// 从收入信息中截取收支类型
 				String strno = (String) txno.getText(); // 从信息中截取收支编号
-				Intent intent = new Intent(getActivity(), AddPay.class);// 创建Intent对象
+				Intent intent = new Intent(getActivity(), AddPayActivity.class);// 创建Intent对象
 				if (strtype.equals("收入")) {
 					intent.putExtra("cwp.message", new String[] { strno,
 							"btnininfo" });// 设置传递数据

@@ -34,24 +34,27 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class About extends Activity {
+/**
+ * 关于的界面
+ */
+public class AboutActivity extends Activity {
 	TextView usernow, countuser, countpay, countincome, sendlog, gesturepw,
 			gesturepwmdtext, gesturepwcleartext;
 	TableRow author, description, gesturepwmd;
 	Intent intentr;
 	int userid;
-	AccountDAO accountDAO = new AccountDAO(About.this);
-	PayDAO payDAO = new PayDAO(About.this);
-	IncomeDAO incomeDAO = new IncomeDAO(About.this);
-	NoteDAO noteDAO = new NoteDAO(About.this);
+	AccountDAO accountDAO = new AccountDAO(AboutActivity.this);
+	PayDAO payDAO = new PayDAO(AboutActivity.this);
+	IncomeDAO incomeDAO = new IncomeDAO(AboutActivity.this);
+	NoteDAO noteDAO = new NoteDAO(AboutActivity.this);
 	static SharedPreferences sp;
 	Editor edit;
-	private final int REQUESTCODE = 1; // ���صĽ����
+	private final int REQUESTCODE = 1;  //返回的结果码
 	private TextView app_version;
 	private TextView updateapp;
 	private TextView feedback;
 
-	public About() {
+	public AboutActivity() {
 
 	}
 
@@ -62,7 +65,7 @@ public class About extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.about);
 
-		SysApplication.getInstance().addActivity(this); // ����ٶ��������this
+		SysApplication.getInstance().addActivity(this); // 在销毁队列中添加this
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 			setTranslucentStatus(true);
@@ -107,7 +110,7 @@ public class About extends Activity {
 		intentr = getIntent();
 		userid = intentr.getIntExtra("cwp.id", 100000001);
 		if (userid == 100000001)
-			usernow.setText("Ĭ���û�");
+			usernow.setText("默认用户");
 		else {
 			usernow.setText(accountDAO.find(userid));
 		}
@@ -116,7 +119,7 @@ public class About extends Activity {
 		feedback.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(About.this, CustomActivity.class);
+				Intent intent = new Intent(AboutActivity.this, CustomActivity.class);
 				// intent.putExtra("cwp.md", "md");
 				startActivity(intent);
 			}
@@ -125,40 +128,40 @@ public class About extends Activity {
 		updateapp.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				UpdateManager manager = new UpdateManager(About.this);
-				// ����������
+				UpdateManager manager = new UpdateManager(AboutActivity.this);
+				// 检查软件更新
 				manager.checkUpdate("show");
 			}
 		});
 
-		class OnClickListenermd implements OnClickListener { // �޸�����
+		class OnClickListenermd implements OnClickListener { // 修改密码
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(About.this,
+				Intent intent = new Intent(AboutActivity.this,
 						UnlockGesturePasswordActivity.class);
 				intent.putExtra("cwp.md", "md");
 				startActivity(intent);
 			}
 		}
 
-		if (sp.getString("gesturepw", "").equals("��")
+		if (sp.getString("gesturepw", "").equals("关")
 				|| sp.getString("gesturepw", "").equals("")) {
-			gesturepw.setText("��");
+			gesturepw.setText("关");
 		} else {
-			gesturepw.setText("��");
+			gesturepw.setText("开");
 			gesturepwmd.setVisibility(View.VISIBLE);
 			if (CrashApplication.getInstance().getLockPatternUtils()
 					.savedPatternExists()) {
-				gesturepwmd.setOnClickListener(new OnClickListenermd()); // �޸�����
+				gesturepwmd.setOnClickListener(new OnClickListenermd()); // 修改密码
 			}
 		}
 
-		if (sp.getString("sendlog", "").equals("��")
+		if (sp.getString("sendlog", "").equals("关")
 				|| sp.getString("sendlog", "").equals("")) {
-			sendlog.setText("��");
+			sendlog.setText("关");
 		} else {
-			sendlog.setText("��");
+			sendlog.setText("开");
 		}
 		countuser.setText(String.valueOf(accountDAO.getCount()));
 		countpay.setText(String.valueOf(payDAO.getCount(userid)));
@@ -168,45 +171,45 @@ public class About extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				CustomDialog.Builder customBuilder = new CustomDialog.Builder(
-						About.this);
+						AboutActivity.this);
 
-				customBuilder.setTitle("��ʾ"); // ��������
+				customBuilder.setTitle("提示"); // 创建标题
 				customBuilder
-						.setMessage("�Ƿ���/�ر��������룿\nע�⣺�ر���������������ԭ���룡")
-						.setPositiveButton("����",
+						.setMessage("是否开启/关闭手势密码？\n注意：关闭手势密码需输入原密码！")
+						.setPositiveButton("开启",
 								new DialogInterface.OnClickListener() {
 
 									public void onClick(DialogInterface dialog,
-											int which) {
+														int which) {
 										dialog.dismiss();
 										if (!sp.getString("gesturepw", "")
-												.equals("��")) {
+												.equals("开")) {
 											Intent intent = new Intent(
-													About.this,
+													AboutActivity.this,
 													UnlockGesturePasswordActivity.class);
 											intent.putExtra("cwp.pwenable",
 													"enable");
 											startActivityForResult(intent,
-													REQUESTCODE); // ��ʾ���Է��ؽ��
+													REQUESTCODE); // 表示可以返回结果
 										}
 									}
 								})
-						.setNegativeButton("�ر�",
+						.setNegativeButton("关闭",
 								new DialogInterface.OnClickListener() {
 
 									public void onClick(DialogInterface dialog,
-											int which) {
+														int which) {
 										dialog.dismiss();
 										Intent intent = new Intent(
-												About.this,
+												AboutActivity.this,
 												UnlockGesturePasswordActivity.class);
 										intent.putExtra("cwp.pwclear", "clear");
 										startActivityForResult(intent,
-												REQUESTCODE); // ��ʾ���Է��ؽ��
+												REQUESTCODE); // 表示可以返回结果
 									}
 								});
-				Dialog dialog = customBuilder.create();// �����Ի���
-				dialog.show(); // ��ʾ�Ի���
+				Dialog dialog = customBuilder.create();// 创建对话框
+				dialog.show(); // 显示对话框
 			}
 		});
 
@@ -214,43 +217,43 @@ public class About extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				CustomDialog.Builder customBuilder = new CustomDialog.Builder(
-						About.this);
+						AboutActivity.this);
 
-				customBuilder.setTitle("��ʾ"); // ��������
+				customBuilder.setTitle("提示"); // 创建标题
 				customBuilder
-						.setMessage("�Ƿ���/�رշ��ʹ�����־���ܣ�\nע�⣺���˳��������½�����ɳ�ʼ����")
-						.setPositiveButton("����",
+						.setMessage("是否开启/关闭发送错误日志功能？\n注意：需退出程序重新进入完成初始化！")
+						.setPositiveButton("开启",
 								new DialogInterface.OnClickListener() {
 
 									public void onClick(DialogInterface dialog,
-											int which) {
-										edit.putString("sendlog", "��");
+														int which) {
+										edit.putString("sendlog", "开");
 										edit.commit();
-										sendlog.setText("��");
+										sendlog.setText("开");
 										dialog.dismiss();
 									}
 								})
-						.setNegativeButton("�ر�",
+						.setNegativeButton("关闭",
 								new DialogInterface.OnClickListener() {
 
 									public void onClick(DialogInterface dialog,
-											int which) {
-										edit.putString("sendlog", "��");
+														int which) {
+										edit.putString("sendlog", "关");
 										edit.commit();
-										sendlog.setText("��");
+										sendlog.setText("关");
 										dialog.dismiss();
 
 									}
 								});
-				Dialog dialog = customBuilder.create();// �����Ի���
-				dialog.show(); // ��ʾ�Ի���
+				Dialog dialog = customBuilder.create();// 创建对话框
+				dialog.show(); // 显示对话框
 			}
 		});
 
 		description.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(About.this, Description.class);
+				Intent intent = new Intent(AboutActivity.this, DescriptionActivity.class);
 				intent.putExtra("cwp.id", userid);
 				startActivity(intent);
 			}
@@ -264,23 +267,23 @@ public class About extends Activity {
 
 		if (requestCode == REQUESTCODE) {
 			if (resultCode == 2) {
-				edit.putString("gesturepw", "��");
+				edit.putString("gesturepw", "关");
 				edit.commit();
-				gesturepw.setText("��");
+				gesturepw.setText("关");
 				gesturepwmd.setVisibility(View.GONE);
 			}
 			if (resultCode == 3) {
-				edit.putString("gesturepw", "��");
+				edit.putString("gesturepw", "开");
 				edit.commit();
-				gesturepw.setText("��");
+				gesturepw.setText("开");
 				gesturepwmd.setVisibility(View.VISIBLE);
 			}
 		} else {
-			Toast.makeText(About.this, "����ʧ�ܣ�", Toast.LENGTH_LONG).show();
+			Toast.makeText(AboutActivity.this, "操作失败！", Toast.LENGTH_LONG).show();
 		}
 	}
 
-	public static String getVersion(Context context)// ��ȡ�汾��
+	public static String getVersion(Context context)// 获取版本号
 	{
 		try {
 			PackageInfo pi = context.getPackageManager().getPackageInfo(
@@ -294,10 +297,10 @@ public class About extends Activity {
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) { // ���/����/���η��ؼ�
-			Intent intent = new Intent(About.this, MainActivity.class);
+		if (keyCode == KeyEvent.KEYCODE_BACK) { // 监控/拦截/屏蔽返回键
+			Intent intent = new Intent(AboutActivity.this, MainActivity.class);
 			intent.putExtra("cwp.id", userid);
-			intent.putExtra("cwp.Fragment", "4");// ���ô������
+			intent.putExtra("cwp.Fragment", "4");// 设置传递数据
 			startActivity(intent);
 			return true;
 		}

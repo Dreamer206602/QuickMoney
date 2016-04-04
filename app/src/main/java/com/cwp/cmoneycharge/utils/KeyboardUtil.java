@@ -1,6 +1,6 @@
 package com.cwp.cmoneycharge.utils;
 
-import com.cwp.cmoneycharge.activity.AddPay;
+import com.cwp.cmoneycharge.activity.AddPayActivity;
 import com.cwp.cmoneycharge.R;
 
 import android.app.Activity;
@@ -77,7 +77,7 @@ public class KeyboardUtil {
 
 		private void goforkey(int primaryCode, int[] keyCodes) {
 			Editable editable = ed.getText();
-			if (typemode.equals("ModifyInP")) { // 添加模式获取开始光标
+			if (typemode.equals("ModifyInPActivity")) { // 添加模式获取开始光标
 				ed.setSelection(editable.length());
 			}
 			int start = ed.getSelectionStart();
@@ -97,17 +97,17 @@ public class KeyboardUtil {
 				}
 			}
 			// else if (primaryCode == -11) { // 收入
-			// ((AddPay) act).update();
+			// ((AddPayActivity) act).update();
 			// }
 			// else if (primaryCode == -12) { // 支出
-			// AddPay add = new AddPay();
+			// AddPayActivity add = new AddPayActivity();
 			// add.getupdatepay("income");
 			// }
 			else if (primaryCode == -7) {
 				hideKeyboard();
 			} else if (primaryCode == -9) {
 				hideKeyboard();
-				AddPay.showVoiveDialog();
+				AddPayActivity.showVoiveDialog();
 			} else if (primaryCode == -10) {
 				ed.setText("");
 				a = true;

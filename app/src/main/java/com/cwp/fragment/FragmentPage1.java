@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.cwp.chart.adapter.MyAdspter;
-import com.cwp.cmoneycharge.activity.AddPay;
+import com.cwp.cmoneycharge.activity.AddPayActivity;
 import com.cwp.cmoneycharge.R;
 
 import cwp.moneycharge.dao.IncomeDAO;
@@ -94,7 +94,7 @@ public class FragmentPage1 extends BaseFragment {
 				String strtype = ((String) txkind.getText()).substring(1,
 						((String) txkind.getText()).indexOf(']')).trim();// 从收入信息中截取收支类型
 				String strno = (String) txno.getText(); // 从信息中截取收支编号
-				Intent intent = new Intent(getActivity(), AddPay.class);// 创建Intent对象
+				Intent intent = new Intent(getActivity(), AddPayActivity.class);// 创建Intent对象
 				if (strtype.equals("收入")) {
 					intent.putExtra("cwp.message", new String[] { strno,
 							"btnininfo" });// 设置传递数据
@@ -111,7 +111,7 @@ public class FragmentPage1 extends BaseFragment {
 			@Override
 			public void onClick(View arg0) {
 				// Intent intent = new Intent(getActivity(), AddIncome.class);
-				Intent intent = new Intent(getActivity(), AddPay.class);// 创建Intent对象
+				Intent intent = new Intent(getActivity(), AddPayActivity.class);// 创建Intent对象
 				intent.putExtra("cwp.id", userid);
 				intent.putExtra("keyboard", "true");
 				startActivity(intent);

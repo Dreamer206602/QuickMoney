@@ -22,7 +22,7 @@ package com.cwp.chart.listener;
  * completely unfolded state from a folded state).
  */
 public interface OnFoldListener {
-    public void onStartFold(float foldFactor);
-    public void onFoldingState(float foldFactor, float foldDrawHeight);
-    public void onEndFold(float foldFactor);
+     void onStartFold(float foldFactor);
+     void onFoldingState(float foldFactor, float foldDrawHeight);
+     void onEndFold(float foldFactor);
 }

@@ -51,24 +51,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.About" />
+        <activity android:name=".activity.AboutActivity" />
         <!--<activity android:name="com.cwp.cmoneycharge.Account" />-->
         <!--<activity android:name="com.cwp.cmoneycharge.AddIncome" />-->
         <!--<activity android:name="com.cwp.cmoneycharge.AddNote" />-->
-        <activity android:name=".activity.AddPay" />
-        <activity android:name=".activity.Author" />
+        <activity android:name=".activity.AddPayActivity" />
+        <activity android:name=".activity.AuthorActivity" />
         <!--<activity android:name="com.cwp.cmoneycharge.ChangePwd" />-->
         <!--<activity android:name="com.cwp.cmoneycharge.Data" />-->
-        <activity android:name=".activity.Description" />
+        <activity android:name=".activity.DescriptionActivity" />
         <!--<activity android:name="com.cwp.cmoneycharge.Income" />-->
-        <activity android:name=".activity.IncomeData" />
-        <activity android:name=".activity.InPtypeManager" />
+        <activity android:name=".activity.IncomeDataActivity" />
+        <activity android:name=".activity.InPtypeManagerActivity" />
         <!--<activity android:name="com.cwp.cmoneycharge.Login" />-->
-        <activity android:name=".activity.ModifyInP" />
+        <activity android:name=".activity.ModifyInPActivity" />
         <!--<activity android:name="com.cwp.cmoneycharge.ModifyNote" />-->
         <!--<activity android:name="com.cwp.cmoneycharge.Note" />-->
         <!--<activity android:name="com.cwp.cmoneycharge.Pay" />-->
-        <activity android:name=".activity.PayData" />
+        <activity android:name=".activity.PayDataActivity" />
         <!--<activity android:name="com.cwp.cmoneycharge.PIData" />-->
         <!--<activity android:name="com.cwp.cmoneycharge.Register" />-->
         <!--<activity android:name="com.cwp.cmoneycharge.Setting" />-->
@@ -90,7 +90,7 @@
         <!--<activity android:name="cwp.moneycharge.model.Tb_pay" />-->
         <!--<activity android:name="cwp.moneycharge.model.Tb_ptype" />-->
         <activity android:name=".activity.SettingActivity" />
-        <activity android:name=".activity.PayChart" />
+        <activity android:name=".activity.PayChartActivity" />
         <activity
             android:name="com.umeng.fb.example.CustomActivity"
             android:windowSoftInputMode="adjustPan" />

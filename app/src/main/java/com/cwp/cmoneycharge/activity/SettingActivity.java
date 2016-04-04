@@ -18,11 +18,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Spinner;
 
-/**
- * Demo����ʶ�����ʹ�ã������C?���ע
- * 
- * @author yangliang02
- */
+
 public class SettingActivity extends Activity implements
 		OnCheckedChangeListener {
 
@@ -50,7 +46,7 @@ public class SettingActivity extends Activity implements
 
 		Intent intentr = getIntent();
 		userid = intentr.getIntExtra("cwp.id", 100000001);
-		SysApplication.getInstance().addActivity(this); // ����ٶ��������this
+		SysApplication.getInstance().addActivity(this);
 		startSoundCheckBox = (CheckBox) findViewById(R.id.cb_play_start_sound);
 		startSoundCheckBox.setChecked(Config.PLAY_START_SOUND);
 		startSoundCheckBox.setOnCheckedChangeListener(this);
@@ -194,10 +190,10 @@ public class SettingActivity extends Activity implements
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) { // ���/����/���η��ؼ�
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			Intent intent = new Intent(SettingActivity.this, MainActivity.class);
 			intent.putExtra("cwp.id", userid);
-			intent.putExtra("cwp.Fragment", "4");// ���ô������
+			intent.putExtra("cwp.Fragment", "4");
 			startActivity(intent);
 			return true;
 		}
