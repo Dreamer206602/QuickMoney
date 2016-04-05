@@ -1,11 +1,22 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    lintOptions{
+        abortOnError false
+    }
+
+    signingConfigs {
+        config {
+            keyAlias 'quickmoney'
+            keyPassword '654321'
+            storeFile file('F:/ASWorkSpace2/QuickMoney/quickmoney.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
-
     useLibrary 'org.apache.http.legacy'
-
     defaultConfig {
         applicationId "com.cwp.cmoneycharge"
         minSdkVersion 15
@@ -19,12 +30,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+        baiduMarket {
+            signingConfig signingConfigs.config
+        }
+    }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-//    compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:support-v4:23.2.1'
     compile 'com.jakewharton:butterknife:7.0.1'
 }

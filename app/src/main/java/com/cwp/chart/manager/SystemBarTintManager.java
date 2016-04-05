@@ -23,6 +23,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -59,6 +60,7 @@ public class SystemBarTintManager {
     private View mNavBarTintView;
     private static boolean sIsMiuiV6;
 
+
     static {
         try {
             Class<?> sysClass = Class.forName("android.os.SystemProperties");
@@ -88,8 +90,11 @@ public class SystemBarTintManager {
                     android.R.attr.windowTranslucentNavigation};
             TypedArray a = activity.obtainStyledAttributes(attrs);
             try {
+
                 mStatusBarAvailable = a.getBoolean(0, false);
-                mNavBarAvailable = a.getBoolean(1, false);
+                //TODO  why??   index=1  error??
+                mNavBarAvailable = a.getBoolean(0, false);
+
             } finally {
                 a.recycle();
             }

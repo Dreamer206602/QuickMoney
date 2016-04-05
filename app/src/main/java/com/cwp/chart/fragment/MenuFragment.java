@@ -16,10 +16,6 @@ import android.view.WindowManager;
 
 /**
  * menu fragment ，主要是用于显示menu菜单
- * 
- * @author <a href="mailto:kris@krislq.com">Kris.lee</a>
- * @since Mar 12, 2013
- * @version 1.0.0
  */
 public class MenuFragment extends PreferenceFragment implements
 		OnPreferenceClickListener {

@@ -1,5 +1,6 @@
 package com.cwp.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
@@ -30,12 +31,7 @@ import butterknife.ButterKnife;
 public class FragmentPage2 extends BaseFragment implements OnClickListener {
     static int userid;
     private static FragmentPage1 fragmentPage1;
-
-
-
-
-
-    private FragmentPage2 fragmentPage2;
+    public  FragmentPage2 fragmentPage2;
     private static FragmentPage3 fragmentPage3;
     private static FragmentPage4 fragmentPage4;
     // 定义布局对象
@@ -64,27 +60,29 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
     int value = 0;
     private LinearLayout pop_photoView;
 
-    static FragmentActivity act;
-
-    public FragmentPage2(FragmentActivity activity) {
-        act = activity;
-    }
+   public static  FragmentActivity act;
 
     public FragmentPage2() {
+
     }
+    @SuppressLint("ValidFragment")
+    public FragmentPage2(FragmentActivity activity) {
+     act = activity;
+    }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_2, null);
-        ButterKnife.bind(this, view);
+
         return view;
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         Intent intentr = getActivity().getIntent();
         userid = intentr.getIntExtra("cwp.id", 100000001);
 
@@ -147,7 +145,6 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-        // System.out.println("我按了" + v.getId());
         switch (v.getId()) {
             // 点击动态按钮
             case R.id.layout_friendfeed:
@@ -398,9 +395,4 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
 
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
 }

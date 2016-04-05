@@ -161,7 +161,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/dataselect"
+        android:id="@+id/dataselects"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
