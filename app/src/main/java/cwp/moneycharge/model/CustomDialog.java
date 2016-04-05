@@ -56,10 +56,11 @@ public class CustomDialog extends Dialog {
         public Builder(Context context) {
             this.context = context;
         }
- 
+
+
         /**
          * Set the Dialog message from String
-         * @param title
+         * @param message
          * @return
          */
         public Builder setMessage(String message) {
@@ -69,7 +70,7 @@ public class CustomDialog extends Dialog {
  
         /**
          * Set the Dialog message from resource
-         * @param title
+         * @param message
          * @return
          */
         public Builder setMessage(int message) {

@@ -9,13 +9,13 @@ public class Tb_pay {
 	// + "type integer ,address varchar(100),mark varchar(200))
 
 	private int _id;
-	private int no;// ´æ´¢Ö§³ö±àºÅ
-	private double money;// ´æ´¢Ö§³ö½ğ¶î
-	private String time;// ´æ´¢Ö§³öÊ±¼ä
-	private int type;// ´æ´¢Ö§³öÀà±ğ
-	private String address;// ´æ´¢Ö§³öµØµã
-	private String mark;// ´æ´¢Ö§³ö±¸×¢
-	private String photo;// ´æ´¢Ö§³ö±¸×¢
+	private int no;// å­˜å‚¨æ”¯å‡ºç¼–å·
+	private double money;// å­˜å‚¨æ”¯å‡ºé‡‘é¢
+	private String time;// å­˜å‚¨æ”¯å‡ºæ—¶é—´
+	private int type;// å­˜å‚¨æ”¯å‡ºç±»åˆ«
+	private String address;// å­˜å‚¨æ”¯å‡ºåœ°ç‚¹
+	private String mark;// å­˜å‚¨æ”¯å‡ºå¤‡æ³¨
+	private String photo;// å­˜å‚¨æ”¯å‡ºå¤‡æ³¨
 
 	public Tb_pay() {
 		// TODO Auto-generated constructor stub
@@ -23,18 +23,19 @@ public class Tb_pay {
 	}
 
 	public Tb_pay(int id, int no, double d, String time, int type,
-			String address, String mark, String photo) {
+				  String address, String mark, String photo) {
 		super();
 		this._id = id;
-		this.no = no;// ÎªÖ§³ö±àºÅ¸³Öµ
-		this.money = d;// ÎªÖ§³ö½ğ¶î¸³Öµ
-		this.time = time;// ÎªÖ§³öÊ±¼ä¸³Öµ
-		this.type = type;// ÎªÖ§³öÀà±ğ¸³Öµ
-		this.address = address;// ÎªÖ§³öµØµã¸³Öµ
-		this.mark = mark;// ÎªÖ§³ö±¸×¢¸³Öµ
-		this.photo = photo;// ÎªÖ§³ö±¸×¢¸³Öµ
+		this.no = no;// ä¸ºæ”¯å‡ºç¼–å·èµ‹å€¼
+		this.money = d;// ä¸ºæ”¯å‡ºé‡‘é¢èµ‹å€¼
+		this.time = time;// ä¸ºæ”¯å‡ºæ—¶é—´èµ‹å€¼
+		this.type = type;// ä¸ºæ”¯å‡ºç±»åˆ«èµ‹å€¼
+		this.address = address;// ä¸ºæ”¯å‡ºåœ°ç‚¹èµ‹å€¼
+		this.mark = mark;// ä¸ºæ”¯å‡ºå¤‡æ³¨èµ‹å€¼
+		this.photo = photo;// ä¸ºæ”¯å‡ºå¤‡æ³¨èµ‹å€¼
 
 	}
+
 
 	public int get_id() {
 		return _id;

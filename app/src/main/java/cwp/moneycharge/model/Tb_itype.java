@@ -1,11 +1,11 @@
 package cwp.moneycharge.model;
 
-public class Tb_itype { 
+public class Tb_itype {
 	//_id INTEGER  NOT NULL PRIMARY KEY,no not null integer AUTOINCREMENT ,typename varchar(50) 
-	private int  _id;//用户id
-	private int no;//收入类型id
-	private String typename;//收入类型名称
-	
+	private int  _id;//鐢ㄦ埛id
+	private int no;//鏀跺叆绫诲瀷id
+	private String typename;//鏀跺叆绫诲瀷鍚嶇О
+
 	public Tb_itype() {
 		// TODO Auto-generated constructor stub
 		super();

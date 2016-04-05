@@ -14,29 +14,29 @@ public class Tb_income {
 	// _id INTEGER NOT NULL PRIMARY KEY,no not null integer ,money decimal,time
 	// varchar(10),
 	// type integer ,handler varchar(100),mark varchar(200))
-	private int _id;// ´æ´¢ÓÃ»§id
-	private int no;// ´æ´¢ÊÕÈë±àºÅ
-	private double money;// ´æ´¢ÊÕÈë½ğ¶î
-	private String time;// ´æ´¢ÊÕÈëÊ±¼ä
-	private int type;// ´æ´¢ÊÕÈëÀà±ğid
-	private String handler;// ´æ´¢ÊÕÈëµØÖ·
-	private String mark;// ´æ´¢ÊÕÈë±¸×¢
-	private String kind;// ´æ´¢ÊÕÈëÊÕÖ§Àà±ğ
-	private String photo;// ´æ´¢Ö§³ö±¸×¢
+	private int _id;// å­˜å‚¨ç”¨æˆ·id
+	private int no;// å­˜å‚¨æ”¶å…¥ç¼–å·
+	private double money;// å­˜å‚¨æ”¶å…¥é‡‘é¢
+	private String time;// å­˜å‚¨æ”¶å…¥æ—¶é—´
+	private int type;// å­˜å‚¨æ”¶å…¥ç±»åˆ«id
+	private String handler;// å­˜å‚¨æ”¶å…¥åœ°å€
+	private String mark;// å­˜å‚¨æ”¶å…¥å¤‡æ³¨
+	private String kind;// å­˜å‚¨æ”¶å…¥æ”¶æ”¯ç±»åˆ«
+	private String photo;// å­˜å‚¨æ”¯å‡ºå¤‡æ³¨
 
 	public Tb_income(int id, int no, double d, String time, int type,
-			String handler, String mark, String photo, String kind) {
+					 String handler, String mark, String photo, String kind) {
 
 		super();
-		this._id = id;// ÎªÓÃ»§id
-		this.no = no;// ÎªÊÕÈë±àºÅ¸³Öµ
-		this.money = d;// ÎªÊÕÈë½ğ¶î¸³Öµ
-		this.time = time;// ÎªÊÕÈëÊ±¼ä¸³Öµ
-		this.type = type;// ÎªÊÕÈëÀà±ğ¸³Öµ
-		this.handler = handler;// ÎªÊÕÈë¸¶¿î·½¸³Öµ
-		this.mark = mark;// ÎªÊÕÈë±¸×¢¸³Öµ
-		this.kind = kind;// ÎªÊÕÈë±¸×¢¸³Öµ
-		this.photo = photo;// ÎªÖ§³ö±¸×¢¸³Öµ
+		this._id = id;// ä¸ºç”¨æˆ·id
+		this.no = no;// ä¸ºæ”¶å…¥ç¼–å·èµ‹å€¼
+		this.money = d;// ä¸ºæ”¶å…¥é‡‘é¢èµ‹å€¼
+		this.time = time;// ä¸ºæ”¶å…¥æ—¶é—´èµ‹å€¼
+		this.type = type;// ä¸ºæ”¶å…¥ç±»åˆ«èµ‹å€¼
+		this.handler = handler;// ä¸ºæ”¶å…¥ä»˜æ¬¾æ–¹èµ‹å€¼
+		this.mark = mark;// ä¸ºæ”¶å…¥å¤‡æ³¨èµ‹å€¼
+		this.kind = kind;// ä¸ºæ”¶å…¥å¤‡æ³¨èµ‹å€¼
+		this.photo = photo;// ä¸ºæ”¯å‡ºå¤‡æ³¨èµ‹å€¼
 	}
 
 	public String getPhoto() {
