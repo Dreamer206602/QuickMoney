@@ -12,14 +12,14 @@
         android:background="@drawable/toolbar_bg_normal" >  
   
         <LinearLayout  
-            android:layout_width="fill_parent"  
-            android:layout_height="fill_parent"  
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginTop="1dp"  
             android:gravity="center_horizontal" >  
   
             <FrameLayout  
                 android:id="@+id/layout_friendfeed"  
-                android:layout_width="fill_parent"  
+                android:layout_width="match_parent"
                 android:layout_height="60dp"  
                 android:layout_weight="1">  
   
@@ -120,12 +120,12 @@
             </FrameLayout>  
         </LinearLayout>  
     </FrameLayout>  
-<!--  
-    <FrameLayout  
-        android:id="@+id/toggle_btnLayout" 
-        android:layout_width="fill_parent"  
+<!--
+    <FrameLayout
+        android:id="@+id/toggle_btnLayout"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" 
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true" >
  -->
     <ImageView  

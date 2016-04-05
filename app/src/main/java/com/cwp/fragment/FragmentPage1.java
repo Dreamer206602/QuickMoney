@@ -40,7 +40,7 @@ public class FragmentPage1 extends BaseFragment {
 	String nodata = "		还木有数据，赶紧买买买吧";
 
 	public void Pay() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	ListView lvinfo;// 创建ListView对象
@@ -59,8 +59,7 @@ public class FragmentPage1 extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
-		return inflater.inflate(R.layout.fragment_1, null);
+		return inflater.inflate(R.layout.fragment_1,container, false);
 	}
 
 	public void onActivityCreated(Bundle savedInstanceState) {
