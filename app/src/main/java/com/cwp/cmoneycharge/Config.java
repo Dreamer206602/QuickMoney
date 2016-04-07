@@ -3,16 +3,12 @@ package com.cwp.cmoneycharge;
 import com.baidu.voicerecognition.android.VoiceRecognitionConfig;
 import com.baidu.voicerecognition.android.ui.BaiduASRDigitalDialog;
 
-/**
- * 临时保存参数信息，Demo演示使用
- * 
- * @author yangliang02
- */
+
 public class Config {
-	/** 对话框样式 */
+	/** 锟皆伙拷锟斤拷锟斤拷式 */
 	public static int DIALOG_THEME = BaiduASRDigitalDialog.THEME_BLUE_LIGHTBG;
 
-	/** 对话框样式 */
+	/** 锟皆伙拷锟斤拷锟斤拷式 */
 	public static int pushlogindex = 0;
 
 	public static int getPushlog() {
@@ -24,14 +20,14 @@ public class Config {
 	}
 
 	/**
-	 * 当前识别语言
+	 * 锟斤拷前识锟斤拷锟斤拷锟斤拷
 	 */
 	public static String CURRENT_LANGUAGE = VoiceRecognitionConfig.LANGUAGE_CHINESE;
 
 	private static int CURRENT_LANGUAGE_INDEX = 0;
 
 	/**
-	 * 当前垂直领域类型
+	 * 锟斤拷前锟斤拷直锟斤拷锟斤拷锟斤拷锟斤拷
 	 */
 	public static int CURRENT_PROP = VoiceRecognitionConfig.PROP_INPUT;
 
@@ -104,22 +100,22 @@ public class Config {
 	}
 
 	/**
-	 * 播放声音
+	 * 锟斤拷锟斤拷锟斤拷锟斤拷
 	 */
 	public static boolean PLAY_START_SOUND = true;
 
 	/**
-	 * 播放结束
+	 * 锟斤拷锟脚斤拷锟斤拷
 	 */
 	public static boolean PLAY_END_SOUND = true;
 
 	/**
-	 * 对话框提示音
+	 * 锟皆伙拷锟斤拷锟斤拷示锟斤拷
 	 */
 	public static boolean DIALOG_TIPS_SOUND = true;
 
 	/**
-	 * 显示音量
+	 * 锟斤拷示锟斤拷锟斤拷
 	 */
 	public static boolean SHOW_VOL = true;
 

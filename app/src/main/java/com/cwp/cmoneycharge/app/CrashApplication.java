@@ -1,5 +1,6 @@
 package com.cwp.cmoneycharge.app;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.cwp.cmoneycharge.handler.CrashHandler;
 import com.cwp.pattern.utils.LockPatternUtils;
 
@@ -24,6 +25,7 @@ public class CrashApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		SDKInitializer.initialize(getApplicationContext());
 		mInstance = this;
 		mLockPatternUtils = new LockPatternUtils(this);
 		receiver = new LockScreenReceiver();

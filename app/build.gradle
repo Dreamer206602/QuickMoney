@@ -1,6 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+    }
     lintOptions {
         abortOnError false
         checkReleaseBuilds false

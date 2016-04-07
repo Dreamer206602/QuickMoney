@@ -29,9 +29,14 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
         <meta-data
-            android:name="com.amap.api.v2.apikey"
-            android:value="40fd2c7bc96ff0fc9eccdbabc2b96984" />
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="cGSPq2Q9kRuq9ynxMdOISjGL7Q1Gg7p4" />
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"/> >
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="552bc81efd98c518a50008b2" />
