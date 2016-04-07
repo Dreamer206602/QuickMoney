@@ -21,37 +21,38 @@ public class ParseXmlService {
 			throws Exception {
 		HashMap<String, String> hashMap = new HashMap<String, String>();
 
-		// ÊµÀı»¯Ò»¸öÎÄµµ¹¹½¨Æ÷¹¤³§
+
+		// å®ä¾‹åŒ–ä¸€ä¸ªæ–‡æ¡£æ„å»ºå™¨å·¥å‚
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		// Í¨¹ıÎÄµµ¹¹½¨Æ÷¹¤³§»ñÈ¡Ò»¸öÎÄµµ¹¹½¨Æ÷
+		// é€šè¿‡æ–‡æ¡£æ„å»ºå™¨å·¥å‚è·å–ä¸€ä¸ªæ–‡æ¡£æ„å»ºå™¨
 		DocumentBuilder builder = factory.newDocumentBuilder();
-		// Í¨¹ıÎÄµµÍ¨¹ıÎÄµµ¹¹½¨Æ÷¹¹½¨Ò»¸öÎÄµµÊµÀı
+		// é€šè¿‡æ–‡æ¡£é€šè¿‡æ–‡æ¡£æ„å»ºå™¨æ„å»ºä¸€ä¸ªæ–‡æ¡£å®ä¾‹
 		Document document = builder.parse(inStream);
-		// »ñÈ¡XMLÎÄ¼ş¸ù½Úµã
+		// è·å–XMLæ–‡ä»¶æ ¹èŠ‚ç‚¹
 		Element root = document.getDocumentElement();
-		// »ñµÃËùÓĞ×Ó½Úµã
+		// è·å¾—æ‰€æœ‰å­èŠ‚ç‚¹
 		NodeList childNodes = root.getChildNodes();
 		for (int j = 0; j < childNodes.getLength(); j++) {
-			// ±éÀú×Ó½Úµã
+			// éå†å­èŠ‚ç‚¹
 			Node childNode = (Node) childNodes.item(j);
 			if (childNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element childElement = (Element) childNode;
-				// °æ±¾ºÅ
+				// ç‰ˆæœ¬å·
 				if ("version".equals(childElement.getNodeName())) {
 					hashMap.put("version", childElement.getFirstChild()
 							.getNodeValue());
 				}
-				// Èí¼şÃû³Æ
+				// è½¯ä»¶åç§°
 				else if (("name".equals(childElement.getNodeName()))) {
 					hashMap.put("name", childElement.getFirstChild()
 							.getNodeValue());
 				}
-				// ÏÂÔØµØÖ·
+				// ä¸‹è½½åœ°å€
 				else if (("url".equals(childElement.getNodeName()))) {
 					hashMap.put("url", childElement.getFirstChild()
 							.getNodeValue());
 				}
-				// ¸üĞÂÄÚÈİ
+				// æ›´æ–°å†…å®¹
 				else if (("text".equals(childElement.getNodeName()))) {
 					hashMap.put("text", childElement.getFirstChild()
 							.getNodeValue());

@@ -3,7 +3,7 @@ package com.example.testpic;
 import java.util.List;
 
 /**
- * 一个目录的相册对象
+ * 涓�涓洰褰曠殑鐩稿唽瀵硅薄
  * 
  * @author Administrator
  * 

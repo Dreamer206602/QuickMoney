@@ -29,10 +29,10 @@ import android.widget.GridView;
 public class ImageGridActivity extends Activity {
 	public static final String EXTRA_IMAGE_LIST = "imagelist";
 
-	// ArrayList<Entity> dataList;//����װ�����Դ���б�
+	// ArrayList<Entity> dataList;//用来装载数据源的列表
 	List<ImageItem> dataList;
 	GridView gridView;
-	ImageGridAdapter adapter;// �Զ�������䇒
+	ImageGridAdapter adapter;// 自定义的适配噿
 	AlbumHelper helper;
 	Button bt;
 
@@ -40,12 +40,12 @@ public class ImageGridActivity extends Activity {
 		@Override
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
-			case 0:
-				Toast.makeText(ImageGridActivity.this, "���ѡ��9��ͼƬ", 400).show();
-				break;
+				case 0:
+					Toast.makeText(ImageGridActivity.this, "最多选择9张图片", 400).show();
+					break;
 
-			default:
-				break;
+				default:
+					break;
 			}
 		}
 	};
@@ -132,7 +132,7 @@ public class ImageGridActivity extends Activity {
 	}
 
 	/**
-	 * ��檻�view��ͼ
+	 * 初妾化view视图
 	 */
 	private void initView() {
 		gridView = (GridView) findViewById(R.id.gridview);
@@ -142,7 +142,7 @@ public class ImageGridActivity extends Activity {
 		gridView.setAdapter(adapter);
 		adapter.setTextCallback(new TextCallback() {
 			public void onListen(int count) {
-				bt.setText("���" + " (" + count + ")");
+				bt.setText("完成" + " (" + count + ")");
 			}
 		});
 
@@ -150,10 +150,10 @@ public class ImageGridActivity extends Activity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+									int position, long id) {
 				/**
-				 * ���position������Ի�ø�GridView����View��󶨵�ʵ���࣬Ȼ�������isSelected״�� *
-				 * ?�� ���ж��Ƿ���ʾ??Ч��?����ѡ��Ч����[�������������Ĵ����л���˵�p
+				 * 根据position参数，可以获得跟GridView的子View相绑定的实体类，然后根据它的isSelected状捊 *
+				 * ?＿ 来判断是否显示??效果?至于选中效果的覽则，下面适配器的代码中会有说昿
 				 */
 				// if(dataList.get(position).isSelected()){
 				// dataList.get(position).setSelected(false);
@@ -161,7 +161,7 @@ public class ImageGridActivity extends Activity {
 				// dataList.get(position).setSelected(true);
 				// }
 				/**
-				 * ֪ͨ���������󶨵���ݷ����˸ı䣬Ӧ��ˢ���W��
+				 * 通知适配器，绑定的数据发生了改变，应当刷新覹囿
 				 */
 				adapter.notifyDataSetChanged();
 			}
@@ -170,7 +170,7 @@ public class ImageGridActivity extends Activity {
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) { // ���/����/���η��ؼ�
+		if (keyCode == KeyEvent.KEYCODE_BACK) { // 监控/拦截/屏蔽返回键
 			Intent intent = new Intent(ImageGridActivity.this,
 					TestPicActivity.class);
 			startActivity(intent);

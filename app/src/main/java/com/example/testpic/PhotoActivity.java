@@ -41,7 +41,7 @@ public class PhotoActivity extends Activity {
 		photo_relativeLayout.setBackgroundColor(0x70000000);
 
 		Intent intentr = getIntent();
-		Bundle bundle = intentr.getExtras();// »ñÈ¡´«ÈëµÄÊı¾İ£¬²¢Ê¹ÓÃBundle¼ÇÂ¼
+		Bundle bundle = intentr.getExtras();// è·å–ä¼ å…¥çš„æ•°æ®ï¼Œå¹¶ä½¿ç”¨Bundleè®°å½•
 		if ((bundle != null)) {
 			if ((bundle.containsKey("mian"))) {
 				photo_relativeLayout.setVisibility(View.GONE);
@@ -118,8 +118,8 @@ public class PhotoActivity extends Activity {
 			initListViews(bmp.get(i));//
 		}
 
-		adapter = new MyPageAdapter(listViews);// ¹¹Ôìadapter
-		pager.setAdapter(adapter);// ÉèÖÃÊÊÅäÆ÷
+		adapter = new MyPageAdapter(listViews);// ï¿½ï¿½ï¿½ï¿½adapter
+		pager.setAdapter(adapter);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		Intent intent = getIntent();
 		int id = intent.getIntExtra("ID", 0);
 		pager.setCurrentItem(id);
@@ -128,25 +128,25 @@ public class PhotoActivity extends Activity {
 	private void initListViews(Bitmap bm) {
 		if (listViews == null)
 			listViews = new ArrayList<View>();
-		ImageView img = new ImageView(this);// ¹¹ÔìtextView¶ÔÏó
+		ImageView img = new ImageView(this);// ï¿½ï¿½ï¿½ï¿½textViewï¿½ï¿½ï¿½ï¿½
 		img.setBackgroundColor(0xff000000);
 		img.setImageBitmap(bm);
 		img.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
 				LayoutParams.FILL_PARENT));
-		listViews.add(img);// Ìí¼Óview
+		listViews.add(img);// ï¿½ï¿½ï¿½view
 	}
 
 	private OnPageChangeListener pageChangeListener = new OnPageChangeListener() {
 
-		public void onPageSelected(int arg0) {// Ò³ÃæÑ¡ÔñÏìÓ¦º¯Êı
+		public void onPageSelected(int arg0) {// Ò³ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½
 			count = arg0;
 		}
 
-		public void onPageScrolled(int arg0, float arg1, int arg2) {// »¬¶¯ÖĞ¡£¡£¡£
+		public void onPageScrolled(int arg0, float arg1, int arg2) {// ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½ï¿½
 
 		}
 
-		public void onPageScrollStateChanged(int arg0) {// »¬¶¯×´Ì¬¸Ä±ä
+		public void onPageScrollStateChanged(int arg0) {// ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½Ä±ï¿½
 
 		}
 	};
@@ -155,20 +155,20 @@ public class PhotoActivity extends Activity {
 
 		private ArrayList<View> listViews;// content
 
-		private int size;// Ò³Êı
+		private int size;// Ò³ï¿½ï¿½
 
-		public MyPageAdapter(ArrayList<View> listViews) {// ¹¹Ôìº¯Êı
-															// ³õÊ¼»¯viewpagerµÄÊ±ºò¸øµÄÒ»¸öÒ³Ãæ
+		public MyPageAdapter(ArrayList<View> listViews) {// ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½
+															// ï¿½ï¿½Ê¼ï¿½ï¿½viewpagerï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ò³ï¿½ï¿½
 			this.listViews = listViews;
 			size = listViews == null ? 0 : listViews.size();
 		}
 
-		public void setListViews(ArrayList<View> listViews) {// ×Ô¼ºĞ´µÄÒ»¸ö·½·¨ÓÃÀ´Ìí¼ÓÊı¾İ
+		public void setListViews(ArrayList<View> listViews) {// ï¿½Ô¼ï¿½Ğ´ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			this.listViews = listViews;
 			size = listViews == null ? 0 : listViews.size();
 		}
 
-		public int getCount() {// ·µ»ØÊıÁ¿
+		public int getCount() {// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			return size;
 		}
 
@@ -176,14 +176,14 @@ public class PhotoActivity extends Activity {
 			return POSITION_NONE;
 		}
 
-		public void destroyItem(View arg0, int arg1, Object arg2) {// Ïú»Ùview¶ÔÏó
+		public void destroyItem(View arg0, int arg1, Object arg2) {// ï¿½ï¿½ï¿½ï¿½viewï¿½ï¿½ï¿½ï¿½
 			((ViewPager) arg0).removeView(listViews.get(arg1 % size));
 		}
 
 		public void finishUpdate(View arg0) {
 		}
 
-		public Object instantiateItem(View arg0, int arg1) {// ·µ»Øview¶ÔÏó
+		public Object instantiateItem(View arg0, int arg1) {// ï¿½ï¿½ï¿½ï¿½viewï¿½ï¿½ï¿½ï¿½
 			try {
 				((ViewPager) arg0).addView(listViews.get(arg1 % size), 0);
 

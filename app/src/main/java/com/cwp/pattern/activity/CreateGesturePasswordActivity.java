@@ -165,7 +165,7 @@ public class CreateGesturePasswordActivity extends Activity implements
 		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.gesturepassword_create);
-		SysApplication.getInstance().addActivity(this); // ����ٶ��������this
+		SysApplication.getInstance().addActivity(this); // 在销毁队列中添加this
 
 		SystemBarTintManager mTintManager;
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -175,7 +175,7 @@ public class CreateGesturePasswordActivity extends Activity implements
 		mTintManager.setStatusBarTintEnabled(true);
 		mTintManager.setStatusBarTintResource(R.color.statusbar_bg);
 
-		// ��ʼ����ʾ����
+		// 初始化演示动画
 		mAnimatePattern.add(LockPatternView.Cell.of(0, 0));
 		mAnimatePattern.add(LockPatternView.Cell.of(0, 1));
 		mAnimatePattern.add(LockPatternView.Cell.of(1, 1));
@@ -444,7 +444,7 @@ public class CreateGesturePasswordActivity extends Activity implements
 	private void saveChosenPatternAndFinish() {
 		CrashApplication.getInstance().getLockPatternUtils()
 				.saveLockPattern(mChosenPattern);
-		showToast("�������óɹ�");
+		showToast("密码设置成功");
 		this.setResult(3);// this.setResult(int resultCode)��resultCode �����Զ���
 		this.finish();
 	}

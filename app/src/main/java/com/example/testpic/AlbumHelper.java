@@ -16,9 +16,9 @@ import android.provider.MediaStore.Images.Thumbnails;
 import android.util.Log;
 
 /**
- * ר��������
+ *  专辑帮助类
  * 
- * @author Administrator
+ *
  * 
  */
 public class AlbumHelper {
@@ -26,9 +26,9 @@ public class AlbumHelper {
 	Context context;
 	ContentResolver cr;
 
-	// ����ͼ�б�
+	// 缩略图列表
 	HashMap<String, String> thumbnailList = new HashMap<String, String>();
-	// ר���б�
+	// 专辑列表
 	List<HashMap<String, String>> albumList = new ArrayList<HashMap<String, String>>();
 	HashMap<String, ImageBucket> bucketList = new HashMap<String, ImageBucket>();
 
@@ -45,8 +45,8 @@ public class AlbumHelper {
 	}
 
 	/**
-	 * ��ʼ��
-	 * 
+	 * 初始化
+	 *
 	 * @param context
 	 */
 	public void init(Context context) {
@@ -57,7 +57,7 @@ public class AlbumHelper {
 	}
 
 	/**
-	 * �õ�����ͼ
+	 * 得到缩略图
 	 */
 	private void getThumbnail() {
 		String[] projection = { Thumbnails._ID, Thumbnails.IMAGE_ID,
@@ -68,8 +68,8 @@ public class AlbumHelper {
 	}
 
 	/**
-	 * �����ݿ��еõ�����ͼ
-	 * 
+	 * 从数据库中得到缩略图
+	 *
 	 * @param cur
 	 */
 	private void getThumbnailColumnData(Cursor cur) {
@@ -100,7 +100,7 @@ public class AlbumHelper {
 	}
 
 	/**
-	 * �õ�ԭͼ
+	 * 得到原图
 	 */
 	void getAlbum() {
 		String[] projection = { Albums._ID, Albums.ALBUM, Albums.ALBUM_ART,
@@ -112,8 +112,8 @@ public class AlbumHelper {
 	}
 
 	/**
-	 * �ӱ������ݿ��еõ�ԭͼ
-	 * 
+	 * 从本地数据库中得到原图
+	 *
 	 * @param cur
 	 */
 	private void getAlbumColumnData(Cursor cur) {
@@ -160,28 +160,28 @@ public class AlbumHelper {
 	}
 
 	/**
-	 * �Ƿ񴴽���ͼƬ��
+	 * 是否创建了图片集
 	 */
 	boolean hasBuildImagesBucketList = false;
 
 	/**
-	 * �õ�ͼƬ��
+	 * 得到图片集
 	 */
 	void buildImagesBucketList() {
 		long startTime = System.currentTimeMillis();
 
-		// ��������ͼ����
+		// 构造缩略图索引
 		getThumbnail();
 
-		// �����������
+		// 构造相册索引
 		String columns[] = new String[] { Media._ID, Media.BUCKET_ID,
 				Media.PICASA_ID, Media.DATA, Media.DISPLAY_NAME, Media.TITLE,
 				Media.SIZE, Media.BUCKET_DISPLAY_NAME };
-		// �õ�һ���α�
+		// 得到一个游标
 		Cursor cur = cr.query(Media.EXTERNAL_CONTENT_URI, columns, null, null,
 				null);
 		if (cur.moveToFirst()) {
-			// ��ȡָ���е�����
+			// 获取指定列的索引
 			int photoIDIndex = cur.getColumnIndexOrThrow(Media._ID);
 			int photoPathIndex = cur.getColumnIndexOrThrow(Media.DATA);
 			int photoNameIndex = cur.getColumnIndexOrThrow(Media.DISPLAY_NAME);
@@ -191,7 +191,7 @@ public class AlbumHelper {
 					.getColumnIndexOrThrow(Media.BUCKET_DISPLAY_NAME);
 			int bucketIdIndex = cur.getColumnIndexOrThrow(Media.BUCKET_ID);
 			int picasaIdIndex = cur.getColumnIndexOrThrow(Media.PICASA_ID);
-			// ��ȡͼƬ����
+			// 获取图片总数
 			int totalNum = cur.getCount();
 
 			do {
@@ -229,7 +229,7 @@ public class AlbumHelper {
 		Iterator<Entry<String, ImageBucket>> itr = bucketList.entrySet()
 				.iterator();
 		while (itr.hasNext()) {
-			Entry<String, ImageBucket> entry = (Entry<String, ImageBucket>) itr
+			Map.Entry<String, ImageBucket> entry = (Map.Entry<String, ImageBucket>) itr
 					.next();
 			ImageBucket bucket = entry.getValue();
 			Log.d(TAG, entry.getKey() + ", " + bucket.bucketName + ", "
@@ -246,8 +246,8 @@ public class AlbumHelper {
 	}
 
 	/**
-	 * �õ�ͼƬ��
-	 * 
+	 * 得到图片集
+	 *
 	 * @param refresh
 	 * @return
 	 */
@@ -259,7 +259,7 @@ public class AlbumHelper {
 		Iterator<Entry<String, ImageBucket>> itr = bucketList.entrySet()
 				.iterator();
 		while (itr.hasNext()) {
-			Entry<String, ImageBucket> entry = (Entry<String, ImageBucket>) itr
+			Map.Entry<String, ImageBucket> entry = (Map.Entry<String, ImageBucket>) itr
 					.next();
 			tmpList.add(entry.getValue());
 		}
@@ -267,8 +267,8 @@ public class AlbumHelper {
 	}
 
 	/**
-	 * �õ�ԭʼͼ��·��
-	 * 
+	 * 得到原始图像路径
+	 *
 	 * @param image_id
 	 * @return
 	 */

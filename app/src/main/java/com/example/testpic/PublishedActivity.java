@@ -71,7 +71,7 @@ public class PublishedActivity extends Activity {
 		mTintManager.setStatusBarTintEnabled(true);
 		mTintManager.setStatusBarTintResource(R.color.statusbar_bg);
 
-		SysApplication.getInstance().addActivity(this); // ����ٶ��������this
+		SysApplication.getInstance().addActivity(this); // 在销毁队列中添加this
 
 	}
 
@@ -91,7 +91,7 @@ public class PublishedActivity extends Activity {
 	public void Init() {
 		Intent intentr = getIntent();
 		userid = intentr.getIntExtra("cwp.id", 100000001);
-		bundle = intentr.getExtras();// ��ȡ�������ݣ���ʹ��Bundle��¼
+		bundle = intentr.getExtras();// 获取传入的数据，并使用Bundle记录
 		if ((bundle != null)) {
 			if ((bundle.containsKey("cwp.photo"))) {
 				if (firstin) {
@@ -108,7 +108,7 @@ public class PublishedActivity extends Activity {
 		noScrollgridview.setOnItemClickListener(new OnItemClickListener() {
 
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
+									long arg3) {
 				if (arg2 == Bimp.bmp.size()) {
 					new PopupWindows(PublishedActivity.this, noScrollgridview);
 				} else {
@@ -124,11 +124,11 @@ public class PublishedActivity extends Activity {
 		activity_selectimg_send.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				setResult(3);// this.setResult(int resultCode)��resultCode �����Զ���
+				setResult(3);// this.setResult(int resultCode)，resultCode 可以自定义
 				finish();
-				// �����ѹ�����ͼƬȫ������ list ·��������
-				// �����ѹ����� bmp ���� ���� Bimp.bmp����
-				// ����ϴ��������� .........
+				// 高清的压缩过的图片全部就在 list 路径里面了
+				// 高清的压缩过的 bmp 对象 都在 Bimp.bmp里面
+				// 完成上传服务器后 .........
 				// FileUtils.deleteDir();
 			}
 		});
@@ -136,8 +136,8 @@ public class PublishedActivity extends Activity {
 
 	@SuppressLint("HandlerLeak")
 	public class GridAdapter extends BaseAdapter {
-		private LayoutInflater inflater; // ��ͼ����
-		private int selectedPosition = -1;// ѡ�е�λ��
+		private LayoutInflater inflater; // 视图容器
+		private int selectedPosition = -1;// 选中的位置
 		private boolean shape;
 
 		public boolean isShape() {
@@ -154,7 +154,7 @@ public class PublishedActivity extends Activity {
 
 		public void update() {
 //			if (Bimp.flag == 0) {
-				loading();
+			loading();
 //				Bimp.flag++;
 //			}
 		}
@@ -182,7 +182,7 @@ public class PublishedActivity extends Activity {
 		}
 
 		/**
-		 * ListView Item����
+		 * ListView Item设置
 		 */
 		public View getView(int position, View convertView, ViewGroup parent) {
 			final int coord = position;
@@ -218,9 +218,9 @@ public class PublishedActivity extends Activity {
 		Handler handler = new Handler() {
 			public void handleMessage(Message msg) {
 				switch (msg.what) {
-				case 1:
-					adapter.notifyDataSetChanged();
-					break;
+					case 1:
+						adapter.notifyDataSetChanged();
+						break;
 				}
 				super.handleMessage(msg);
 			}
@@ -237,7 +237,7 @@ public class PublishedActivity extends Activity {
 							break;
 						} else {
 							Intent intentr = getIntent();
-							bundle = intentr.getExtras();// ��ȡ�������ݣ���ʹ��Bundle��¼
+							bundle = intentr.getExtras();// 获取传入的数据，并使用Bundle记录
 							try {
 								if (Bimp.drr.size() >= Bimp.max) {
 									String path = Bimp.drr.get(Bimp.max);
@@ -274,7 +274,7 @@ public class PublishedActivity extends Activity {
 		return path;
 	}
 
-	public class PopupWindows extends PopupWindow { // �����˵�
+	public class PopupWindows extends PopupWindow { // 弹出菜单
 
 		public PopupWindows(Context mContext, View parent) {
 
@@ -297,11 +297,11 @@ public class PublishedActivity extends Activity {
 			update();
 
 			Button bt1 = (Button) view
-					.findViewById(R.id.item_popupwindows_camera); // ���
+					.findViewById(R.id.item_popupwindows_camera); // 相机
 			Button bt2 = (Button) view
-					.findViewById(R.id.item_popupwindows_Photo); // ͼ��
+					.findViewById(R.id.item_popupwindows_Photo); // 图库
 			Button bt3 = (Button) view
-					.findViewById(R.id.item_popupwindows_cancel); // ȡ��
+					.findViewById(R.id.item_popupwindows_cancel); // 取消
 			bt1.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
 					photo();
@@ -350,12 +350,12 @@ public class PublishedActivity extends Activity {
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
-		case TAKE_PICTURE:
-			if (Bimp.drr.size() < 9 && resultCode == -1) {
-				Bimp.drr.add(path);
-			}
-			Init();
-			break;
+			case TAKE_PICTURE:
+				if (Bimp.drr.size() < 9 && resultCode == -1) {
+					Bimp.drr.add(path);
+				}
+				Init();
+				break;
 		}
 	}
 
@@ -365,8 +365,8 @@ public class PublishedActivity extends Activity {
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) { // ���/����/���η��ؼ�
-			setResult(3);// this.setResult(int resultCode)��resultCode �����Զ���
+		if (keyCode == KeyEvent.KEYCODE_BACK) { // 监控/拦截/屏蔽返回键
+			setResult(3);// this.setResult(int resultCode)，resultCode 可以自定义
 			finish();
 			return true;
 		}

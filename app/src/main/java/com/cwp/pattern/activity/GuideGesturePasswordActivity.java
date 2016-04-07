@@ -23,7 +23,7 @@ public class GuideGesturePasswordActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.gesturepassword_guide);
 
-		SysApplication.getInstance().addActivity(this); // ����ٶ��������this
+		SysApplication.getInstance().addActivity(this); // 在销毁队列中添加this
 
 		SystemBarTintManager mTintManager;
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -42,7 +42,7 @@ public class GuideGesturePasswordActivity extends Activity {
 						Intent intent = new Intent(
 								GuideGesturePasswordActivity.this,
 								CreateGesturePasswordActivity.class);
-						// ���µ�Activity
+						// 打开新的Activity
 						startActivityForResult(intent, 1);
 					}
 				});

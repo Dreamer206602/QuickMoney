@@ -17,14 +17,14 @@ public class Bimp {
 	public static boolean act_bool = true;
 	public static List<Bitmap> bmp = new ArrayList<Bitmap>();
 
-	// ͼƬsd��ַ �ϴ�������ʱ��ͼƬ�������淽��ѹ���� ���浽��ʱ�ļ��� ͼƬѹ����С��100KB��ʧ��Ȳ�����
+	// 图片sd地址 上传服务器时把图片调用下面方法压缩后 保存到临时文件夹 图片压缩后小于100KB，失真度不明显
 	public static List<String> drr = new ArrayList<String>();
 	public static List<String> smdrr = new ArrayList<String>();
 
 	public static Bitmap getbitmap(String path) throws IOException {
 		Bitmap bitmap = null;
 		File f = new File(path);
-		if (f.exists()) { /* ����Bitmap���󣬲�����mImageView�� */
+		if (f.exists()) { /* 产生Bitmap对象，并放入mImageView中 */
 			bitmap = BitmapFactory.decodeFile(path);
 		}
 		return bitmap;

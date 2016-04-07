@@ -19,10 +19,10 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 public class TestPicActivity extends Activity {
-	// ArrayList<Entity> dataList;//ÓÃÀ´×°ÔØÊı¾İÔ´µÄÁĞ±í
+	// ArrayList<Entity> dataList;//ç”¨æ¥è£…è½½æ•°æ®æºçš„åˆ—è¡¨
 	List<ImageBucket> dataList;
 	GridView gridView;
-	ImageBucketAdapter adapter;// ×Ô¶¨ÒåµÄÊÊÅäÆ÷
+	ImageBucketAdapter adapter;// è‡ªå®šä¹‰çš„é€‚é…å™¨
 	AlbumHelper helper;
 	private TextView gridview_cancel;
 	public static final String EXTRA_IMAGE_LIST = "imagelist";
@@ -42,11 +42,11 @@ public class TestPicActivity extends Activity {
 	}
 
 	/**
-	 * ³õÊ¼»¯Êı¾İ
+	 * åˆå§‹åŒ–æ•°æ®
 	 */
 	private void initData() {
 		// /**
-		// * ÕâÀï£¬ÎÒÃÇ¼ÙÉèÒÑ¾­´ÓÍøÂç»òÕß±¾µØ½âÎöºÃÁËÊı¾İ£¬ËùÒÔÖ±½ÓÔÚÕâÀïÄ£ÄâÁË10¸öÊµÌåÀà£¬Ö±½Ó×°½øÁĞ±íÖĞ
+		// * è¿™é‡Œï¼Œæˆ‘ä»¬å‡è®¾å·²ç»ä»ç½‘ç»œæˆ–è€…æœ¬åœ°è§£æå¥½äº†æ•°æ®ï¼Œæ‰€ä»¥ç›´æ¥åœ¨è¿™é‡Œæ¨¡æ‹Ÿäº†10ä¸ªå®ä½“ç±»ï¼Œç›´æ¥è£…è¿›åˆ—è¡¨ä¸­
 		// */
 		// dataList = new ArrayList<Entity>();
 		// for(int i=-0;i<10;i++){
@@ -59,7 +59,7 @@ public class TestPicActivity extends Activity {
 	}
 
 	/**
-	 * ³õÊ¼»¯viewÊÓÍ¼
+	 * åˆå§‹åŒ–viewè§†å›¾
 	 */
 	private void initView() {
 		gridView = (GridView) findViewById(R.id.gridview);
@@ -80,10 +80,10 @@ public class TestPicActivity extends Activity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+									int position, long id) {
 				/**
-				 * ¸ù¾İposition²ÎÊı£¬¿ÉÒÔ»ñµÃ¸úGridViewµÄ×ÓViewÏà°ó¶¨µÄÊµÌåÀà£¬È»ºó¸ù¾İËüµÄisSelected×´Ì¬£¬
-				 * À´ÅĞ¶ÏÊÇ·ñÏÔÊ¾Ñ¡ÖĞĞ§¹û¡£ ÖÁÓÚÑ¡ÖĞĞ§¹ûµÄ¹æÔò£¬ÏÂÃæÊÊÅäÆ÷µÄ´úÂëÖĞ»áÓĞËµÃ÷
+				 * æ ¹æ®positionå‚æ•°ï¼Œå¯ä»¥è·å¾—è·ŸGridViewçš„å­Viewç›¸ç»‘å®šçš„å®ä½“ç±»ï¼Œç„¶åæ ¹æ®å®ƒçš„isSelectedçŠ¶æ€ï¼Œ
+				 * æ¥åˆ¤æ–­æ˜¯å¦æ˜¾ç¤ºé€‰ä¸­æ•ˆæœã€‚ è‡³äºé€‰ä¸­æ•ˆæœçš„è§„åˆ™ï¼Œä¸‹é¢é€‚é…å™¨çš„ä»£ç ä¸­ä¼šæœ‰è¯´æ˜
 				 */
 				// if(dataList.get(position).isSelected()){
 				// dataList.get(position).setSelected(false);
@@ -91,7 +91,7 @@ public class TestPicActivity extends Activity {
 				// dataList.get(position).setSelected(true);
 				// }
 				/**
-				 * Í¨ÖªÊÊÅäÆ÷£¬°ó¶¨µÄÊı¾İ·¢ÉúÁË¸Ä±ä£¬Ó¦µ±Ë¢ĞÂÊÓÍ¼
+				 * é€šçŸ¥é€‚é…å™¨ï¼Œç»‘å®šçš„æ•°æ®å‘ç”Ÿäº†æ”¹å˜ï¼Œåº”å½“åˆ·æ–°è§†å›¾
 				 */
 				// adapter.notifyDataSetChanged();
 				Intent intent = new Intent(TestPicActivity.this,
@@ -106,7 +106,7 @@ public class TestPicActivity extends Activity {
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) { // ¼à¿Ø/À¹½Ø/ÆÁ±Î·µ»Ø¼ü
+		if (keyCode == KeyEvent.KEYCODE_BACK) { // ç›‘æ§/æ‹¦æˆª/å±è”½è¿”å›é”®
 			Intent intent = new Intent(TestPicActivity.this,
 					PublishedActivity.class);
 			startActivity(intent);
