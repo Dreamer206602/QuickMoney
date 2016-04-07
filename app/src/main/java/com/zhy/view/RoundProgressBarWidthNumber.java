@@ -43,7 +43,7 @@ public class RoundProgressBarWidthNumber extends
 	}
 
 	/**
-	 * 这里默认在布局中padding值要么不设置，要么全部设置
+	 *
 	 */
 	@Override
 	protected synchronized void onMeasure(int widthMeasureSpec,

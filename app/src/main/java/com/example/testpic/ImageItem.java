@@ -3,7 +3,7 @@ package com.example.testpic;
 import java.io.Serializable;
 
 /**
- * 一个图片对象
+ *
  * 
  * @author Administrator
  * 
