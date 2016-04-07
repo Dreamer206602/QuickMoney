@@ -15,10 +15,9 @@ import android.view.Window;
 import android.view.WindowManager;
 
 /**
- * menu fragment £¬Ö÷ÒªÊÇÓÃÓÚÏÔÊ¾menu²Ëµ¥
+ * menu fragment ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾menuï¿½Ëµï¿½
  */
-public class MenuFragment extends PreferenceFragment implements
-		OnPreferenceClickListener {
+public class MenuFragment extends PreferenceFragment implements OnPreferenceClickListener {
 	int index = -1;
 
 	@Override

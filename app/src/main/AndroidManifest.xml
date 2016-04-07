@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cwp.cmoneycharge">
 
+
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -69,26 +72,6 @@
         <!--<activity android:name="com.cwp.cmoneycharge.Note" />-->
         <!--<activity android:name="com.cwp.cmoneycharge.Pay" />-->
         <activity android:name=".activity.PayDataActivity" />
-        <!--<activity android:name="com.cwp.cmoneycharge.PIData" />-->
-        <!--<activity android:name="com.cwp.cmoneycharge.Register" />-->
-        <!--<activity android:name="com.cwp.cmoneycharge.Setting" />-->
-        <!--<activity android:name="cwp.moneycharge.dao.AccountDAO" />-->
-        <!--<activity android:name="cwp.moneycharge.dao.DBOpenHelper" />-->
-        <!--<activity android:name="cwp.moneycharge.dao.IncomeDAO" />-->
-        <!--<activity android:name="cwp.moneycharge.dao.ItypeDAO" />-->
-        <!--<activity android:name="cwp.moneycharge.dao.NoteDAO" />-->
-        <!--<activity android:name="cwp.moneycharge.dao.PayDAO" />-->
-        <!--<activity android:name="cwp.moneycharge.dao.PtypeDAO" />-->
-        <!--<activity android:name="cwp.moneycharge.model.ActivityManager" />-->
-        <!--<activity android:name="cwp.moneycharge.model.CustomDialog" />-->
-        <!--<activity android:name="cwp.moneycharge.model.Datapicker" />-->
-        <!--<activity android:name="cwp.moneycharge.model.KindData" />-->
-        <!--<activity android:name="cwp.moneycharge.model.Tb_account" />-->
-        <!--<activity android:name="cwp.moneycharge.model.Tb_income" />-->
-        <!--<activity android:name="cwp.moneycharge.model.Tb_itype" />-->
-        <!--<activity android:name="cwp.moneycharge.model.Tb_note" />-->
-        <!--<activity android:name="cwp.moneycharge.model.Tb_pay" />-->
-        <!--<activity android:name="cwp.moneycharge.model.Tb_ptype" />-->
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.PayChartActivity" />
         <activity

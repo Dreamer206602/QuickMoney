@@ -71,8 +71,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 
-public class AddPayActivity extends Activity implements AMapLocationListener,
-		OnClickListener {
+public class AddPayActivity extends Activity implements AMapLocationListener, OnClickListener {
 	protected static final int DATE_DIALOG_ID = 0;// 创建日期对话框常量
 	static String type = "pay";
 	String VoiceDefault = "";
@@ -617,13 +616,13 @@ public class AddPayActivity extends Activity implements AMapLocationListener,
 
 	private void updateDisplay() {
 		// 显示设置的时间
-
 		txtTime.setText(new StringBuilder().append(mYear).append("-")
 				.append(mMonth + 1).append("-").append(mDay));
 
 	}
 
-	private String setTimeFormat(String newtxtTime) { // 设置日期格式
+	// 设置日期格式
+	private String setTimeFormat(String newtxtTime) {
 		String date;
 		if (typemode == "add") {
 			date = txtTime.getText().toString();
@@ -657,7 +656,10 @@ public class AddPayActivity extends Activity implements AMapLocationListener,
 
 	}
 
-	public void VoiceRecognition() { // 调用百度语音识别
+	/**
+	 * 调用百度语音识别
+	 */
+	public void VoiceRecognition() {
 		// mResult.setText(null);
 		mCurrentTheme = Config.DIALOG_THEME;
 		if (mDialog != null) {
@@ -1003,17 +1005,21 @@ public class AddPayActivity extends Activity implements AMapLocationListener,
 		}
 	}
 
+
+
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.btn_loacte:
 				// 注意更换定位时间后，需要先将定位请求删除，再进行定位请求
-				mLocationManagerProxy.removeUpdates(this);
-				int randomTime = mRandom.nextInt(1000);
-				mLocationManagerProxy.requestLocationData(
-						LocationProviderProxy.AMapNetwork, 60 * 1000 + randomTime,
-						15, this);
-				mLocationManagerProxy.setGpsEnable(false);
+//				mLocationManagerProxy.removeUpdates(this);
+//				int randomTime = mRandom.nextInt(1000);
+//				mLocationManagerProxy.requestLocationData(
+//						LocationProviderProxy.AMapNetwork, 60 * 1000 + randomTime,
+//						15, this);
+//				mLocationManagerProxy.setGpsEnable(false);
+
 				break;
 		}
 	}
