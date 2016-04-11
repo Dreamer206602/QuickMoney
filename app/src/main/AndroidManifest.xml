@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cwp.cmoneycharge">
+
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -14,8 +15,10 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
@@ -24,23 +27,23 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-
+        android:theme="@style/AppTheme">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="cGSPq2Q9kRuq9ynxMdOISjGL7Q1Gg7p4" />
+
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"/> >
+            android:process=":remote" />
+        >
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="552bc81efd98c518a50008b2" />
         <!-- Push UMENG_MESSAGE_SECRET -->
         <meta-data
             android:name="UMENG_MESSAGE_SECRET"
-            android:value="UMENG_MESSAGE_SECRET" >
-        </meta-data>
+            android:value="UMENG_MESSAGE_SECRET" />
         <!-- umeng push -->
         <meta-data
             android:name="UMENG_CHANNEL"
@@ -48,7 +51,7 @@
 
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -56,22 +59,22 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.AboutActivity" />
-        <!--<activity android:name="com.cwp.cmoneycharge.Account" />-->
-        <!--<activity android:name="com.cwp.cmoneycharge.AddIncome" />-->
-        <!--<activity android:name="com.cwp.cmoneycharge.AddNote" />-->
+        <!-- <activity android:name="com.cwp.cmoneycharge.Account" /> -->
+        <!-- <activity android:name="com.cwp.cmoneycharge.AddIncome" /> -->
+        <!-- <activity android:name="com.cwp.cmoneycharge.AddNote" /> -->
         <activity android:name=".activity.AddPayActivity" />
         <activity android:name=".activity.AuthorActivity" />
-        <!--<activity android:name="com.cwp.cmoneycharge.ChangePwd" />-->
-        <!--<activity android:name="com.cwp.cmoneycharge.Data" />-->
+        <!-- <activity android:name="com.cwp.cmoneycharge.ChangePwd" /> -->
+        <!-- <activity android:name="com.cwp.cmoneycharge.Data" /> -->
         <activity android:name=".activity.DescriptionActivity" />
-        <!--<activity android:name="com.cwp.cmoneycharge.Income" />-->
+        <!-- <activity android:name="com.cwp.cmoneycharge.Income" /> -->
         <activity android:name=".activity.IncomeDataActivity" />
         <activity android:name=".activity.InPtypeManagerActivity" />
-        <!--<activity android:name="com.cwp.cmoneycharge.Login" />-->
+        <!-- <activity android:name="com.cwp.cmoneycharge.Login" /> -->
         <activity android:name=".activity.ModifyInPActivity" />
-        <!--<activity android:name="com.cwp.cmoneycharge.ModifyNote" />-->
-        <!--<activity android:name="com.cwp.cmoneycharge.Note" />-->
-        <!--<activity android:name="com.cwp.cmoneycharge.Pay" />-->
+        <!-- <activity android:name="com.cwp.cmoneycharge.ModifyNote" /> -->
+        <!-- <activity android:name="com.cwp.cmoneycharge.Note" /> -->
+        <!-- <activity android:name="com.cwp.cmoneycharge.Pay" /> -->
         <activity android:name=".activity.PayDataActivity" />
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.PayChartActivity" />
@@ -96,17 +99,16 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.example.testpic.ImageGridActivity"
-            android:theme="@android:style/Theme.NoTitleBar" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name="com.example.testpic.TestPicActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:theme="@android:style/Theme.NoTitleBar" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name="com.example.testpic.PhotoActivity"
-            android:theme="@android:style/Theme.NoTitleBar" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.LoginActivity"></activity>
     </application>
 
 </manifest>
