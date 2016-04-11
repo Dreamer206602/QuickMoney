@@ -71,7 +71,7 @@ public class CustomActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_custom);
 
-		SysApplication.getInstance().addActivity(this); // ����ٶ��������this
+		SysApplication.getInstance().addActivity(this); // 在销毁队列中添加this
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 			setTranslucentStatus(true);
@@ -89,18 +89,18 @@ public class CustomActivity extends Activity {
 		initView();
 
 		Intent intentr = getIntent();
-		Bundle bundle = intentr.getExtras();// ��ȡ�������ݣ���ʹ��Bundle��¼
+		Bundle bundle = intentr.getExtras();// 获取传入的数据，并使用Bundle记录
 		if (bundle != null) {
 			if (bundle.containsKey("cwp.md")) {
-				String error = (String) bundle.getString("cwp.md");// ��ȡBundle�м�¼����Ϣ
+				String error = (String) bundle.getString("cwp.md");// 获取Bundle中记录的信息
 				inputEdit.setText(error);
 			}
 		}
 		mAgent = new FeedbackAgent(this);
 		mComversation = new FeedbackAgent(this).getDefaultConversation();
 		if (!firstfb.equals(sp.getString("firstfb", ""))) {
-			mComversation.addUserReply("��ã���ӭʹ�ÿ��ټǣ��뷴��ʹ�ò�Ʒ�ĸ��ܺͽ���");
-			edit.putString("firstfb", "true"); // һ��ֻ���һ��
+			mComversation.addUserReply("您好，欢迎使用快速记，请反馈使用产品的感受和建议");
+			edit.putString("firstfb", "true"); // 一天只检查一次
 			edit.commit();
 		}
 		adapter = new ReplyAdapter();
@@ -127,7 +127,7 @@ public class CustomActivity extends Activity {
 		sendBtn = (Button) findViewById(R.id.fb_send_btn);
 		inputEdit = (EditText) findViewById(R.id.fb_send_content);
 		example_left2 = (ImageView) findViewById(R.id.example_left2);
-		// ����ˢ�����
+		// 下拉刷新组件
 
 		mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.fb_reply_refresh);
 		example_left2.setOnClickListener(new OnClickListener() {
@@ -144,17 +144,17 @@ public class CustomActivity extends Activity {
 				String content = inputEdit.getText().toString();
 				inputEdit.getEditableText().clear();
 				if (!TextUtils.isEmpty(content)) {
-					// ��������ӵ��Ự�б�
+					// 将内容添加到会话列表
 					mComversation.addUserReply(content);
-					// ˢ����ListView
+					// 刷新新ListView
 					mHandler.sendMessage(new Message());
-					// ���ͬ��
+					// 数据同步
 					sync();
 				}
 			}
 		});
 
-		// ����ˢ��
+		// 下拉刷新
 		mSwipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
 			@Override
 			public void onRefresh() {
@@ -163,7 +163,7 @@ public class CustomActivity extends Activity {
 		});
 	}
 
-	// ���ͬ��
+	// 数据同步
 	private void sync() {
 
 		mComversation.sync(new SyncListener() {
@@ -174,17 +174,17 @@ public class CustomActivity extends Activity {
 
 			@Override
 			public void onReceiveDevReply(List<Reply> replyList) {
-				// SwipeRefreshLayoutֹͣˢ��
+				// SwipeRefreshLayout停止刷新
 				mSwipeRefreshLayout.setRefreshing(false);
-				// ������Ϣ��ˢ��ListView
+				// 发送消息，刷新ListView
 				mHandler.sendMessage(new Message());
-				// �����û���µĻظ���ݣ��򷵻�
+				// 如果开发者没有新的回复数据，则返回
 				if (replyList == null || replyList.size() < 1) {
 					return;
 				}
 			}
 		});
-		// ����adapter��ˢ��ListView
+		// 更新adapter，刷新ListView
 		adapter.notifyDataSetChanged();
 	}
 
@@ -208,19 +208,19 @@ public class CustomActivity extends Activity {
 
 		@Override
 		public int getViewTypeCount() {
-			// ���ֲ�ͬ��Tiem����
+			// 两种不同的Tiem布局
 			return VIEW_TYPE_COUNT;
 		}
 
 		@Override
 		public int getItemViewType(int position) {
-			// ��ȡ�����ظ�
+			// 获取单条回复
 			Reply reply = mComversation.getReplyList().get(position);
 			if (Reply.TYPE_DEV_REPLY.equals(reply.type)) {
-				// �����߻ظ�Item����
+				// 开发者回复Item布局
 				return VIEW_TYPE_DEV;
 			} else {
-				// �û��������ظ�Item����
+				// 用户反馈、回复Item布局
 				return VIEW_TYPE_USER;
 			}
 		}
@@ -229,16 +229,16 @@ public class CustomActivity extends Activity {
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ViewHolder holder = null;
 
-			// ��ȡ�����ظ�
+			// 获取单条回复
 			Reply reply = mComversation.getReplyList().get(position);
 			if (convertView == null) {
-				// ���Type�����������ز�ͬ��Item����
+				// 根据Type的类型来加载不同的Item布局
 				if (Reply.TYPE_DEV_REPLY.equals(reply.type)) {
-					// �����ߵĻظ�
+					// 开发者的回复
 					convertView = LayoutInflater.from(mContext).inflate(
 							R.layout.custom_fb_user_reply, null);
 				} else {
-					// �û��ķ������ظ�
+					// 用户的反馈、回复
 					convertView = LayoutInflater.from(mContext).inflate(
 							R.layout.custom_fb_dev_reply, null);
 
@@ -248,7 +248,7 @@ public class CustomActivity extends Activity {
 					}
 				}
 
-				// ����ViewHolder����ȡ����View
+				// 创建ViewHolder并获取各种View
 				holder = new ViewHolder();
 				holder.replyContent = (TextView) convertView
 						.findViewById(R.id.fb_reply_content);
@@ -263,19 +263,19 @@ public class CustomActivity extends Activity {
 				holder = (ViewHolder) convertView.getTag();
 			}
 
-			// ������������
-			// ����Reply������
+			// 以下是填充数据
+			// 设置Reply的内容
 			holder.replyContent.setText(reply.content);
-			// ��AppӦ�ý��棬���ڿ����ߵ�Reply����statusû������
+			// 在App应用界面，对于开发者的Reply来讲status没有意义
 			if (!Reply.TYPE_DEV_REPLY.equals(reply.type)) {
-				// ���Reply��״̬������replyStateFailed��״̬
+				// 根据Reply的状态来设置replyStateFailed的状态
 				if (Reply.STATUS_NOT_SENT.equals(reply.status)) {
 					holder.replyStateFailed.setVisibility(View.VISIBLE);
 				} else {
 					holder.replyStateFailed.setVisibility(View.GONE);
 				}
 
-				// ���Reply��״̬������replyProgressBar��״̬
+				// 根据Reply的状态来设置replyProgressBar的状态
 				if (Reply.STATUS_SENDING.equals(reply.status)) {
 					holder.replyProgressBar.setVisibility(View.VISIBLE);
 				} else {
@@ -283,7 +283,7 @@ public class CustomActivity extends Activity {
 				}
 			}
 
-			// �ظ���ʱ����ݣ��������QQ����Reply֮�����100000ms��չʾʱ��
+			// 回复的时间数据，这里仿照QQ两条Reply之间相差100000ms则展示时间
 			if ((position + 1) < mComversation.getReplyList().size()) {
 				Reply nextReply = mComversation.getReplyList()
 						.get(position + 1);
