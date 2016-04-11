@@ -45,8 +45,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * @author coolszy
- * @date 2012-4-26
+ * @author boobooMX
  * @blog http://blog.92coding.com
  */
 

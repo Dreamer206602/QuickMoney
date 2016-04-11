@@ -17,9 +17,7 @@ import android.util.Log;
 
 import com.cwp.pattern.widget.LockPatternView;
 
-/**
- * ͼ��������ܡ����ܹ�����
- * 
+/*
  * @author way
  * 
  */

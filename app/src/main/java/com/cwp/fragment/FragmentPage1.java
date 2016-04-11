@@ -37,7 +37,7 @@ public class FragmentPage1 extends BaseFragment {
 	TextView expense_amount;
 	PtypeDAO ptypeDAO;
 	ItypeDAO itypeDAO;
-	String nodata = "		还木有数据，赶紧买买买吧";
+	String nodata = "还木有数据，赶紧买买买吧";
 
 	public void Pay() {
 
