@@ -1,16 +1,5 @@
 package com.cwp.fragment;
 
-import com.cwp.cmoneycharge.activity.AboutActivity;
-import com.cwp.cmoneycharge.activity.InPtypeManagerActivity;
-import com.cwp.cmoneycharge.R;
-import com.cwp.cmoneycharge.activity.SettingActivity;
-
-import cwp.moneycharge.dao.IncomeDAO;
-import cwp.moneycharge.dao.ItypeDAO;
-import cwp.moneycharge.dao.PayDAO;
-import cwp.moneycharge.dao.PtypeDAO;
-import cwp.moneycharge.widget.CustomDialog;
-
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,26 +8,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.activity.AboutActivity;
+import com.cwp.cmoneycharge.activity.InPtypeManagerActivity;
+import com.cwp.cmoneycharge.activity.SettingActivity;
+
+import cwp.moneycharge.dao.IncomeDAO;
+import cwp.moneycharge.dao.ItypeDAO;
+import cwp.moneycharge.dao.PayDAO;
+import cwp.moneycharge.dao.PtypeDAO;
+import cwp.moneycharge.widget.CustomDialog;
+
+/**
+ * 更多的界面
+ */
 public class FragmentPage4 extends BaseFragment {
 
 	int userid;
 	Intent intentr;
 	private ListView listview;
-
-	public void Setting() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-
-		return inflater.inflate(R.layout.fragment_4, null);
+		return inflater.inflate(R.layout.fragment_4, container,false);
 	}
 
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -54,7 +51,6 @@ public class FragmentPage4 extends BaseFragment {
 
 	@Override
 	public void onStart() {
-
 		super.onStart();
 		intentr = getActivity().getIntent();
 		userid = intentr.getIntExtra("cwp.id", 100000001);
@@ -76,13 +72,13 @@ public class FragmentPage4 extends BaseFragment {
 						intentr = new Intent(getActivity(), SettingActivity.class); // 设置百度语音
 						startActivity(intentr);
 						break;
-					case 3:
+					case 3://收入类型的管理
 						intentr = new Intent(getActivity(), InPtypeManagerActivity.class);
 						intentr.putExtra("cwp.id", userid);
 						intentr.putExtra("type", 0);
 						startActivity(intentr);
 						break;
-					case 4:
+					case 4://支出类型的管理
 						intentr = new Intent(getActivity(), InPtypeManagerActivity.class);
 						intentr.putExtra("cwp.id", userid);
 						intentr.putExtra("type", 1);

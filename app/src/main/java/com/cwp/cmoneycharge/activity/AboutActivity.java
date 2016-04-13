@@ -1,18 +1,5 @@
 package com.cwp.cmoneycharge.activity;
 
-import com.cwp.chart.manager.SystemBarTintManager;
-import com.cwp.cmoneycharge.app.CrashApplication;
-import com.cwp.cmoneycharge.R;
-import com.cwp.cmoneycharge.app.SysApplication;
-import com.cwp.pattern.activity.UnlockGesturePasswordActivity;
-import com.cwp.pattern.service.UpdateManager;
-import com.umeng.fb.example.CustomActivity;
-
-import cwp.moneycharge.dao.AccountDAO;
-import cwp.moneycharge.dao.IncomeDAO;
-import cwp.moneycharge.dao.NoteDAO;
-import cwp.moneycharge.dao.PayDAO;
-import cwp.moneycharge.widget.CustomDialog;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
@@ -27,15 +14,29 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnClickListener;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cwp.chart.manager.SystemBarTintManager;
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.app.CrashApplication;
+import com.cwp.cmoneycharge.app.SysApplication;
+import com.cwp.pattern.activity.UnlockGesturePasswordActivity;
+import com.cwp.pattern.service.UpdateManager;
+import com.umeng.fb.example.CustomActivity;
+
+import cwp.moneycharge.dao.AccountDAO;
+import cwp.moneycharge.dao.IncomeDAO;
+import cwp.moneycharge.dao.NoteDAO;
+import cwp.moneycharge.dao.PayDAO;
+import cwp.moneycharge.widget.CustomDialog;
+
 /**
- * 关于的界面
+ * 关于系统的界面
  */
 public class AboutActivity extends Activity {
 	TextView usernow, countuser, countpay, countincome, sendlog, gesturepw,

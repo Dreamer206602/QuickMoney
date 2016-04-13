@@ -1,10 +1,5 @@
 package com.cwp.cmoneycharge.activity;
 
-import com.baidu.voicerecognition.android.ui.BaiduASRDigitalDialog;
-import com.cwp.cmoneycharge.Config;
-import com.cwp.cmoneycharge.R;
-import com.cwp.cmoneycharge.app.SysApplication;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +13,14 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Spinner;
 
+import com.baidu.voicerecognition.android.ui.BaiduASRDigitalDialog;
+import com.cwp.cmoneycharge.Config;
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.app.SysApplication;
 
+/**
+ * 设置百度语音的界面
+ */
 public class SettingActivity extends Activity implements
 		OnCheckedChangeListener {
 

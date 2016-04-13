@@ -61,7 +61,7 @@ import cwp.moneycharge.dao.PtypeDAO;
 import cwp.moneycharge.model.KindData;
 
 /**
- * 侧边栏的界面
+ * 侧边栏的界面---报表的界面
  */
 public class PayChartActivity extends SlidingActivity implements OnClickListener {
 	DialogShowUtil dialogShowUtil = new DialogShowUtil(this, this, null, null,

@@ -1,9 +1,5 @@
 package com.cwp.chart.fragment;
 
-import com.cwp.chart.manager.SystemBarTintManager;
-import com.cwp.cmoneycharge.activity.PayChartActivity;
-import com.cwp.cmoneycharge.R;
-
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
@@ -14,9 +10,11 @@ import android.preference.PreferenceFragment;
 import android.view.Window;
 import android.view.WindowManager;
 
-/**
- * menu fragment ����Ҫ��������ʾmenu�˵�
- */
+import com.cwp.chart.manager.SystemBarTintManager;
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.activity.PayChartActivity;
+
+
 public class MenuFragment extends PreferenceFragment implements OnPreferenceClickListener {
 	int index = -1;
 

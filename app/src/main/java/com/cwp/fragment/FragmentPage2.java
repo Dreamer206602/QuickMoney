@@ -150,11 +150,11 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
             case R.id.layout_friendfeed:
                 clickFriendfeedBtn();
                 break;
-            // 点击与我相关按钮
+            // 点击报表按钮
             case R.id.layout_myfeed:
                 clickMyfeedBtn();
                 break;
-            // 点击我的空间按钮
+            // 点击我的账户按钮
             case R.id.layout_home:
                 clickHomeBtn();
                 break;
@@ -166,13 +166,15 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
             case R.id.toggle_btn:
                 clickToggleBtn();
                 break;
-            // 点击中间按钮
+            // 点击中间按钮的语音记账
             case R.id.pop_voice:
                 clickPop_voiceBtn();
                 break;
+            //点击中间按钮的快速记账
             case R.id.pop_quick:
                 clickPop_quickBtn();
                 break;
+            //点击中间按钮的图片记账
             case R.id.pop_photo:
                 clickPop_photoViewBtn();
                 break;
@@ -196,15 +198,13 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
         DisplayMetrics dm = parent.getResources().getDisplayMetrics();
         int w_screen = dm.widthPixels;
         int h_screen = dm.heightPixels;
-        // System.out.println("你的设备w_screen：" + w_screen + " h_screen：" +
-        // h_screen);
         if (popWindow == null) {
             LayoutInflater layoutInflater = (LayoutInflater) getActivity()
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             View view = layoutInflater.inflate(R.layout.popwindow_layout, null);
             popWinLayout = (LinearLayout) view.findViewById(R.id.popwindow);
-            // 创建一个PopuWidow对象
+            // 创建一个PopupWindow对象
             float radiowith = w_screen / 480.0f;
             float radioheight = h_screen / 800.0f;
             popWindow = new PopupWindow(view,
@@ -212,11 +212,13 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
         }
         // 使其聚集 ，要想监听菜单里控件的事件就必须要调用此方法
         popWindow.setFocusable(true);
-
+        //语音记账
         pop_voiceView = (LinearLayout) popWinLayout
                 .findViewById(R.id.pop_voice);
+        //快速记账
         pop_quickView = (LinearLayout) popWinLayout
                 .findViewById(R.id.pop_quick);
+        //拍照记账
         pop_photoView = (LinearLayout) popWinLayout
                 .findViewById(R.id.pop_photo);
         pop_voiceView.setOnClickListener(this);
@@ -228,7 +230,6 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
         // 设置背景，这个是为了点击“返回Back”也能使其消失，并且并不会影响你的背景
         popWindow.setBackgroundDrawable(new BitmapDrawable());
         // 设置菜单显示的位置
-
         int xPos = (w_screen - popWinLayout.getLayoutParams().width) / 2;
         popWindow.showAsDropDown(parent, xPos, 12);
         // popWindow.showAsDropDown(parent, Gravity.CENTER, 0);
@@ -286,7 +287,7 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
     }
 
     /**
-     * 点击了“与我相关”按钮
+     * 点击了"报表"按钮
      */
     public static void clickMyfeedBtn() {
 
@@ -329,7 +330,7 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
     /**
      * 点击了“更多”按钮
      */
-    public static   void clickMoreBtn() {
+    public static void clickMoreBtn() {
         // 实例化Fragment页面
         fragmentPage4 = new FragmentPage4();
         // 得到Fragment事务管理器
@@ -353,16 +354,16 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
         moreIv.setSelected(true);
     }
 
+    //点击语音记账的点击事件
     private void clickPop_voiceBtn() {
-
         Intent intent = new Intent(getActivity(), AddPayActivity.class);// 创建Intent对象
         intent.putExtra("cwp.id", userid);
         intent.putExtra("cwp.voice", "");// 设置传递数据
         startActivity(intent);
     }
 
+    //点击快速记账的点击事件
     private void clickPop_quickBtn() {
-
         Intent intent = new Intent(getActivity(), AddPayActivity.class);// 创建Intent对象
         intent.putExtra("cwp.id", userid);
         intent.putExtra("keyboard", "true");
@@ -370,7 +371,7 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
     }
 
     /**
-     * 点击了中间按钮
+     * 点击了中间按钮的点击事件
      */
     private void clickToggleBtn() {
         showPopupWindow(plusImageView);

@@ -1,17 +1,5 @@
 package com.cwp.cmoneycharge.activity;
 
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import org.achartengine.ChartFactory;
-import org.achartengine.GraphicalView;
-import org.achartengine.model.CategorySeries;
-import org.achartengine.model.SeriesSelection;
-import org.achartengine.renderer.DefaultRenderer;
-import org.achartengine.renderer.SimpleSeriesRenderer;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -32,20 +20,35 @@ import android.widget.Toast;
 import com.cwp.cmoneycharge.R;
 import com.cwp.cmoneycharge.app.SysApplication;
 
+import org.achartengine.ChartFactory;
+import org.achartengine.GraphicalView;
+import org.achartengine.model.CategorySeries;
+import org.achartengine.model.SeriesSelection;
+import org.achartengine.renderer.DefaultRenderer;
+import org.achartengine.renderer.SimpleSeriesRenderer;
+
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import cwp.moneycharge.dao.PayDAO;
 import cwp.moneycharge.dao.PtypeDAO;
 import cwp.moneycharge.model.KindData;
 
+/**
+ * 分类支出统计表
+ */
 public class PayDataActivity extends Activity {
 	int userid;
 	Intent intentr;
 	PayDAO payDAO;
 	int defaultMonth;
 	int defaultYear;
-	Time time;// ��ȡ��ǰʱ��
+	Time time;
 	LinearLayout piechart, pdataselect;
 	Button beforet, aftert, anytime;
-	Spinner year, month, day, yeare, monthe, daye;// �����ϵ�����ʱ��
+	Spinner year, month, day, yeare, monthe, daye;
 	List<String> yearlist;
 	Adapter adapter;
 	String date1 = "", date2 = "";
@@ -63,10 +66,6 @@ public class PayDataActivity extends Activity {
 			Color.rgb(255, 120, 100), Color.rgb(255, 12, 100),
 			Color.rgb(217, 190, 100), Color.rgb(50, 150, 100),
 			Color.rgb(150, 150, 100), Color.rgb(150, 150, 190) };
-
-	public PayDataActivity() {
-		// TODO Auto-generated constructor stub
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

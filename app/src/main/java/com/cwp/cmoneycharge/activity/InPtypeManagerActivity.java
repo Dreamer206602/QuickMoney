@@ -1,17 +1,5 @@
 package com.cwp.cmoneycharge.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.cwp.chart.manager.SystemBarTintManager;
-import com.cwp.cmoneycharge.R;
-import com.cwp.cmoneycharge.app.SysApplication;
-
-import cwp.moneycharge.dao.ItypeDAO;
-import cwp.moneycharge.dao.PtypeDAO;
-import cwp.moneycharge.widget.CustomDialog;
-import cwp.moneycharge.model.Tb_itype;
-import cwp.moneycharge.model.Tb_ptype;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,9 +11,9 @@ import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,11 +21,23 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class InPtypeManagerActivity extends Activity {
+import com.cwp.chart.manager.SystemBarTintManager;
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.app.SysApplication;
 
-	public InPtypeManagerActivity() {
-		// TODO Auto-generated constructor stub
-	}
+import java.util.ArrayList;
+import java.util.List;
+
+import cwp.moneycharge.dao.ItypeDAO;
+import cwp.moneycharge.dao.PtypeDAO;
+import cwp.moneycharge.model.Tb_itype;
+import cwp.moneycharge.model.Tb_ptype;
+import cwp.moneycharge.widget.CustomDialog;
+
+/**
+ * 收入类型和支出类型的管理的界面
+ */
+public class InPtypeManagerActivity extends Activity {
 
 	private List<String> typename;
 	private ListView lv;
@@ -72,6 +72,7 @@ public class InPtypeManagerActivity extends Activity {
 		delete = (Button) findViewById(R.id.deletetype);
 	}
 
+	//设置半透明的状态
 	@TargetApi(19)
 	private void setTranslucentStatus(boolean on) {
 		Window win = getWindow();

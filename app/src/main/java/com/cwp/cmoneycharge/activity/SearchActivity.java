@@ -51,6 +51,9 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+/**
+ * 搜索的界面
+ */
 public class SearchActivity extends Activity {
 	private String arrs[] = { "自定义时间段", "今天", "昨天", "本周", "上周", "本月", "上月",
 			"本季", "上季", "本年" };
