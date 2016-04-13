@@ -1,6 +1,4 @@
-package com.example.testpic;
-
-import java.util.List;
+package com.example.testpic.adapter;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -12,15 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cwp.cmoneycharge.R;
-import com.example.testpic.BitmapCache.ImageCallback;
+import com.example.testpic.activity.BitmapCache;
+import com.example.testpic.activity.BitmapCache.ImageCallback;
+import com.example.testpic.model.ImageBucket;
+
+import java.util.List;
 
 public class ImageBucketAdapter extends BaseAdapter {
 	final String TAG = getClass().getSimpleName();
 
 	Activity act;
-	/**
-	 * ?????
-	 */
 	List<ImageBucket> dataList;
 	BitmapCache cache;
 	ImageCallback callback = new ImageCallback() {

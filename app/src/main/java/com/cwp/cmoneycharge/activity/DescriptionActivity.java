@@ -7,7 +7,7 @@ import android.view.KeyEvent;
 
 import com.cwp.cmoneycharge.R;
 
-import cwp.moneycharge.model.ActivityManager;
+import cwp.moneycharge.manager.ActivityManager;
 
 public class DescriptionActivity extends Activity{
 

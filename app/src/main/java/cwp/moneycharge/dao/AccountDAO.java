@@ -6,11 +6,12 @@ import android.database.sqlite.SQLiteDatabase;
 
 import cwp.moneycharge.model.*;
 
+/**
+ *
+ */
 public class AccountDAO {
 	private DBOpenHelper helper;// 创建DBOpenHelper对象
-
 	private SQLiteDatabase db;// 创建SQLiteDatabase对象
-
 	public AccountDAO(Context context)// 定义构造函数
 	{
 		helper = new DBOpenHelper(context);// 初始化DBOpenHelper对象

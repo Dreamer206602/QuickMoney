@@ -25,9 +25,9 @@ import com.cwp.cmoneycharge.activity.AddPayActivity;
 import com.cwp.cmoneycharge.activity.MainActivity;
 import com.cwp.cmoneycharge.activity.PayChartActivity;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
+/**
+ * 主界面
+ */
 public class FragmentPage2 extends BaseFragment implements OnClickListener {
     static int userid;
     private static FragmentPage1 fragmentPage1;
@@ -179,6 +179,9 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
         }
     }
 
+    /**
+     * 点击  “记一笔”的按钮的点击事件
+     */
     private void clickPop_photoViewBtn() {
         Intent intent = new Intent(getActivity(), AddPayActivity.class);// 创建Intent对象
         intent.putExtra("cwp.id", userid);
@@ -287,7 +290,6 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
      */
     public static void clickMyfeedBtn() {
 
-        // Intent intentr = new Intent(getActivity(), PayData.class);
         Intent intentr = new Intent(act, PayChartActivity.class);
         intentr.putExtra("cwp.id", userid);
         intentr.putExtra("type", 0);

@@ -82,7 +82,7 @@
             android:name="com.umeng.fb.example.CustomActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.example.testpic.PublishedActivity"
+            android:name="com.example.testpic.activity.PublishedActivity"
             android:theme="@style/HalfTransparent" />
         <activity
             android:name=".activity.SearchActivity"
@@ -98,14 +98,14 @@
             android:name="com.cwp.pattern.activity.UnlockGesturePasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.testpic.ImageGridActivity"
+            android:name="com.example.testpic.activity.ImageGridActivity"
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
-            android:name="com.example.testpic.TestPicActivity"
+            android:name="com.example.testpic.activity.TestPicActivity"
             android:configChanges="orientation|keyboardHidden"
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
-            android:name="com.example.testpic.PhotoActivity"
+            android:name="com.example.testpic.activity.PhotoActivity"
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.LoginActivity"></activity>

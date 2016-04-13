@@ -4,6 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * DBOpenHelper
+ */
 public class DBOpenHelper extends SQLiteOpenHelper {
 	private static final int VERSION=2;	//已经做出更新
 	private static final String DBNAME="cmoneycharge.db";

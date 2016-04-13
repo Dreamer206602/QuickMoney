@@ -1,4 +1,4 @@
-package com.example.testpic;
+package com.example.testpic.model;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package com.example.testpic;
+package com.example.testpic.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

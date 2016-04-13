@@ -9,7 +9,7 @@ import com.cwp.cmoneycharge.app.SysApplication;
 
 import cwp.moneycharge.dao.ItypeDAO;
 import cwp.moneycharge.dao.PtypeDAO;
-import cwp.moneycharge.model.CustomDialog;
+import cwp.moneycharge.widget.CustomDialog;
 import cwp.moneycharge.model.Tb_itype;
 import cwp.moneycharge.model.Tb_ptype;
 import android.annotation.TargetApi;

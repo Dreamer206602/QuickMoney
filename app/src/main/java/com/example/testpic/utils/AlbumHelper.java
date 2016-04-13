@@ -1,11 +1,4 @@
-package com.example.testpic;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+package com.example.testpic.utils;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -14,6 +7,16 @@ import android.provider.MediaStore.Audio.Albums;
 import android.provider.MediaStore.Images.Media;
 import android.provider.MediaStore.Images.Thumbnails;
 import android.util.Log;
+
+import com.example.testpic.model.ImageBucket;
+import com.example.testpic.model.ImageItem;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  *  专辑帮助类

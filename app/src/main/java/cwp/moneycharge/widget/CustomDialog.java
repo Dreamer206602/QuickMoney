@@ -1,10 +1,5 @@
-package cwp.moneycharge.model;
+package cwp.moneycharge.widget;
  
-
-import com.cwp.cmoneycharge.R;
-import com.cwp.cmoneycharge.R.id;
-import com.cwp.cmoneycharge.R.layout;
-import com.cwp.cmoneycharge.R.style;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -15,6 +10,10 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.R.id;
+import com.cwp.cmoneycharge.R.style;
  
 /**
  * 

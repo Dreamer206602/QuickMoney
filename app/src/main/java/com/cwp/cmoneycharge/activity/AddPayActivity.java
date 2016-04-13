@@ -1,45 +1,5 @@
 package com.cwp.cmoneycharge.activity;
 
-import java.io.IOException;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Random;
-
-//import com.amap.api.location.AMapLocation;
-//import com.amap.api.location.AMapLocationListener;
-//import com.amap.api.location.LocationManagerProxy;
-//import com.amap.api.location.LocationProviderProxy;
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
-import com.baidu.voicerecognition.android.ui.BaiduASRDigitalDialog;
-import com.baidu.voicerecognition.android.ui.DialogRecognitionListener;
-import com.cwp.chart.manager.SystemBarTintManager;
-import com.cwp.cmoneycharge.Config;
-import com.cwp.cmoneycharge.utils.DialogShowUtil;
-import com.cwp.cmoneycharge.Effectstype;
-import com.cwp.cmoneycharge.R;
-import com.cwp.cmoneycharge.api.Constants;
-import com.cwp.cmoneycharge.app.CrashApplication;
-import com.cwp.cmoneycharge.app.SysApplication;
-import com.cwp.cmoneycharge.utils.DigitUtil;
-import com.cwp.cmoneycharge.utils.KeyboardUtil;
-import com.cwp.cmoneycharge.widget.NiftyDialogBuilder;
-import com.cwp.pattern.activity.UnlockGesturePasswordActivity;
-import com.example.testpic.Bimp;
-import com.example.testpic.PublishedActivity;
-
-import cwp.moneycharge.dao.IncomeDAO;
-import cwp.moneycharge.dao.ItypeDAO;
-import cwp.moneycharge.dao.PayDAO;
-import cwp.moneycharge.dao.PtypeDAO;
-import cwp.moneycharge.model.Tb_income;
-import cwp.moneycharge.model.Tb_pay;
-
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -49,17 +9,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -74,7 +33,50 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.voicerecognition.android.ui.BaiduASRDigitalDialog;
+import com.baidu.voicerecognition.android.ui.DialogRecognitionListener;
+import com.cwp.chart.manager.SystemBarTintManager;
+import com.cwp.cmoneycharge.Config;
+import com.cwp.cmoneycharge.Effectstype;
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.api.Constants;
+import com.cwp.cmoneycharge.app.CrashApplication;
+import com.cwp.cmoneycharge.app.SysApplication;
+import com.cwp.cmoneycharge.utils.DialogShowUtil;
+import com.cwp.cmoneycharge.utils.DigitUtil;
+import com.cwp.cmoneycharge.utils.KeyboardUtil;
+import com.cwp.cmoneycharge.widget.NiftyDialogBuilder;
+import com.cwp.pattern.activity.UnlockGesturePasswordActivity;
+import com.example.testpic.utils.Bimp;
+import com.example.testpic.activity.PublishedActivity;
 
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Random;
+
+import cwp.moneycharge.dao.IncomeDAO;
+import cwp.moneycharge.dao.ItypeDAO;
+import cwp.moneycharge.dao.PayDAO;
+import cwp.moneycharge.dao.PtypeDAO;
+import cwp.moneycharge.model.Tb_income;
+import cwp.moneycharge.model.Tb_pay;
+
+//import com.amap.api.location.AMapLocation;
+//import com.amap.api.location.AMapLocationListener;
+//import com.amap.api.location.LocationManagerProxy;
+//import com.amap.api.location.LocationProviderProxy;
+
+/**
+ * 添加收入的界面
+ */
 public class AddPayActivity extends Activity implements  OnClickListener {
     protected static final int DATE_DIALOG_ID = 0;// 创建日期对话框常量
     static String type = "pay";
@@ -140,9 +142,6 @@ public class AddPayActivity extends Activity implements  OnClickListener {
     private LocationClient mLocationClient;
     private BDLocationListener mLocationListener = new MyLocationListener();
 
-    public AddPayActivity() {
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,7 +179,7 @@ public class AddPayActivity extends Activity implements  OnClickListener {
 
         dialogShowUtil = new DialogShowUtil(this, this, VoiceSave, type, // 初始化dialog
                 VoiceDefault);
-        btn_loacte.setOnClickListener(this); // 定位
+        btn_loacte.setOnClickListener(this); // 定位的按钮
 
         // 隐藏菜单
         bottom_empty.setOnClickListener(new OnClickListener() {
@@ -191,7 +190,7 @@ public class AddPayActivity extends Activity implements  OnClickListener {
             }
         });
 
-        // 添加图片
+        // 添加图片的按钮
         addphoto.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(AddPayActivity.this, PublishedActivity.class);

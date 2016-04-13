@@ -1,22 +1,14 @@
-package cwp.moneycharge.model;
+package cwp.moneycharge.manager;
 
-import java.util.LinkedList; 
-import java.util.List; 
-import android.app.Activity; 
-import android.app.AlertDialog; 
-import android.app.Application; 
-import android.content.DialogInterface; 
-import android.content.Intent; 
+import android.app.Activity;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class ActivityManager {
 	private List<Activity> mList = new LinkedList<Activity>(); 
     private static ActivityManager instance; 
-	 
-	public ActivityManager() {
-		// TODO Auto-generated constructor stub
-	}
 
- 
     public synchronized static ActivityManager getInstance() { 
         if (null == instance) { 
             instance = new ActivityManager(); 

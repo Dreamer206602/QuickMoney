@@ -1,9 +1,5 @@
 package com.cwp.cmoneycharge.widget;
 
-import com.cwp.cmoneycharge.anim.BaseEffects;
-import com.cwp.cmoneycharge.Effectstype;
-import com.cwp.cmoneycharge.R;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,10 +16,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.cwp.cmoneycharge.Effectstype;
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.anim.BaseEffects;
 
-/**
- * Created by lee on 2014/7/30.
- */
+
+
 public class NiftyDialogBuilder extends Dialog implements DialogInterface {
 
     private final String defTextColor="#FFFFFFFF";

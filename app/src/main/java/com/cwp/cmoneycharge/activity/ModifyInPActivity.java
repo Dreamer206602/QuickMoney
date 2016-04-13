@@ -8,7 +8,7 @@ import java.util.List;
 import cwp.moneycharge.dao.IncomeDAO; 
 import cwp.moneycharge.dao.ItypeDAO; 
 import cwp.moneycharge.dao.PtypeDAO;
-import cwp.moneycharge.model.ActivityManager;
+import cwp.moneycharge.manager.ActivityManager;
 import cwp.moneycharge.model.Tb_income;
 import cwp.moneycharge.model.Tb_pay;
 

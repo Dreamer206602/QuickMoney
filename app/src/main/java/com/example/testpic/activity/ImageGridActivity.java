@@ -1,12 +1,4 @@
-package com.example.testpic;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-
-import com.cwp.cmoneycharge.R;
-import com.example.testpic.ImageGridAdapter.TextCallback;
+package com.example.testpic.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,12 +11,24 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.GridView;
+
+import com.cwp.cmoneycharge.R;
+import com.example.testpic.utils.AlbumHelper;
+import com.example.testpic.utils.Bimp;
+import com.example.testpic.adapter.ImageGridAdapter;
+import com.example.testpic.adapter.ImageGridAdapter.TextCallback;
+import com.example.testpic.model.ImageItem;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 public class ImageGridActivity extends Activity {
 	public static final String EXTRA_IMAGE_LIST = "imagelist";

@@ -1,7 +1,7 @@
 package com.umeng.fb.example;
 
-import android.app.Application;
-import com.umeng.fb.push.FeedbackPush;
+        import android.app.Application;
+        import com.umeng.fb.push.FeedbackPush;
 
 
 public class AppApplication extends Application {

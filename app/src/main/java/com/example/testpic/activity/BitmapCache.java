@@ -1,11 +1,4 @@
-package com.example.testpic;
-
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.lang.ref.SoftReference;
-import java.util.HashMap;
+package com.example.testpic.activity;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -14,6 +7,13 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ImageView;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.lang.ref.SoftReference;
+import java.util.HashMap;
 
 public class BitmapCache extends Activity {
 

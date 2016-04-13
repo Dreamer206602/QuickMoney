@@ -1,11 +1,4 @@
-package com.example.testpic;
-
-import java.io.File;
-import java.io.IOException;
-
-import com.cwp.chart.manager.SystemBarTintManager;
-import com.cwp.cmoneycharge.R;
-import com.cwp.cmoneycharge.app.SysApplication;
+package com.example.testpic.activity;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -28,11 +21,11 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -44,6 +37,18 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.cwp.chart.manager.SystemBarTintManager;
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.app.SysApplication;
+import com.example.testpic.utils.Bimp;
+import com.example.testpic.utils.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
+
+/**
+ * 添加图片的界面
+ */
 public class PublishedActivity extends Activity {
 
 	private GridView noScrollgridview;
@@ -308,16 +313,17 @@ public class PublishedActivity extends Activity {
 					dismiss();
 				}
 			});
+			//选择图库的按钮
 			bt2.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
-					Intent intent = new Intent(PublishedActivity.this,
-							TestPicActivity.class);
+					Intent intent = new Intent(PublishedActivity.this, TestPicActivity.class);
 					startActivity(intent);
 					Bimp.flag = 0;
 					finish();
 					dismiss();
 				}
 			});
+			//取消的按钮
 			bt3.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
 					dismiss();
@@ -330,6 +336,9 @@ public class PublishedActivity extends Activity {
 	private static final int TAKE_PICTURE = 0x000000;
 	private String path = "";
 
+	/**
+	 * 从相机选择图片
+	 */
 	public void photo() {
 		Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		if (Environment.getExternalStorageState().equals(

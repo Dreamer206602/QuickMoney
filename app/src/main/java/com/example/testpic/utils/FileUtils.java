@@ -1,13 +1,13 @@
-package com.example.testpic;
+package com.example.testpic.utils;
+
+import android.graphics.Bitmap;
+import android.os.Environment;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-import android.graphics.Bitmap;
-import android.os.Environment;
-import android.util.Log;
 
 public class FileUtils {
 

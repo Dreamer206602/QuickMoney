@@ -1,5 +1,8 @@
 package cwp.moneycharge.model;
 
+/**
+ * 收入类型表
+ */
 public class Tb_itype {
 	//_id INTEGER  NOT NULL PRIMARY KEY,no not null integer AUTOINCREMENT ,typename varchar(50) 
 	private int  _id;//用户id

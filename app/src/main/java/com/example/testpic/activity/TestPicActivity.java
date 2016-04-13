@@ -1,9 +1,4 @@
-package com.example.testpic;
-
-import java.io.Serializable;
-import java.util.List;
-
-import com.cwp.cmoneycharge.R;
+package com.example.testpic.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,6 +13,17 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.cwp.cmoneycharge.R;
+import com.example.testpic.utils.AlbumHelper;
+import com.example.testpic.adapter.ImageBucketAdapter;
+import com.example.testpic.model.ImageBucket;
+
+import java.io.Serializable;
+import java.util.List;
+
+/**
+ * 从图库选择的界面
+ */
 public class TestPicActivity extends Activity {
 	// ArrayList<Entity> dataList;//用来装载数据源的列表
 	List<ImageBucket> dataList;

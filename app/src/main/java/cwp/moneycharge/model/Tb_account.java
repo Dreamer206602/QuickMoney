@@ -1,5 +1,8 @@
 package cwp.moneycharge.model;
 
+/**
+ * 用户信息表
+ */
 public class Tb_account {
 //_id INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT ,username varchar(20),pwd varchar(50)
 	private int _id ;

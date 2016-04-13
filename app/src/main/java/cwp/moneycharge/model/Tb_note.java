@@ -1,5 +1,8 @@
 package cwp.moneycharge.model;
 
+/**
+ * 便签信息的表
+ */
 public class Tb_note {
 //_id integer primary key,no integer autoincrement,flag varchar(200))
 	private int _id;

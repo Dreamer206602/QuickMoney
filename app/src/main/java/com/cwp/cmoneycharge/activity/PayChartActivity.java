@@ -1,36 +1,5 @@
 package com.cwp.cmoneycharge.activity;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Random;
-
-import com.cwp.chart.ChartProp;
-import com.cwp.chart.listener.ChartPropChangeListener;
-import com.cwp.chart.fragment.MenuFragment;
-import com.cwp.chart.widget.MyButton;
-import com.cwp.chart.widget.PieView;
-import com.cwp.chart.manager.SystemBarTintManager;
-import com.cwp.cmoneycharge.utils.DialogShowUtil;
-import com.cwp.cmoneycharge.R;
-import com.cwp.cmoneycharge.app.SysApplication;
-import com.cwp.cmoneycharge.app.CrashApplication;
-import com.cwp.pattern.activity.UnlockGesturePasswordActivity;
-import com.slidingmenu.lib.SlidingMenu;
-import com.slidingmenu.lib.app.SlidingActivity;
-
-import cwp.moneycharge.dao.IncomeDAO;
-import cwp.moneycharge.dao.ItypeDAO;
-import cwp.moneycharge.dao.PayDAO;
-import cwp.moneycharge.dao.PtypeDAO;
-import cwp.moneycharge.model.KindData;
-
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.annotation.TargetApi;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -38,7 +7,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.format.Time;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
@@ -46,10 +18,10 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -57,11 +29,40 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.PopupWindow.OnDismissListener;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
-import android.widget.PopupWindow.OnDismissListener;
 
+import com.cwp.chart.ChartProp;
+import com.cwp.chart.fragment.MenuFragment;
+import com.cwp.chart.listener.ChartPropChangeListener;
+import com.cwp.chart.manager.SystemBarTintManager;
+import com.cwp.chart.widget.MyButton;
+import com.cwp.chart.widget.PieView;
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.app.CrashApplication;
+import com.cwp.cmoneycharge.app.SysApplication;
+import com.cwp.cmoneycharge.utils.DialogShowUtil;
+import com.cwp.pattern.activity.UnlockGesturePasswordActivity;
+import com.slidingmenu.lib.SlidingMenu;
+import com.slidingmenu.lib.app.SlidingActivity;
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Random;
+
+import cwp.moneycharge.dao.IncomeDAO;
+import cwp.moneycharge.dao.ItypeDAO;
+import cwp.moneycharge.dao.PayDAO;
+import cwp.moneycharge.dao.PtypeDAO;
+import cwp.moneycharge.model.KindData;
+
+/**
+ * 侧边栏的界面
+ */
 public class PayChartActivity extends SlidingActivity implements OnClickListener {
 	DialogShowUtil dialogShowUtil = new DialogShowUtil(this, this, null, null,
 			null);

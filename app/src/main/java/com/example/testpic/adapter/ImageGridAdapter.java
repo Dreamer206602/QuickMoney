@@ -1,8 +1,4 @@
-package com.example.testpic;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+package com.example.testpic.adapter;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -17,7 +13,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cwp.cmoneycharge.R;
-import com.example.testpic.BitmapCache.ImageCallback;
+import com.example.testpic.utils.Bimp;
+import com.example.testpic.activity.BitmapCache;
+import com.example.testpic.activity.BitmapCache.ImageCallback;
+import com.example.testpic.model.ImageItem;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ImageGridAdapter extends BaseAdapter {
 
@@ -25,7 +28,7 @@ public class ImageGridAdapter extends BaseAdapter {
 	final String TAG = getClass().getSimpleName();
 	Activity act;
 	List<ImageItem> dataList;
-	Map<String, String> map = new HashMap<String, String>();
+	public  Map<String, String> map = new HashMap<String, String>();
 	BitmapCache cache;
 	private Handler mHandler;
 	private int selectTotal = 0;

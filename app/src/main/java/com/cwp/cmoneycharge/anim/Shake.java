@@ -2,12 +2,8 @@ package com.cwp.cmoneycharge.anim;
 
 import android.view.View;
 
-import com.cwp.cmoneycharge.anim.BaseEffects;
 import com.nineoldandroids.animation.ObjectAnimator;
 
-/**
- * Created by lee on 2014/7/31.
- */
 public class Shake  extends BaseEffects {
 
     @Override

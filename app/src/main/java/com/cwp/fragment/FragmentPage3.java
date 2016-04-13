@@ -1,30 +1,5 @@
 package com.cwp.fragment;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.cwp.chart.widget.PullToRefreshView;
-import com.cwp.chart.widget.PullToRefreshView.OnFooterRefreshListener;
-import com.cwp.chart.widget.PullToRefreshView.OnHeaderRefreshListener;
-import com.cwp.chart.widget.RiseNumberTextView;
-import com.cwp.cmoneycharge.activity.AddPayActivity;
-import com.cwp.cmoneycharge.R;
-import com.cwp.cmoneycharge.activity.SearchActivity;
-
-import cwp.moneycharge.dao.IncomeDAO;
-import cwp.moneycharge.dao.ItypeDAO;
-import cwp.moneycharge.dao.PayDAO;
-import cwp.moneycharge.dao.PtypeDAO;
-import cwp.moneycharge.model.KindData;
-import cwp.moneycharge.model.Tb_income;
-import cwp.moneycharge.model.Tb_pay;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -33,14 +8,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
-
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
-import android.view.animation.Animation.AnimationListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -51,6 +25,34 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.cwp.chart.widget.PullToRefreshView;
+import com.cwp.chart.widget.PullToRefreshView.OnFooterRefreshListener;
+import com.cwp.chart.widget.PullToRefreshView.OnHeaderRefreshListener;
+import com.cwp.chart.widget.RiseNumberTextView;
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.activity.AddPayActivity;
+import com.cwp.cmoneycharge.activity.SearchActivity;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import cwp.moneycharge.dao.IncomeDAO;
+import cwp.moneycharge.dao.ItypeDAO;
+import cwp.moneycharge.dao.PayDAO;
+import cwp.moneycharge.dao.PtypeDAO;
+import cwp.moneycharge.model.KindData;
+import cwp.moneycharge.model.Tb_income;
+import cwp.moneycharge.model.Tb_pay;
+
+/**
+ *
+ */
 @SuppressLint("InflateParams")
 public class FragmentPage3 extends BaseFragment implements
 		OnHeaderRefreshListener, OnFooterRefreshListener {

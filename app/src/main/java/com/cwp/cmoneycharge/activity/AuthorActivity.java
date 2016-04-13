@@ -1,6 +1,6 @@
 package com.cwp.cmoneycharge.activity;
 
-import cwp.moneycharge.model.ActivityManager;
+import cwp.moneycharge.manager.ActivityManager;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -1,20 +1,5 @@
 package com.cwp.cmoneycharge.activity;
 
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import org.achartengine.ChartFactory;
-import org.achartengine.GraphicalView;
-import org.achartengine.model.CategorySeries;
-import org.achartengine.model.SeriesSelection;
-import org.achartengine.renderer.DefaultRenderer;
-import org.achartengine.renderer.SimpleSeriesRenderer;
-
-import cwp.moneycharge.dao.IncomeDAO;
-import cwp.moneycharge.dao.ItypeDAO;
-import cwp.moneycharge.model.KindData;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -35,6 +20,25 @@ import android.widget.Toast;
 import com.cwp.cmoneycharge.R;
 import com.cwp.cmoneycharge.app.SysApplication;
 
+import org.achartengine.ChartFactory;
+import org.achartengine.GraphicalView;
+import org.achartengine.model.CategorySeries;
+import org.achartengine.model.SeriesSelection;
+import org.achartengine.renderer.DefaultRenderer;
+import org.achartengine.renderer.SimpleSeriesRenderer;
+
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import cwp.moneycharge.dao.IncomeDAO;
+import cwp.moneycharge.dao.ItypeDAO;
+import cwp.moneycharge.model.KindData;
+
+/**
+ * 收入的界面
+ */
 public class IncomeDataActivity extends Activity {
 	int userid;
 	Intent intentr;
@@ -66,7 +70,6 @@ public class IncomeDataActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.incomedata);
-
 		SysApplication.getInstance().addActivity(this); // 在销毁队列中添加this
 		time = new Time("GMT+8");
 		time.setToNow();

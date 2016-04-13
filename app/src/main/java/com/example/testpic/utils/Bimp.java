@@ -1,4 +1,7 @@
-package com.example.testpic;
+package com.example.testpic.utils;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -6,9 +9,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 public class Bimp {
 	public static int max = 0;

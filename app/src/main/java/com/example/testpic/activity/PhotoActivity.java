@@ -1,9 +1,4 @@
-package com.example.testpic;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import com.cwp.cmoneycharge.R;
+package com.example.testpic.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,6 +12,13 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
+import com.cwp.cmoneycharge.R;
+import com.example.testpic.utils.Bimp;
+import com.example.testpic.utils.FileUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PhotoActivity extends Activity {
 

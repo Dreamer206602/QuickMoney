@@ -1,8 +1,10 @@
 package cwp.moneycharge.model;
 
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
+/**
+ * 支出信息表
+ */
 public class Tb_pay {
 	// _id INTEGER NOT NULL PRIMARY KEY,no not null integer AUTOINCREMENT ,money
 	// decimal,time varchar(10),"

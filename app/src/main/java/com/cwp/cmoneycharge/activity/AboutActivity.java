@@ -12,7 +12,7 @@ import cwp.moneycharge.dao.AccountDAO;
 import cwp.moneycharge.dao.IncomeDAO;
 import cwp.moneycharge.dao.NoteDAO;
 import cwp.moneycharge.dao.PayDAO;
-import cwp.moneycharge.model.CustomDialog;
+import cwp.moneycharge.widget.CustomDialog;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
