@@ -197,31 +197,31 @@
         <item>input, 适用于输入短信、微博等长句输入</item>
     </string-array>
     <string name="prop_default"></string>
-    <string-array name="prop_tpye">
-        <item>@string/prop_default</item>
-        <item>20000, 输入</item>
-        <item>10005, 热词</item>
-        <item>10060, 地图</item>
-        <item>10001, 音乐</item>
-        <item>10002, 视频</item>
-        <item>10003, 应用</item>
-        <item>10004, 网页</item>
-        <item>10007, 健康</item>
-        <item>10006, 购物</item>
-        <item>10008, 打电话</item>
-        <item>10008, 超级电话</item>
-        <item>10052, 医疗</item>
-        <item>10053, 汽车</item>
-        <item>10054, 娱乐餐饮</item>
-        <item>10055, 财经</item>
-        <item>10056, 游戏</item>
-        <item>10057, 菜谱</item>
-        <item>10058, 助手</item>
-        <item>100014, 联系人</item>
-        <item>100016, 手机设置</item>
-        <item>100018, 电视指令</item>
-        <item>100019, 播放器指令</item>
-        <item>100020, 收音机指令</item>
-        <item>100021, 命令词</item>
-    </string-array>
+    <!--<string-array name="prop_tpye">-->
+        <!--<item>@string/prop_default</item>-->
+        <!--<item>20000, 输入</item>-->
+        <!--<item>10005, 热词</item>-->
+        <!--<item>10060, 地图</item>-->
+        <!--<item>10001, 音乐</item>-->
+        <!--<item>10002, 视频</item>-->
+        <!--<item>10003, 应用</item>-->
+        <!--<item>10004, 网页</item>-->
+        <!--<item>10007, 健康</item>-->
+        <!--<item>10006, 购物</item>-->
+        <!--<item>10008, 打电话</item>-->
+        <!--<item>10008, 超级电话</item>-->
+        <!--<item>10052, 医疗</item>-->
+        <!--<item>10053, 汽车</item>-->
+        <!--<item>10054, 娱乐餐饮</item>-->
+        <!--<item>10055, 财经</item>-->
+        <!--<item>10056, 游戏</item>-->
+        <!--<item>10057, 菜谱</item>-->
+        <!--<item>10058, 助手</item>-->
+        <!--<item>100014, 联系人</item>-->
+        <!--<item>100016, 手机设置</item>-->
+        <!--<item>100018, 电视指令</item>-->
+        <!--<item>100019, 播放器指令</item>-->
+        <!--<item>100020, 收音机指令</item>-->
+        <!--<item>100021, 命令词</item>-->
+    <!--</string-array>-->
 </resources>

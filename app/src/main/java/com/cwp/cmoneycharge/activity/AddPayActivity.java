@@ -47,6 +47,7 @@ import com.cwp.chart.manager.SystemBarTintManager;
 import com.cwp.cmoneycharge.Config;
 import com.cwp.cmoneycharge.Effectstype;
 import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.api.Constant;
 import com.cwp.cmoneycharge.app.CrashApplication;
 import com.cwp.cmoneycharge.app.SysApplication;
 import com.cwp.cmoneycharge.utils.DialogShowUtil;
@@ -56,6 +57,10 @@ import com.cwp.cmoneycharge.widget.NiftyDialogBuilder;
 import com.cwp.pattern.activity.UnlockGesturePasswordActivity;
 import com.example.testpic.activity.PublishedActivity;
 import com.example.testpic.utils.Bimp;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -74,7 +79,7 @@ import cwp.moneycharge.model.Tb_pay;
 /**
  * 添加收入的界面
  */
-public class AddPayActivity extends Activity implements OnClickListener {
+public class AddPayActivity extends Activity implements OnClickListener, RecognitionListener {
     protected static final int DATE_DIALOG_ID = 0;// 创建日期对话框常量
     static String type = "pay";
     String VoiceDefault = "";
@@ -135,6 +140,19 @@ public class AddPayActivity extends Activity implements OnClickListener {
     private BDLocationListener mLocationListener = new MyLocationListener();
 
 
+    private class MyLocationListener implements BDLocationListener {
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            if (location == null) {
+                return;
+            }
+            StringBuilder sb = new StringBuilder(1024);
+            sb.append(location.getAddrStr());
+            Log.d("adds", sb.toString());
+            txtAddress.setText(sb.toString());
+        }
+    }
+
     //TODO 百度语音识别
     private static final String TAG = "Sdk2Api";
     private static final int REQUEST_UI = 1;
@@ -147,7 +165,6 @@ public class AddPayActivity extends Activity implements OnClickListener {
     private int status = STATUS_None;
     private long speechEndTime = -1;
     private static final int EVENT_ERROR = 11;
-
 
 
     @Override
@@ -267,52 +284,8 @@ public class AddPayActivity extends Activity implements OnClickListener {
     //TODO　百度语音识别
     private void initBaiDuSpeech() {
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this, new ComponentName(this, VoiceRecognitionService.class));
-        speechRecognizer.setRecognitionListener(new RecognitionListener() {
-            @Override
-            public void onReadyForSpeech(Bundle params) {
+        speechRecognizer.setRecognitionListener(this);
 
-            }
-
-            @Override
-            public void onBeginningOfSpeech() {
-
-            }
-
-            @Override
-            public void onRmsChanged(float rmsdB) {
-
-            }
-
-            @Override
-            public void onBufferReceived(byte[] buffer) {
-
-            }
-
-            @Override
-            public void onEndOfSpeech() {
-
-            }
-
-            @Override
-            public void onError(int error) {
-
-            }
-
-            @Override
-            public void onResults(Bundle results) {
-
-            }
-
-            @Override
-            public void onPartialResults(Bundle partialResults) {
-
-            }
-
-            @Override
-            public void onEvent(int eventType, Bundle params) {
-
-            }
-        });
     }
 
     //TODO 百度地图的处理
@@ -744,79 +717,34 @@ public class AddPayActivity extends Activity implements OnClickListener {
      * 调用百度语音识别
      */
     public void VoiceRecognition() {
-//        // mResult.setText(null);
-//        mCurrentTheme = Config.DIALOG_THEME;
-//        if (mDialog != null) {
-//            mDialog.dismiss();
-//            //mDialog.finish();
-//
-//        }
-//        Bundle params = new Bundle();
-//        params.putString(BaiduASRDigitalDialog.PARAM_API_KEY, Constants.API_KEY); // 百度语音api_key
-//        params.putString(BaiduASRDigitalDialog.PARAM_SECRET_KEY,
-//                Constants.SECRET_KEY);
-//        params.putInt(BaiduASRDigitalDialog.PARAM_DIALOG_THEME, // 百度语音主题
-//                Config.DIALOG_THEME);
-//        mDialog = new BaiduASRDigitalDialog(AddPayActivity.this, params);
-//        mDialog.setDialogRecognitionListener(mRecognitionListener);
-//        mDialog.getParams().putInt(BaiduASRDigitalDialog.PARAM_PROP, // 百度识别类别
-//                Config.CURRENT_PROP);
-//        mDialog.getParams().putString(BaiduASRDigitalDialog.PARAM_LANGUAGE, // 百度识别语言
-//                Config.getCurrentLanguage());
-//        mDialog.getParams().putBoolean(
-//                // 百度识别音效相关
-//                BaiduASRDigitalDialog.PARAM_START_TONE_ENABLE,
-//                Config.PLAY_START_SOUND);
-//        mDialog.getParams().putBoolean(
-//                BaiduASRDigitalDialog.PARAM_END_TONE_ENABLE,
-//                Config.PLAY_END_SOUND);
-//        mDialog.getParams().putBoolean(
-//                BaiduASRDigitalDialog.PARAM_TIPS_TONE_ENABLE,
-//                Config.DIALOG_TIPS_SOUND);
-//        mDialog.show();
-
-
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(AddPayActivity.this);
         boolean api = sp.getBoolean("api", false);
         if (api) {
             switch (status) {
                 case STATUS_None:
                     start();
-                    btn.setText("取消");
                     status = STATUS_WaitingReady;
                     break;
                 case STATUS_WaitingReady:
                     cancel();
                     status = STATUS_None;
-                    btn.setText("开始");
                     break;
                 case STATUS_Ready:
                     cancel();
                     status = STATUS_None;
-                    btn.setText("开始");
                     break;
                 case STATUS_Speaking:
                     stop();
                     status = STATUS_Recognition;
-                    btn.setText("识别中");
                     break;
                 case STATUS_Recognition:
                     cancel();
                     status = STATUS_None;
-                    btn.setText("开始");
                     break;
             }
         } else {
             start();
         }
-    }
-
-
-
-
-
-
-
     }
 
     public void VoiceSuccess() { // 识别成功录入数据
@@ -1073,14 +1001,9 @@ public class AddPayActivity extends Activity implements OnClickListener {
 
     @Override
     protected void onDestroy() {
-//        if (mDialog != null) {
-//            mDialog.dismiss();
-//        }
-//        if (dialogBuilder != null) {
-//            dialogBuilder.dismiss();
-//        }
         super.onDestroy();
         mLocationClient.unRegisterLocationListener(mLocationListener);
+
     }
 
     protected void onResume() {
@@ -1127,8 +1050,11 @@ public class AddPayActivity extends Activity implements OnClickListener {
                         textphoto = "";
                         initphoto();
                     }
-                    break;
+
                 }
+            case RESULT_OK:
+                onResults(data.getExtras());
+                break;
 
         }
     }
@@ -1137,23 +1063,235 @@ public class AddPayActivity extends Activity implements OnClickListener {
         dialogShowUtil.dialogShow("rotatebottom", "first", "", "");
     }
 
-    /**
-     * 百度地图定位的事件监听
-     */
-    private class MyLocationListener implements BDLocationListener {
-
-        @Override
-        public void onReceiveLocation(BDLocation location) {
-            if (location == null) {
-                return;
+    //设置识别的参数
+    public void bindParams(Intent intent) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        if (sp.getBoolean("tips_sound", true)) {
+            intent.putExtra(Constant.EXTRA_SOUND_START, R.raw.bdspeech_recognition_start);
+            intent.putExtra(Constant.EXTRA_SOUND_END, R.raw.bdspeech_speech_end);
+            intent.putExtra(Constant.EXTRA_SOUND_SUCCESS, R.raw.bdspeech_recognition_success);
+            intent.putExtra(Constant.EXTRA_SOUND_ERROR, R.raw.bdspeech_recognition_error);
+            intent.putExtra(Constant.EXTRA_SOUND_CANCEL, R.raw.bdspeech_recognition_cancel);
+        }
+        if (sp.contains(Constant.EXTRA_INFILE)) {
+            String tmp = sp.getString(Constant.EXTRA_INFILE, "").replaceAll(",.*", "").trim();
+            intent.putExtra(Constant.EXTRA_INFILE, tmp);
+        }
+        if (sp.getBoolean(Constant.EXTRA_OUTFILE, false)) {
+            intent.putExtra(Constant.EXTRA_OUTFILE, "sdcard/outfile.pcm");
+        }
+        if (sp.contains(Constant.EXTRA_SAMPLE)) {
+            String tmp = sp.getString(Constant.EXTRA_SAMPLE, "").replaceAll(",.*", "").trim();
+            if (null != tmp && !"".equals(tmp)) {
+                intent.putExtra(Constant.EXTRA_SAMPLE, Integer.parseInt(tmp));
             }
-            StringBuilder sb = new StringBuilder(1024);
-            sb.append(location.getAddrStr());
-            Log.d("adds", sb.toString());
-            txtAddress.setText(sb.toString());
+        }
+        if (sp.contains(Constant.EXTRA_LANGUAGE)) {
+            String tmp = sp.getString(Constant.EXTRA_LANGUAGE, "").replaceAll(",.*", "").trim();
+            if (null != tmp && !"".equals(tmp)) {
+                intent.putExtra(Constant.EXTRA_LANGUAGE, tmp);
+            }
+        }
+        if (sp.contains(Constant.EXTRA_NLU)) {
+            String tmp = sp.getString(Constant.EXTRA_NLU, "").replaceAll(",.*", "").trim();
+            if (null != tmp && !"".equals(tmp)) {
+                intent.putExtra(Constant.EXTRA_NLU, tmp);
+            }
+        }
 
+        if (sp.contains(Constant.EXTRA_VAD)) {
+            String tmp = sp.getString(Constant.EXTRA_VAD, "").replaceAll(",.*", "").trim();
+            if (null != tmp && !"".equals(tmp)) {
+                intent.putExtra(Constant.EXTRA_VAD, tmp);
+            }
+        }
+        String prop = null;
+        if (sp.contains(Constant.EXTRA_PROP)) {
+            String tmp = sp.getString(Constant.EXTRA_PROP, "").replaceAll(",.*", "").trim();
+            if (null != tmp && !"".equals(tmp)) {
+                intent.putExtra(Constant.EXTRA_PROP, Integer.parseInt(tmp));
+                prop = tmp;
+            }
+        }
+
+        // offline asr
+        {
+            intent.putExtra(Constant.EXTRA_OFFLINE_ASR_BASE_FILE_PATH, "/sdcard/easr/s_1");
+            intent.putExtra(Constant.EXTRA_LICENSE_FILE_PATH, "/sdcard/easr/license-tmp-20150530.txt");
+            if (null != prop) {
+                int propInt = Integer.parseInt(prop);
+                if (propInt == 10060) {
+                    intent.putExtra(Constant.EXTRA_OFFLINE_LM_RES_FILE_PATH, "/sdcard/easr/s_2_Navi");
+                } else if (propInt == 20000) {
+                    intent.putExtra(Constant.EXTRA_OFFLINE_LM_RES_FILE_PATH, "/sdcard/easr/s_2_InputMethod");
+                }
+            }
+            intent.putExtra(Constant.EXTRA_OFFLINE_SLOT_DATA, buildTestSlotData());
         }
     }
+
+    private String buildTestSlotData() {
+        JSONObject slotData = new JSONObject();
+        JSONArray name = new JSONArray().put("李涌泉").put("郭下纶");
+        JSONArray song = new JSONArray().put("七里香").put("发如雪");
+        JSONArray artist = new JSONArray().put("周杰伦").put("李世龙");
+        JSONArray app = new JSONArray().put("手机百度").put("百度地图");
+        JSONArray usercommand = new JSONArray().put("关灯").put("开门");
+        try {
+            slotData.put(Constant.EXTRA_OFFLINE_SLOT_NAME, name);
+            slotData.put(Constant.EXTRA_OFFLINE_SLOT_SONG, song);
+            slotData.put(Constant.EXTRA_OFFLINE_SLOT_ARTIST, artist);
+            slotData.put(Constant.EXTRA_OFFLINE_SLOT_APP, app);
+            slotData.put(Constant.EXTRA_OFFLINE_SLOT_USERCOMMAND, usercommand);
+        } catch (JSONException e) {
+
+        }
+        return slotData.toString();
+    }
+
+    //开始录音
+    private void start(){
+        Intent intent=new Intent();
+        bindParams(intent);//设置识别参数
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        {
+            String args = sp.getString("args", "");
+            if (null != args) {
+                intent.putExtra("args", args);
+            }
+        }
+        boolean api = sp.getBoolean("api", false);
+        if (api) {
+            speechEndTime = -1;
+            speechRecognizer.startListening(intent);
+        } else {
+            intent.setAction("com.baidu.action.RECOGNIZE_SPEECH");
+            startActivityForResult(intent, REQUEST_UI);
+        }
+
+
+    }
+    //停止录音
+    private void stop(){
+        speechRecognizer.stopListening();
+    }
+    //取消录音
+    private void cancel(){
+        speechRecognizer.cancel();
+
+    }
+
+
+
+    //百度语音识别
+    @Override
+    public void onReadyForSpeech(Bundle params) {
+        //准备就绪
+        status=STATUS_Ready;
+    }
+
+    @Override
+    public void onBeginningOfSpeech() {
+        //开始说话处理
+        status=STATUS_Speaking;
+    }
+
+    @Override
+    public void onRmsChanged(float rmsdB) {
+        //音量变化处理
+    }
+
+    @Override
+    public void onBufferReceived(byte[] buffer) {
+        //录音数据传出处理
+    }
+
+    @Override
+    public void onEndOfSpeech() {
+        //说话结束处理
+        status=STATUS_Recognition;
+
+    }
+
+    @Override
+    public void onError(int error) {
+        //出错处理
+        status = STATUS_None;
+        StringBuilder sb = new StringBuilder();
+        switch (error) {
+            case SpeechRecognizer.ERROR_AUDIO:
+                sb.append("音频问题");
+                break;
+            case SpeechRecognizer.ERROR_SPEECH_TIMEOUT:
+                sb.append("没有语音输入");
+                break;
+            case SpeechRecognizer.ERROR_CLIENT:
+                sb.append("其它客户端错误");
+                break;
+            case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:
+                sb.append("权限不足");
+                break;
+            case SpeechRecognizer.ERROR_NETWORK:
+                sb.append("网络问题");
+                break;
+            case SpeechRecognizer.ERROR_NO_MATCH:
+                sb.append("没有匹配的识别结果");
+                break;
+            case SpeechRecognizer.ERROR_RECOGNIZER_BUSY:
+                sb.append("引擎忙");
+                break;
+            case SpeechRecognizer.ERROR_SERVER:
+                sb.append("服务端错误");
+                break;
+            case SpeechRecognizer.ERROR_NETWORK_TIMEOUT:
+                sb.append("连接超时");
+                break;
+        }
+        sb.append(":" + error);
+        Toast.makeText(AddPayActivity.this,"识别失败：" + sb.toString(),Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onResults(Bundle results) {
+        //最终结果处理
+        status = STATUS_None;
+        ArrayList<String> nbest = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+        //print("识别成功：" + Arrays.toString(nbest.toArray(new String[nbest.size()])));
+        String json_res = results.getString("origin_result");
+        try {
+            Toast.makeText(AddPayActivity.this,"origin_result=\n" + new JSONObject(json_res).toString(4),
+                    Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(AddPayActivity.this,"origin_result=[warning: bad json]\n" + json_res,Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onPartialResults(Bundle partialResults) {
+        //临时结果处理
+        ArrayList<String> nbest = partialResults.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+        if (nbest.size() > 0) {
+            Toast.makeText(AddPayActivity.this,"~临时识别结果：" + Arrays.toString(nbest.toArray(new String[0])),
+                    Toast.LENGTH_SHORT).show();
+            //Toast.makeText().setText(nbest.get(0));
+        }
+    }
+
+    @Override
+    public void onEvent(int eventType, Bundle params) {
+        //处理结果回调
+        switch (eventType) {
+            case EVENT_ERROR:
+                String reason = params.get("reason") + "";
+                Log.d("Add","EVENT_ERROR, " + reason);
+                break;
+            case VoiceRecognitionService.EVENT_ENGINE_SWITCH:
+                int type = params.getInt("engine_type");
+                Log.d("Add","*引擎切换至" + (type == 0 ? "在线" : "离线"));
+                break;
+        }
+    }
+
 
 }
 
