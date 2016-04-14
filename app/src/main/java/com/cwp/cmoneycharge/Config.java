@@ -5,10 +5,10 @@ import com.baidu.voicerecognition.android.ui.BaiduASRDigitalDialog;
 
 
 public class Config {
-	/** �Ի�����ʽ */
+	/** 对话框样式 */
 	public static int DIALOG_THEME = BaiduASRDigitalDialog.THEME_BLUE_LIGHTBG;
 
-	/** �Ի�����ʽ */
+	/** 对话框样式 */
 	public static int pushlogindex = 0;
 
 	public static int getPushlog() {
@@ -20,14 +20,14 @@ public class Config {
 	}
 
 	/**
-	 * ��ǰʶ������
+	 * 当前识别语言
 	 */
 	public static String CURRENT_LANGUAGE = VoiceRecognitionConfig.LANGUAGE_CHINESE;
 
 	private static int CURRENT_LANGUAGE_INDEX = 0;
 
 	/**
-	 * ��ǰ��ֱ��������
+	 * 当前垂直领域类型
 	 */
 	public static int CURRENT_PROP = VoiceRecognitionConfig.PROP_INPUT;
 
@@ -43,17 +43,17 @@ public class Config {
 
 	public static void setCurrentLanguageIndex(int index) {
 		switch (index) {
-		case 1:
-			CURRENT_LANGUAGE = VoiceRecognitionConfig.LANGUAGE_CANTONESE;
-			break;
-		case 2:
-			CURRENT_LANGUAGE = VoiceRecognitionConfig.LANGUAGE_ENGLISH;
-			break;
+			case 1:
+				CURRENT_LANGUAGE = VoiceRecognitionConfig.LANGUAGE_CANTONESE;
+				break;
+			case 2:
+				CURRENT_LANGUAGE = VoiceRecognitionConfig.LANGUAGE_ENGLISH;
+				break;
 
-		default:
-			CURRENT_LANGUAGE = VoiceRecognitionConfig.LANGUAGE_CHINESE;
-			index = 0;
-			break;
+			default:
+				CURRENT_LANGUAGE = VoiceRecognitionConfig.LANGUAGE_CHINESE;
+				index = 0;
+				break;
 		}
 		CURRENT_LANGUAGE_INDEX = index;
 	}
@@ -64,58 +64,58 @@ public class Config {
 
 	public static void setCurrentPropIndex(int index) {
 		switch (index) {
-		case 1:
-			CURRENT_PROP = VoiceRecognitionConfig.PROP_SEARCH;
-			break;
-		case 2:
-			CURRENT_PROP = VoiceRecognitionConfig.PROP_MAP;
-			break;
-		case 3:
-			CURRENT_PROP = VoiceRecognitionConfig.PROP_MUSIC;
-			break;
-		case 4:
-			CURRENT_PROP = VoiceRecognitionConfig.PROP_VIDEO;
-			break;
-		case 5:
-			CURRENT_PROP = VoiceRecognitionConfig.PROP_APP;
-			break;
-		case 6:
-			CURRENT_PROP = VoiceRecognitionConfig.PROP_WEB;
-			break;
-		case 7:
-			CURRENT_PROP = VoiceRecognitionConfig.PROP_HEALTH;
-			break;
-		case 8:
-			CURRENT_PROP = VoiceRecognitionConfig.PROP_SHOPPING;
-			break;
-		case 9:
-			CURRENT_PROP = VoiceRecognitionConfig.PROP_PHONE;
-			break;
-		default:
-			CURRENT_PROP = VoiceRecognitionConfig.PROP_INPUT;
-			index = 0;
-			break;
+			case 1:
+				CURRENT_PROP = VoiceRecognitionConfig.PROP_SEARCH;
+				break;
+			case 2:
+				CURRENT_PROP = VoiceRecognitionConfig.PROP_MAP;
+				break;
+			case 3:
+				CURRENT_PROP = VoiceRecognitionConfig.PROP_MUSIC;
+				break;
+			case 4:
+				CURRENT_PROP = VoiceRecognitionConfig.PROP_VIDEO;
+				break;
+			case 5:
+				CURRENT_PROP = VoiceRecognitionConfig.PROP_APP;
+				break;
+			case 6:
+				CURRENT_PROP = VoiceRecognitionConfig.PROP_WEB;
+				break;
+			case 7:
+				CURRENT_PROP = VoiceRecognitionConfig.PROP_HEALTH;
+				break;
+			case 8:
+				CURRENT_PROP = VoiceRecognitionConfig.PROP_SHOPPING;
+				break;
+			case 9:
+				CURRENT_PROP = VoiceRecognitionConfig.PROP_PHONE;
+				break;
+			default:
+				CURRENT_PROP = VoiceRecognitionConfig.PROP_INPUT;
+				index = 0;
+				break;
 		}
 		CURRENT_PROP_INDEX = index;
 	}
 
 	/**
-	 * ��������
+	 * 播放声音
 	 */
 	public static boolean PLAY_START_SOUND = true;
 
 	/**
-	 * ���Ž���
+	 * 播放结束
 	 */
 	public static boolean PLAY_END_SOUND = true;
 
 	/**
-	 * �Ի�����ʾ��
+	 * 对话框提示音
 	 */
 	public static boolean DIALOG_TIPS_SOUND = true;
 
 	/**
-	 * ��ʾ����
+	 * 显示音量
 	 */
 	public static boolean SHOW_VOL = true;
 

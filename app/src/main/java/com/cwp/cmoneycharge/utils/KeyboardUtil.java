@@ -1,8 +1,5 @@
 package com.cwp.cmoneycharge.utils;
 
-import com.cwp.cmoneycharge.activity.AddPayActivity;
-import com.cwp.cmoneycharge.R;
-
 import android.app.Activity;
 import android.content.Context;
 import android.inputmethodservice.Keyboard;
@@ -12,6 +9,12 @@ import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
 
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.activity.AddPayActivity;
+
+/**
+ * 键盘的工具类
+ */
 public class KeyboardUtil {
 	private Context ctx;
 	private Activity act;

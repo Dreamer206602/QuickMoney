@@ -5,12 +5,16 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.speech.RecognitionListener;
+import android.speech.SpeechRecognizer;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -37,13 +41,12 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.voicerecognition.android.ui.BaiduASRDigitalDialog;
+import com.baidu.speech.VoiceRecognitionService;
 import com.baidu.voicerecognition.android.ui.DialogRecognitionListener;
 import com.cwp.chart.manager.SystemBarTintManager;
 import com.cwp.cmoneycharge.Config;
 import com.cwp.cmoneycharge.Effectstype;
 import com.cwp.cmoneycharge.R;
-import com.cwp.cmoneycharge.api.Constants;
 import com.cwp.cmoneycharge.app.CrashApplication;
 import com.cwp.cmoneycharge.app.SysApplication;
 import com.cwp.cmoneycharge.utils.DialogShowUtil;
@@ -51,8 +54,8 @@ import com.cwp.cmoneycharge.utils.DigitUtil;
 import com.cwp.cmoneycharge.utils.KeyboardUtil;
 import com.cwp.cmoneycharge.widget.NiftyDialogBuilder;
 import com.cwp.pattern.activity.UnlockGesturePasswordActivity;
-import com.example.testpic.utils.Bimp;
 import com.example.testpic.activity.PublishedActivity;
+import com.example.testpic.utils.Bimp;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -60,7 +63,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Random;
 
 import cwp.moneycharge.dao.IncomeDAO;
 import cwp.moneycharge.dao.ItypeDAO;
@@ -69,15 +71,10 @@ import cwp.moneycharge.dao.PtypeDAO;
 import cwp.moneycharge.model.Tb_income;
 import cwp.moneycharge.model.Tb_pay;
 
-//import com.amap.api.location.AMapLocation;
-//import com.amap.api.location.AMapLocationListener;
-//import com.amap.api.location.LocationManagerProxy;
-//import com.amap.api.location.LocationProviderProxy;
-
 /**
  * 添加收入的界面
  */
-public class AddPayActivity extends Activity implements  OnClickListener {
+public class AddPayActivity extends Activity implements OnClickListener {
     protected static final int DATE_DIALOG_ID = 0;// 创建日期对话框常量
     static String type = "pay";
     String VoiceDefault = "";
@@ -95,9 +92,9 @@ public class AddPayActivity extends Activity implements  OnClickListener {
     private FrameLayout corporation_fl, address_fl = null;
     private RadioButton rb1 = null;
     private RadioButton rb2 = null;
-    ImageView left_back;
+    private ImageView left_back;//取消的按钮
 
-    private BaiduASRDigitalDialog mDialog = null; // 百度语音定义
+    //private BaiduASRDigitalDialog mDialog = null; // 百度语音定义
     private DialogRecognitionListener mRecognitionListener;
     private int mCurrentTheme = Config.DIALOG_THEME;
     private Effectstype effect; // 自定义Dialog
@@ -110,9 +107,6 @@ public class AddPayActivity extends Activity implements  OnClickListener {
 
     private ArrayAdapter<String> adapter;
     private String[] spdata;
-
-
-    private Random mRandom = new Random();
 
     String[] number = {"一", "二", "两", "三", "四", "五", "六", "七", "八", "九", "十"};
     String[] money = {"元", "块", "钱"};
@@ -136,23 +130,32 @@ public class AddPayActivity extends Activity implements  OnClickListener {
     private FrameLayout bottom_empty;
     private LinearLayout bottom_full;
     private KeyboardUtil keyBoard;
-
-
     //TODO 百度地图
     private LocationClient mLocationClient;
     private BDLocationListener mLocationListener = new MyLocationListener();
 
 
+    //TODO 百度语音识别
+    private static final String TAG = "Sdk2Api";
+    private static final int REQUEST_UI = 1;
+    public static final int STATUS_None = 0;
+    public static final int STATUS_WaitingReady = 2;
+    public static final int STATUS_Ready = 3;
+    public static final int STATUS_Speaking = 4;
+    public static final int STATUS_Recognition = 5;
+    private SpeechRecognizer speechRecognizer;
+    private int status = STATUS_None;
+    private long speechEndTime = -1;
+    private static final int EVENT_ERROR = 11;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.add);// 设置布局文件
         SysApplication.getInstance().addActivity(this); // 在销毁队列中添加this
         super.onStart();// 实现基类中的方法
-
-        //TODO 百度地图的处理
-        initBaiDuMap();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             setTranslucentStatus(true);
             findViewById(R.id.top).setVisibility(View.VISIBLE);
@@ -179,7 +182,7 @@ public class AddPayActivity extends Activity implements  OnClickListener {
 
         dialogShowUtil = new DialogShowUtil(this, this, VoiceSave, type, // 初始化dialog
                 VoiceDefault);
-        btn_loacte.setOnClickListener(this); // 定位的按钮
+        btn_loacte.setOnClickListener(this); // 定位的按钮的点击事件
 
         // 隐藏菜单
         bottom_empty.setOnClickListener(new OnClickListener() {
@@ -218,23 +221,24 @@ public class AddPayActivity extends Activity implements  OnClickListener {
             }
         });
 
-        mRecognitionListener = new DialogRecognitionListener() { // 百度识别返回数据
-
-            @Override
-            public void onResults(Bundle results) {
-                ArrayList<String> rs = results != null ? results
-                        .getStringArrayList(RESULTS_RECOGNITION) : null;
-                if (rs != null && rs.size() > 0) {
-                    Recognition(rs.get(0)); // 把识别数据传入识别方法
-                    // Toast.makeText(AddPayActivity.this, rs.get(0),
-                    // Toast.LENGTH_SHORT).show();
-                }
-            }
-        };
+//        mRecognitionListener = new DialogRecognitionListener() { // 百度识别返回数据
+//
+//            @Override
+//            public void onResults(Bundle results) {
+//                ArrayList<String> rs = results != null ? results
+//                        .getStringArrayList(RESULTS_RECOGNITION) : null;
+//                if (rs != null && rs.size() > 0) {
+//                    Recognition(rs.get(0)); // 把识别数据传入识别方法
+//                    // Toast.makeText(AddPayActivity.this, rs.get(0),
+//                    // Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        };
 
         corporation_fl = (FrameLayout) findViewById(R.id.corporation_fl);
         address_fl = (FrameLayout) findViewById(R.id.address_fl);
 
+        //checkBox按钮
         rb1.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
@@ -254,11 +258,65 @@ public class AddPayActivity extends Activity implements  OnClickListener {
         mYear = c.get(Calendar.YEAR);// 获取年份
         mMonth = c.get(Calendar.MONTH);// 获取月份
         mDay = c.get(Calendar.DAY_OF_MONTH);// 获取天数
+
+
+        //TODO　百度语音识别
+        initBaiDuSpeech();
+    }
+
+    //TODO　百度语音识别
+    private void initBaiDuSpeech() {
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this, new ComponentName(this, VoiceRecognitionService.class));
+        speechRecognizer.setRecognitionListener(new RecognitionListener() {
+            @Override
+            public void onReadyForSpeech(Bundle params) {
+
+            }
+
+            @Override
+            public void onBeginningOfSpeech() {
+
+            }
+
+            @Override
+            public void onRmsChanged(float rmsdB) {
+
+            }
+
+            @Override
+            public void onBufferReceived(byte[] buffer) {
+
+            }
+
+            @Override
+            public void onEndOfSpeech() {
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+
+            @Override
+            public void onResults(Bundle results) {
+
+            }
+
+            @Override
+            public void onPartialResults(Bundle partialResults) {
+
+            }
+
+            @Override
+            public void onEvent(int eventType, Bundle params) {
+
+            }
+        });
     }
 
     //TODO 百度地图的处理
     private void initBaiDuMap() {
-
         //定位
         mLocationClient = new LocationClient(getApplicationContext());
         mLocationClient.registerLocationListener(mLocationListener);
@@ -464,15 +522,16 @@ public class AddPayActivity extends Activity implements  OnClickListener {
             }
         });
 
+        //TODO  语音识别的按钮
         btnVoice.setOnClickListener(new OnClickListener() {// 语音识别监听
-
             @Override
             public void onClick(View v) {
                 dialogShowUtil.dialogShow("rotatebottom", "first", "", "");
             }
         });
 
-        btnSaveButton.setOnClickListener(new OnClickListener() {// 为保存按钮设置监听事件
+        // 为保存按钮设置监听事件
+        btnSaveButton.setOnClickListener(new OnClickListener() {
             private String textreAddres;
             private String textreMark;
 
@@ -685,34 +744,79 @@ public class AddPayActivity extends Activity implements  OnClickListener {
      * 调用百度语音识别
      */
     public void VoiceRecognition() {
-        // mResult.setText(null);
-        mCurrentTheme = Config.DIALOG_THEME;
-        if (mDialog != null) {
-            mDialog.dismiss();
+//        // mResult.setText(null);
+//        mCurrentTheme = Config.DIALOG_THEME;
+//        if (mDialog != null) {
+//            mDialog.dismiss();
+//            //mDialog.finish();
+//
+//        }
+//        Bundle params = new Bundle();
+//        params.putString(BaiduASRDigitalDialog.PARAM_API_KEY, Constants.API_KEY); // 百度语音api_key
+//        params.putString(BaiduASRDigitalDialog.PARAM_SECRET_KEY,
+//                Constants.SECRET_KEY);
+//        params.putInt(BaiduASRDigitalDialog.PARAM_DIALOG_THEME, // 百度语音主题
+//                Config.DIALOG_THEME);
+//        mDialog = new BaiduASRDigitalDialog(AddPayActivity.this, params);
+//        mDialog.setDialogRecognitionListener(mRecognitionListener);
+//        mDialog.getParams().putInt(BaiduASRDigitalDialog.PARAM_PROP, // 百度识别类别
+//                Config.CURRENT_PROP);
+//        mDialog.getParams().putString(BaiduASRDigitalDialog.PARAM_LANGUAGE, // 百度识别语言
+//                Config.getCurrentLanguage());
+//        mDialog.getParams().putBoolean(
+//                // 百度识别音效相关
+//                BaiduASRDigitalDialog.PARAM_START_TONE_ENABLE,
+//                Config.PLAY_START_SOUND);
+//        mDialog.getParams().putBoolean(
+//                BaiduASRDigitalDialog.PARAM_END_TONE_ENABLE,
+//                Config.PLAY_END_SOUND);
+//        mDialog.getParams().putBoolean(
+//                BaiduASRDigitalDialog.PARAM_TIPS_TONE_ENABLE,
+//                Config.DIALOG_TIPS_SOUND);
+//        mDialog.show();
+
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(AddPayActivity.this);
+        boolean api = sp.getBoolean("api", false);
+        if (api) {
+            switch (status) {
+                case STATUS_None:
+                    start();
+                    btn.setText("取消");
+                    status = STATUS_WaitingReady;
+                    break;
+                case STATUS_WaitingReady:
+                    cancel();
+                    status = STATUS_None;
+                    btn.setText("开始");
+                    break;
+                case STATUS_Ready:
+                    cancel();
+                    status = STATUS_None;
+                    btn.setText("开始");
+                    break;
+                case STATUS_Speaking:
+                    stop();
+                    status = STATUS_Recognition;
+                    btn.setText("识别中");
+                    break;
+                case STATUS_Recognition:
+                    cancel();
+                    status = STATUS_None;
+                    btn.setText("开始");
+                    break;
+            }
+        } else {
+            start();
         }
-        Bundle params = new Bundle();
-        params.putString(BaiduASRDigitalDialog.PARAM_API_KEY, Constants.API_KEY); // 百度语音api_key
-        params.putString(BaiduASRDigitalDialog.PARAM_SECRET_KEY,
-                Constants.SECRET_KEY);
-        params.putInt(BaiduASRDigitalDialog.PARAM_DIALOG_THEME, // 百度语音主题
-                Config.DIALOG_THEME);
-        mDialog = new BaiduASRDigitalDialog(this, params);
-        mDialog.setDialogRecognitionListener(mRecognitionListener);
-        mDialog.getParams().putInt(BaiduASRDigitalDialog.PARAM_PROP, // 百度识别类别
-                Config.CURRENT_PROP);
-        mDialog.getParams().putString(BaiduASRDigitalDialog.PARAM_LANGUAGE, // 百度识别语言
-                Config.getCurrentLanguage());
-        mDialog.getParams().putBoolean(
-                // 百度识别音效相关
-                BaiduASRDigitalDialog.PARAM_START_TONE_ENABLE,
-                Config.PLAY_START_SOUND);
-        mDialog.getParams().putBoolean(
-                BaiduASRDigitalDialog.PARAM_END_TONE_ENABLE,
-                Config.PLAY_END_SOUND);
-        mDialog.getParams().putBoolean(
-                BaiduASRDigitalDialog.PARAM_TIPS_TONE_ENABLE,
-                Config.DIALOG_TIPS_SOUND);
-        mDialog.show();
+    }
+
+
+
+
+
+
+
     }
 
     public void VoiceSuccess() { // 识别成功录入数据
@@ -969,20 +1073,14 @@ public class AddPayActivity extends Activity implements  OnClickListener {
 
     @Override
     protected void onDestroy() {
-        if (mDialog != null) {
-            mDialog.dismiss();
-        }
-        if (dialogBuilder != null) {
-            dialogBuilder.dismiss();
-        }
+//        if (mDialog != null) {
+//            mDialog.dismiss();
+//        }
+//        if (dialogBuilder != null) {
+//            dialogBuilder.dismiss();
+//        }
         super.onDestroy();
         mLocationClient.unRegisterLocationListener(mLocationListener);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
     }
 
     protected void onResume() {
@@ -999,14 +1097,14 @@ public class AddPayActivity extends Activity implements  OnClickListener {
     }
 
 
-
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_loacte:
-                Toast.makeText(this,"正在定位...",Toast.LENGTH_SHORT).show();
-                mLocationClient.requestLocation();
+                //Toast.makeText(this,"正在定位...",Toast.LENGTH_SHORT).show();
+                //mLocationClient.requestLocation();
+                //TODO 百度地图的处理
+                initBaiDuMap();
                 break;
         }
     }
@@ -1039,7 +1137,10 @@ public class AddPayActivity extends Activity implements  OnClickListener {
         dialogShowUtil.dialogShow("rotatebottom", "first", "", "");
     }
 
-    private class  MyLocationListener implements BDLocationListener{
+    /**
+     * 百度地图定位的事件监听
+     */
+    private class MyLocationListener implements BDLocationListener {
 
         @Override
         public void onReceiveLocation(BDLocation location) {
@@ -1049,7 +1150,6 @@ public class AddPayActivity extends Activity implements  OnClickListener {
             StringBuilder sb = new StringBuilder(1024);
             sb.append(location.getAddrStr());
             Log.d("adds", sb.toString());
-            //Toast.makeText(AddPayActivity.this,"Address:"+location.getAddrStr(),Toast.LENGTH_SHORT).show();
             txtAddress.setText(sb.toString());
 
         }
