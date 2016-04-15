@@ -31,7 +31,6 @@ import com.cwp.cmoneycharge.activity.PayChartActivity;
 public class FragmentPage2 extends BaseFragment implements OnClickListener {
     static int userid;
     private static FragmentPage1 fragmentPage1;
-    public  FragmentPage2 fragmentPage2;
     private static FragmentPage3 fragmentPage3;
     private static FragmentPage4 fragmentPage4;
     // 定义布局对象

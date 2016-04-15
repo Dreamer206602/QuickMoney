@@ -13,10 +13,6 @@ public class DescriptionActivity extends Activity{
 
 	Intent intentr;
 	int userid;
-	public DescriptionActivity() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

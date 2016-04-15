@@ -45,10 +45,10 @@ public class PayDataActivity extends Activity {
 	PayDAO payDAO;
 	int defaultMonth;
 	int defaultYear;
-	Time time;
+	Time time;// 获取当前时间
 	LinearLayout piechart, pdataselect;
 	Button beforet, aftert, anytime;
-	Spinner year, month, day, yeare, monthe, daye;
+	Spinner year, month, day, yeare, monthe, daye;// 界面上的任意时间
 	List<String> yearlist;
 	Adapter adapter;
 	String date1 = "", date2 = "";
@@ -67,14 +67,16 @@ public class PayDataActivity extends Activity {
 			Color.rgb(217, 190, 100), Color.rgb(50, 150, 100),
 			Color.rgb(150, 150, 100), Color.rgb(150, 150, 190) };
 
+
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.paydata);
-		SysApplication.getInstance().addActivity(this); // �����ٶ��������this
+		SysApplication.getInstance().addActivity(this); // 在销毁队列中添加this
 		time = new Time("GMT+8");
 		time.setToNow();
-		defaultMonth = time.month + 1;// ����Ĭ���·�
+		defaultMonth = time.month + 1;// 设置默认月份
 		defaultYear = time.year;
 		beforet = (Button) findViewById(R.id.pbefore);
 		aftert = (Button) findViewById(R.id.pafter);
@@ -89,13 +91,13 @@ public class PayDataActivity extends Activity {
 		nodata = (TextView) findViewById(R.id.nodata);
 		pdataselect = (LinearLayout) findViewById(R.id.pdataselect);
 		mSeries = new CategorySeries("");
-		mRenderer = new DefaultRenderer();
-		yearlist = new ArrayList<String>();
+		mRenderer = new DefaultRenderer();// PieChart的主要描绘器
+		yearlist = new ArrayList<String>(); // 生成年份列表 spinner
 		payDAO = new PayDAO(PayDataActivity.this);
 		KindDatap = new ArrayList<KindData>();
 		ptypeDAO = new PtypeDAO(PayDataActivity.this);
 
-
+		// 设置年
 		for (int i = 0; i <= 10; i++) {
 			yearlist.add(String.valueOf(defaultYear - i));
 		}
@@ -113,20 +115,20 @@ public class PayDataActivity extends Activity {
 		userid = intentr.getIntExtra("cwp.id", 100000001);
 		defaultMonth = intentr.getIntExtra("default", defaultMonth);
 		defaultYear = intentr.getIntExtra("defaulty", defaultYear);
-		int type = intentr.getIntExtra("type", 0);
+		int type = intentr.getIntExtra("type", 0);// 为0，选择上下月，为1，选择任意时间
 		payDAO = new PayDAO(PayDataActivity.this);
 
-		mRenderer.setZoomButtonsVisible(true);
-		mRenderer.setStartAngle(180);
-		mRenderer.setDisplayValues(true);
-		mRenderer.setFitLegend(true);
-		mRenderer.setShowLabels(true);
-		mRenderer.setLabelsTextSize(54);
-		mRenderer.setShowLegend(false);
-		mRenderer.setLabelsColor(Color.BLACK);
-		mRenderer.setLegendTextSize(54);
-		mRenderer.setLegendHeight(30);
-		mRenderer.setChartTitleTextSize(54);
+		mRenderer.setZoomButtonsVisible(true); // 显示放大缩小功能按钮
+		mRenderer.setStartAngle(180); // 设置为水平开始
+		mRenderer.setDisplayValues(true); // 显示数据
+		mRenderer.setFitLegend(true); // 设置自动按比例缩放
+		mRenderer.setShowLabels(true); // 显示标签
+		mRenderer.setLabelsTextSize(54); // 设置轴刻度文字的大小
+		mRenderer.setShowLegend(false); // 不显示底部
+		mRenderer.setLabelsColor(Color.BLACK); // 设置轴标签颜色
+		mRenderer.setLegendTextSize(54); // 设置图例字体大小
+		mRenderer.setLegendHeight(30); // 设置图例高度
+		mRenderer.setChartTitleTextSize(54); // 设置饼图标题大小
 
 		if (type == 0) {
 			KindDatap = payDAO.getKDataOnMonth(userid, defaultYear,
@@ -140,7 +142,7 @@ public class PayDataActivity extends Activity {
 			KindDatap = payDAO.getKDataOnDay(userid, date1, date2);
 			mRenderer.setChartTitle(date1 + "~" + date2);
 		}
-
+		// 数据
 
 		if (KindDatap.size() == 0) {
 			nodata.setVisibility(View.VISIBLE);
@@ -150,7 +152,7 @@ public class PayDataActivity extends Activity {
 			double sum = 0.00;
 			int i = 0;
 			for (KindData kp : KindDatap)
-				sum += kp.getAmount();// �ܺ�
+				sum += kp.getAmount();// 总和
 
 			for (KindData kp : KindDatap) {
 				mSeries.add(ptypeDAO.getOneName(userid, kp.getKindname()),
@@ -161,45 +163,45 @@ public class PayDataActivity extends Activity {
 				} else {
 					renderer.setColor(getRandomColor());
 				}
-				renderer.setChartValuesFormat(NumberFormat.getPercentInstance());// ���ðٷֱ�
-				mRenderer.addSeriesRenderer(renderer);// �����µ��������ӵ�DefaultRenderer��
+				renderer.setChartValuesFormat(NumberFormat.getPercentInstance());// 设置百分比
+				mRenderer.addSeriesRenderer(renderer);// 将最新的描绘器添加到DefaultRenderer中
 				i++;
 			}
 
 			mChartView = ChartFactory.getPieChartView(getApplicationContext(),
-					mSeries, mRenderer);// ����mChartView
-			mRenderer.setClickEnabled(true);// �������¼�
-			mChartView.setOnClickListener(new OnClickListener() {// ��������
-						@Override
-						public void onClick(View v) {
-							SeriesSelection seriesSelection = mChartView
-									.getCurrentSeriesAndPoint();// ��ȡ��ǰ������ָ��
-							if (seriesSelection == null) {
-								Toast.makeText(getApplicationContext(),
-										"��δѡ������", Toast.LENGTH_SHORT).show();
-							} else {
-								for (int i = 0; i < mSeries.getItemCount(); i++) {
-									mRenderer.getSeriesRendererAt(i)
-											.setHighlighted(
-													i == seriesSelection
-															.getPointIndex());
-								}
-								mChartView.repaint();
-								Toast.makeText(
-										getApplicationContext(),
-										"��ѡ����ǵ�"
-												+ (seriesSelection
-														.getPointIndex() + 1)
-												+ " �� "
-												+ " �ٷֱ�Ϊ  "
-												+ NumberFormat
-														.getPercentInstance()
-														.format(seriesSelection
-																.getValue()),
-										Toast.LENGTH_SHORT).show();
-							}
+					mSeries, mRenderer);// 构建mChartView
+			mRenderer.setClickEnabled(true);// 允许点击事件
+			mChartView.setOnClickListener(new View.OnClickListener() {// 具体内容
+				@Override
+				public void onClick(View v) {
+					SeriesSelection seriesSelection = mChartView
+							.getCurrentSeriesAndPoint();// 获取当前的类别和指针
+					if (seriesSelection == null) {
+						Toast.makeText(getApplicationContext(),
+								"您未选择数据", Toast.LENGTH_SHORT).show();
+					} else {
+						for (int i = 0; i < mSeries.getItemCount(); i++) {
+							mRenderer.getSeriesRendererAt(i)
+									.setHighlighted(
+											i == seriesSelection
+													.getPointIndex());
 						}
-					});
+						mChartView.repaint();
+						Toast.makeText(
+								getApplicationContext(),
+								"您选择的是第"
+										+ (seriesSelection
+										.getPointIndex() + 1)
+										+ " 项 "
+										+ " 百分比为  "
+										+ NumberFormat
+										.getPercentInstance()
+										.format(seriesSelection
+												.getValue()),
+								Toast.LENGTH_SHORT).show();
+					}
+				}
+			});
 			piechart.addView(mChartView);
 		}
 
@@ -269,7 +271,7 @@ public class PayDataActivity extends Activity {
 				+ daye.getSelectedItem().toString();
 	}
 
-	private int getRandomColor() {// �ֱ����RBG��ֵ
+	private int getRandomColor() {// 分别产生RBG数值
 		Random random = new Random();
 		int R = random.nextInt(255);
 		int G = random.nextInt(255);
@@ -278,10 +280,10 @@ public class PayDataActivity extends Activity {
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) { // 监控/拦截/屏蔽返回键
 			Intent intent = new Intent(PayDataActivity.this, MainActivity.class);
 			intent.putExtra("cwp.id", userid);
-			intent.putExtra("cwp.Fragment", "2");
+			intent.putExtra("cwp.Fragment", "2");// 设置传递数据
 			startActivity(intent);
 			return true;
 		}

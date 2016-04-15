@@ -289,8 +289,6 @@ public class AddPayActivity extends Activity implements OnClickListener, Recogni
 
     //TODO 百度地图的处理
     private void initBaiDuMap() {
-
-
         //设置定位的参数
         LocationClientOption option = new LocationClientOption();
         option.setIsNeedAddress(true);
