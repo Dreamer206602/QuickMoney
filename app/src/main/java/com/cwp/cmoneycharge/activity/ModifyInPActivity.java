@@ -1,17 +1,5 @@
 package com.cwp.cmoneycharge.activity;
 
-import java.util.Calendar;
-import java.util.List;
-  
-//import com.cwp.cmoneycharge.R;
-
-import cwp.moneycharge.dao.IncomeDAO; 
-import cwp.moneycharge.dao.ItypeDAO; 
-import cwp.moneycharge.dao.PtypeDAO;
-import cwp.moneycharge.manager.ActivityManager;
-import cwp.moneycharge.model.Tb_income;
-import cwp.moneycharge.model.Tb_pay;
-
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -29,7 +17,18 @@ import android.widget.Toast;
 
 import com.cwp.cmoneycharge.R;
 
+import java.util.Calendar;
+import java.util.List;
+
+import cwp.moneycharge.dao.IncomeDAO;
+import cwp.moneycharge.dao.ItypeDAO;
 import cwp.moneycharge.dao.PayDAO;
+import cwp.moneycharge.dao.PtypeDAO;
+import cwp.moneycharge.manager.ActivityManager;
+import cwp.moneycharge.model.Tb_income;
+import cwp.moneycharge.model.Tb_pay;
+
+
 
 public class ModifyInPActivity extends Activity{
 	protected static final int DATE_DIALOG_ID = 0;// 创建日期对话框常量
@@ -52,9 +51,6 @@ public class ModifyInPActivity extends Activity{
 	private String[] spdata;
 	PayDAO payDAO= new PayDAO(ModifyInPActivity.this );// 创建PayDAO对象
 	IncomeDAO incomeDAO  = new IncomeDAO(ModifyInPActivity.this);// 创建IncomeDAO对象
-	public ModifyInPActivity() {
-		// TODO Auto-generated constructor stub
-	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub

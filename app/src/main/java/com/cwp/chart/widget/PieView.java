@@ -1,31 +1,26 @@
 package com.cwp.chart.widget;
 
-import java.util.ArrayList;
-
-import com.cwp.chart.ChartProp;
-import com.cwp.chart.listener.ChartPropChangeListener;
-import com.cwp.chart.PiewController;
-import com.cwp.cmoneycharge.activity.PayChartActivity;
-import com.cwp.cmoneycharge.R;
-
 import android.content.Context;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
-
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.RectF;
-
-import android.graphics.Paint;
-
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
-
 import android.view.View;
+
+import com.cwp.chart.ChartProp;
+import com.cwp.chart.PiewController;
+import com.cwp.chart.listener.ChartPropChangeListener;
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.activity.PayChartActivity;
+
+import java.util.ArrayList;
 
 public class PieView extends View implements View.OnTouchListener, Runnable {
 
@@ -291,7 +286,6 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
-		// �߶�
 		screenHight = (float) PiewController.measureWidth(heightMeasureSpec);
 
 		screenWidth = (float) PiewController.measureHeight(widthMeasureSpec);

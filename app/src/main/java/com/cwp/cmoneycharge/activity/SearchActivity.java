@@ -109,10 +109,6 @@ public class SearchActivity extends Activity {
 	protected String timetype;
 	private LinearLayout search_list_timeall;
 	private RelativeLayout search_more_close;
-	public int defaultMonth;
-	public String dmonth;
-	public int defaultDay;
-	public String dday;
 	private Calendar c;
 	protected String searchstate = "quit";
 	public boolean timeselect;

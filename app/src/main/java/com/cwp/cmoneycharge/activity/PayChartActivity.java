@@ -560,8 +560,6 @@ public class PayChartActivity extends SlidingActivity implements OnClickListener
 		DisplayMetrics dm = parent.getResources().getDisplayMetrics();
 		int w_screen = dm.widthPixels;
 		int h_screen = dm.heightPixels;
-		// System.out
-		// .println("你的设备w_screen：" + w_screen + " h_screen：" + h_screen);
 		if (popWindow == null) {
 			LayoutInflater layoutInflater = (LayoutInflater) this
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
