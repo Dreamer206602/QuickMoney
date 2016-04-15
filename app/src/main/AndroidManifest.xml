@@ -46,9 +46,9 @@
         android:theme="@style/AppTheme">
         <!-- begin: baidu speech sdk-->
         <!-- 请填写真实的APP_ID API_KEY SECRET_KEY -->
-        <meta-data android:name="com.baidu.speech.APP_ID" android:value="7969578"/>
-        <meta-data android:name="com.baidu.speech.API_KEY" android:value="cGSPq2Q9kRuq9ynxMdOISjGL7Q1Gg7p4"/>
-        <meta-data android:name="com.baidu.speech.SECRET_KEY" android:value="Lw8vaTO8U06XvPBZNRkTpwmmRHhwsOw8"/>
+        <meta-data android:name="com.baidu.speech.APP_ID" android:value="8005590"/>
+        <meta-data android:name="com.baidu.speech.API_KEY" android:value="MXwxgW99VWOIGP6Guc8HdrAA"/>
+        <meta-data android:name="com.baidu.speech.SECRET_KEY" android:value="ef702de58676e302190533c97eb331b7"/>
         <service android:name="com.baidu.speech.VoiceRecognitionService" android:exported="false" />
         <activity
             android:name="com.baidu.voicerecognition.android.ui.BaiduASRDigitalDialog"
@@ -87,6 +87,8 @@
 
         <activity
             android:name=".activity.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenLayout"
+            android:screenOrientation="portrait"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

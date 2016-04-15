@@ -1,8 +1,5 @@
 package com.cwp.chart.widget;
 
-import com.cwp.chart.adapter.CheckAdapter;
-import com.cwp.cmoneycharge.R;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,6 +14,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.cwp.chart.adapter.CheckAdapter;
+import com.cwp.cmoneycharge.R;
 
 /**
  * 自定义多种选择的Dialog
@@ -306,14 +306,14 @@ public class CustomMultiChoiceDialog extends Dialog {
 				} else {
 					checkAll.setVisibility(View.GONE);
 				}
-			} else { // ����ǵ�ѡģʽ
+			} else {
 				final CheckAdapter checkAdapter = new CheckAdapter(context,
 						items, checkedItems);
 
 				listView.setAdapter(checkAdapter);
 				listView.setItemsCanFocus(true);
 
-				for (int i = 0; i < items.length; i++) { // ����CheckBox
+				for (int i = 0; i < items.length; i++) {
 					CheckBox itemCheckBox = (CheckBox) listView.getAdapter()
 							.getView(i, null, null)
 							.findViewById(R.id.chk_selectone);

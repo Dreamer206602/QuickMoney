@@ -1,12 +1,9 @@
 package com.cwp.cmoneycharge;
 
 //import com.baidu.voicerecognition.android.VoiceRecognitionConfig;
-import com.baidu.voicerecognition.android.ui.BaiduASRDigitalDialog;
-
-
 public class Config {
 	/** 对话框样式 */
-	public static int DIALOG_THEME = BaiduASRDigitalDialog.THEME_BLUE_LIGHTBG;
+	//public static int DIALOG_THEME = BaiduASRDigitalDialog.THEME_BLUE_LIGHTBG;
 
 	/** 对话框样式 */
 	public static int pushlogindex = 0;
@@ -23,6 +20,9 @@ public class Config {
 	 * 当前识别语言
 	 */
 	//public static String CURRENT_LANGUAGE = VoiceRecognitionConfig.LANGUAGE_CHINESE;
+
+
+
 
 	private static int CURRENT_LANGUAGE_INDEX = 0;
 
@@ -41,22 +41,23 @@ public class Config {
 		return CURRENT_LANGUAGE_INDEX;
 	}
 
-//	public static void setCurrentLanguageIndex(int index) {
-//		switch (index) {
-//			case 1:
-//				CURRENT_LANGUAGE = VoiceRecognitionConfig.LANGUAGE_CANTONESE;
-//				break;
-//			case 2:
-//				CURRENT_LANGUAGE = VoiceRecognitionConfig.LANGUAGE_ENGLISH;
-//				break;
-//
-//			default:
-//				CURRENT_LANGUAGE = VoiceRecognitionConfig.LANGUAGE_CHINESE;
-//				index = 0;
-//				break;
-//		}
-//		CURRENT_LANGUAGE_INDEX = index;
-//	}
+	public static void setCurrentLanguageIndex(int index) {
+		switch (index) {
+			case 1:
+				//CURRENT_LANGUAGE = VoiceRecognitionConfig.LANGUAGE_CANTONESE;
+
+				break;
+			case 2:
+				//CURRENT_LANGUAGE = VoiceRecognitionConfig.LANGUAGE_ENGLISH;
+				break;
+
+			default:
+				//CURRENT_LANGUAGE = VoiceRecognitionConfig.LANGUAGE_CHINESE;
+				index = 0;
+				break;
+		}
+		CURRENT_LANGUAGE_INDEX = index;
+	}
 
 	public static int getCurrentPropIndex() {
 		return CURRENT_PROP_INDEX;

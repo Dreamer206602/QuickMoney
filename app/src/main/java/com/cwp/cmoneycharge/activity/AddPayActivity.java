@@ -42,9 +42,7 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.speech.VoiceRecognitionService;
-import com.baidu.voicerecognition.android.ui.DialogRecognitionListener;
 import com.cwp.chart.manager.SystemBarTintManager;
-import com.cwp.cmoneycharge.Config;
 import com.cwp.cmoneycharge.Effectstype;
 import com.cwp.cmoneycharge.R;
 import com.cwp.cmoneycharge.api.Constant;
@@ -99,9 +97,7 @@ public class AddPayActivity extends Activity implements OnClickListener, Recogni
     private RadioButton rb2 = null;
     private ImageView left_back;//取消的按钮
 
-    //private BaiduASRDigitalDialog mDialog = null; // 百度语音定义
-    private DialogRecognitionListener mRecognitionListener;
-    private int mCurrentTheme = Config.DIALOG_THEME;
+
     private Effectstype effect; // 自定义Dialog
     NiftyDialogBuilder dialogBuilder = null;
     Boolean firstin = true;
@@ -197,6 +193,17 @@ public class AddPayActivity extends Activity implements OnClickListener, Recogni
         bottom_empty = (FrameLayout) findViewById(R.id.bottom_empty);
         bottom_full = (LinearLayout) findViewById(R.id.bottom_full);
 
+
+        //百度定位
+        //定位
+        mLocationClient = new LocationClient(getApplicationContext());
+        mLocationClient.registerLocationListener(mLocationListener);
+        //TODO　百度语音识别
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this, new ComponentName(this, VoiceRecognitionService.class));
+        speechRecognizer.setRecognitionListener(this);
+
+
+
         dialogShowUtil = new DialogShowUtil(this, this, VoiceSave, type, // 初始化dialog
                 VoiceDefault);
         btn_loacte.setOnClickListener(this); // 定位的按钮的点击事件
@@ -277,22 +284,12 @@ public class AddPayActivity extends Activity implements OnClickListener, Recogni
         mDay = c.get(Calendar.DAY_OF_MONTH);// 获取天数
 
 
-        //TODO　百度语音识别
-        initBaiDuSpeech();
-    }
-
-    //TODO　百度语音识别
-    private void initBaiDuSpeech() {
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this, new ComponentName(this, VoiceRecognitionService.class));
-        speechRecognizer.setRecognitionListener(this);
 
     }
 
     //TODO 百度地图的处理
     private void initBaiDuMap() {
-        //定位
-        mLocationClient = new LocationClient(getApplicationContext());
-        mLocationClient.registerLocationListener(mLocationListener);
+
 
         //设置定位的参数
         LocationClientOption option = new LocationClientOption();
@@ -500,6 +497,8 @@ public class AddPayActivity extends Activity implements OnClickListener, Recogni
             @Override
             public void onClick(View v) {
                 dialogShowUtil.dialogShow("rotatebottom", "first", "", "");
+                //VoiceRecognition();
+
             }
         });
 
@@ -717,6 +716,7 @@ public class AddPayActivity extends Activity implements OnClickListener, Recogni
      * 调用百度语音识别
      */
     public void VoiceRecognition() {
+
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(AddPayActivity.this);
         boolean api = sp.getBoolean("api", false);
         if (api) {
@@ -1002,6 +1002,7 @@ public class AddPayActivity extends Activity implements OnClickListener, Recogni
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        speechRecognizer.destroy();
         mLocationClient.unRegisterLocationListener(mLocationListener);
 
     }
@@ -1024,15 +1025,18 @@ public class AddPayActivity extends Activity implements OnClickListener, Recogni
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_loacte:
-                //Toast.makeText(this,"正在定位...",Toast.LENGTH_SHORT).show();
-                //mLocationClient.requestLocation();
                 //TODO 百度地图的处理
                 initBaiDuMap();
                 break;
         }
     }
 
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            onResults(data.getExtras());
+        }
         switch (requestCode) {
             case 102:
                 if (resultCode == 3 || resultCode == 0) {
@@ -1052,18 +1056,14 @@ public class AddPayActivity extends Activity implements OnClickListener, Recogni
                     }
 
                 }
-            case RESULT_OK:
-                onResults(data.getExtras());
-                break;
-
         }
+
     }
 
     public static void showVoiveDialog() {
         dialogShowUtil.dialogShow("rotatebottom", "first", "", "");
     }
 
-    //设置识别的参数
     public void bindParams(Intent intent) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         if (sp.getBoolean("tips_sound", true)) {
@@ -1149,12 +1149,14 @@ public class AddPayActivity extends Activity implements OnClickListener, Recogni
         return slotData.toString();
     }
 
+
     //开始录音
-    private void start(){
-        Intent intent=new Intent();
-        bindParams(intent);//设置识别参数
+    private void start() {
+        Intent intent = new Intent();
+        bindParams(intent);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         {
+
             String args = sp.getString("args", "");
             if (null != args) {
                 intent.putExtra("args", args);
@@ -1169,36 +1171,35 @@ public class AddPayActivity extends Activity implements OnClickListener, Recogni
             startActivityForResult(intent, REQUEST_UI);
         }
 
-
     }
+
     //停止录音
-    private void stop(){
+    private void stop() {
         speechRecognizer.stopListening();
     }
+
     //取消录音
-    private void cancel(){
+    private void cancel() {
         speechRecognizer.cancel();
-
     }
-
 
 
     //百度语音识别
     @Override
     public void onReadyForSpeech(Bundle params) {
         //准备就绪
-        status=STATUS_Ready;
+        status = STATUS_Ready;
     }
 
     @Override
     public void onBeginningOfSpeech() {
         //开始说话处理
-        status=STATUS_Speaking;
+        status = STATUS_Speaking;
     }
 
     @Override
     public void onRmsChanged(float rmsdB) {
-        //音量变化处理
+
     }
 
     @Override
@@ -1209,7 +1210,7 @@ public class AddPayActivity extends Activity implements OnClickListener, Recogni
     @Override
     public void onEndOfSpeech() {
         //说话结束处理
-        status=STATUS_Recognition;
+        status = STATUS_Recognition;
 
     }
 
@@ -1248,7 +1249,7 @@ public class AddPayActivity extends Activity implements OnClickListener, Recogni
                 break;
         }
         sb.append(":" + error);
-        Toast.makeText(AddPayActivity.this,"识别失败：" + sb.toString(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(AddPayActivity.this, "识别失败：" + sb.toString(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -1259,10 +1260,10 @@ public class AddPayActivity extends Activity implements OnClickListener, Recogni
         //print("识别成功：" + Arrays.toString(nbest.toArray(new String[nbest.size()])));
         String json_res = results.getString("origin_result");
         try {
-            Toast.makeText(AddPayActivity.this,"origin_result=\n" + new JSONObject(json_res).toString(4),
+            Toast.makeText(AddPayActivity.this, "origin_result=\n" + new JSONObject(json_res).toString(4),
                     Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(AddPayActivity.this,"origin_result=[warning: bad json]\n" + json_res,Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddPayActivity.this, "origin_result=[warning: bad json]\n" + json_res, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -1271,7 +1272,7 @@ public class AddPayActivity extends Activity implements OnClickListener, Recogni
         //临时结果处理
         ArrayList<String> nbest = partialResults.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
         if (nbest.size() > 0) {
-            Toast.makeText(AddPayActivity.this,"~临时识别结果：" + Arrays.toString(nbest.toArray(new String[0])),
+            Toast.makeText(AddPayActivity.this, "~临时识别结果：" + Arrays.toString(nbest.toArray(new String[0])),
                     Toast.LENGTH_SHORT).show();
             //Toast.makeText().setText(nbest.get(0));
         }
@@ -1283,11 +1284,11 @@ public class AddPayActivity extends Activity implements OnClickListener, Recogni
         switch (eventType) {
             case EVENT_ERROR:
                 String reason = params.get("reason") + "";
-                Log.d("Add","EVENT_ERROR, " + reason);
+                Log.d("Add", "EVENT_ERROR, " + reason);
                 break;
             case VoiceRecognitionService.EVENT_ENGINE_SWITCH:
                 int type = params.getInt("engine_type");
-                Log.d("Add","*引擎切换至" + (type == 0 ? "在线" : "离线"));
+                Log.d("Add", "*引擎切换至" + (type == 0 ? "在线" : "离线"));
                 break;
         }
     }

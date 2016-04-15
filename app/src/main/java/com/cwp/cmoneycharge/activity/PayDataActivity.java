@@ -89,13 +89,13 @@ public class PayDataActivity extends Activity {
 		nodata = (TextView) findViewById(R.id.nodata);
 		pdataselect = (LinearLayout) findViewById(R.id.pdataselect);
 		mSeries = new CategorySeries("");
-		mRenderer = new DefaultRenderer();// PieChart����Ҫ�����
-		yearlist = new ArrayList<String>(); // ��������б� spinner
+		mRenderer = new DefaultRenderer();
+		yearlist = new ArrayList<String>();
 		payDAO = new PayDAO(PayDataActivity.this);
 		KindDatap = new ArrayList<KindData>();
 		ptypeDAO = new PtypeDAO(PayDataActivity.this);
 
-		// ������
+
 		for (int i = 0; i <= 10; i++) {
 			yearlist.add(String.valueOf(defaultYear - i));
 		}
@@ -113,20 +113,20 @@ public class PayDataActivity extends Activity {
 		userid = intentr.getIntExtra("cwp.id", 100000001);
 		defaultMonth = intentr.getIntExtra("default", defaultMonth);
 		defaultYear = intentr.getIntExtra("defaulty", defaultYear);
-		int type = intentr.getIntExtra("type", 0);// Ϊ0��ѡ�������£�Ϊ1��ѡ������ʱ��
+		int type = intentr.getIntExtra("type", 0);
 		payDAO = new PayDAO(PayDataActivity.this);
 
-		mRenderer.setZoomButtonsVisible(true); // ��ʾ�Ŵ���С���ܰ�ť
-		mRenderer.setStartAngle(180); // ����Ϊˮƽ��ʼ
-		mRenderer.setDisplayValues(true); // ��ʾ����
-		mRenderer.setFitLegend(true); // �����Զ�����������
-		mRenderer.setShowLabels(true); // ��ʾ��ǩ
-		mRenderer.setLabelsTextSize(54); // ������̶����ֵĴ�С
-		mRenderer.setShowLegend(false); // ����ʾ�ײ�
-		mRenderer.setLabelsColor(Color.BLACK); // �������ǩ��ɫ
-		mRenderer.setLegendTextSize(54); // ����ͼ�������С
-		mRenderer.setLegendHeight(30); // ����ͼ���߶�
-		mRenderer.setChartTitleTextSize(54); // ���ñ�ͼ�����С
+		mRenderer.setZoomButtonsVisible(true);
+		mRenderer.setStartAngle(180);
+		mRenderer.setDisplayValues(true);
+		mRenderer.setFitLegend(true);
+		mRenderer.setShowLabels(true);
+		mRenderer.setLabelsTextSize(54);
+		mRenderer.setShowLegend(false);
+		mRenderer.setLabelsColor(Color.BLACK);
+		mRenderer.setLegendTextSize(54);
+		mRenderer.setLegendHeight(30);
+		mRenderer.setChartTitleTextSize(54);
 
 		if (type == 0) {
 			KindDatap = payDAO.getKDataOnMonth(userid, defaultYear,
@@ -140,7 +140,7 @@ public class PayDataActivity extends Activity {
 			KindDatap = payDAO.getKDataOnDay(userid, date1, date2);
 			mRenderer.setChartTitle(date1 + "~" + date2);
 		}
-		// ����
+
 
 		if (KindDatap.size() == 0) {
 			nodata.setVisibility(View.VISIBLE);
@@ -278,10 +278,10 @@ public class PayDataActivity extends Activity {
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) { // ���/����/���η��ؼ�
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			Intent intent = new Intent(PayDataActivity.this, MainActivity.class);
 			intent.putExtra("cwp.id", userid);
-			intent.putExtra("cwp.Fragment", "2");// ���ô�������
+			intent.putExtra("cwp.Fragment", "2");
 			startActivity(intent);
 			return true;
 		}
