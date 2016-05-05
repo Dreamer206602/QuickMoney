@@ -119,14 +119,10 @@ public class PayChartActivity extends SlidingActivity implements OnClickListener
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 
-		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-		// WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
 		SysApplication.getInstance().addActivity(this); // 在销毁队列中添加this
 		setContentView(R.layout.paychart);
 		// set the Behind View
 		setBehindContentView(R.layout.frame_menu);
-
 		SystemBarTintManager mTintManager;
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 			setTranslucentStatus(true);
@@ -141,8 +137,7 @@ public class PayChartActivity extends SlidingActivity implements OnClickListener
 		incomeDAO = new IncomeDAO(PayChartActivity.this);
 		itypeDAO = new ItypeDAO(PayChartActivity.this);
 
-		FragmentTransaction fragmentTransaction = getFragmentManager()
-				.beginTransaction();
+		FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 		MenuFragment menuFragment = new MenuFragment();
 		fragmentTransaction.replace(R.id.menu, menuFragment);
 		fragmentTransaction.commit();
@@ -181,22 +176,16 @@ public class PayChartActivity extends SlidingActivity implements OnClickListener
 		win.setAttributes(winParams);
 	}
 
-	@Override
-	protected void onStart() {
 
-		super.onStart();
-
-	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		pieView.rotateEnable();
-		SharedPreferences sp = this.getSharedPreferences("preferences",
-				MODE_WORLD_READABLE);
+		SharedPreferences sp = this.getSharedPreferences("preferences", MODE_WORLD_READABLE);
 		CrashApplication myApplaction = (CrashApplication) getApplication();
-		if ((myApplaction.isLocked)
-				&& (sp.getString("gesturepw", "").equals("开"))) {// 判断是否需要跳转到密码界面
+		if ((myApplaction.isLocked) && (sp.getString("gesturepw", "").equals("开"))) {
+			// 判断是否需要跳转到密码界面
 			Intent intent = new Intent(this,
 					UnlockGesturePasswordActivity.class);
 			startActivity(intent);

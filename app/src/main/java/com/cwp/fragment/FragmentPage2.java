@@ -76,7 +76,6 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_2, null);
-
         return view;
     }
 
@@ -306,8 +305,7 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
         // 实例化Fragment页面
         fragmentPage3 = new FragmentPage3();
         // 得到Fragment事务管理器
-        FragmentTransaction fragmentTransaction = act
-                .getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = act.getSupportFragmentManager().beginTransaction();
         // 替换当前的页面
         fragmentTransaction.replace(R.id.frame_content, fragmentPage3);
         // 事务管理提交
