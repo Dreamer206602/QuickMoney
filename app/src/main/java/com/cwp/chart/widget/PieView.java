@@ -22,6 +22,7 @@ import com.cwp.cmoneycharge.activity.PayChartActivity;
 
 import java.util.ArrayList;
 
+//自定义圆形
 public class PieView extends View implements View.OnTouchListener, Runnable {
 
 	private float m_x = 0;
@@ -102,11 +103,11 @@ public class PieView extends View implements View.OnTouchListener, Runnable {
 		 * mCanvas.drawColor(0xff639EC3); mCanvas.save();
 		 */
 
-		// *********************************确定参逥?域*************************************
-		float f3 = f1 - radius;// X轿- 巿
-		float f4 = f2 - radius; // Y轿- 丿
-		float f5 = f1 + radius; // X轿- 叿
-		float f6 = f2 + radius; // Y轿- 丿
+
+		float f3 = f1 - radius;
+		float f4 = f2 - radius;
+		float f5 = f1 + radius;
+		float f6 = f2 + radius;
 		RectF rectF = new RectF(f3, f4, f5, f6);
 
 		// *********************************画每个区域的颜色坿********************************
