@@ -93,7 +93,7 @@ public class ImageGridActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(ImageGridActivity.this,
-						TestPicActivity.class);
+						GalleryActivity.class);
 				startActivity(intent);
 				finish();
 			}
@@ -176,7 +176,7 @@ public class ImageGridActivity extends Activity {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) { // 监控/拦截/屏蔽返回键
 			Intent intent = new Intent(ImageGridActivity.this,
-					TestPicActivity.class);
+					GalleryActivity.class);
 			startActivity(intent);
 			finish();
 			return true;

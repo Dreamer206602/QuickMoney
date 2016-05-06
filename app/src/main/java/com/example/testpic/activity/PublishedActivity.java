@@ -62,11 +62,8 @@ public class PublishedActivity extends Activity {
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.activity_selectimg);
-
 		Init();
-
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 			setTranslucentStatus(true);
 			// findViewById(R.id.top).setVisibility(View.VISIBLE);
@@ -291,8 +288,8 @@ public class PublishedActivity extends Activity {
 			ll_popup.startAnimation(AnimationUtils.loadAnimation(mContext,
 					R.anim.push_bottom_in_2));
 
-			setWidth(LayoutParams.FILL_PARENT);
-			setHeight(LayoutParams.FILL_PARENT);
+			setWidth(LayoutParams.MATCH_PARENT);
+			setHeight(LayoutParams.MATCH_PARENT);
 			setBackgroundDrawable(new BitmapDrawable());
 			setFocusable(true);
 			setOutsideTouchable(true);
@@ -306,16 +303,16 @@ public class PublishedActivity extends Activity {
 					.findViewById(R.id.item_popupwindows_Photo); // 图库
 			Button bt3 = (Button) view
 					.findViewById(R.id.item_popupwindows_cancel); // 取消
-			bt1.setOnClickListener(new OnClickListener() {
+			bt1.setOnClickListener(new OnClickListener() {//相机
 				public void onClick(View v) {
 					photo();
 					dismiss();
 				}
 			});
-			//选择图库的按钮
+			//选择图库的按钮的点击事件
 			bt2.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
-					Intent intent = new Intent(PublishedActivity.this, TestPicActivity.class);
+					Intent intent = new Intent(PublishedActivity.this, GalleryActivity.class);
 					startActivity(intent);
 					Bimp.flag = 0;
 					finish();
@@ -336,7 +333,7 @@ public class PublishedActivity extends Activity {
 	private String path = "";
 
 	/**
-	 * 从相机选择图片
+	 * 从相机拍照选择图片
 	 */
 	public void photo() {
 		Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

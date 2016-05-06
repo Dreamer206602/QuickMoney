@@ -120,8 +120,8 @@ public class PhotoActivity extends Activity {
 			initListViews(bmp.get(i));//
 		}
 
-		adapter = new MyPageAdapter(listViews);// ����adapter
-		pager.setAdapter(adapter);// ����������
+		adapter = new MyPageAdapter(listViews);
+		pager.setAdapter(adapter);
 		Intent intent = getIntent();
 		int id = intent.getIntExtra("ID", 0);
 		pager.setCurrentItem(id);
@@ -130,12 +130,12 @@ public class PhotoActivity extends Activity {
 	private void initListViews(Bitmap bm) {
 		if (listViews == null)
 			listViews = new ArrayList<View>();
-		ImageView img = new ImageView(this);// ����textView����
+		ImageView img = new ImageView(this);
 		img.setBackgroundColor(0xff000000);
 		img.setImageBitmap(bm);
 		img.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
 				LayoutParams.FILL_PARENT));
-		listViews.add(img);// ���view
+		listViews.add(img);
 	}
 
 	private OnPageChangeListener pageChangeListener = new OnPageChangeListener() {
@@ -144,11 +144,11 @@ public class PhotoActivity extends Activity {
 			count = arg0;
 		}
 
-		public void onPageScrolled(int arg0, float arg1, int arg2) {// �����С�����
+		public void onPageScrolled(int arg0, float arg1, int arg2) {
 
 		}
 
-		public void onPageScrollStateChanged(int arg0) {// ����״̬�ı�
+		public void onPageScrollStateChanged(int arg0) {
 
 		}
 	};
@@ -157,15 +157,14 @@ public class PhotoActivity extends Activity {
 
 		private ArrayList<View> listViews;// content
 
-		private int size;// ҳ��
+		private int size;//
 
-		public MyPageAdapter(ArrayList<View> listViews) {// ���캯��
-															// ��ʼ��viewpager��ʱ�����һ��ҳ��
+		public MyPageAdapter(ArrayList<View> listViews) {
 			this.listViews = listViews;
 			size = listViews == null ? 0 : listViews.size();
 		}
 
-		public void setListViews(ArrayList<View> listViews) {// �Լ�д��һ�����������������
+		public void setListViews(ArrayList<View> listViews) {
 			this.listViews = listViews;
 			size = listViews == null ? 0 : listViews.size();
 		}
@@ -178,14 +177,14 @@ public class PhotoActivity extends Activity {
 			return POSITION_NONE;
 		}
 
-		public void destroyItem(View arg0, int arg1, Object arg2) {// ����view����
+		public void destroyItem(View arg0, int arg1, Object arg2) {
 			((ViewPager) arg0).removeView(listViews.get(arg1 % size));
 		}
 
 		public void finishUpdate(View arg0) {
 		}
 
-		public Object instantiateItem(View arg0, int arg1) {// ����view����
+		public Object instantiateItem(View arg0, int arg1) {
 			try {
 				((ViewPager) arg0).addView(listViews.get(arg1 % size), 0);
 

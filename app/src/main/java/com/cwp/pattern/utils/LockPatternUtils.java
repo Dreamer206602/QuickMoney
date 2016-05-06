@@ -17,10 +17,7 @@ import android.util.Log;
 
 import com.cwp.pattern.widget.LockPatternView;
 
-/*
- * @author way
- * 
- */
+
 public class LockPatternUtils {
 	private static final String TAG = "LockPatternUtils";
 	private static final String LOCK_PATTERN_FILE = "gesture.key";
@@ -96,7 +93,7 @@ public class LockPatternUtils {
 	}
 
 	/**
-	 * Deserialize a pattern. ����,���ڱ���״��	 * 
+	 * Deserialize a pattern.
 	 * @param string
 	 *            The pattern serialized with {@link #patternToString}
 	 * @return The pattern.

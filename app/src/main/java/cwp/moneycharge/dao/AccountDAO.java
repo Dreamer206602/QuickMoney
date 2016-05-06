@@ -9,7 +9,7 @@ import cwp.moneycharge.model.*;
 /**
  *
  */
-public class AccountDAO {
+public class  AccountDAO {
 	private DBOpenHelper helper;// 创建DBOpenHelper对象
 	private SQLiteDatabase db;// 创建SQLiteDatabase对象
 	public AccountDAO(Context context)// 定义构造函数

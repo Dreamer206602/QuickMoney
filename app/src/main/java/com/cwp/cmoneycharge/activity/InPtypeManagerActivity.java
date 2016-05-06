@@ -105,6 +105,7 @@ public class InPtypeManagerActivity extends Activity {
 		lv.setAdapter(new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_checked, typename));
 
+		//点击按钮的点击事件
 		add.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
@@ -112,6 +113,7 @@ public class InPtypeManagerActivity extends Activity {
 			}
 
 		});
+		//删除按钮的点击事件
 		delete.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {

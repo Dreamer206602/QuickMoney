@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * 从图库选择的界面
  */
-public class TestPicActivity extends Activity {
+public class GalleryActivity extends Activity {
 	// ArrayList<Entity> dataList;//用来装载数据源的列表
 	List<ImageBucket> dataList;
 	GridView gridView;
@@ -72,14 +72,14 @@ public class TestPicActivity extends Activity {
 		gridview_cancel = (TextView) findViewById(R.id.gridview_cancel);
 		gridview_cancel.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(TestPicActivity.this,
+				Intent intent = new Intent(GalleryActivity.this,
 						PublishedActivity.class);
 				startActivity(intent);
 				finish();
 			}
 		});
 
-		adapter = new ImageBucketAdapter(TestPicActivity.this, dataList);
+		adapter = new ImageBucketAdapter(GalleryActivity.this, dataList);
 		gridView.setAdapter(adapter);
 
 		gridView.setOnItemClickListener(new OnItemClickListener() {
@@ -91,18 +91,18 @@ public class TestPicActivity extends Activity {
 				 * 根据position参数，可以获得跟GridView的子View相绑定的实体类，然后根据它的isSelected状态，
 				 * 来判断是否显示选中效果。 至于选中效果的规则，下面适配器的代码中会有说明
 				 */
-				// if(dataList.get(position).isSelected()){
-				// dataList.get(position).setSelected(false);
-				// }else{
-				// dataList.get(position).setSelected(true);
-				// }
+//				 if(dataList.get(position).isSelected()){
+//				 dataList.get(position).setSelected(false);
+//				 }else{
+//				 dataList.get(position).setSelected(true);
+//				 }
 				/**
 				 * 通知适配器，绑定的数据发生了改变，应当刷新视图
 				 */
 				// adapter.notifyDataSetChanged();
-				Intent intent = new Intent(TestPicActivity.this,
+				Intent intent = new Intent(GalleryActivity.this,
 						ImageGridActivity.class);
-				intent.putExtra(TestPicActivity.EXTRA_IMAGE_LIST,
+				intent.putExtra(GalleryActivity.EXTRA_IMAGE_LIST,
 						(Serializable) dataList.get(position).imageList);
 				startActivity(intent);
 				finish();
@@ -113,7 +113,7 @@ public class TestPicActivity extends Activity {
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) { // 监控/拦截/屏蔽返回键
-			Intent intent = new Intent(TestPicActivity.this,
+			Intent intent = new Intent(GalleryActivity.this,
 					PublishedActivity.class);
 			startActivity(intent);
 			finish();

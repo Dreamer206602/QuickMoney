@@ -1,17 +1,5 @@
 package com.cwp.pattern.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.cwp.chart.manager.SystemBarTintManager;
-import com.cwp.cmoneycharge.app.CrashApplication;
-import com.cwp.cmoneycharge.R;
-import com.cwp.cmoneycharge.app.SysApplication;
-import com.cwp.pattern.utils.LockPatternUtils;
-import com.cwp.pattern.widget.LockPatternView;
-import com.cwp.pattern.widget.LockPatternView.Cell;
-import com.cwp.pattern.widget.LockPatternView.DisplayMode;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.Build;
@@ -19,12 +7,24 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.cwp.chart.manager.SystemBarTintManager;
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.app.CrashApplication;
+import com.cwp.cmoneycharge.app.SysApplication;
+import com.cwp.pattern.utils.LockPatternUtils;
+import com.cwp.pattern.widget.LockPatternView;
+import com.cwp.pattern.widget.LockPatternView.Cell;
+import com.cwp.pattern.widget.LockPatternView.DisplayMode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateGesturePasswordActivity extends Activity implements
 		OnClickListener {
@@ -162,8 +162,6 @@ public class CreateGesturePasswordActivity extends Activity implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.gesturepassword_create);
 		SysApplication.getInstance().addActivity(this); // 在销毁队列中添加this
 
@@ -445,7 +443,7 @@ public class CreateGesturePasswordActivity extends Activity implements
 		CrashApplication.getInstance().getLockPatternUtils()
 				.saveLockPattern(mChosenPattern);
 		showToast("密码设置成功");
-		this.setResult(3);// this.setResult(int resultCode)��resultCode �����Զ���
+		this.setResult(3);// this.setResult(int resultCode)
 		this.finish();
 	}
 }

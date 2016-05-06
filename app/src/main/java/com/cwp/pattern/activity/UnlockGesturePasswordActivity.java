@@ -1,16 +1,5 @@
 package com.cwp.pattern.activity;
 
-import java.util.List;
-
-import com.cwp.chart.manager.SystemBarTintManager;
-import com.cwp.cmoneycharge.app.CrashApplication;
-import com.cwp.cmoneycharge.utils.DialogShowUtil;
-import com.cwp.cmoneycharge.R;
-import com.cwp.cmoneycharge.app.SysApplication;
-import com.cwp.pattern.utils.LockPatternUtils;
-import com.cwp.pattern.widget.LockPatternView;
-import com.cwp.pattern.widget.LockPatternView.Cell;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -28,6 +17,17 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.cwp.chart.manager.SystemBarTintManager;
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.app.CrashApplication;
+import com.cwp.cmoneycharge.app.SysApplication;
+import com.cwp.cmoneycharge.utils.DialogShowUtil;
+import com.cwp.pattern.utils.LockPatternUtils;
+import com.cwp.pattern.widget.LockPatternView;
+import com.cwp.pattern.widget.LockPatternView.Cell;
+
+import java.util.List;
 
 public class UnlockGesturePasswordActivity extends Activity {
 	private LockPatternView mLockPatternView;
@@ -54,8 +54,6 @@ public class UnlockGesturePasswordActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.gesturepassword_unlock);
 
 		SystemBarTintManager mTintManager;

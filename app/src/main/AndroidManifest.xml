@@ -139,7 +139,7 @@
             android:name="com.example.testpic.activity.ImageGridActivity"
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
-            android:name="com.example.testpic.activity.TestPicActivity"
+            android:name="com.example.testpic.activity.GalleryActivity"
             android:configChanges="orientation|keyboardHidden"
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
