@@ -728,7 +728,7 @@ public class SearchActivity extends Activity {
     }
 
     private void updateDisplay() {
-        if (timetype == "start") {
+        if (timetype.equals("start")) {
             search_starttime.setText(incomeDAO.gettime(mYear, mMonth + 1, mDay,
                     false, false));
         } else {

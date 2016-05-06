@@ -230,7 +230,6 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
         int xPos = (w_screen - popWinLayout.getLayoutParams().width) / 2;
         popWindow.showAsDropDown(parent, xPos, 12);
         // popWindow.showAsDropDown(parent, Gravity.CENTER, 0);
-
         // 监听菜单的关闭事件
         popWindow.setOnDismissListener(new OnDismissListener() {
             @Override
@@ -263,7 +262,6 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
         FragmentTransaction fragmentTransaction;
         fragmentTransaction = act.getSupportFragmentManager()
                 .beginTransaction();
-
         // 替换当前的页面
         fragmentTransaction.replace(R.id.frame_content, fragmentPage1);
         // 事务管理提交

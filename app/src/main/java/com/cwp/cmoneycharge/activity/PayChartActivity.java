@@ -106,13 +106,13 @@ public class PayChartActivity extends SlidingActivity implements OnClickListener
 	int userid;
 	int type;
 	String datatype = "pay";
-	Adapter adapter;
+	Adapter adapter;//适配器
 
-	PayDAO payDAO;
-	IncomeDAO incomeDAO;
+	PayDAO payDAO;//支出的数据库
+	IncomeDAO incomeDAO;//收入的数据库
 	List<KindData> KindDatap;
-	PtypeDAO ptypeDAO;
-	ItypeDAO itypeDAO;
+	PtypeDAO ptypeDAO;//支出类型的数据库
+	ItypeDAO itypeDAO;//收入类型的数据库
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -203,7 +203,6 @@ public class PayChartActivity extends SlidingActivity implements OnClickListener
 	 * Description:初始化界面元紿
 	 *
 	 */
-
 	public void initView() {
 
 		final Calendar c = Calendar.getInstance();// 获取当前系统日期
@@ -229,7 +228,6 @@ public class PayChartActivity extends SlidingActivity implements OnClickListener
 		defaultYear = intentr.getIntExtra("defaulty", defaultYear);
 
 		pieView = (PieView) this.findViewById(R.id.lotteryView);
-		// myButton = (MyButton) this.findViewById(R.id.MyBt);
 		textView = (TextView) this.findViewById(R.id.MyTV);
 		textView2 = (TextView) this.findViewById(R.id.MyTVbottom);
 		example_left = (ImageView) findViewById(R.id.example_left);
