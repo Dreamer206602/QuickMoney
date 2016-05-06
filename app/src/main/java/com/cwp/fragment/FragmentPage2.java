@@ -126,8 +126,7 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
         moreIv = (ImageView) getActivity().findViewById(R.id.image_more);
 
         // 实例化按钮图片组件
-        toggleImageView = (ImageView) getActivity().findViewById(
-                R.id.toggle_btn);
+        toggleImageView = (ImageView) getActivity().findViewById(R.id.toggle_btn);
         plusImageView = (ImageView) getActivity().findViewById(R.id.plus_btn);
     }
 
@@ -255,7 +254,7 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
     }
 
     /**
-     * 点击了“动态”按钮
+     * 点击了“明细”按钮
      */
     public static   void clickFriendfeedBtn() {
         // 实例化Fragment页面
@@ -285,7 +284,7 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
     }
 
     /**
-     * 点击了"报表"按钮
+     * 点击了"报表"按钮，跳转到报表的界面
      */
     public static void clickMyfeedBtn() {
 
@@ -299,7 +298,7 @@ public class FragmentPage2 extends BaseFragment implements OnClickListener {
     }
 
     /**
-     * 点击了“我的空间”按钮
+     * 点击了“我的账户”按钮，跳转到账户的界面
      */
     public static void clickHomeBtn() {
         // 实例化Fragment页面

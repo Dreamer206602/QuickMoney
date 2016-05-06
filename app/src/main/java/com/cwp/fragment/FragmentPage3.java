@@ -51,7 +51,7 @@ import cwp.moneycharge.model.Tb_income;
 import cwp.moneycharge.model.Tb_pay;
 
 /**
- *账户的界面
+ *我的账户的界面
  */
 @SuppressLint("InflateParams")
 public class FragmentPage3 extends BaseFragment implements

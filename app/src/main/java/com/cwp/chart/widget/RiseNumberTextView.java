@@ -46,7 +46,7 @@ public class RiseNumberTextView extends TextView implements RiseNumberBase {
 	}
 
 	public interface EndListener {
-		public void onEndFinish();
+		 void onEndFinish();
 	}
 
 	public boolean isRunning() {

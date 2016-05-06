@@ -38,9 +38,8 @@ public class FragmentPage1 extends BaseFragment {
     Button baddpay;
     TextView income_amount;
     TextView expense_amount;
-    PtypeDAO ptypeDAO;
-    ItypeDAO itypeDAO;
-    String nodata = "还木有数据，赶紧买买买吧";
+    PtypeDAO ptypeDAO;//收入类型的数据库
+    ItypeDAO itypeDAO;//支出类型的数据库
 
     ListView lvinfo;// 创建ListView对象
     String strType = "";// 创建字符串，记录管理类型
@@ -78,7 +77,7 @@ public class FragmentPage1 extends BaseFragment {
         super.onStart();// 实现基类中的方法// 调用自定义方法显示收入信息
         Intent intentr = getActivity().getIntent();
         userid = intentr.getIntExtra("cwp.id", 100000001);
-        Showamount();
+        Showamount();//显示数据
         ShowInfo(R.id.btnoutinfo);
         //listView的点击事件
         lvinfo.setOnItemClickListener(new OnItemClickListener()// 为ListView添加项单击事件

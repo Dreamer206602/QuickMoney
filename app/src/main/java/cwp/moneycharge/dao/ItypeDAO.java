@@ -1,22 +1,20 @@
 package cwp.moneycharge.dao;
 
-import cwp.moneycharge.model.Datapicker;
-import cwp.moneycharge.model.Tb_itype; 
-import cwp.moneycharge.dao.DBOpenHelper;
-import java.util.List;
-import java.util.ArrayList;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.cwp.cmoneycharge.R;
 
-import android.database.sqlite.SQLiteDatabase;
-import android.content.Context;
-import android.database.Cursor;
+import java.util.ArrayList;
+import java.util.List;
+
+import cwp.moneycharge.model.Datapicker;
+import cwp.moneycharge.model.Tb_itype;
 
 
-/**
- * @author cwpcc
- *
- */
+
+//支出类型的数据库
 public class ItypeDAO {
 	//(_id INTEGER  NOT NULL PRIMARY KEY,no not null int ,typename varchar(50)
 	private DBOpenHelper helper;// 创建DBOpenHelper对象

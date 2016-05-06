@@ -1,16 +1,17 @@
 package cwp.moneycharge.dao;
 
-import cwp.moneycharge.model.Tb_ptype;
-import cwp.moneycharge.dao.DBOpenHelper;
-import java.util.List;
-import java.util.ArrayList;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.cwp.cmoneycharge.R;
 
-import android.database.sqlite.SQLiteDatabase;
-import android.content.Context;
-import android.database.Cursor;
+import java.util.ArrayList;
+import java.util.List;
 
+import cwp.moneycharge.model.Tb_ptype;
+
+//收入类型的数据库
 public class PtypeDAO {
 	// (_id INTEGER NOT NULL PRIMARY KEY,no not null integer ,typename
 	// varchar(50)

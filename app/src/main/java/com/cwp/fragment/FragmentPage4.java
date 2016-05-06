@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.cwp.cmoneycharge.R;
 import com.cwp.cmoneycharge.activity.AboutActivity;
 import com.cwp.cmoneycharge.activity.InPtypeManagerActivity;
-import com.cwp.cmoneycharge.activity.SettingActivity;
 
 import cwp.moneycharge.dao.IncomeDAO;
 import cwp.moneycharge.dao.ItypeDAO;
@@ -68,10 +67,10 @@ public class FragmentPage4 extends BaseFragment {
 					case 1:
 						alarmDialog(pos); // 清空支出数据
 						break;
-					case 2:
-						intentr = new Intent(getActivity(), SettingActivity.class); // 设置百度语音
-						startActivity(intentr);
-						break;
+//					case 2:
+//						intentr = new Intent(getActivity(), SettingActivity.class); // 设置百度语音
+//						startActivity(intentr);
+//						break;
 					case 3://收入类型的管理
 						intentr = new Intent(getActivity(), InPtypeManagerActivity.class);
 						intentr.putExtra("cwp.id", userid);
@@ -107,7 +106,7 @@ public class FragmentPage4 extends BaseFragment {
 
 		customBuilder.setTitle("警告"); // 创建标题
 		switch (type) {
-			case 0:
+			case 0://清除收入的数据
 				customBuilder
 						.setMessage("将删除当前的用户所有" + ps)
 						.setPositiveButton("确定",
@@ -134,7 +133,7 @@ public class FragmentPage4 extends BaseFragment {
 								});
 				break;
 
-			case 1:
+			case 1://清除支出的数据
 				customBuilder
 						.setMessage("将删除当前的用户所有" + is)
 						.setPositiveButton("确定",
