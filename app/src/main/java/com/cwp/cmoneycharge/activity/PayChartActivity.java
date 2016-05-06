@@ -61,7 +61,7 @@ import cwp.moneycharge.dao.PtypeDAO;
 import cwp.moneycharge.model.KindData;
 
 /**
- * 侧边栏的界面---报表的界面
+ * 报表的界面
  */
 public class PayChartActivity extends SlidingActivity implements OnClickListener {
 	DialogShowUtil dialogShowUtil = new DialogShowUtil(this, this, null, null,
@@ -116,9 +116,7 @@ public class PayChartActivity extends SlidingActivity implements OnClickListener
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
-
 		SysApplication.getInstance().addActivity(this); // 在销毁队列中添加this
 		setContentView(R.layout.paychart);
 		// set the Behind View
@@ -654,6 +652,7 @@ public class PayChartActivity extends SlidingActivity implements OnClickListener
 	}
 
 	public void getAnyDate() {// 处理任意时间
+
 		date1 = year.getSelectedItem().toString() + "-"
 				+ month.getSelectedItem().toString() + "-"
 				+ day.getSelectedItem().toString();

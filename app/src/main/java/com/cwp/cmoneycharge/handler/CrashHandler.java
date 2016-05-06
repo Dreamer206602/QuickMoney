@@ -17,7 +17,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.cwp.cmoneycharge.app.SysApplication;
-import com.umeng.fb.example.CustomActivity;
+import com.umeng.fb.example.FeedBackActivity;
 
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -133,7 +133,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
     }
 
     protected void sendreport(Context mContext) {
-        Intent intent = new Intent(mContext, CustomActivity.class);
+        Intent intent = new Intent(mContext, FeedBackActivity.class);
         intent.putExtra("cwp.md", result);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_NEW_TASK);

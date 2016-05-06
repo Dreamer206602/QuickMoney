@@ -27,7 +27,7 @@ import com.cwp.cmoneycharge.app.CrashApplication;
 import com.cwp.cmoneycharge.app.SysApplication;
 import com.cwp.pattern.activity.UnlockGesturePasswordActivity;
 import com.cwp.pattern.service.UpdateManager;
-import com.umeng.fb.example.CustomActivity;
+import com.umeng.fb.example.FeedBackActivity;
 
 import cwp.moneycharge.dao.AccountDAO;
 import cwp.moneycharge.dao.IncomeDAO;
@@ -62,8 +62,6 @@ public class AboutActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.about);
 
 		SysApplication.getInstance().addActivity(this); // 在销毁队列中添加this
@@ -117,15 +115,17 @@ public class AboutActivity extends Activity {
 		}
 		app_version.setText(getVersion(this));
 
+		//用户反馈的点击事件
 		feedback.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(AboutActivity.this, CustomActivity.class);
+				Intent intent = new Intent(AboutActivity.this, FeedBackActivity.class);
 				// intent.putExtra("cwp.md", "md");
 				startActivity(intent);
 			}
 		});
 
+		//检查更新的点击事件
 		updateapp.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

@@ -117,7 +117,7 @@
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.PayChartActivity" />
         <activity
-            android:name="com.umeng.fb.example.CustomActivity"
+            android:name="com.umeng.fb.example.FeedBackActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.example.testpic.activity.PublishedActivity"

@@ -1,17 +1,5 @@
 package com.umeng.fb.example;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
-import com.cwp.chart.manager.SystemBarTintManager;
-import com.cwp.cmoneycharge.R;
-import com.cwp.cmoneycharge.app.SysApplication;
-import com.umeng.fb.FeedbackAgent;
-import com.umeng.fb.SyncListener;
-import com.umeng.fb.model.Conversation;
-import com.umeng.fb.model.Reply;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -27,11 +15,10 @@ import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnClickListener;
-
-import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,7 +27,20 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class CustomActivity extends Activity {
+import com.cwp.chart.manager.SystemBarTintManager;
+import com.cwp.cmoneycharge.R;
+import com.cwp.cmoneycharge.app.SysApplication;
+import com.umeng.fb.FeedbackAgent;
+import com.umeng.fb.SyncListener;
+import com.umeng.fb.model.Conversation;
+import com.umeng.fb.model.Reply;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+//用户反馈的界面
+public class FeedBackActivity extends Activity {
 
 	private ListView mListView;
 	private FeedbackAgent mAgent;
@@ -53,7 +53,6 @@ public class CustomActivity extends Activity {
 	private final int VIEW_TYPE_COUNT = 2;
 	private final int VIEW_TYPE_USER = 0;
 	private final int VIEW_TYPE_DEV = 1;
-	private final String TAG = CustomActivity.class.getName();
 	String firstfb = "true";
 
 	private Handler mHandler = new Handler() {
@@ -67,8 +66,6 @@ public class CustomActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_custom);
 
 		SysApplication.getInstance().addActivity(this); // 在销毁队列中添加this
@@ -128,7 +125,6 @@ public class CustomActivity extends Activity {
 		inputEdit = (EditText) findViewById(R.id.fb_send_content);
 		example_left2 = (ImageView) findViewById(R.id.example_left2);
 		// 下拉刷新组件
-
 		mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.fb_reply_refresh);
 		example_left2.setOnClickListener(new OnClickListener() {
 

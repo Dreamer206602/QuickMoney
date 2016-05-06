@@ -1,14 +1,14 @@
 package com.cwp.cmoneycharge.app;
 
-import com.baidu.mapapi.SDKInitializer;
-import com.cwp.cmoneycharge.handler.CrashHandler;
-import com.cwp.pattern.utils.LockPatternUtils;
-
 import android.app.Application;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+
+import com.baidu.mapapi.SDKInitializer;
+import com.cwp.cmoneycharge.handler.CrashHandler;
+import com.cwp.pattern.utils.LockPatternUtils;
 
 public class CrashApplication extends Application {
 	public boolean isLocked = true;
@@ -44,7 +44,6 @@ public class CrashApplication extends Application {
 	class LockScreenReceiver extends BroadcastReceiver {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			/* �����ﴦ��㲥 */
 			if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
 				isLocked  = true;
 			}

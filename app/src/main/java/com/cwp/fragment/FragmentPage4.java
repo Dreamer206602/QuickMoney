@@ -159,7 +159,7 @@ public class FragmentPage4 extends BaseFragment {
 									}
 								});
 				break;
-			case 5:
+			case 5://重置数据
 				customBuilder
 						.setMessage("此操作将重置当前用户的收入、支出类型，确定还原吗？")
 						.setPositiveButton("确定",
@@ -199,7 +199,7 @@ public class FragmentPage4 extends BaseFragment {
 
 	@Override
 	public void filngtonext() {
-		// TODO Auto-generated method stub
+
 
 	}
 
